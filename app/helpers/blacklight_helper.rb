@@ -5,6 +5,6 @@ module BlacklightHelper
   include Blacklight::CatalogHelperBehavior
 
   def render_document_sidebar_partial(document = @document)
-    super(document) + (render 'access_container', document: document)
+    super(document) + (render 'relations_container', document: document)
   end
 end
