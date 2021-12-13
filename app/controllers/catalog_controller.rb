@@ -244,7 +244,7 @@ class CatalogController < ApplicationController
 
     # Custom tools for Map Search
     config.add_show_tools_partial :full_layer_description, partial: 'full_layer_description', if: proc { |_context, _config, options| options[:document] }
-    config.add_nav_action :full_layer_description, partial: 'full_layer_description', if: proc { |_context, _config, options| options[:document] }
+    
     # Configure basemap provider for GeoBlacklight maps (uses https only basemap
     # providers with open licenses)
     # Valid basemaps include:
