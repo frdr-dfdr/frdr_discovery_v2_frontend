@@ -1,5 +1,8 @@
-<% if document.external_url.present? %>
+<div class="card access">
+    <div class="card-header">
+        <%= t('geoblacklight.tools.access_data') %>
+    </div>
     <%= link_to document.external_url do %>
         <%= t('geoblacklight.tools.explore') %><%= document.holding_institute %>
     <% end %>
-<% end %>
+</div>
