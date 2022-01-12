@@ -1,6 +1,12 @@
 <% document ||= @document %>
+<hr>
+<div class="row">
+    <div class="col">
+        <h3>Geospatial information</h3>
+    </div>
+</div>
 <div class='row'>
-  <div id='viewer-container' class="col-md-12">
+    <div id='viewer-container' class="col-md-7">
 
     <% if show_help_text?('viewer_protocol', document.viewer_protocol) %>
       <%= render_help_text_entry('viewer_protocol', document.viewer_protocol) %>
@@ -8,5 +14,63 @@
 
     <%= content_tag :div, id: 'map', data: { map: 'item', protocol: document.viewer_protocol.camelize, url: document.viewer_endpoint, 'layer-id' => document.wxs_identifier, 'map-bbox' => document.bounding_box_as_wsen, 'catalog-path'=> search_catalog_path, available: document_available?, inspect: false, basemap: geoblacklight_basemap, leaflet_options: leaflet_options } do %>
     <% end %>
-  </div>
+    </div>
+    <div id='geo-choice-container' class="col-md-5 form-check">
+        <div class="row">
+            <div class="col">
+                Select geospatial file to preview on map:
+            </div>
+        </div>
+        <div class="row mb-2">
+            <select class="form-select col-sm-9">
+                <option>geofile2.json</option>
+            </select>
+        </div>
+        <div class="row mb-3">
+            <button class="btn btn-primary col-sm-7">Download selected file</button>
+        </div>
+        <div class="row mb-1">
+            <div class="col">Select geospatial feature(s) to view on map:</div>
+        </div>
+        <div class="row">
+            <ul class="list-group col">
+                <li class="list-group-item">
+                    <input class="form-check-input feature-checkbox" type="checkbox" value="" id="bbox-all">
+                    <label class="form-check-label feature-label" for="bbox-all">
+                        Bounding boxes
+                    </label>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <input class="form-check-input feature-checkbox" type="checkbox" value="" id="bbox-1">
+                            <label class="form-check-label feature-label" for="bbox-1">
+                                Stanley Park; Vancouver; British Columbia; Canada
+                            </label>
+                        </li>
+                        <li class="list-group-item">
+                            <input class="form-check-input feature-checkbox" type="checkbox" value="" id="bbox-2">
+                            <label class="form-check-label feature-label" for="bbox-1">
+                                123.72, 49.195, -123.020, 49.315
+                            </label>
+                        </li>
+                    </ul>
+                </li>
+                <li class="list-group-item">
+                    <input class="form-check-input feature-checkbox" type="checkbox" value="" id="point-all">
+                    <label class="form-check-label feature-label" for="point-all">
+                        Points
+                    </label>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <input class="form-check-input feature-checkbox" type="checkbox" value="" id="point-1">
+                            <label class="form-check-label feature-label" for="point-1">
+                                123.72,49.50
+                            </label>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
 </div>
+<%#
+<% end %>
