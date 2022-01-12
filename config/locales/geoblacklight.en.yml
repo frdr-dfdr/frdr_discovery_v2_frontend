@@ -116,6 +116,18 @@ en:
       attribute: 'Attribute'
       value: 'Value'
       click_map: 'Click on map to inspect values'
+      geospatial_info:
+        heading: 'Geospatial information'
+        file:
+          download: 'Download selected file'
+          help: 'Select geospatial file to preview on map:'
+          none: 'None'
+        select:
+          help: 'Select geospatial feature(s) to view on map:'
+          bbox: 'Bounding boxes'
+          line: 'Lines'
+          points: 'Points'
+          polygons: 'Polygons'
     relations:
       ancestor: 'Source Datasets'
       descendant: 'Linked Records'
