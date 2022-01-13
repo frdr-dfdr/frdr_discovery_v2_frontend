@@ -1,6 +1,5 @@
 <% document ||= @document %>
 
-
 <hr>
 <div class="row">
     <div class="col">
@@ -17,74 +16,7 @@
     <%= content_tag :div, id: 'map', data: { map: 'item', protocol: document.viewer_protocol.camelize, url: document.viewer_endpoint, 'layer-id' => document.wxs_identifier, 'map-bbox' => document.bounding_box_as_wsen, 'catalog-path'=> search_catalog_path, available: document_available?, inspect: false, basemap: geoblacklight_basemap, leaflet_options: leaflet_options } do %>
     <% end %>
     </div>
-    <div id='geo-choice-container' class="col-md-5 form-check">
-        <div class="row">
-            <%= content_tag :div, t('geoblacklight.show.geospatial_info.file.help'), class: 'col' %>
-        </div>
-        <div class="row mb-2">
-            <%= select_tag 'download_geo_file_choose', options_for_select([ [t('geoblacklight.show.geospatial_info.file.none'), ''], 'geofile1.json', 'geofile2.json', 'geofile3.json', 'geofile4.json' ], 'geofile2.json'), class: 'form-select col-sm-9' %>
-        </div>
-        <div class="row mb-3">
-            <%= button_tag fa_icon("download", text: t('geoblacklight.show.geospatial_info.file.download')), name: 'download_geo_file', class: 'btn btn-primary col-sm-7' %>
-        </div>
-        <div class="row mb-1">
-            <%= content_tag :div, t('geoblacklight.show.geospatial_info.select.help'), class: 'col' %>
-        </div>
-        <div class="row">
-            <ul class="list-group col">
-                <li class="list-group-item">
-                    <%= check_box_tag 'bbox-all', '', true, class: 'form-check-input feature-checkbox' %>
-                    <%= label_tag 'bbox-all', t('geoblacklight.show.geospatial_info.select.bbox'), class: 'form-check-label feature-label' %>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">
-                            <%= check_box_tag 'bbox-1', 'bbox-1-value', true, class: 'form-check-input feature-checkbox bbox' %>
-                            <%= label_tag 'bbox-1', 'Stanley Park; Vancouver; British Columbia; Canada', class: 'form-check-label feature-label' %>
-                        </li>
-                        <li class="list-group-item">
-                            <%= check_box_tag 'bbox-2', 'bbox-2-value', true, class: 'form-check-input feature-checkbox bbox' %>
-                            <%= label_tag 'bbox-2', '123.72, 49.195, -123.020, 49.315', class: 'form-check-label feature-label' %>
-                        </li>
-                    </ul>
-                </li>
-                <li class="list-group-item">
-                    <%= check_box_tag 'line-all', '', true, class: 'form-check-input feature-checkbox' %>
-                    <%= label_tag 'line-all', t('geoblacklight.show.geospatial_info.select.line'), class: 'form-check-label feature-label' %>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">
-                            <%= check_box_tag 'line-1', 'line-1-value', true, class: 'form-check-input feature-checkbox line' %>
-                            <%= label_tag 'line-1', '123,45, 49.195, -123.45, 49.195', class: 'form-check-label feature-label' %>
-                        </li>
-                        <li class="list-group-item">
-                            <%= check_box_tag 'line-2', 'line-2-value', true, class: 'form-check-input feature-checkbox line' %>
-                            <%= label_tag 'line-2', '123.72, 49.195, -123.020, 49.315', class: 'form-check-label feature-label' %>
-                        </li>
-                    </ul>
-                </li>
-                <li class="list-group-item">
-                    <%= check_box_tag 'point-all', '', true, class: 'form-check-input feature-checkbox' %>
-                    <%= label_tag 'point-all', t('geoblacklight.show.geospatial_info.select.points'), class: 'form-check-label feature-label' %>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">
-                            <%= check_box_tag 'point-1', 'point-1-value', true, class: 'form-check-input feature-checkbox point' %>
-                            <%= label_tag 'point-1', '123.72,49.50', class: 'form-check-label feature-label' %>
-                        </li>
-                    </ul>
-                </li>
-                <li class="list-group-item">
-                    <%= check_box_tag 'polygon-all', '', true, class: 'form-check-input feature-checkbox' %>
-                    <%= label_tag 'polygon-all', t('geoblacklight.show.geospatial_info.select.polygon'), class: 'form-check-label feature-label' %>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">
-                            <%= check_box_tag 'polygon-1', 'polygon-1-value', true, class: 'form-check-input feature-checkbox polygon' %>
-                            <%= label_tag 'polygon-1', '123,45, 49.195, 92.321, 35.323, 87.232, 23.231, -123.45, 49.195', class: 'form-check-label feature-label' %>
-                        </li>
-                        <li class="list-group-item">
-                            <%= check_box_tag 'polygon-2', 'polygon-2-value', true, class: 'form-check-input feature-checkbox polygon' %>
-                            <%= label_tag 'polygon-2', '123.72, 49.195, -123.020, 49.315, 122.12, 87.321', class: 'form-check-label feature-label' %>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-    </div>
+
+    <%= render :partial => 'show_map_controls' %>
+
 </div>
