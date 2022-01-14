@@ -3,9 +3,15 @@
 <dl class="row dl-invert document-metadata">
   <div class="col-lg-9">
       <div class="row">
+        <div class="col-sm-12">
+          <hr class="metadata-divider">
+        </div>
         <% doc_presenter.fields_to_render.each do |field_name, field, field_presenter| -%>
           <dt class="blacklight-<%= field_name.parameterize %> col-md-3"><%= render_document_show_field_label document, label: field_presenter.label, field: field_name %></dt>
           <dd class="blacklight-<%= field_name.parameterize %> col-md-9"><%= field_presenter.render %></dd>
+          <div class="col-sm-12">
+            <hr class="metadata-divider">
+          </div>
         <% end -%>
       </div>
   </div>
