@@ -1,5 +1,5 @@
 <% document ||= @document %>
 
 <% if document.has_point? %>
-  <%= render partial: 'show_geo_checkboxes', locals: { all_id: document.point_all_id, all_i18n_key: 'geoblacklight.show.geospatial_info.select.point', checkbox_class: 'point', prefix: document.point_prefix, values: document.points } %>
+  <%= render partial: 'show_geo_checkboxes', locals: { all_id: 'point-all', all_i18n_key: 'geoblacklight.show.geospatial_info.select.point', checkbox_class: 'point', prefix: 'point-', values: document.points } %>
 <% end %>

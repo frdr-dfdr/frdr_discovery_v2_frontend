@@ -31,28 +31,12 @@ class SolrDocument
     @bboxes.length() > 0
   end
 
-  def bbox_all_id
-    'bbox-all'
-  end
-
-  def bbox_prefix
-    'bbox-'
-  end
-
   def bboxes
     @bboxes
   end
 
   def has_line?
     @lines.length() > 0
-  end
-
-  def line_all_id
-    'line-all'
-  end
-
-  def line_prefix
-    'line-'
   end
 
   def lines
@@ -63,28 +47,12 @@ class SolrDocument
     @points.length() > 0
   end
 
-  def point_all_id
-    'point-all'
-  end
-
-  def point_prefix
-    'point-'
-  end
-
   def points
     @points
   end
 
   def has_polygon?
     @polygons.length() > 0
-  end
-
-  def polygon_all_id
-    'polygon-all'
-  end
-
-  def polygon_prefix
-    'polygon-'
   end
 
   def polygons
