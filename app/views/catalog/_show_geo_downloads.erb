@@ -1,0 +1,13 @@
+<% document ||= @document %>
+
+<div class="row">
+    <%= content_tag :div, t('geoblacklight.show.geospatial_info.file.help'), class: 'col' %>
+</div>
+
+<div class="row mb-2">
+    <%= select_tag 'download_geo_file_choose', options_for_select([ [t('geoblacklight.show.geospatial_info.file.none'), ''], 'geofile1.json', 'geofile2.json', 'geofile3.json', 'geofile4.json' ], 'geofile2.json'), class: 'form-select col-sm-9' %>
+</div>
+
+<div class="row mb-3">
+    <%= button_tag fa_icon("download", text: t('geoblacklight.show.geospatial_info.file.download')), name: 'download_geo_file', class: 'btn btn-primary col-sm-7' %>
+</div>

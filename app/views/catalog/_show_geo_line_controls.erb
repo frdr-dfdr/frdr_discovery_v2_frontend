@@ -1,0 +1,5 @@
+<% document ||= @document %>
+
+<% if document.has_line? %>
+  <%= render partial: 'show_geo_checkboxes', locals: { all_id: document.line_all_id, all_i18n_key: 'geoblacklight.show.geospatial_info.select.line', checkbox_class: 'line', prefix: document.line_prefix, values: document.lines } %>
+<% end %>
