@@ -13,13 +13,18 @@ Blacklight.onLoad(function() {
             }
         });
 
-        $('input[type="checkbox"]' + itemClassSelector).change(function(){
+        $('input[type="checkbox"]' + itemClassSelector).change(function() {
             var allInputs = $('input[type="checkbox"]' + itemClassSelector);
-            if(allInputs.length == allInputs.filter(":checked").length){
+            if(allInputs.length == allInputs.filter(":checked").length) {
                 $(allIdSelector).prop('checked', true);
+                $(allIdSelector)[0].indeterminate = false;
+            }
+            else if(allInputs.filter(":checked").length == 0) {
+                $(allIdSelector).prop('checked', false);
+                $(allIdSelector)[0].indeterminate = false;
             }
             else {
-                $(allIdSelector).prop('checked', false);
+                $(allIdSelector)[0].indeterminate = true;
             }
         });
     }
