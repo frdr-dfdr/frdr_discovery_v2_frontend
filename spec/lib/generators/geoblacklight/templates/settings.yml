@@ -4,17 +4,11 @@ APPLICATION_LOGO_URL: 'http://geoblacklight.org/images/geoblacklight-logo.png'
 # Carto OneClick Service https://carto.com/engine/open-in-carto/
 CARTO_ONECLICK_LINK: 'http://oneclick.carto.com/'
 
-# Hide Carto export link
-# CARTO_HIDE: true
-
-# Hide ArcGIS export link
-# ARCGIS_HIDE: true
-
 # ArcGIS Online Base URL
 ARCGIS_BASE_URL: 'https://www.arcgis.com/home/webmap/viewer.html'
 
 # Download path can be configured using this setting
-DOWNLOAD_PATH: "./tmp/cache/downloads"
+#DOWNLOAD_PATH: "./tmp/cache/downloads"
 
 # DEPRECATED Main Solr geometry field used for spatial search and bounding box. Should be type 'rpt'
 GEOMETRY_FIELD: 'solr_geom'
@@ -44,9 +38,10 @@ FIELDS:
   :TEMPORAL: 'dct_temporal_sm'
   :TITLE: 'dc_title_s'
   :SOURCE: 'dc_source_sm'
+  :ISSUED: 'dct_issued_s'
 
 # Institution deployed at
-INSTITUTION: 'FRDR'
+INSTITUTION: 'Stanford'
 
 # Metadata shown in tool panel
 METADATA_SHOWN:
@@ -60,6 +55,9 @@ TIMEOUT_DOWNLOAD: 16
 
 # (For WMS inspection) timeout and open_timeout parameters for Faraday
 TIMEOUT_WMS: 4
+
+# Use the geometry type for the data relations icon
+USE_GEOM_FOR_RELATIONS_ICON: false
 
 # Web services shown in tool panel
 WEBSERVICES_SHOWN:
