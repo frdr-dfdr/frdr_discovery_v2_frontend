@@ -7,7 +7,7 @@
         </div>
         <ul class="list-group list-group-flush">
             <li class="list-group-item" >
-                <%= link_to document.external_url do %>
+                <%= link_to document.external_url, class: 'btn btn-primary' do %>
                   <%= fa_icon "external-link", text: t('geoblacklight.tools.explore') + document.holding_institute, right: true %>
                 <% end %>
             </li>
