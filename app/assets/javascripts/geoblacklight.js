@@ -27,3 +27,7 @@
 //= require leaflet-iiif
 //= require esri-leaflet
 //= require readmore
+
+// Required for bounding box, line, point, polygon all checkboxes to change
+// all of the other individual checkboxes in map controls on show
+//= requre geoblacklight/modules/show_geo_controls.js

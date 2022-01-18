@@ -88,4 +88,4 @@ gem 'rack-cors'
 
 gem 'rails-i18n', '~> 5.1'
 gem 'i18n-js'
-
+gem 'font-awesome-rails'

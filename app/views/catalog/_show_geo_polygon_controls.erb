@@ -1,0 +1,5 @@
+<% document ||= @document %>
+
+<% if document.has_polygon? %>
+  <%= render partial: 'show_geo_checkboxes', locals: { all_id: 'polygon-all', all_i18n_key: 'geoblacklight.show.geospatial_info.select.polygon', checkbox_class: 'polygon', prefix: 'polygon-', values: document.polygons } %>
+<% end %>

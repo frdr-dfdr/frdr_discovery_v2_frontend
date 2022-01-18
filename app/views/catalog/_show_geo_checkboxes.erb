@@ -1,0 +1,14 @@
+<% document ||= @document %>
+
+<li class="list-group-item">
+    <%= check_box_tag all_id, '', true, class: 'form-check-input feature-checkbox' %>
+    <%= label_tag all_id, t(all_i18n_key), class: 'form-check-label feature-label' %>
+    <ul class="list-group list-group-flush">
+      <% values.each_with_index do |value, index| %>
+        <li class="list-group-item">
+            <%= check_box_tag prefix + index.to_s, prefix + index.to_s, true, class: 'form-check-input feature-checkbox ' + checkbox_class %>
+            <%= label_tag prefix + index.to_s, value, class: 'form-check-label feature-label' %>
+        </li>
+      <% end %>
+    </ul>
+</li>
