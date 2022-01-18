@@ -142,10 +142,10 @@ class CatalogController < ApplicationController
     config.add_show_field Settings.FIELDS.PROVENANCE, label: 'Held by', link_to_facet: true
     config.add_show_field(
       Settings.FIELDS.REFERENCES,
-      label: 'Data source',
+      label: 'URL',
       accessor: [:external_url],
       if: proc { |_, _, doc| doc.external_url },
-      helper_method: :render_references_url
+      helper_method: :render_references_url_with_icon
     )
 
     # "fielded" search configuration. Used by pulldown among other places.

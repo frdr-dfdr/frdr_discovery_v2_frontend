@@ -67,7 +67,7 @@ en:
         dct_spatial_sm: 'Place'
         dct_provenance_s: 'Source Repository'
         dc_identifier_s: 'Data Source'
-        dct_references_s: 'Data Source'
+        dct_references_s: 'URL'
 
         dc_title_s: 'title'
         sort:
