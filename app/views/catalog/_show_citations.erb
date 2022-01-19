@@ -1,0 +1,31 @@
+<% document ||= @document %>
+
+<div class="card sidebar citation">
+    <div class="card-header">
+      <%= t('geoblacklight.show.citation.title') %>
+    </div>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item" >
+          <button class='btn btn-primary'>
+            <%= fa_icon "file", text: t('geoblacklight.show.citation.apa'), right: true %>
+          </button>
+        </li>
+        <li class="list-group-item" >
+          <%= content_tag :div do %> 
+            <%= t('geoblacklight.show.citation.help') %>
+          <% end %>
+
+          <%= content_tag :div do %>
+            <%= link_to document.external_url do %>
+              <%= fa_icon "download", text: t('geoblacklight.show.citation.bibtex'), right: true %>
+            <% end %>
+          <% end %>
+
+          <%= content_tag :div do %>
+            <%= link_to document.external_url do %>
+              <%= fa_icon "download", text: t('geoblacklight.show.citation.ris'), right: true %>
+            <% end %>
+          <% end %>
+        </li>
+    </ul>
+</div>

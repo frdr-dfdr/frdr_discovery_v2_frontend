@@ -117,6 +117,12 @@ en:
     show:
       attribute: 'Attribute'
       value: 'Value'
+      citation:
+        apa: 'Copy citation'
+        bibtex: 'Download bibtex file (.bib)'
+        help: 'Export to citation manager:'
+        ris: 'Download ris file (.ris)'
+        title: 'Cite this dataset'
       click_map: 'Click on map to inspect values'
       geospatial_info:
         heading: 'Geospatial information'
