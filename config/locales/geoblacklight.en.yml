@@ -118,7 +118,12 @@ en:
       attribute: 'Attribute'
       value: 'Value'
       citation:
-        apa: 'Copy citation'
+        apa:
+          button: 'Get citation'
+          modal:
+            copy: 'Copy Citation'
+            close: "Close"
+            title: "APA Citation"
         bibtex: 'Download bibtex file (.bib)'
         help: 'Export to citation manager:'
         ris: 'Download ris file (.ris)'

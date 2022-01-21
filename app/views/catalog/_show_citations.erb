@@ -1,13 +1,40 @@
 <% document ||= @document %>
 
+<!-- Modal -->
+<div class="modal fade" id="apaModal" tabindex="-1" role="dialog" aria-labelledby="apaModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="apaModalLabel"><%= t('geoblacklight.show.citation.apa.modal.title') %></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="<%= t('geoblacklight.show.citation.apa.modal.close') %>">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+        <%= content_tag :div, class: 'modal-body' do %>
+          <% get_apa_citation(document).each do | citation | %>
+            <%= content_tag :div do %>
+              <%= sanitize citation %>
+            <% end %>
+          <% end %>
+        <% end %>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" aria-label="<%= t('geoblacklight.show.citation.apa.modal.copy') %>">
+          <%= t('geoblacklight.show.citation.apa.modal.copy') %>
+        </button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal"><%= t('geoblacklight.show.citation.apa.modal.close') %></button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="card sidebar citation">
     <div class="card-header">
       <%= t('geoblacklight.show.citation.title') %>
     </div>
     <ul class="list-group list-group-flush">
         <li class="list-group-item" >
-          <button class='btn btn-primary'>
-            <%= fa_icon "file", text: t('geoblacklight.show.citation.apa'), right: true %>
+          <button class='btn btn-primary' type="button" data-toggle="modal" data-target="#apaModal">
+            <%= fa_icon "file", text: t('geoblacklight.show.citation.apa.button'), right: true %>
           </button>
         </li>
         <li class="list-group-item" >
