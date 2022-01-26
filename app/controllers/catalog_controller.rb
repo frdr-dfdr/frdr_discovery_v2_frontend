@@ -4,6 +4,7 @@ require 'blacklight/catalog'
 class CatalogController < ApplicationController
 
   include Blacklight::Catalog
+  include GeodisyHelper
 
   configure_blacklight do |config|
 
@@ -260,6 +261,13 @@ class CatalogController < ApplicationController
     config.autocomplete_path = 'suggest'
   end
 
-
+  def download_bibtex
+    solr_response = search_service.fetch params[:id]
+    document = solr_response&.first()&.documents&.first()
+    bibtex = get_document_bibtex document
+    filename = document.fetch(:dc_title_s, "new_reference")
+    filename = filename.parameterize(separator: '_') + ".bib"
+    send_data bibtex.to_s, :type => 'text/plain; charset=UTF-8', :filename => filename, :disposition => :attachment
+  end
 
 end
