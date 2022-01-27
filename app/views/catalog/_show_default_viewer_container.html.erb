@@ -1,6 +1,13 @@
 <% document ||= @document %>
+
+<hr>
+<div class="row">
+    <div class="col">
+        <%= content_tag :h3, t('geoblacklight.show.geospatial_info.heading') %>
+    </div>
+</div>
 <div class='row'>
-  <div id='viewer-container' class="col-md-12">
+    <div id='viewer-container' class="col-md-7">
 
     <% if show_help_text?('viewer_protocol', document.viewer_protocol) %>
       <%= render_help_text_entry('viewer_protocol', document.viewer_protocol) %>
@@ -8,5 +15,8 @@
 
     <%= content_tag :div, id: 'map', data: { map: 'item', protocol: document.viewer_protocol.camelize, url: document.viewer_endpoint, 'layer-id' => document.wxs_identifier, 'map-bbox' => document.bounding_box_as_wsen, 'catalog-path'=> search_catalog_path, available: document_available?, inspect: false, basemap: geoblacklight_basemap, leaflet_options: leaflet_options } do %>
     <% end %>
-  </div>
+    </div>
+
+    <%= render :partial => 'show_map_sidebar' %>
+
 </div>

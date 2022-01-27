@@ -1,0 +1,17 @@
+<% document ||= @document %>
+
+<div class="row mb-1">
+    <%= content_tag :div, t('geoblacklight.show.geospatial_info.select.help'), class: 'col' %>
+</div>
+
+<div class="row">
+    <ul class="list-group col">
+      <%= render partial: 'show_geo_bbox_controls' %>
+
+      <%= render partial: 'show_geo_line_controls' %>
+
+      <%= render partial: 'show_geo_point_controls' %>
+
+      <%= render partial: 'show_geo_polygon_controls' %>
+    </ul>
+</div>

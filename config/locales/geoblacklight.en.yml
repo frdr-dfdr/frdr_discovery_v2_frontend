@@ -105,7 +105,7 @@ en:
       tiled_map_layer: 'ArcGIS Tiled Map Layer'
       dynamic_map_layer: 'ArcGIS Dynamic Map Layer'
       image_map_layer: 'ArcGIS Image Map Layer'
-      data_dictionary: 'Download ISO 19139 Metadata'
+      data_dictionary: 'Download ISO 19139 XML'
       services: 'Web services'
       services_close: 'Close'
       map_service: 'OpenStreetMap_France'
@@ -118,6 +118,18 @@ en:
       attribute: 'Attribute'
       value: 'Value'
       click_map: 'Click on map to inspect values'
+      geospatial_info:
+        heading: 'Geospatial information'
+        file:
+          download: 'Download selected file'
+          help: 'Select geospatial file to preview on map:'
+          none: 'None'
+        select:
+          help: 'Select geospatial feature(s) to view on map:'
+          bbox: 'Bounding boxes'
+          line: 'Lines'
+          points: 'Points'
+          polygons: 'Polygons'
     relations:
       ancestor: 'Source Datasets'
       descendant: 'Linked Records'
