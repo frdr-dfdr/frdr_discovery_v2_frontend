@@ -119,7 +119,7 @@ en:
       value: 'Value'
       citation:
         apa:
-          button: 'Get citation'
+          button: 'View Citation'
           modal:
             copy: 'Copy Citation'
             close: "Close"
