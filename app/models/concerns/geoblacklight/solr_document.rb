@@ -126,6 +126,7 @@ module Geoblacklight
         for b in bs do
             if b.bbox_type = "bounding box"
                 array.push(b.north + ", " + b.west + ", " + b.south + ', ' + b.east)
+            end
         end
         return arrays
     end
