@@ -121,14 +121,15 @@ module Geoblacklight
     end
 
     def get_bboxes
-        bs = fetch(Settings.FIELDS.BBOXES)
-        array = []
-        for b in bs do
-            if b.bbox_type = "bounding box"
-                array.push(b.north + ", " + b.west + ", " + b.south + ', ' + b.east)
-            end
-        end
-        return array. join(", ")
+        #bs = fetch(Settings.FIELDS.BBOXES)
+        #array = []
+        #for b in bs do
+        #    if b.bbox_type = "bounding box"
+        #        array.push(b.north + ", " + b.west + ", " + b.south + ', ' + b.east)
+        #    end
+        #end
+        #return array
+        return "this worked"
     end
   end
 end
