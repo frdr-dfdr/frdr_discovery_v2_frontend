@@ -119,5 +119,15 @@ module Geoblacklight
         super
       end
     end
+
+    def get_bboxes
+        bs = fetch(Settings.FIELDS.BBOXES)
+        array = []
+        for b in bs do
+            if b.bbox_type = "bounding box"
+                array.push(b.north + ", " + b.west + ", " + b.south + ', ' + b.east)
+        end
+        return arrays
+    end
   end
 end
