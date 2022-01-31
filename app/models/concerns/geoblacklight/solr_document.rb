@@ -129,7 +129,7 @@ module Geoblacklight
         #    end
         #end
         #return array
-        return "this worked"
+        "this worked"
     end
   end
 end
