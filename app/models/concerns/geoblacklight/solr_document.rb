@@ -128,7 +128,7 @@ module Geoblacklight
                 array.push(b.north + ", " + b.west + ", " + b.south + ', ' + b.east)
             end
         end
-        return arrays
+        return array
     end
   end
 end
