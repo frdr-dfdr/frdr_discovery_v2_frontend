@@ -55,12 +55,12 @@ en:
         example_query_facet_field: 'Publish Date'
     search:
       fields:
-        dc_creator_sm: 'Author(s)'
+        dc_creator_sm: 'Authors'
         dc_publisher_sm: 'Institution(s)'
-        dct_issued_s: 'Year(s)'
+        dct_issued_s: 'Date published'
         layer_geom_type_s: 'Data Type'
         dc_rights_s: 'Access'
-        dc_subject_sm: 'Subject(s)'
+        dc_subject_sm: 'Keywords'
         dc_format_s: 'Format'
         dct_isPartOf_sm: 'Collection'
         dc_description_s: 'Description'
