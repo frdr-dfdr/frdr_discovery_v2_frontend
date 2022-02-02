@@ -115,14 +115,18 @@ en:
       metadata_error: 'The metadata view for selected schema is not available'
       metadata_trace: 'Please select another metadata view. Alternately, try downloading the file or reaching out to the holding institution.'
     show:
+      additional_metadata:
+        heading: 'Additional Metadata'
       attribute: 'Attribute'
       value: 'Value'
       citation:
         apa:
           button: 'View Citation'
           modal:
+            copied: 'Citation copied to clipboard'
             copy: 'Copy Citation'
             close: "Close"
+            failed: 'Unable to copy citation to clipboard'
             title: "APA Citation"
         bibtex: 'Download bibtex file (.bib)'
         help: 'Export to citation manager:'

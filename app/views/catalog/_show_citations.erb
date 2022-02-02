@@ -12,13 +12,19 @@
       </div>
         <%= content_tag :div, class: 'modal-body' do %>
           <% get_apa_citation(document).each do | citation | %>
-            <%= content_tag :div do %>
+            <%= content_tag :div, id: 'apa-citation' do %>
               <%= sanitize citation %>
+            <% end %>
+            <%= content_tag :div, id: 'apa-citation-copied', class: 'alert alert-success', style: 'display: none;' do %>
+              <%= t('geoblacklight.show.citation.apa.modal.copied') %>
+            <% end %>
+            <%= content_tag :div, id: 'apa-citation-failed', class: 'alert alert-danger', style: 'display: none;' do %>
+              <%= t('geoblacklight.show.citation.apa.modal.failed') %>
             <% end %>
           <% end %>
         <% end %>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" aria-label="<%= t('geoblacklight.show.citation.apa.modal.copy') %>">
+        <button type="button" id="copy-citation-button" class="btn btn-primary" aria-label="<%= t('geoblacklight.show.citation.apa.modal.copy') %>">
           <%= t('geoblacklight.show.citation.apa.modal.copy') %>
         </button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal"><%= t('geoblacklight.show.citation.apa.modal.close') %></button>
