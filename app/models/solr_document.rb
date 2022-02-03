@@ -69,7 +69,7 @@ class SolrDocument
        #        array.push(b.north + ", " + b.west + ", " + b.south + ', ' + b.east)
        #    end
        #end
-       return fetch(Settings.FIELDS.BBOXES, 'dc_source_sm')
+       return fetch(Settings.FIELDS.BBOXES, 'dc_title_s')
   end
 
 end
