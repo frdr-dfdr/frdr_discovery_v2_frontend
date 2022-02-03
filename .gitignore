@@ -68,3 +68,7 @@ yarn-debug.log*
 
 # Ignore vim swp files
 *.swp
+
+.idea/
+
+.metadata/
