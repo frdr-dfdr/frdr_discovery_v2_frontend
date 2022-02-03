@@ -61,7 +61,7 @@ class SolrDocument
   end
   def get_bboxes
          bs = JSON.parse(fetch(Settings.FIELDS.BBOXES, ''))
-         array = ['test']
+         array = ["test"]
          #print array
          #for b in bs do
          #    if b.bbox_type == "bounding box"
