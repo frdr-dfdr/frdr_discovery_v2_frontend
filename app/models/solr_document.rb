@@ -69,7 +69,7 @@ class SolrDocument
          #        return b.bbox_type
          #    end
          #end
-         return array.join(", ")
+         return array
   end
 
 end
