@@ -115,18 +115,7 @@ module Geoblacklight
                #        array.push(b.north + ", " + b.west + ", " + b.south + ', ' + b.east)
                #    end
                #end
-               #return fetch(Settings.FIELDS.GEOMETRY, '')
-               geom_field = fetch(Settings.FIELDS.GEOMETRY, '')
-               exp = /^\s*ENVELOPE\(
-                         \s*([-\.\d]+)\s*,
-                         \s*([-\.\d]+)\s*,
-                         \s*([-\.\d]+)\s*,
-                         \s*([-\.\d]+)\s*
-                         \)\s*$/x # uses 'x' option for free-spacing mode
-               bbox_match = exp.match(geom_field)
-               return geom_field unless bbox_match # return as-is, not a WKT
-               w, e, n, s = bbox_match.captures
-               "#{w} #{s} #{e} #{n}"
+               return fetch(Settings.FIELDS.BBOXES, '')
     end
 
     private
