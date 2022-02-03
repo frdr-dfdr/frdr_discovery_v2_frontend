@@ -121,7 +121,7 @@ module Geoblacklight
     end
 
     def get_bboxes
-           #bs = JSON.parse(fetch(Settings.FIELDS.BBOXES, ''))
+           bs = fetch(Settings.FIELDS.BBOXES, '')
            array = ['test']
            #print array
            #for b in bs do
@@ -129,7 +129,7 @@ module Geoblacklight
            #        array.push(b.north + ", " + b.west + ", " + b.south + ', ' + b.east)
            #    end
            #end
-           return fetch(Settings.FIELDS.BBOXES, 'dc_title_s')
+           return array
       end
 
   end
