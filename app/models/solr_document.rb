@@ -66,9 +66,10 @@ class SolrDocument
          for b in bs do
              if b.bbox_type == "bounding box"
                  array.push(b.north + ", " + b.west + ", " + b.south + ', ' + b.east)
+                 return b.bbox_type
              end
          end
-         return array.join(', ')
+         return array.join(", ")
   end
 
 end
