@@ -60,16 +60,16 @@ class SolrDocument
     @polygons
   end
   def get_bboxes
-         bs = JSON.parse(fetch(Settings.FIELDS.BBOXES, ''))
+         bs = fetch(Settings.FIELDS.BBOXES, '')
          #print array
-         for b in bs do
-            return b["north"]
+         #for b in bs do
+         #   return b["north"]
          #    if b.bbox_type == "bounding box"
          #        array.push(b.north + ", " + b.west + ", " + b.south + ', ' + b.east)
          #        return b.bbox_type
          #    end
-         end
-         return 1
+         #end
+         return bs.class
   end
 
 end
