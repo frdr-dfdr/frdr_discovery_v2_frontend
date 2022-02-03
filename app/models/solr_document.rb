@@ -68,7 +68,7 @@ class SolrDocument
          #        array.push(b.north + ", " + b.west + ", " + b.south + ', ' + b.east)
          #    end
          #end
-         return array
+         return array[0].to_s
   end
 
 end
