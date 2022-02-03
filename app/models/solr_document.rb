@@ -1,4 +1,4 @@
-require json
+require 'json'
 # frozen_string_literal: true
 class SolrDocument
   include Blacklight::Solr::Document
