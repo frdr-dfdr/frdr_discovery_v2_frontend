@@ -122,14 +122,25 @@ module Geoblacklight
 
     def get_bboxes
            #bs = fetch(Settings.FIELDS.BBOXES, '')
-           array = ['test']
+           #array = ['test']
            #print array
            #for b in bs do
            #    if b.bbox_type == "bounding box"
            #        array.push(b.north + ", " + b.west + ", " + b.south + ', ' + b.east)
            #    end
            #end
-           return fetch(Settings.FIELDS.GEOMETRY, '')
+           #return fetch(Settings.FIELDS.GEOMETRY, '')
+           geom_field = fetch(Settings.FIELDS.GEOMETRY, '')
+           exp = /^\s*ENVELOPE\(
+                     \s*([-\.\d]+)\s*,
+                     \s*([-\.\d]+)\s*,
+                     \s*([-\.\d]+)\s*,
+                     \s*([-\.\d]+)\s*
+                     \)\s*$/x # uses 'x' option for free-spacing mode
+           bbox_match = exp.match(geom_field)
+           return geom_field unless bbox_match # return as-is, not a WKT
+           w, e, n, s = bbox_match.captures
+           "#{w} #{s} #{e} #{n}"
       end
 
   end
