@@ -129,7 +129,7 @@ module Geoblacklight
            #        array.push(b.north + ", " + b.west + ", " + b.south + ', ' + b.east)
            #    end
            #end
-           fetch(Settings.FIELDS.FILE_FORMAT)
+           fetch(Settings.FIELDS.GEOMETRY, '')
       end
 
   end

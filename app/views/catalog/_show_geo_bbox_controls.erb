@@ -1,6 +1,6 @@
 <% document ||= @document %>
 
 <% if document.has_bbox? %>
-  <%= document.bounding_box_as_wsen %>
+  <%= document.get_bboxes %>
   <%= render partial: 'show_geo_checkboxes', locals: { all_id: 'bbox-all', all_i18n_key: 'geoblacklight.show.geospatial_info.select.bbox', checkbox_class: 'bbox', prefix: 'bbox-', values: document.bboxes } %>
 <% end %>
