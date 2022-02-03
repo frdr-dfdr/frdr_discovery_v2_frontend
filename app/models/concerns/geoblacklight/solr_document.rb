@@ -106,17 +106,6 @@ module Geoblacklight
       type.endpoint if type.present?
     end
 
-    def get_bboxes
-               #bs = fetch(Settings.FIELDS.BBOXES, '')
-               #array = ['test']
-               #print array
-               #for b in bs do
-               #    if b.bbox_type == "bounding box"
-               #        array.push(b.north + ", " + b.west + ", " + b.south + ', ' + b.east)
-               #    end
-               #end
-               return fetch(Settings.FIELDS.BBOXES, '')
-    end
 
     private
 
