@@ -121,7 +121,7 @@ module Geoblacklight
     end
 
     def get_bboxes
-           bs = fetch(Settings.FIELDS.BBOXES, '')
+           #bs = fetch(Settings.FIELDS.BBOXES, '')
            array = ['test']
            #print array
            #for b in bs do
