@@ -70,7 +70,7 @@ class SolrDocument
          #        array.push(b.north + ", " + b.west + ", " + b.south + ', ' + b.east)
          #        return b.bbox_type
          #    end
-         #end
+         end
          return bs
   end
 
