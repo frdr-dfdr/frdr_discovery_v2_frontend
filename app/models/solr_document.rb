@@ -69,7 +69,7 @@ class SolrDocument
          #        return b.bbox_type
          #    end
          #end
-         return JSON.parse(bs[0].to_json).class
+         return JSON.parse(bs[0]).class
   end
 
 end
