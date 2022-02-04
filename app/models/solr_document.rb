@@ -64,8 +64,7 @@ class SolrDocument
          #print array
          for b in bs do
              bjson = JSON.parse(b)
-             return bjson
-         #   return b["north"]
+             return bjson["north"]
          #    if b.bbox_type == "bounding box"
          #        array.push(b.north + ", " + b.west + ", " + b.south + ', ' + b.east)
          #        return b.bbox_type
@@ -75,3 +74,5 @@ class SolrDocument
   end
 
 end
+
+
