@@ -65,7 +65,7 @@ class SolrDocument
          for b in bs do
              bjson = JSON.parse(b)
 
-             if bjson["bbox_type"] == "bounding box"
+             if bjson["bbox_type"] == "bounding box" || bjson["bbox_type"] == "file"
                   #other = bjson.key?("other") ? bjson["other"] : ""
                   #country = bjson.key?("country") ? bjson["country"] : ""
                   #province = bjson.key?("province") ? bjson["province"] : ""
@@ -74,7 +74,10 @@ class SolrDocument
                   country = bjson.fetch("country", "")
                   province = bjson.fetch("province", "")
                   city = bjson.fetch("city","")
-                  if other.empty? && country.empty? && province.empty? && city.empty?
+                  file_name = bjson.fetch("file_name", "")
+                  if !file_name.empty?
+                    array.push(file_name)
+                  elsif other.empty? && country.empty? && province.empty? && city.empty?
                     array.push(bjson.fetch("north", "failed to grab north") + ", " + bjson.fetch("west", "failed to grab west") + ", " + bjson.fetch("south", "failed to grab south") + ', ' + bjson.fetch("east", "failed to grab east"))
                   else
                     answer = ""
@@ -108,6 +111,9 @@ class SolrDocument
          end
          return array
   end
+
+  def get_lines
+
 
 end
 
