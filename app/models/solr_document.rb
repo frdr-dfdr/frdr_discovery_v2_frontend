@@ -113,7 +113,49 @@ class SolrDocument
   end
 
   def get_lines
+    ls = fetch(Settings.FIELDS.LINES, '')
+         array = []
+         for l in ls do
+             answer = ""
+             ljson = JSON.parse(l)
+             for p in ljson
+                 if !answer.empty?
+                    answer += ", "
+                 end
+                 answer += p
+             end
+             array.push(answer)
+         end
+    return answer
+  end
 
+  def get_polygons
+    ps = fetch(Settings.FIELDS.POLYGONS, '')
+        array = []
+        for p in ps do
+            answer = ""
+            pjson = JSON.parse(l)
+            first = ""
+            last = ""
+            for pt in pjson
+                if first.empty?
+                    first = pt
+                end
+                if !answer.empty?
+                   answer += ", "
+                end
+                answer += p
+                last = p
+            end
+            if last != first
+                answer += ", " + first
+            array.push(answer)
+        end
+    return answer
+  end
+
+  def get_points
+    fetch(Settings.FIELDS.POINTS, '')
 
 end
 

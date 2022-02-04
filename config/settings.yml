@@ -45,6 +45,9 @@ FIELDS:
   :TITLE: 'dc_title_s'
   :SOURCE: 'dc_source_sm'
   :BBOXES: 'bboxes_sm'
+  :LINES: 'lines_sm'
+  :POINTS: 'points_sm'
+  :POLYGONS: 'polygons_sm'
 
 # Institution deployed at
 INSTITUTION: 'FRDR'
