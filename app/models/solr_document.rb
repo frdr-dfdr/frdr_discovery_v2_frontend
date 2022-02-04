@@ -156,6 +156,7 @@ class SolrDocument
 
   def get_points
     fetch(Settings.FIELDS.POINTS, '')
+  end
 
 end
 
