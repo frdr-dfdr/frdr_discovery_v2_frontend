@@ -29,7 +29,7 @@ class SolrDocument
   use_extension(Blacklight::Document::DublinCore)
 
   def has_bbox?
-    @bboxes.length() > 0
+    fetch(Settings.FIELDS.BBOXES, '').length() > 0
   end
 
   def bboxes
