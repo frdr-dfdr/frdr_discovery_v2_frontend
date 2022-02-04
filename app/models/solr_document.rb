@@ -60,7 +60,7 @@ class SolrDocument
     @polygons
   end
   def get_bboxes
-         bs = fetch(Settings.FIELDS.BBOXES, '')
+         bs = JSON.parse(fetch(Settings.FIELDS.BBOXES, ''))
          #print array
          #for b in bs do
          #   return b["north"]
