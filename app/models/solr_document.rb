@@ -61,16 +61,48 @@ class SolrDocument
   end
   def get_bboxes
          bs = fetch(Settings.FIELDS.BBOXES, '')
-         #print array
+         array = []
          for b in bs do
              bjson = JSON.parse(b)
-             return bjson["north"]
-         #    if b.bbox_type == "bounding box"
-         #        array.push(b.north + ", " + b.west + ", " + b.south + ', ' + b.east)
-         #        return b.bbox_type
-         #    end
+
+             if bjson["bbox_type"] == "bounding box"
+                  #other = bjson.key?("other") ? bjson["other"] : ""
+                  #country = bjson.key?("country") ? bjson["country"] : ""
+                  #province = bjson.key?("province") ? bjson["province"] : ""
+                  #city = bjson.key?("city") ? bjson["city"] : ""
+                  other = bjson.fetch(:other, "")
+                  country = bjson.fetch(:country, "")
+                  province = bjson.fetch(:province, "")
+                  city = bjson.fetch(:city,"")
+                  if other == "" && country == "" && province == "" && city == ""
+                    array.push(bjson.fetch(:north, "a") + ", " + bjson.fetch(:west, "b") + ", " + bjson.fetch(:south, "c") + ', ' + bjson.fetch(:east, "d"))
+                  else
+                    answer = ""
+                    if other != ""
+                        answer = other
+                    if city!= ""
+                        if answer = other
+                            answer += "; " + city
+                        else
+                            answer = city
+                    end
+                    if province != ""
+                        if answer != ""
+                            answer += "; " + province
+                        else
+                            answer = province
+                    end
+                    if country != ""
+                        if answer != ""
+                            answer += "; " + country
+                        else
+                            answer = country
+                    end
+                    array.push(answer)
+                  end
+             end
          end
-         return bs
+         return array
   end
 
 end
