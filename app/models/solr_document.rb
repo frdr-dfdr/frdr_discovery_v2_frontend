@@ -74,29 +74,29 @@ class SolrDocument
                   country = bjson.fetch(:country, "")
                   province = bjson.fetch(:province, "")
                   city = bjson.fetch(:city,"")
-                  if other == "" && country == "" && province == "" && city == ""
+                  if other.empty? && country.empty? && province.empty? && city.empty?
                     array.push(bjson.fetch(:north, "a") + ", " + bjson.fetch(:west, "b") + ", " + bjson.fetch(:south, "c") + ', ' + bjson.fetch(:east, "d"))
                   else
                     answer = ""
-                    if other != ""
+                    if !other.empty?
                         answer = other
                     end
-                    if city!= ""
-                        if answer = other
+                    if !city.empty?
+                        if !answer.empty?
                             answer += "; " + city
                         else
                             answer = city
                         end
                     end
-                    if province != ""
-                        if answer != ""
+                    if !province.empty?
+                        if !answer.empty?
                             answer += "; " + province
                         else
                             answer = province
                         end
                     end
-                    if country != ""
-                        if answer != ""
+                    if !country.empty?
+                        if !answer.empty?
                             answer += "; " + country
                         else
                             answer = country
