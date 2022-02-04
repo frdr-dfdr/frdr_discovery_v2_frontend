@@ -70,12 +70,12 @@ class SolrDocument
                   #country = bjson.key?("country") ? bjson["country"] : ""
                   #province = bjson.key?("province") ? bjson["province"] : ""
                   #city = bjson.key?("city") ? bjson["city"] : ""
-                  other = bjson.fetch(:other, "")
-                  country = bjson.fetch(:country, "")
-                  province = bjson.fetch(:province, "")
-                  city = bjson.fetch(:city,"")
+                  other = bjson.fetch("other", "")
+                  country = bjson.fetch("country", "")
+                  province = bjson.fetch("province", "")
+                  city = bjson.fetch("city","")
                   if other.empty? && country.empty? && province.empty? && city.empty?
-                    array.push(bjson.fetch(:north, "a") + ", " + bjson.fetch(:west, "b") + ", " + bjson.fetch(:south, "c") + ', ' + bjson.fetch(:east, "d"))
+                    array.push(bjson.fetch("north", "failed to grab north") + ", " + bjson.fetch("west", "failed to grab west") + ", " + bjson.fetch("south", "failed to grab south") + ', ' + bjson.fetch("east", "failed to grab east"))
                   else
                     answer = ""
                     if !other.empty?
