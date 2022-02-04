@@ -80,23 +80,27 @@ class SolrDocument
                     answer = ""
                     if other != ""
                         answer = other
+                    end
                     if city!= ""
                         if answer = other
                             answer += "; " + city
                         else
                             answer = city
+                        end
                     end
                     if province != ""
                         if answer != ""
                             answer += "; " + province
                         else
                             answer = province
+                        end
                     end
                     if country != ""
                         if answer != ""
                             answer += "; " + country
                         else
                             answer = country
+                        end
                     end
                     array.push(answer)
                   end
