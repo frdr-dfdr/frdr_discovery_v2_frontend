@@ -149,6 +149,7 @@ class SolrDocument
             end
             if last != first
                 answer += ", " + first
+            end
             array.push(answer)
         end
     return answer
