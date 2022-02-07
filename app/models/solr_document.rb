@@ -126,7 +126,7 @@ class SolrDocument
              end
              array.push(answer)
          end
-    return answer
+    return array
     #return ljson
   end
 
@@ -153,7 +153,7 @@ class SolrDocument
             end
             array.push(answer)
         end
-    return ps
+    return array
   end
 
   def get_points
