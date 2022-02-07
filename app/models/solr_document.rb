@@ -153,7 +153,7 @@ class SolrDocument
             end
             array.push(answer)
         end
-    return answer
+    return ps
   end
 
   def get_points
