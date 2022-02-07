@@ -33,31 +33,31 @@ class SolrDocument
   end
 
   def bboxes
-    @bboxes
+    get_bboxes
   end
 
   def has_line?
-    @lines.length() > 0
+    fetch(Settings.FIELDS.LINES, '').length() > 0
   end
 
   def lines
-    @lines
+    get_lines
   end
 
   def has_point?
-    @points.length() > 0
+    fetch(Settings.FIELDS.POINTS, '').length() > 0
   end
 
   def points
-    @points
+    get_points
   end
 
   def has_polygon?
-    @polygons.length() > 0
+    fetch(Settings.FIELDS.POLYGONS, '').length() > 0
   end
 
   def polygons
-    @polygons
+    get_polygons
   end
   def get_bboxes
          bs = fetch(Settings.FIELDS.BBOXES, '')
