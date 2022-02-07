@@ -118,16 +118,16 @@ class SolrDocument
          for l in ls do
              answer = ""
              ljson = JSON.parse(l)
-             #for p in ljson
-             #    if !answer.empty?
-             #       answer += ", "
-             #    end
-             #    answer += p
-             #end
-             #array.push(answer)
+             for p in ljson
+                 if !answer.empty?
+                    answer += ", "
+                 end
+                 answer += p.to_s
+             end
+             array.push(answer)
          end
-    #return answer
-    return ljson
+    return answer
+    #return ljson
   end
 
   def get_polygons
