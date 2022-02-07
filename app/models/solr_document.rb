@@ -116,13 +116,10 @@ class SolrDocument
     ls = fetch(Settings.FIELDS.LINES, '')
          array = []
          for l in ls do
-             answer = ""
              ljson = JSON.parse(l)
+             answer = ""
              for p in ljson
-                 if !answer.empty?
-                    answer += ", "
-                 end
-                 answer += p.to_s
+                 answer = ljson["lat1"].to_s + ", " + ljson["long1"].to_s + " - " + ljson["lat2"].to_s + ", " + ljson["long2"].to_s
              end
              array.push(answer)
          end
@@ -134,22 +131,20 @@ class SolrDocument
     ps = fetch(Settings.FIELDS.POLYGONS, '')
         array = []
         for p in ps do
-            answer = ""
+            answer = []
+            point = ""
             pjson = JSON.parse(p)
             first = ""
             last = ""
             for pt in pjson
-                if first.to_s.empty?
-                    first = pt
-                end
-                if !answer.empty?
-                   answer += ", "
-                end
-                answer += pt.to_s
-                last = pt
+                point = "(" + pt["lat"].to_s + ", " + pt["long"].to_s + ")"
+                if first.empty?
+                    first = point
+                answer.push(point)
+                last = point
             end
             if last != first
-                answer += ", " + first.to_s
+                answer.push(first)
             end
             array.push(answer)
         end
