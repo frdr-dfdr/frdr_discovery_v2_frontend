@@ -147,7 +147,13 @@ class SolrDocument
             if last != first
                 answer.push(first)
             end
-            array.push(answer)
+            answerStr = ""
+            for pnt in answer
+                if !answerStr.empty?
+                    answerStr += ", "
+                answerStr += pnt
+            end
+            array.push(answerStr)
         end
     return array
   end
