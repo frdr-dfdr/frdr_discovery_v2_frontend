@@ -145,11 +145,11 @@ class SolrDocument
                 if !answer.empty?
                    answer += ", "
                 end
-                answer += pt.t_s
+                answer += pt.to_s
                 last = pt
             end
             if last != first
-                answer += ", " + first.t_s
+                answer += ", " + first.to_s
             end
             array.push(answer)
         end
