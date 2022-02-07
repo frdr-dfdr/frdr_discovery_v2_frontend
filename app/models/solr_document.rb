@@ -119,7 +119,7 @@ class SolrDocument
              ljson = JSON.parse(l)
              answer = ""
              for p in ljson
-                 answer = ljson["lat1"].to_s + ", " + ljson["long1"].to_s + " - " + ljson["lat2"].to_s + ", " + ljson["long2"].to_s
+                 answer = "(" + ljson["lat1"].to_s + ", " + ljson["long1"].to_s + ") - (" + ljson["lat2"].to_s + ", " + ljson["long2"].to_s + ")"
              end
              array.push(answer)
          end
