@@ -140,6 +140,7 @@ class SolrDocument
                 point = "(" + pt["lat"].to_s + ", " + pt["long"].to_s + ")"
                 if first.empty?
                     first = point
+                end
                 answer.push(point)
                 last = point
             end
