@@ -139,7 +139,7 @@ class SolrDocument
             first = ""
             last = ""
             for pt in pjson
-                if first.empty?
+                if first.to_s.empty?
                     first = pt
                 end
                 if !answer.empty?
