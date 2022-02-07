@@ -152,8 +152,8 @@ class SolrDocument
         #        answer += ", " + first
         #    end
         #    array.push(answer)
-        end
-    return answer
+        #end
+    #return answer
   end
 
   def get_points
