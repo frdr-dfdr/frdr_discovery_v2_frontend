@@ -151,6 +151,7 @@ class SolrDocument
             for pnt in answer
                 if !answerStr.empty?
                     answerStr += ", "
+                end
                 answerStr += pnt
             end
             array.push(answerStr)
