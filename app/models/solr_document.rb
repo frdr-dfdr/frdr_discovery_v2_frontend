@@ -117,35 +117,31 @@ class SolrDocument
          array = []
          for l in ls do
              ljson = JSON.parse(l)
-             answer = ""
-             for p in ljson
-                 answer = "(" + ljson["lat1"].to_s + ", " + ljson["long1"].to_s + ") - (" + ljson["lat2"].to_s + ", " + ljson["long2"].to_s + ")"
-             end
+             answer = "(" + ljson["lat1"].to_s + ", " + ljson["long1"].to_s + ") - (" + ljson["lat2"].to_s + ", " + ljson["long2"].to_s + ")"
              array.push(answer)
          end
     return array
-    #return ljson
   end
 
   def get_polygons
     ps = fetch(Settings.FIELDS.POLYGONS, '')
         array = []
         for p in ps do
-            answer = []
+            answer_pg_str = []
             point = ""
             pjson = JSON.parse(p)
-            first = ""
-            last = ""
+            first_str = ""
+            last_str = ""
             for pt in pjson
-                point = "(" + pt["lat"].to_s + ", " + pt["long"].to_s + ")"
-                if first.empty?
-                    first = point
+                point_str = "(" + pt["lat"].to_s + ", " + pt["long"].to_s + ")"
+                if first_str.empty?
+                    first_str = point_str
                 end
-                answer.push(point)
-                last = point
+                answer_pg_str.push(point)
+                last_str = point_str
             end
-            if last != first
-                answer.push(first)
+            if last_str != first_str
+                answer_str.push(first_str)
             end
             answerStr = ""
             for pnt in answer
@@ -163,6 +159,140 @@ class SolrDocument
     fetch(Settings.FIELDS.POINTS, '')
   end
 
+  # Creates a Map of arrays of arrays of geo objects (bboxes, lines, points, and polygons) for the record map to be able to draw
+  def geo_objects
+    map_object_types = Hash.new
+    arrays_bs = []
+    arrays_pgs = []
+    arrays_ls = []
+    arrays_pts = []
+
+    # Get polygons
+    pgs = fetch(Settings.FIELDS.POLYGONS, '')
+    for p in pgs do
+        answer_pgs = []
+        answer_pg_str = []
+        point = []
+        point_str = ""
+        pjson = JSON.parse(p)
+        first = ""
+        last = ""
+        for pt in pjson
+            point_str = "(" + pt["lat"].to_s + ", " + pt["long"].to_s + ")"
+            point.push(pt["lat"])
+            point.push(pt["long"])
+            if first.empty?
+                first = point
+                first_str = point_str
+            end
+            answer_pgs.push(point)
+            last = point
+            answer_pg_str.push(point)
+            last_str = point_str
+        end
+        if last != first
+            answer_pgs.push(first)
+            answer_str.push(first_str)
+        end
+        poly_map = Hash.new
+        poly_map["data"] = answer_pgs
+        poly_map["checkboxes"] = answer_str
+        arrays_pgs.push(poly_map)
+    end
+
+    # Get lines (probably need to fix this as lines don't need to be straight lines so may need more than 2 points to define)
+    ls = fetch(Settings.FIELDS.LINES, '')
+    for l in ls do
+         ljson = JSON.parse(l)
+            answer_str = "(" + ljson["lat1"].to_s + ", " + ljson["long1"].to_s + ") - (" + ljson["lat2"].to_s + ", " + ljson["long2"].to_s + ")"
+            answer_ls = []
+            line_pt_1 = []
+            line_pt_2 = []
+            line_pt_1.push(ljson["lat1"])
+            line_pt_1.push(ljson["long1"])
+            answer_ls.push(line_pt_1)
+            line_pt_2.push(ljson["lat2"])
+            line_pt_2.push(ljson["long2"])
+            answer_ls.push(line_pt_2)
+            line_map = Hash.new
+            line_map["data"] = answer_ls
+            line_map["checkboxes"] = answer_str
+            array_ls.push(line_map)
+         array_ls.push(answer)
+    end
+    # Get bounding boxes
+    bs = fetch(Settings.FIELDS.BBOXES, '')
+    bbox_map = Hash.new
+    for b in bs do
+        answer_bb = []
+        answer_bb_str = ""
+        bjson = JSON.parse(b)
+        west = bjson.fetch("west", "")
+        east = bjson.fetch("east", "")
+        north = bjson.fetch("north", "")
+        south = bjson.fetch("south", "")
+        point_nw = [north,west]
+        point_se = [south,east]
+        answer_bb.push(point_nw)
+        answer_bb.push(point_se)
+
+        other = bjson.fetch("other", "")
+        country = bjson.fetch("country", "")
+        province = bjson.fetch("province", "")
+        city = bjson.fetch("city","")
+        file_name = bjson.fetch("file_name", "")
+        if !file_name.empty?
+            answer_bb_str = file_name
+        elsif other.empty? && country.empty? && province.empty? && city.empty?
+            answer_bb_str = north.to_s + ", " + west.to_s + ", " + south.to_s + ', ' + east.to_s)
+        else
+            if !other.empty?
+                answer_bb_str = other
+            end
+            if !city.empty?
+                if !answer_bb_str.empty?
+                    answer_bb_str += "; " + city
+                else
+                    answer_bb_str = city
+                end
+            end
+            if !province.empty?
+                if !answer_bb_str.empty?
+                    answer_bb_str += "; " + province
+                else
+                    answer_bb_str = province
+                end
+            end
+            if !country.empty?
+                if !answer_bb_str.empty?
+                    answer_bb_str += "; " + country
+                else
+                    answer_bb_str = country
+                end
+            end
+        end
+        array_bs.push(answer)
+        bbox_map["data"] = answer_bb
+        bbox_map["checkboxes"] = answer_bb_str
+        arrays_bs.push(bbox_map)
+    end
+
+    # Get points
+    pts = fetch(Settings.FIELDS.POINTS, '')
+    for p in pts
+        points_map = Hash.new
+        points_map["data"] = p
+        points_map["checkboxes"] = p
+        arrays_pts.push(points_map)
+    end
+
+
+    map_object_types["bboxes"] = arrays_bs
+    map_object_types["lines"] = arrays_ls
+    map_object_types["polygons"] = arrays_pgs
+    map_object_types["points"] = arrays_pts
+
+    return map_object_types
 end
 
 
