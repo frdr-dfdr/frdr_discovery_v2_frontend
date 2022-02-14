@@ -244,7 +244,7 @@ class SolrDocument
         if !file_name.empty?
             answer_bb_str = file_name
         elsif other.empty? && country.empty? && province.empty? && city.empty?
-            answer_bb_str = north.to_s + ", " + west.to_s + ", " + south.to_s + ', ' + east.to_s)
+            answer_bb_str = north.to_s + ", " + west.to_s + ", " + south.to_s + ', ' + east.to_s
         else
             if !other.empty?
                 answer_bb_str = other
