@@ -141,7 +141,7 @@ class SolrDocument
             last_str = point_str
         end
         if last_str != first_str
-            answer_str.push(first_str)
+            answer_pg_str.push(first_str)
         end
         answerStr = ""
         for pnt in answer
