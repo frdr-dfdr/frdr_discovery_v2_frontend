@@ -12,16 +12,22 @@ Blacklight.onLoad(function() {
                 $('input[type="checkbox"]' + itemClassSelector).prop('checked', false);
             }
         });
-
+        geoblacklight = new GeoBlacklight.Viewer.Map(this, { bbox: bbox });
         $('input[type="checkbox"]' + itemClassSelector).change(function() {
             var allInputs = $('input[type="checkbox"]' + itemClassSelector);
+            var bounds = $L.bboxToBounds($(this).data([[-61.74948],[47.45465],[-61.66],[47.66]]));
+
+
             if(allInputs.length == allInputs.filter(":checked").length) {
                 $(allIdSelector).prop('checked', true);
                 $(allIdSelector)[0].indeterminate = false;
+                $geoblacklight.addBoundsOverlay(bounds);
+
             }
             else if(allInputs.filter(":checked").length == 0) {
                 $(allIdSelector).prop('checked', false);
                 $(allIdSelector)[0].indeterminate = false;
+                $geoblacklight.removeBoundsOverlay();
             }
             else {
                 $(allIdSelector)[0].indeterminate = true;
@@ -35,3 +41,5 @@ Blacklight.onLoad(function() {
     addAllControl('#polygon-all', '.polygon');
 
 });
+
+//[[-61.74948],[47.45465],[-61.66],[47.66]]
