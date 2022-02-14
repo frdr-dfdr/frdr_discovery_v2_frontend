@@ -12,7 +12,7 @@ Blacklight.onLoad(function() {
                 $('input[type="checkbox"]' + itemClassSelector).prop('checked', false);
             }
         });
-        geoblacklight = new GeoBlacklight.Viewer.Map(this, { bbox: bbox });
+        //geoblacklight = new GeoBlacklight.Viewer.Map(this, { bbox: bbox });
         $('input[type="checkbox"]' + itemClassSelector).change(function() {
             var allInputs = $('input[type="checkbox"]' + itemClassSelector);
             //var bounds = $L.bboxToBounds($(this).data([[-61.74948],[47.45465],[-61.66],[47.66]]));
