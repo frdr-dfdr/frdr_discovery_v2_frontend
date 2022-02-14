@@ -144,7 +144,7 @@ class SolrDocument
             answer_pg_str.push(first_str)
         end
         answerStr = ""
-        for pnt in answer
+        for pnt in answer_pg_str
             if !answerStr.empty?
                 answerStr += ", "
             end
