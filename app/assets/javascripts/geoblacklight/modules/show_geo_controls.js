@@ -21,13 +21,13 @@ Blacklight.onLoad(function() {
             if(allInputs.length == allInputs.filter(":checked").length) {
                 $(allIdSelector).prop('checked', true);
                 $(allIdSelector)[0].indeterminate = false;
-                $geoblacklight.addBoundsOverlay(bounds);
+                //$geoblacklight.addBoundsOverlay(bounds);
 
             }
             else if(allInputs.filter(":checked").length == 0) {
                 $(allIdSelector).prop('checked', false);
                 $(allIdSelector)[0].indeterminate = false;
-                $geoblacklight.removeBoundsOverlay();
+                //$geoblacklight.removeBoundsOverlay();
             }
             else {
                 $(allIdSelector)[0].indeterminate = true;
