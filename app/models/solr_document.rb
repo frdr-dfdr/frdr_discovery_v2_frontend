@@ -125,33 +125,33 @@ class SolrDocument
 
   def get_polygons
     ps = fetch(Settings.FIELDS.POLYGONS, '')
-        array = []
-        for p in ps do
-            answer_pg_str = []
-            point = ""
-            pjson = JSON.parse(p)
-            first_str = ""
-            last_str = ""
-            for pt in pjson
-                point_str = "(" + pt["lat"].to_s + ", " + pt["long"].to_s + ")"
-                if first_str.empty?
-                    first_str = point_str
-                end
-                answer_pg_str.push(point)
-                last_str = point_str
+    array = []
+    for p in ps do
+        answer_pg_str = []
+        point = ""
+        pjson = JSON.parse(p)
+        first_str = ""
+        last_str = ""
+        for pt in pjson
+            point_str = "(" + pt["lat"].to_s + ", " + pt["long"].to_s + ")"
+            if first_str.empty?
+                first_str = point_str
             end
-            if last_str != first_str
-                answer_str.push(first_str)
-            end
-            answerStr = ""
-            for pnt in answer
-                if !answerStr.empty?
-                    answerStr += ", "
-                end
-                answerStr += pnt
-            end
-            array.push(answerStr)
+            answer_pg_str.push(point)
+            last_str = point_str
         end
+        if last_str != first_str
+            answer_str.push(first_str)
+        end
+        answerStr = ""
+        for pnt in answer
+            if !answerStr.empty?
+                answerStr += ", "
+            end
+            answerStr += pnt
+        end
+        array.push(answerStr)
+    end
     return array
   end
 
@@ -203,22 +203,22 @@ class SolrDocument
     # Get lines (probably need to fix this as lines don't need to be straight lines so may need more than 2 points to define)
     ls = fetch(Settings.FIELDS.LINES, '')
     for l in ls do
-         ljson = JSON.parse(l)
-            answer_str = "(" + ljson["lat1"].to_s + ", " + ljson["long1"].to_s + ") - (" + ljson["lat2"].to_s + ", " + ljson["long2"].to_s + ")"
-            answer_ls = []
-            line_pt_1 = []
-            line_pt_2 = []
-            line_pt_1.push(ljson["lat1"])
-            line_pt_1.push(ljson["long1"])
-            answer_ls.push(line_pt_1)
-            line_pt_2.push(ljson["lat2"])
-            line_pt_2.push(ljson["long2"])
-            answer_ls.push(line_pt_2)
-            line_map = Hash.new
-            line_map["data"] = answer_ls
-            line_map["checkboxes"] = answer_str
-            array_ls.push(line_map)
-         array_ls.push(answer)
+        ljson = JSON.parse(l)
+        answer_str = "(" + ljson["lat1"].to_s + ", " + ljson["long1"].to_s + ") - (" + ljson["lat2"].to_s + ", " + ljson["long2"].to_s + ")"
+        answer_ls = []
+        line_pt_1 = []
+        line_pt_2 = []
+        line_pt_1.push(ljson["lat1"])
+        line_pt_1.push(ljson["long1"])
+        answer_ls.push(line_pt_1)
+        line_pt_2.push(ljson["lat2"])
+        line_pt_2.push(ljson["long2"])
+        answer_ls.push(line_pt_2)
+        line_map = Hash.new
+        line_map["data"] = answer_ls
+        line_map["checkboxes"] = answer_str
+        array_ls.push(line_map)
+        array_ls.push(answer)
     end
     # Get bounding boxes
     bs = fetch(Settings.FIELDS.BBOXES, '')
@@ -293,6 +293,7 @@ class SolrDocument
     map_object_types["points"] = arrays_pts
 
     return map_object_types
+  end
 end
 
 
