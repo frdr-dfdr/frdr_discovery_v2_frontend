@@ -60,4 +60,27 @@ module GeodisyHelper
     cp << item
     return cp.render :bibliography, id: :currentDoc
   end
+
+  # Add fields you want to show up as additional metadata to the following list
+  @@additional_metadata = ["dct_affiliation_sm", "dct_contributor_sm", "dct_publisher_sm", "dc_series_sm"]
+  def is_additional_metadata? field_name
+    @@additional_metadata.include? field_name
+  end
+
+  # Determines user locale and if a field is an english or french and does/n't match
+  def is_locale_for_metadata? field_name
+    if I18n.locale == :en
+      !field_name.include? "_fr_"
+    else
+      !field_name.include? "_en_"
+    end
+  end
+
+  # Helper for add show fields to render each value as its own separate div
+  def render_value_as_divs(args)
+    content_tag :div do
+      args[:value].collect { |value| concat content_tag(:div, value) }
+    end
+  end
+
 end
