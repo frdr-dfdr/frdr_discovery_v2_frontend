@@ -137,6 +137,7 @@ class CatalogController < ApplicationController
     # Add additional metadata fields first so they show up before the other locale values
     config.add_show_field Settings.FIELDS.AFFILIATION, label: 'Author Affiliation', itemprop: 'affiliation', helper_method: :render_value_as_divs
     config.add_show_field Settings.FIELDS.CONTRIBUTOR, label: 'Contributor(s)', itemprop: 'contributor'
+    config.add_show_field Settings.FIELDS.PUBLISHER, label: 'Publisher', itemprop: 'publisher'
     config.add_show_field Settings.FIELDS.SERIES, label: 'Series', itemprop: 'series'
 
     config.add_show_field Settings.FIELDS.TITLE_EN, label: 'Title (EN)', itemprop: 'title'

@@ -62,7 +62,7 @@ module GeodisyHelper
   end
 
   # Add fields you want to show up as additional metadata to the following list
-  @@additional_metadata = ["dct_affiliation_sm", "dct_contributor_sm", "dct_publisher_sm", "dc_series_sm"]
+  @@additional_metadata = [Settings.FIELDS.AFFILIATION, Settings.FIELDS.CONTRIBUTOR, Settings.FIELDS.PUBLISHER, Settings.FIELDS.SERIES]
   def is_additional_metadata? field_name
     @@additional_metadata.include? field_name
   end
