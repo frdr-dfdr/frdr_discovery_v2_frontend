@@ -33,6 +33,7 @@ FIELDS:
   :GEOMETRY: 'solr_geom'
   :WXS_IDENTIFIER: 'layer_id_s'
   :RIGHTS: 'dc_rights_s'
+  :RIGHTS_URI: 'dc_rights_uri_s'
   :PROVENANCE: 'dct_provenance_s'
   :GEOM_TYPE: 'layer_geom_type_s'
   :SERIES: 'dc_series_sm'
