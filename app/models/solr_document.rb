@@ -59,8 +59,4 @@ class SolrDocument
     @polygons
   end
 
-  def holding_institute
-    fetch(Settings.FIELDS.PROVENANCE)
-  end
-
 end
