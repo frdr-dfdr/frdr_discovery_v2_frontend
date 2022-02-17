@@ -16,8 +16,12 @@ Blacklight.onLoad(function() {
         $(allIdSelector).click(function() {
             if ($(this).is(':checked')) {
                 $('input[type="checkbox"]' + itemClassSelector).prop('checked', true);
+                var bounds = L.bboxToBounds("-180.0 -86.0 180.0 86.0");
+                                viewer.addBoundsOverlay(bounds);
             } else {
                 $('input[type="checkbox"]' + itemClassSelector).prop('checked', false);
+                var bounds = L.bboxToBounds("-180.0 -86.0 180.0 86.0");
+                                viewer.map.removeLayer(bounds);
             }
         });
 
@@ -27,8 +31,8 @@ Blacklight.onLoad(function() {
                 $(allIdSelector).prop('checked', true);
                 $(allIdSelector)[0].indeterminate = false;
 
-                var bounds = L.bboxToBounds("-180.0 -86.0 180.0 86.0");
-                viewer.addBoundsOverlay(bounds);
+                //var bounds = L.bboxToBounds("-180.0 -86.0 180.0 86.0");
+                //viewer.addBoundsOverlay(bounds);
             }
             else if(allInputs.filter(":checked").length == 0) {
                 $(allIdSelector).prop('checked', false);
