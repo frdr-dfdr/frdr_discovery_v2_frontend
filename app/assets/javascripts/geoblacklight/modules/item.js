@@ -16,15 +16,19 @@ Blacklight.onLoad(function() {
         $(allIdSelector).click(function() {
             if ($(this).is(':checked')) {
                 $('input[type="checkbox"]' + itemClassSelector).prop('checked', true);
-                var bounds = L.bboxToBounds("-180.0 -86.0 180.0 86.0");
-                                viewer.addBoundsOverlay(bounds);
             } else {
                 $('input[type="checkbox"]' + itemClassSelector).prop('checked', false);
-                var bounds = L.bboxToBounds("-180.0 -86.0 180.0 86.0");
-                                viewer.map.removeLayer(bounds);
             }
         });
-
+        $(itemClassSelector).click(function() {
+                if ($(this).is(':checked')) {
+                    var bounds = L.bboxToBounds("-180.0 -86.0 180.0 86.0");
+                                    viewer.addBoundsOverlay(bounds);
+                } else {
+                    var bounds = L.bboxToBounds("-180.0 -86.0 180.0 86.0");
+                                    viewer.map.removeLayer(bounds);
+                }
+        }
         $('input[type="checkbox"]' + itemClassSelector).change(function() {
             var allInputs = $('input[type="checkbox"]' + itemClassSelector);
             if(allInputs.length == allInputs.filter(":checked").length) {
