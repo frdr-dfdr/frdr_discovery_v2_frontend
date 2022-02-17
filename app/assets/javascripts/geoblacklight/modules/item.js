@@ -21,12 +21,11 @@ Blacklight.onLoad(function() {
             }
         });
         $("input[type='checkbox']").on("change",function(){
+                var bounds = L.bboxToBounds("-180.0 -86.0 180.0 86.0");
                 if ($(this).is(':checked')) {
-                    var bounds = L.bboxToBounds("-180.0 -86.0 180.0 86.0");
                                     viewer.addBoundsOverlay(bounds);
                 } else {
-                    var bounds = L.bboxToBounds("-180.0 -86.0 180.0 86.0");
-                                    viewer.map.removeLayer(bounds);
+                                    viewer.removeLayer(bounds);
                 }
         });
         $('input[type="checkbox"]' + itemClassSelector).change(function() {
