@@ -23,7 +23,7 @@ Blacklight.onLoad(function() {
         $("input[type='checkbox']").on("change",function(){
                 var bounds = L.bboxToBounds("-180.0 -86.0 180.0 86.0");
                 if ($(this).is(':checked')) {
-                                    viewer.addBoundsOverlay(bounds, "a");
+                                    viewer.addBoundsOverlaySingle(bounds, "a");
                 } else {
                                     viewer.removeSingleBoundsOverlay("a");
                 }

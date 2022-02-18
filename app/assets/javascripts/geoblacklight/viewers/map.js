@@ -51,11 +51,17 @@ GeoBlacklight.Viewer.Map = GeoBlacklight.Viewer.extend({
    * Add a bounding box overlay to map.
    * @param {L.LatLngBounds} bounds Leaflet LatLngBounds
    */
-            bounds.getSouthWest(),
-            bounds.getSouthEast(),
-            bounds.getNorthEast(),
-            bounds.getNorthWest()
-            ]));
+  addBoundsOverlaySingle: function(bounds, name) {
+    if (bounds instanceof L.LatLngBounds) {
+      mapOverlay = L.polygon([
+                           bounds.getSouthWest(),
+                           bounds.getSouthEast(),
+                           bounds.getNorthEast(),
+                           bounds.getNorthWest()
+                         ]);
+      var layerName = feature.properties.condition[0];
+      mapOverlay[layerName]=name;
+      this.overlay.addLayer(mapOverlay);
     }
   },
 
