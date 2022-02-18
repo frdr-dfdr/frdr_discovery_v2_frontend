@@ -67,7 +67,7 @@ GeoBlacklight.Viewer.Map = GeoBlacklight.Viewer.extend({
   removeSingleBoundsOverlay: function(name) {
     for(var i in this.overlay._layers){
         if (this.overlay._layers[i].id == name){
-            this.overlay.removeLayer(name);
+            this.overlay.removeLayer(i);
         }
     }
   },
