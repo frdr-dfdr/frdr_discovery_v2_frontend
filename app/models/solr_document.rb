@@ -29,7 +29,7 @@ class SolrDocument
   use_extension(Blacklight::Document::DublinCore)
 
   def has_bbox?
-    geo_objects["bboxes"]["checkboxes"].length() > 0
+     geo_objects["bboxes"].length() > 0
   end
 
   def bboxes
@@ -37,7 +37,7 @@ class SolrDocument
   end
 
   def has_line?
-    geo_objects["lines"]["checkboxes"].length() > 0
+    geo_objects["lines"].length() > 0
   end
 
   def lines
@@ -45,7 +45,7 @@ class SolrDocument
   end
 
   def has_point?
-    geo_objects["points"]["checkboxes"].length() > 0
+    geo_objects["points"].length() > 0
   end
 
   def points
@@ -53,7 +53,7 @@ class SolrDocument
   end
 
   def has_polygon?
-    geo_objects["polygons"]["checkboxes"].length() > 0
+    geo_objects["polygons"].length() > 0
   end
 
   def polygons
