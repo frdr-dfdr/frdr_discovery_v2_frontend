@@ -137,7 +137,6 @@ class SolrDocument
         line_map["data"] = answer_ls
         line_map["checkboxes"] = answer_str
         array_ls.push(line_map)
-        array_ls.push(answer)
     end
     return arrays_ls
   end
