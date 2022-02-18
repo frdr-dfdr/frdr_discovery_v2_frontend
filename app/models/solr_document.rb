@@ -29,35 +29,35 @@ class SolrDocument
   use_extension(Blacklight::Document::DublinCore)
 
   def has_bbox?
-    geo_objects.get("bboxes").get("checkboxes").length() > 0
+    geo_objects["bboxes"]["checkboxes"].length() > 0
   end
 
   def bboxes
-    geo_objects.get("bboxes").get("data")
+    geo_objects["bboxes"]["data"]
   end
 
   def has_line?
-    geo_objects.get("lines").get("checkboxes").length() > 0
+    geo_objects["lines"]["checkboxes"].length() > 0
   end
 
   def lines
-    geo_objects.get("lines").get("data")
+    geo_objects["lines"]["data"]
   end
 
   def has_point?
-    geo_objects.get("points").get("checkboxes").length() > 0
+    geo_objects["points"]["checkboxes"].length() > 0
   end
 
   def points
-    geo_objects.get("points").get("data")
+    geo_objects["points"]["data"]
   end
 
   def has_polygon?
-    geo_objects.get("polygons").get("checkboxes").length() > 0
+    geo_objects["polygons"]["checkboxes"].length() > 0
   end
 
   def polygons
-    geo_objects.get("polygons").get("data")
+    geo_objects["polygons"]["data"]
   end
   def get_bboxes
     arrays_bs = []
