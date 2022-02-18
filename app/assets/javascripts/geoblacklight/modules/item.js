@@ -23,9 +23,9 @@ Blacklight.onLoad(function() {
         $("input[type='checkbox']").on("change",function(){
                 var bounds = L.bboxToBounds("-180.0 -86.0 180.0 86.0");
                 if ($(this).is(':checked')) {
-                                    viewer.addBoundsOverlay(bounds);
+                                    viewer.addBoundsOverlay(bounds, "a");
                 } else {
-                                    viewer.removeLayer(bounds);
+                                    viewer.removeLayer("a");
                 }
         });
         $('input[type="checkbox"]' + itemClassSelector).change(function() {
