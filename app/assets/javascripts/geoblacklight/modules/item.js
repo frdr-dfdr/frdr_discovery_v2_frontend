@@ -25,7 +25,7 @@ Blacklight.onLoad(function() {
                 if ($(this).is(':checked')) {
                                     viewer.addBoundsOverlay(bounds, "a");
                 } else {
-                                    viewer.removeLayer("a");
+                                    viewer.removeSingleBoundsOverlay("a");
                 }
         });
         $('input[type="checkbox"]' + itemClassSelector).change(function() {
