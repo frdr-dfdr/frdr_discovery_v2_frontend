@@ -33,7 +33,7 @@ class SolrDocument
   end
 
   def bboxes
-    geo_objects["bboxes"]["data"]
+    geo_objects["bboxes"]
   end
 
   def has_line?
@@ -41,7 +41,7 @@ class SolrDocument
   end
 
   def lines
-    geo_objects["lines"]["data"]
+    geo_objects["lines"]
   end
 
   def has_point?
@@ -49,7 +49,7 @@ class SolrDocument
   end
 
   def points
-    geo_objects["points"]["data"]
+    geo_objects["points"]
   end
 
   def has_polygon?
@@ -57,7 +57,7 @@ class SolrDocument
   end
 
   def polygons
-    geo_objects["polygons"]["data"]
+    geo_objects["polygons"]
   end
   def get_bboxes
     arrays_bs = []
