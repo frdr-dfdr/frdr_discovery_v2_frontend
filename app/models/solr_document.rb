@@ -138,7 +138,7 @@ class SolrDocument
         line_map["checkboxes"] = answer_str
         array_ls.push(line_map)
     end
-    return arrays_ls
+    return array_ls
   end
 
   def get_polygons
