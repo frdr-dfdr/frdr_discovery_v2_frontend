@@ -47,15 +47,19 @@ GeoBlacklight.Viewer.Map = GeoBlacklight.Viewer.extend({
     }
   },
 
-  removeSingleBoundsOverlay: function(bounds) {
-    if (bounds instanceof L.LatLngBounds){
-        this.overlay.removeLayer(L.polygon([
+  /**
+   * Add a bounding box overlay to map.
+   * @param {L.LatLngBounds} bounds Leaflet LatLngBounds
             bounds.getSouthWest(),
             bounds.getSouthEast(),
             bounds.getNorthEast(),
             bounds.getNorthWest()
             ]));
     }
+  },
+
+  removeSingleBoundsOverlay: function(name) {
+    overlay.removeLayer(name);
   },
   /**
    * Remove bounding box overlay from map.
