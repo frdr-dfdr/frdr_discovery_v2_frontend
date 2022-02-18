@@ -111,7 +111,6 @@ class SolrDocument
                 end
             end
         end
-        array_bs.push(answer)
         bbox_map["data"] = answer_bb
         bbox_map["checkboxes"] = answer_bb_str
         arrays_bs.push(bbox_map)
