@@ -59,14 +59,13 @@ GeoBlacklight.Viewer.Map = GeoBlacklight.Viewer.extend({
                            bounds.getNorthEast(),
                            bounds.getNorthWest()
                          ]);
-      var layerName = feature.properties.condition[0];
-      mapOverlay[layerName]=name;
+      mapOverlay.id=name;
       this.overlay.addLayer(mapOverlay);
     }
   },
 
   removeSingleBoundsOverlay: function(name) {
-    overlay.removeLayer(name);
+    this.overlay.removeLayer(name);
   },
   /**
    * Remove bounding box overlay from map.
