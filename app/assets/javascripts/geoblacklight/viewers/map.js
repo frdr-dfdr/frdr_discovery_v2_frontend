@@ -65,7 +65,11 @@ GeoBlacklight.Viewer.Map = GeoBlacklight.Viewer.extend({
   },
 
   removeSingleBoundsOverlay: function(name) {
-    this.overlay.removeLayer(name);
+    for(var i in this.overlay._layers){
+        if (this.overlay._layers[i].id == name){
+            this.overlay.removeLayer(name);
+        }
+    }
   },
   /**
    * Remove bounding box overlay from map.
