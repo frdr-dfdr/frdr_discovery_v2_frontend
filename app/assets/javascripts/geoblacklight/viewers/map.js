@@ -50,6 +50,7 @@ GeoBlacklight.Viewer.Map = GeoBlacklight.Viewer.extend({
   /**
    * Add a bounding box overlay to map.
    * @param {L.LatLngBounds} bounds Leaflet LatLngBounds
+   */
             bounds.getSouthWest(),
             bounds.getSouthEast(),
             bounds.getNorthEast(),
