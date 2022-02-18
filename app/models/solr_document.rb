@@ -169,11 +169,11 @@ class SolrDocument
         end
         if last != first
             answer_pgs.push(first)
-            answer_str.push(first_str)
+            answer_pg_str.push(first_str)
         end
         poly_map = Hash.new
         poly_map["data"] = answer_pgs
-        poly_map["checkboxes"] = answer_str
+        poly_map["checkboxes"] = answer_pg_str
         arrays_pgs.push(poly_map)
     end
     return arrays_pgs
