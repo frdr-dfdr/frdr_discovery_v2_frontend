@@ -91,7 +91,7 @@ class SolrDocument
         answer_bb.push(point_se)
         p point_nw.to_s
         p point_se.to_s
-        p.answer_bb.to_s
+        p answer_bb.to_s
 
         other = bjson.fetch("other", "")
         country = bjson.fetch("country", "")
