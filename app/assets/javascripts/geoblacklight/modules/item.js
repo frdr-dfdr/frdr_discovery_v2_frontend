@@ -6,7 +6,7 @@ Blacklight.onLoad(function() {
       viewer;
 
     // get new viewer instance and pass in element
-    viewer = new window['GeoBlacklight']['Viewer'][viewerName](element.get("data"));
+    viewer = new window['GeoBlacklight']['Viewer'][viewerName](element);
 
     /**
      * Add behaviour for all checkbox that can select / deselect all fo the checkboxes
