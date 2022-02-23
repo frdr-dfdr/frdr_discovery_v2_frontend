@@ -136,8 +136,9 @@ class SolrDocument
         p "string = " + answer_bb_str
         bbox_map["data"] = answer_bb
         bbox_map["checkboxes"] = answer_bb_str
+         p "array start " + counter.to_s + " " + arrays_bs.to_s
         arrays_bs.push(bbox_map)
-        p "array " + counter.to_s + " " + arrays_bs.to_s
+        p "array end " + counter.to_s + " " + arrays_bs.to_s
         counter = counter + 1
     end
     return arrays_bs
