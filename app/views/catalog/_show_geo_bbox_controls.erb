@@ -1,5 +1,5 @@
 <% document ||= @document %>
 
 <% if document.has_bbox? %>
-  <%= render partial: 'show_geo_checkboxes', locals: { all_id: 'bbox-all', all_i18n_key: 'geoblacklight.show.geospatial_info.select.bbox', checkbox_class: 'bbox', prefix: 'bbox-', values: document.bboxes } %>
+  <%= render partial: 'show_geo_checkboxes', locals: { all_id: 'bbox-all', all_i18n_key: 'geoblacklight.show.geospatial_info.select.bbox', checkbox_class: 'bbox', prefix: 'bbox-', values: document.bboxes["checkboxes"] } %>
 <% end %>
