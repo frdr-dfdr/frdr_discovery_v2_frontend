@@ -60,7 +60,7 @@ class SolrDocument
     geo_objects["polygons"]
   end
   def get_bboxes
-    arrays_bs = []
+    arrays_bs = Array.new
     bs = fetch(Settings.FIELDS.BBOXES, '')
     bbox_map = Hash.new
     for b in bs do
@@ -73,13 +73,15 @@ class SolrDocument
         province = ""
         city = ""
         file_name = ""
-        answer_bb = []
+        answer_bb = Array.new
         answer_bb_str = ""
         bjson = JSON.parse(b)
         west = bjson.fetch("west", "")
         east = bjson.fetch("east", "")
         north = bjson.fetch("north", "")
         south = bjson.fetch("south", "")
+        point_nw = Array.new
+        point_se = Array.new
         point_nw = [north,west]
         point_se = [south,east]
         answer_bb.push(point_nw)
@@ -128,15 +130,15 @@ class SolrDocument
   end
 
   def get_lines
-    array_ls = []
+    array_ls = Array.new
     ls = fetch(Settings.FIELDS.LINES, '')
     for l in ls do
         answer_str = ""
         ljson = JSON.parse(l)
         answer_str = "(" + ljson["lat1"].to_s + ", " + ljson["long1"].to_s + ") - (" + ljson["lat2"].to_s + ", " + ljson["long2"].to_s + ")"
-        answer_ls = []
-        line_pt_1 = []
-        line_pt_2 = []
+        answer_ls = Array.new
+        line_pt_1 = Array.new
+        line_pt_2 = Array.new
         line_pt_1.push(ljson["lat1"])
         line_pt_1.push(ljson["long1"])
         answer_ls.push(line_pt_1)
@@ -155,9 +157,9 @@ class SolrDocument
     arrays_pgs = []
     pgs = fetch(Settings.FIELDS.POLYGONS, '')
     for p in pgs do
-        answer_pgs = []
-        answer_pg_str = []
-        point = []
+        answer_pgs = Array.new
+        answer_pg_str = Array.new
+        point = Array.new
         point_str = ""
         pjson = JSON.parse(p)
         first = ""
