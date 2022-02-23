@@ -67,22 +67,22 @@ class SolrDocument
     bbox_map = Hash.new
     for b in bs do
         p "Counter " + counter.to_s
-        west = ""
-        east = ""
-        north = ""
-        south = ""
-        other = ""
-        country = ""
-        province = ""
-        city = ""
-        file_name = ""
+        west = String.new
+        east = String.new
+        north = String.new
+        south = String.new
+        other = String.new
+        country = String.new
+        province = String.new
+        city = String.new
+        file_name = String.new
         answer_bb = Array.new
-        answer_bb_str = ""
+        answer_bb_str = String.new
         bjson = JSON.parse(b)
-        west = bjson.fetch("west", "")
-        east = bjson.fetch("east", "")
-        north = bjson.fetch("north", "")
-        south = bjson.fetch("south", "")
+        west = bjson.fetch("west", String.new)
+        east = bjson.fetch("east", String.new)
+        north = bjson.fetch("north", String.new)
+        south = bjson.fetch("south", String.new)
         point_nw = Array.new
         point_se = Array.new
         point_nw = [north,west]
@@ -93,11 +93,11 @@ class SolrDocument
         p point_se.to_s
         p answer_bb.to_s
 
-        other = bjson.fetch("other", "")
-        country = bjson.fetch("country", "")
-        province = bjson.fetch("province", "")
-        city = bjson.fetch("city","")
-        file_name = bjson.fetch("file_name", "")
+        other = bjson.fetch("other", String.new)
+        country = bjson.fetch("country", String.new)
+        province = bjson.fetch("province", String.new)
+        city = bjson.fetch("city",String.new)
+        file_name = bjson.fetch("file_name", String.new)
         p "country = " + country
         p "province = " + province
         p "city = " + city
@@ -148,7 +148,7 @@ class SolrDocument
     array_ls = Array.new
     ls = fetch(Settings.FIELDS.LINES, '')
     for l in ls do
-        answer_str = ""
+        answer_str = String.new
         ljson = JSON.parse(l)
         answer_str = "(" + ljson["lat1"].to_s + ", " + ljson["long1"].to_s + ") - (" + ljson["lat2"].to_s + ", " + ljson["long2"].to_s + ")"
         answer_ls = Array.new
@@ -175,10 +175,10 @@ class SolrDocument
         answer_pgs = Array.new
         answer_pg_str = Array.new
         point = Array.new
-        point_str = ""
+        point_str = String.new
         pjson = JSON.parse(p)
-        first = ""
-        last = ""
+        first = String.new
+        last = String.new
         for pt in pjson
             point_str = "(" + pt["lat"].to_s + ", " + pt["long"].to_s + ")"
             point.push(pt["lat"])
