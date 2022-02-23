@@ -64,6 +64,15 @@ class SolrDocument
     bs = fetch(Settings.FIELDS.BBOXES, '')
     bbox_map = Hash.new
     for b in bs do
+        west = ""
+        east = ""
+        north = ""
+        south = ""
+        other = ""
+        country = ""
+        province = ""
+        city = ""
+        file_name = ""
         answer_bb = []
         answer_bb_str = ""
         bjson = JSON.parse(b)
@@ -122,6 +131,7 @@ class SolrDocument
     array_ls = []
     ls = fetch(Settings.FIELDS.LINES, '')
     for l in ls do
+        answer_str = ""
         ljson = JSON.parse(l)
         answer_str = "(" + ljson["lat1"].to_s + ", " + ljson["long1"].to_s + ") - (" + ljson["lat2"].to_s + ", " + ljson["long2"].to_s + ")"
         answer_ls = []
