@@ -154,7 +154,7 @@ class SolrDocument
   end
 
   def get_polygons
-    arrays_pgs = []
+    arrays_pgs = Array.new
     pgs = fetch(Settings.FIELDS.POLYGONS, '')
     for p in pgs do
         answer_pgs = Array.new
@@ -165,6 +165,7 @@ class SolrDocument
         first = ""
         last = ""
         for pt in pjson
+            p pt.to_s
             point_str = "(" + pt["lat"].to_s + ", " + pt["long"].to_s + ")"
             point.push(pt["lat"])
             point.push(pt["long"])
@@ -190,7 +191,7 @@ class SolrDocument
   end
 
   def get_points
-    arrays_pts = []
+    arrays_pts = Array.new
     pts = fetch(Settings.FIELDS.POINTS, '')
     for p in pts
         points_map = Hash.new
