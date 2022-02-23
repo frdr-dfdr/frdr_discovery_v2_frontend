@@ -63,9 +63,10 @@ class SolrDocument
     arrays_bs = Array.new
     bs = fetch(Settings.FIELDS.BBOXES, '')
     p "Bounding boxes"
-    p bs.to_s
+    counter = 1
     bbox_map = Hash.new
     for b in bs do
+        p "Counter " + counter.to_s
         west = ""
         east = ""
         north = ""
@@ -88,12 +89,20 @@ class SolrDocument
         point_se = [south,east]
         answer_bb.push(point_nw)
         answer_bb.push(point_se)
+        p point_nw.to_s
+        p point_se.to_s
+        p.answer_bb.to_s
 
         other = bjson.fetch("other", "")
         country = bjson.fetch("country", "")
         province = bjson.fetch("province", "")
         city = bjson.fetch("city","")
         file_name = bjson.fetch("file_name", "")
+        p "country = " + country
+        p "province = " + province
+        p "city = " + city
+        p "other = " + other
+        p "file name = " + file_name
         if !file_name.empty?
             answer_bb_str = file_name
         elsif other.empty? && country.empty? && province.empty? && city.empty?
@@ -124,9 +133,12 @@ class SolrDocument
                 end
             end
         end
+        p "string = " answer_bb_str
         bbox_map["data"] = answer_bb
         bbox_map["checkboxes"] = answer_bb_str
         arrays_bs.push(bbox_map)
+        p "array " + counter.to_s + " " + arrays_bs.to_s
+        counter = counter + 1
     end
     return arrays_bs
   end
@@ -164,8 +176,6 @@ class SolrDocument
         point = Array.new
         point_str = ""
         pjson = JSON.parse(p)
-        p "Polygon"
-        p pjson.to_s
         first = ""
         last = ""
         for pt in pjson
