@@ -62,6 +62,8 @@ class SolrDocument
   def get_bboxes
     arrays_bs = Array.new
     bs = fetch(Settings.FIELDS.BBOXES, '')
+    p "Bounding boxes"
+    p bs.to_s
     bbox_map = Hash.new
     for b in bs do
         west = ""
@@ -162,10 +164,11 @@ class SolrDocument
         point = Array.new
         point_str = ""
         pjson = JSON.parse(p)
+        p "Polygon"
+        p pjson.to_s
         first = ""
         last = ""
         for pt in pjson
-            p pt.to_s
             point_str = "(" + pt["lat"].to_s + ", " + pt["long"].to_s + ")"
             point.push(pt["lat"])
             point.push(pt["long"])
