@@ -23,9 +23,9 @@ Blacklight.onLoad(function() {
         $("input[type='checkbox']").on("change",function(){
                 var bounds = L.bboxToBounds("-180.0 -86.0 180.0 86.0");
                 if ($(this).is(':checked')) {
-                                    viewer.addBoundsOverlaySingle(bounds, "a");
+                                    viewer.addBoundsOverlaySingle(bounds, this.defaultValue);
                 } else {
-                                    viewer.removeSingleBoundsOverlay("a");
+                                    viewer.removeSingleBoundsOverlay(this.defaultValue);
                 }
         });
         $('input[type="checkbox"]' + itemClassSelector).change(function() {
@@ -46,7 +46,12 @@ Blacklight.onLoad(function() {
             }
         });
     }
+    function addBbox(){
+        var bounds = L.bboxToBounds("-180.0 -86.0 180.0 86.0");
+        viewer.addBoundsOverlaySingle(bounds, this.defaultValue);
+    }
 
+    addBBox();
     addAllControl('#bbox-all', '.bbox');
     addAllControl('#line-all', '.line');
     addAllControl('#point-all', '.point');
