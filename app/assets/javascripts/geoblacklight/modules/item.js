@@ -18,7 +18,7 @@ Blacklight.onLoad(function() {
             viewer.removeSingleBoundsOverlay(item.attributes.name.nodeValue);
         }
     }
-    }
+    
     /**
      * Add behaviour for all checkbox that can select / deselect all fo the checkboxes
      * of a type and gets unchecked if one of the sub checkboxes gets unchecked.
