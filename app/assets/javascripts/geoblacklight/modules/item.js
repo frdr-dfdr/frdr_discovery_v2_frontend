@@ -46,7 +46,7 @@ Blacklight.onLoad(function() {
             }
         });
     }
-    function addBbox(){
+    function addBBox(){
         var bounds = L.bboxToBounds("-180.0 -86.0 180.0 86.0");
         viewer.addBoundsOverlaySingle(bounds, this.defaultValue);
     }
