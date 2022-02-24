@@ -11,7 +11,7 @@ Blacklight.onLoad(function() {
 
     function swapCheckValue(item, checked){
         item.checked = checked;
-        if checked{
+        if (checked){
             viewer.addBoundsOverlaySingle(bounds, item.attributes.name.nodeValue);
         }
         else{
