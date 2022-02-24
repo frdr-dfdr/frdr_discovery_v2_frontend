@@ -154,6 +154,8 @@ class SolrDocument
         answer_pgs = []
         answer_pg_str = []
         pjson = JSON.parse(p)
+        first = String.new
+        last = String.new
         for pt in pjson
             point = []
             point_str = String.new("(" + pt["lat"].to_s + ", " + pt["long"].to_s + ")")
