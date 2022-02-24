@@ -34,7 +34,8 @@ Blacklight.onLoad(function() {
         });
         $("input[type='checkbox']").on("change",function(){
                 if ($(this).is(':checked')) {
-                                    viewer.addBoundsOverlaySingle(bounds, this.attributes.name.nodeValue);
+                    viewer.removeSingleBoundsOverlay(this.attributes.name.nodeValue);
+                    viewer.addBoundsOverlaySingle(bounds, this.attributes.name.nodeValue);
                 } else {
                                     viewer.removeSingleBoundsOverlay(this.attributes.name.nodeValue);
                 }
