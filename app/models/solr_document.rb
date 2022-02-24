@@ -196,8 +196,8 @@ class SolrDocument
     pts = fetch(Settings.FIELDS.POINTS, '')
     for p in pts do
         points_map = Hash.new
-        points_map["data"] = p
-        points_map["checkboxes"] = p
+        points_map["data"] = "(" + p.to_s + ")"
+        points_map["checkboxes"] = "(" + p.to_s + ")"
         arrays_pts.push(points_map)
     end
     return arrays_pts
