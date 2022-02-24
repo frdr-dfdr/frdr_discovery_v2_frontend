@@ -60,49 +60,41 @@ class SolrDocument
     geo_objects["polygons"]
   end
   def get_bboxes
-    arrays_bs = Array.new
+    arrays_bs = []
     bs = fetch(Settings.FIELDS.BBOXES, '')
     p "Bounding boxes"
     counter = 1
     bbox_map = Hash.new
     for b in bs do
         p "Counter " + counter.to_s
-        west = String.new
-        east = String.new
-        north = String.new
-        south = String.new
-        other = String.new
-        country = String.new
-        province = String.new
-        city = String.new
-        file_name = String.new
-        answer_bb = Array.new
+        answer_bb = []
         answer_bb_str = String.new
         bjson = JSON.parse(b)
-        west = bjson.fetch("west", String.new)
-        east = bjson.fetch("east", String.new)
-        north = bjson.fetch("north", String.new)
-        south = bjson.fetch("south", String.new)
-        point_nw = Array.new
-        point_se = Array.new
+        point_nw = []
+        p "NW a " + point_nw.to_s
+        p "string a = " + answer_bb_str
+        west = String.new(bjson.fetch("west", String.new))
+        p "NW b " + point_nw.to_s
+        p "string b = " + answer_bb_str
+        east = String.new(bjson.fetch("east", String.new)
+        north = String.new(bjson.fetch("north", String.new)
+        p "NW c " + point_nw.to_s
+        p "string c = " + answer_bb_str
+        south = String.new(bjson.fetch("south", String.new)
+        point_nw = []
+        point_se = []
         point_nw = [north,west]
+        p "NW d " + point_nw.to_s
+        p "string d = " + answer_bb_str
         point_se = [south,east]
         answer_bb.push(point_nw)
         answer_bb.push(point_se)
-        p point_nw.to_s
-        p point_se.to_s
-        p answer_bb.to_s
 
-        other = bjson.fetch("other", String.new)
-        country = bjson.fetch("country", String.new)
-        province = bjson.fetch("province", String.new)
-        city = bjson.fetch("city",String.new)
-        file_name = bjson.fetch("file_name", String.new)
-        p "country = " + country
-        p "province = " + province
-        p "city = " + city
-        p "other = " + other
-        p "file name = " + file_name
+        other = String.new(bjson.fetch("other", String.new))
+        country = String.new(bjson.fetch("country", String.new))
+        province = String.new(bjson.fetch("province", String.new))
+        city = String.new(bjson.fetch("city",String.new))
+        file_name = String.new(bjson.fetch("file_name", String.new))
         if !file_name.empty?
             answer_bb_str = file_name
         elsif other.empty? && country.empty? && province.empty? && city.empty?
@@ -133,7 +125,7 @@ class SolrDocument
                 end
             end
         end
-        p "string = " + answer_bb_str
+        p "string final = " + answer_bb_str
         bbox_map["data"] = answer_bb
         bbox_map["checkboxes"] = answer_bb_str
          p "array start " + counter.to_s + " " + arrays_bs.to_s
@@ -145,15 +137,15 @@ class SolrDocument
   end
 
   def get_lines
-    array_ls = Array.new
+    array_ls = []
     ls = fetch(Settings.FIELDS.LINES, '')
     for l in ls do
         answer_str = String.new
         ljson = JSON.parse(l)
         answer_str = "(" + ljson["lat1"].to_s + ", " + ljson["long1"].to_s + ") - (" + ljson["lat2"].to_s + ", " + ljson["long2"].to_s + ")"
-        answer_ls = Array.new
-        line_pt_1 = Array.new
-        line_pt_2 = Array.new
+        answer_ls = []
+        line_pt_1 = []
+        line_pt_2 = []
         line_pt_1.push(ljson["lat1"])
         line_pt_1.push(ljson["long1"])
         answer_ls.push(line_pt_1)
@@ -169,12 +161,12 @@ class SolrDocument
   end
 
   def get_polygons
-    arrays_pgs = Array.new
+    arrays_pgs = []
     pgs = fetch(Settings.FIELDS.POLYGONS, '')
     for p in pgs do
-        answer_pgs = Array.new
-        answer_pg_str = Array.new
-        point = Array.new
+        answer_pgs = []
+        answer_pg_str = []
+        point = []
         point_str = String.new
         pjson = JSON.parse(p)
         first = String.new
@@ -205,7 +197,7 @@ class SolrDocument
   end
 
   def get_points
-    arrays_pts = Array.new
+    arrays_pts = []
     pts = fetch(Settings.FIELDS.POINTS, '')
     for p in pts
         points_map = Hash.new
