@@ -14,6 +14,7 @@ Blacklight.onLoad(function() {
             item = group[i];
             item.checked = checked;
             if (checked){
+                viewer.removeSingleBoundsOverlay(item.attributes.name.nodeValue);
                 viewer.addBoundsOverlaySingle(bounds, item.attributes.name.nodeValue);
             }else{
                  viewer.removeSingleBoundsOverlay(item.attributes.name.nodeValue);
