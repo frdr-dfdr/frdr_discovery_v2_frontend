@@ -9,13 +9,15 @@ Blacklight.onLoad(function() {
     viewer = new window['GeoBlacklight']['Viewer'][viewerName](element);
     var bounds = L.bboxToBounds("-180.0 -86.0 180.0 86.0");
 
-    function swapCheckValue(item, checked){
-        item.checked = checked;
-        if (checked){
-            viewer.addBoundsOverlaySingle(bounds, item.attributes.name.nodeValue);
-        }
-        else{
-            viewer.removeSingleBoundsOverlay(item.attributes.name.nodeValue);
+    function swapCheckValue(group, checked){
+        for(let i = 0; i< group.length; i++){
+            item = group[i];
+            item.checked = checked;
+            if (checked){
+                viewer.addBoundsOverlaySingle(bounds, item.attributes.name.nodeValue);
+            }else{
+                 viewer.removeSingleBoundsOverlay(item.attributes.name.nodeValue);
+             }
         }
     }
 
@@ -27,9 +29,9 @@ Blacklight.onLoad(function() {
 
         $(allIdSelector).click(function() {
             if ($(this).is(':checked')) {
-                $('input[type="checkbox"]' + itemClassSelector).forEach(swapCheckValue(true));
+                swapCheckValue($('input[type="checkbox"]' + itemClassSelector), true);
             } else {
-                $('input[type="checkbox"]' + itemClassSelector).forEach(swapCheckValue(false));
+                swapCheckValue($('input[type="checkbox"]' + itemClassSelector), false);
             }
         });
         $("input[type='checkbox']").on("change",function(){
