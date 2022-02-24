@@ -156,7 +156,7 @@ class SolrDocument
         pjson = JSON.parse(p)
         first = String.new
         last = String.new
-        for pt in pjson
+        for pt in pjson do
             point = []
             point_str = "(" + pt["lat"].to_s + ", " + pt["long"].to_s + ")"
             point.push(pt["lat"])
@@ -179,6 +179,7 @@ class SolrDocument
         for a in answer_pg_str_str do
             if counter != 0
                 label = label + ", "
+                counter = 1
             end
             label = label + a
         end
@@ -193,7 +194,7 @@ class SolrDocument
   def get_points
     arrays_pts = []
     pts = fetch(Settings.FIELDS.POINTS, '')
-    for p in pts
+    for p in pts do
         points_map = Hash.new
         points_map["data"] = p
         points_map["checkboxes"] = p
