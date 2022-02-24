@@ -18,7 +18,7 @@ Blacklight.onLoad(function() {
             viewer.removeSingleBoundsOverlay(item.attributes.name.nodeValue);
         }
     }
-    
+
     /**
      * Add behaviour for all checkbox that can select / deselect all fo the checkboxes
      * of a type and gets unchecked if one of the sub checkboxes gets unchecked.
@@ -27,9 +27,9 @@ Blacklight.onLoad(function() {
 
         $(allIdSelector).click(function() {
             if ($(this).is(':checked')) {
-                $('input[type="checkbox"]' + itemClassSelector).forEach(swapCheckValue(true);
+                $('input[type="checkbox"]' + itemClassSelector).forEach(swapCheckValue(true));
             } else {
-                $('input[type="checkbox"]' + itemClassSelector).forEach(swapCheckValue(false);
+                $('input[type="checkbox"]' + itemClassSelector).forEach(swapCheckValue(false));
             }
         });
         $("input[type='checkbox']").on("change",function(){
