@@ -73,6 +73,7 @@ class SolrDocument
         point_nw = []
         p "NW a " + point_nw.to_s
         p "string a = " + answer_bb_str
+        p "array start " + counter.to_s + " " + arrays_bs.to_s
         west = String.new(bjson.fetch("west", String.new))
         p "NW b " + point_nw.to_s
         p "string b = " + answer_bb_str
@@ -83,12 +84,15 @@ class SolrDocument
         south = String.new(bjson.fetch("south", String.new))
         point_nw = []
         point_se = []
+        p "array mid " + counter.to_s + " " + arrays_bs.to_s
         point_nw = [north,west]
         p "NW d " + point_nw.to_s
         p "string d = " + answer_bb_str
         point_se = [south,east]
+        p "array mid2 " + counter.to_s + " " + arrays_bs.to_s
         answer_bb.push(point_nw)
         answer_bb.push(point_se)
+        p "array mid3 " + counter.to_s + " " + arrays_bs.to_s
 
         other = String.new(bjson.fetch("other", String.new))
         country = String.new(bjson.fetch("country", String.new))
@@ -128,9 +132,9 @@ class SolrDocument
         p "string final = " + answer_bb_str
         bbox_map["data"] = answer_bb
         bbox_map["checkboxes"] = answer_bb_str
-         p "array start " + counter.to_s + " " + arrays_bs.to_s
+         p "array end 1 " + counter.to_s + " " + arrays_bs.to_s
         arrays_bs.push(bbox_map)
-        p "array end " + counter.to_s + " " + arrays_bs.to_s
+        p "array end 2 " + counter.to_s + " " + arrays_bs.to_s
         counter = counter + 1
     end
     return arrays_bs
