@@ -176,7 +176,7 @@ class SolrDocument
         end
         label = String.new
         counter = 0
-        for a in answer_pg_str_str do
+        for a in answer_pg_str do
             if counter != 0
                 label = label + ", "
                 counter = 1
