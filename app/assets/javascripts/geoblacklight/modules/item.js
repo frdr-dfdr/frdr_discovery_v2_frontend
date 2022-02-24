@@ -7,21 +7,32 @@ Blacklight.onLoad(function() {
 
     // get new viewer instance and pass in element
     viewer = new window['GeoBlacklight']['Viewer'][viewerName](element);
+    var bounds = L.bboxToBounds("-180.0 -86.0 180.0 86.0");
 
+    function swapCheckValue(item, checked){
+        item.checked = checked;
+        if checked{
+            viewer.addBoundsOverlaySingle(bounds, item.attributes.name.nodeValue);
+        }
+        else{
+            viewer.removeSingleBoundsOverlay(item.attributes.name.nodeValue);
+        }
+    }
+    }
     /**
      * Add behaviour for all checkbox that can select / deselect all fo the checkboxes
      * of a type and gets unchecked if one of the sub checkboxes gets unchecked.
      */
     function addAllControl(allIdSelector, itemClassSelector) {
+
         $(allIdSelector).click(function() {
             if ($(this).is(':checked')) {
-                $('input[type="checkbox"]' + itemClassSelector).prop('checked', true);
+                $('input[type="checkbox"]' + itemClassSelector).forEach(swapCheckValue(true);
             } else {
-                $('input[type="checkbox"]' + itemClassSelector).prop('checked', false);
+                $('input[type="checkbox"]' + itemClassSelector).forEach(swapCheckValue(false);
             }
         });
         $("input[type='checkbox']").on("change",function(){
-                var bounds = L.bboxToBounds("-180.0 -86.0 180.0 86.0");
                 if ($(this).is(':checked')) {
                                     viewer.addBoundsOverlaySingle(bounds, this.attributes.name.nodeValue);
                 } else {
