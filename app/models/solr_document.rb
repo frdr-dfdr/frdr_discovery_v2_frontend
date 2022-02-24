@@ -157,11 +157,21 @@ class SolrDocument
         point_str = String.new
         pjson = JSON.parse(p)
         for pt in pjson
-            point_str = String.new("(" + pt["lat"].to_s + ", " + pt["long"].to_s + ")")
+            point_str = "(" + pt["lat"].to_s + ", " + pt["long"].to_s + ")"
             point.push(pt["lat"])
             point.push(pt["long"])
+            if first.empty?
+                first = point
+                first_str = point_str
+            end
             answer_pgs.push(point)
+            last = point
             answer_pg_str.push(point)
+            last_str = point_str
+        end
+        if last == first
+            answer_pgs.pop()
+            answer_pg_str.pop()
         end
         poly_map = Hash.new
         poly_map["data"] = answer_pgs
