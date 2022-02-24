@@ -76,11 +76,11 @@ class SolrDocument
         west = String.new(bjson.fetch("west", String.new))
         p "NW b " + point_nw.to_s
         p "string b = " + answer_bb_str
-        east = String.new(bjson.fetch("east", String.new)
-        north = String.new(bjson.fetch("north", String.new)
+        east = String.new(bjson.fetch("east", String.new))
+        north = String.new(bjson.fetch("north", String.new))
         p "NW c " + point_nw.to_s
         p "string c = " + answer_bb_str
-        south = String.new(bjson.fetch("south", String.new)
+        south = String.new(bjson.fetch("south", String.new))
         point_nw = []
         point_se = []
         point_nw = [north,west]
