@@ -174,9 +174,17 @@ class SolrDocument
             answer_pgs.pop()
             answer_pg_str.pop()
         end
+        label = String.new
+        counter = 0
+        for a in answer_pg_str_str do
+            if counter != 0
+                label = label + ", "
+            end
+            label = label + a
+        end
         poly_map = Hash.new
         poly_map["data"] = answer_pgs
-        poly_map["checkboxes"] = answer_pg_str
+        poly_map["checkboxes"] = label
         arrays_pgs.push(poly_map)
     end
     return arrays_pgs
