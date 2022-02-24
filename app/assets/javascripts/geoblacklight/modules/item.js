@@ -23,9 +23,9 @@ Blacklight.onLoad(function() {
         $("input[type='checkbox']").on("change",function(){
                 var bounds = L.bboxToBounds("-180.0 -86.0 180.0 86.0");
                 if ($(this).is(':checked')) {
-                                    viewer.addBoundsOverlaySingle(bounds, this.defaultValue);
+                                    viewer.addBoundsOverlaySingle(bounds, $('input[type="checkbox"]')[i].name);
                 } else {
-                                    viewer.removeSingleBoundsOverlay(this.defaultValue);
+                                    viewer.removeSingleBoundsOverlay($('input[type="checkbox"]')[i].name);
                 }
         });
         $('input[type="checkbox"]' + itemClassSelector).change(function() {
@@ -48,7 +48,7 @@ Blacklight.onLoad(function() {
     }
     function addBBox(){
         var bounds = L.bboxToBounds("-180.0 -86.0 180.0 86.0");
-        viewer.addBoundsOverlaySingle(bounds, this.defaultValue);
+        viewer.addBoundsOverlaySingle(bounds, $('input[type="checkbox"]')[i].name);
     }
 
     addBBox();
