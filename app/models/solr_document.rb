@@ -167,7 +167,7 @@ class SolrDocument
             end
             answer_pgs.push(point)
             last = point
-            answer_pg_str.push(point)
+            answer_pg_str.push(point_str)
             last_str = point_str
         end
         if last == first
