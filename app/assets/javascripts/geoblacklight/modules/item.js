@@ -16,6 +16,12 @@ Blacklight.onLoad(function() {
         for(let i = 0; i< group.length; i++){
             item = group[i];
             item.checked = checked;
+            if(checked){
+                viewer.removeSingleBoundsOverlay(item.attributes.name.nodeValue);
+                viewer.addBoundsOverlaySingle(bounds, item.attributes.name.nodeValue);
+            }else{
+                 viewer.removeSingleBoundsOverlay(item.attributes.name.nodeValue);
+             }
         }
     }
 
