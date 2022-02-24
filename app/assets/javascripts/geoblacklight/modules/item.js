@@ -65,8 +65,10 @@ Blacklight.onLoad(function() {
         });
     }
     function addBBox(){
-        var bounds = L.bboxToBounds("-180.0 -86.0 180.0 86.0");
-        //viewer.addBoundsOverlaySingle(bounds, this.attributes.name.nodeValue);
+        swapCheckValue($('input[type="checkbox"]' + '.bbox'), true);
+        swapCheckValue($('input[type="checkbox"]' + '.line'), true);
+        swapCheckValue($('input[type="checkbox"]' + '.point'), true);
+        swapCheckValue($('input[type="checkbox"]' + '.polygon'), true);
     }
 
     addBBox();
