@@ -88,7 +88,7 @@ class SolrDocument
         if !file_name.empty?
             answer_bb_str = file_name
         elsif other.empty? && country.empty? && province.empty? && city.empty?
-            answer_bb_str = north.to_s + ", " + west.to_s + ", " + south.to_s + ', ' + east.to_s
+            answer_bb_str = "North: " + north.to_s + ", West: " + west.to_s + ", South: " + south.to_s + ', East: ' + east.to_s
         else
             if !other.empty?
                 answer_bb_str = other
@@ -158,7 +158,7 @@ class SolrDocument
         last = String.new
         for pt in pjson
             point = []
-            point_str = String.new("(" + pt["lat"].to_s + ", " + pt["long"].to_s + ")")
+            point_str = "(" + pt["lat"].to_s + ", " + pt["long"].to_s + ")"
             point.push(pt["lat"])
             point.push(pt["long"])
             if first.empty?
