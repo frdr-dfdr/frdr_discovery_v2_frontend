@@ -179,8 +179,8 @@ class SolrDocument
         for a in answer_pg_str do
             if counter != 0
                 label = label + ", "
-                counter = 1
             end
+            counter = 1
             label = label + a
         end
         poly_map = Hash.new
