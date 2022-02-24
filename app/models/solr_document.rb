@@ -153,11 +153,10 @@ class SolrDocument
     for p in pgs do
         answer_pgs = []
         answer_pg_str = []
-        point = []
-        point_str = String.new
         pjson = JSON.parse(p)
         for pt in pjson
-            point_str = "(" + pt["lat"].to_s + ", " + pt["long"].to_s + ")"
+            point = []
+            point_str = String.new("(" + pt["lat"].to_s + ", " + pt["long"].to_s + ")")
             point.push(pt["lat"])
             point.push(pt["long"])
             if first.empty?
