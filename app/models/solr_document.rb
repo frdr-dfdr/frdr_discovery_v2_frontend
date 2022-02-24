@@ -64,8 +64,8 @@ class SolrDocument
     bs = fetch(Settings.FIELDS.BBOXES, '')
     p "Bounding boxes"
     counter = 1
-    bbox_map = Hash.new
     for b in bs do
+        bbox_map = Hash.new
         p "Counter " + counter.to_s
         answer_bb = []
         answer_bb_str = String.new
