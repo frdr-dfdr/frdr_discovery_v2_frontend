@@ -9,16 +9,13 @@ Blacklight.onLoad(function() {
     viewer = new window['GeoBlacklight']['Viewer'][viewerName](element);
     var bounds = L.bboxToBounds("-180.0 -86.0 180.0 86.0");
 
+    /**
+    *   Switch all the checkboxes under the Category checkbox to whatever the category checkbox is
+    */
     function swapCheckValue(group, checked){
         for(let i = 0; i< group.length; i++){
             item = group[i];
             item.checked = checked;
-            if (checked){
-                viewer.removeSingleBoundsOverlay(item.attributes.name.nodeValue);
-                viewer.addBoundsOverlaySingle(bounds, item.attributes.name.nodeValue);
-            }else{
-                 viewer.removeSingleBoundsOverlay(item.attributes.name.nodeValue);
-             }
         }
     }
 
