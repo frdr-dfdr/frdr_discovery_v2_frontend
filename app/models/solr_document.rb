@@ -62,37 +62,23 @@ class SolrDocument
   def get_bboxes
     arrays_bs = []
     bs = fetch(Settings.FIELDS.BBOXES, '')
-    p "Bounding boxes"
     counter = 1
     for b in bs do
         bbox_map = Hash.new
-        p "Counter " + counter.to_s
         answer_bb = []
         answer_bb_str = String.new
         bjson = JSON.parse(b)
         point_nw = []
-        p "NW a " + point_nw.to_s
-        p "string a = " + answer_bb_str
-        p "array start " + counter.to_s + " " + arrays_bs.to_s
         west = String.new(bjson.fetch("west", String.new))
-        p "NW b " + point_nw.to_s
-        p "string b = " + answer_bb_str
         east = String.new(bjson.fetch("east", String.new))
         north = String.new(bjson.fetch("north", String.new))
-        p "NW c " + point_nw.to_s
-        p "string c = " + answer_bb_str
         south = String.new(bjson.fetch("south", String.new))
         point_nw = []
         point_se = []
-        p "array mid " + counter.to_s + " " + arrays_bs.to_s
         point_nw = [north,west]
-        p "NW d " + point_nw.to_s
-        p "string d = " + answer_bb_str
         point_se = [south,east]
-        p "array mid2 " + counter.to_s + " " + arrays_bs.to_s
         answer_bb.push(point_nw)
         answer_bb.push(point_se)
-        p "array mid3 " + counter.to_s + " " + arrays_bs.to_s
 
         other = String.new(bjson.fetch("other", String.new))
         country = String.new(bjson.fetch("country", String.new))
@@ -129,12 +115,9 @@ class SolrDocument
                 end
             end
         end
-        p "string final = " + answer_bb_str
         bbox_map["data"] = answer_bb
         bbox_map["checkboxes"] = answer_bb_str
-         p "array end 1 " + counter.to_s + " " + arrays_bs.to_s
         arrays_bs.push(bbox_map)
-        p "array end 2 " + counter.to_s + " " + arrays_bs.to_s
         counter = counter + 1
     end
     return arrays_bs
@@ -173,24 +156,12 @@ class SolrDocument
         point = []
         point_str = String.new
         pjson = JSON.parse(p)
-        first = String.new
-        last = String.new
         for pt in pjson
-            point_str = "(" + pt["lat"].to_s + ", " + pt["long"].to_s + ")"
+            point_str = String.new("(" + pt["lat"].to_s + ", " + pt["long"].to_s + ")")
             point.push(pt["lat"])
             point.push(pt["long"])
-            if first.empty?
-                first = point
-                first_str = point_str
-            end
             answer_pgs.push(point)
-            last = point
             answer_pg_str.push(point)
-            last_str = point_str
-        end
-        if last != first
-            answer_pgs.push(first)
-            answer_pg_str.push(first_str)
         end
         poly_map = Hash.new
         poly_map["data"] = answer_pgs
