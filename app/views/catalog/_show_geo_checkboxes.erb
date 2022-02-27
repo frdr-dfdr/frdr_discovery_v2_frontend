@@ -5,7 +5,7 @@
     <%= label_tag all_id, t(all_i18n_key), class: 'form-check-label feature-label' %>
     <ul class="list-group list-group-flush">
       <% values.each_with_index do |value, index| %>
-        <li class="list-group-item" data: value, index: index>
+        <li class="list-group-item" data-val: value, data-index: index>
             <%= check_box_tag prefix + index.to_s, prefix + index.to_s, true, class: 'form-check-input feature-checkbox ' + checkbox_class%>
             <%= label_tag prefix + index.to_s, value["checkboxes"], class: 'form-check-label feature-label' %>
         </li>
