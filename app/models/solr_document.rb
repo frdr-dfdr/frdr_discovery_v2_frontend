@@ -122,7 +122,7 @@ class SolrDocument
     end
     return arrays_bs
   end
-    //TODO update to deal with polylines
+    #TODO update to deal with polylines
   def get_lines
     array_ls = []
     ls = fetch(Settings.FIELDS.LINES, '')
