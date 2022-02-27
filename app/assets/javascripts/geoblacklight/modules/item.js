@@ -17,8 +17,10 @@ Blacklight.onLoad(function() {
             item = group[i];
             item.checked = checked;
             if(checked){
-                viewer.removeSingleBoundsOverlay(item.attributes.name.nodeValue);
-                viewer.addBoundsOverlaySingle(bounds, item.attributes.name.nodeValue);
+                if(!item.attributes.name.nodeValue.includes("-all")){
+                    viewer.removeSingleBoundsOverlay(item.attributes.name.nodeValue);
+                    viewer.addBoundsOverlaySingle(bounds, item.attributes.name.nodeValue);
+                }
             }else{
                  viewer.removeSingleBoundsOverlay(item.attributes.name.nodeValue);
              }
@@ -40,8 +42,10 @@ Blacklight.onLoad(function() {
         });
         $("input[type='checkbox']").on("change",function(){
                 if ($(this).is(':checked')) {
+                    if(!this.attributes.name.nodeValue.includes("-all")){
                     viewer.removeSingleBoundsOverlay(this.attributes.name.nodeValue);
                     viewer.addBoundsOverlaySingle(bounds, this.attributes.name.nodeValue);
+                    }
                 } else {
                                     viewer.removeSingleBoundsOverlay(this.attributes.name.nodeValue);
                 }
@@ -58,6 +62,7 @@ Blacklight.onLoad(function() {
             else if(allInputs.filter(":checked").length == 0) {
                 $(allIdSelector).prop('checked', false);
                 $(allIdSelector)[0].indeterminate = false;
+                viewer.removeSingleBoundsOverlay(this.attributes.name.nodeValue);
             }
             else {
                 $(allIdSelector)[0].indeterminate = true;
