@@ -118,7 +118,7 @@ Blacklight.onLoad(function() {
         name = text.substring(text.indexOf("checkboxes")+14, text.indexOf("\"}"));
         lat = parseFloat(text.substring(text.indexOf("[\"")+3,text.indexOf(",")));
         text = text.substring(text.indexOf(",")+2);
-        lon = parseFloat(text.sunstring(0,text.indexOf("\"]")));
+        lon = parseFloat(text.substring(0,text.indexOf("\"]")));
         point = L.LatLng(lat, lon);
         viewer.removeSingleBoundsOverlay(name);
         if(checked){
