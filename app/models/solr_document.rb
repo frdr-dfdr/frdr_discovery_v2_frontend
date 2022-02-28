@@ -90,30 +90,7 @@ class SolrDocument
         elsif other.empty? && country.empty? && province.empty? && city.empty?
             answer_bb_str = "North: " + north.to_s + ", West: " + west.to_s + ", South: " + south.to_s + ', East: ' + east.to_s
         else
-            if !other.empty?
-                answer_bb_str = other
-            end
-            if !city.empty?
-                if !answer_bb_str.empty?
-                    answer_bb_str += "; " + city
-                else
-                    answer_bb_str = city
-                end
-            end
-            if !province.empty?
-                if !answer_bb_str.empty?
-                    answer_bb_str += "; " + province
-                else
-                    answer_bb_str = province
-                end
-            end
-            if !country.empty?
-                if !answer_bb_str.empty?
-                    answer_bb_str += "; " + country
-                else
-                    answer_bb_str = country
-                end
-            end
+            answer_bb_str = (([other, city, province, country] - ["", nil]).join(";"))
         end
         bbox_map["data"] = answer_bb
         bbox_map["checkboxes"] = answer_bb_str
