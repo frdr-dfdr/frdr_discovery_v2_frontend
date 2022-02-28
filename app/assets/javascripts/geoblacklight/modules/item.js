@@ -17,7 +17,7 @@ Blacklight.onLoad(function() {
             item = group[i];
             item.checked = checked;
             ruby_data = $(item).attr("data_val");
-            all = JSON.parse('#{raw(ruby_data.to_json)}');
+            all = JSON.parse(ruby_data);
             data = all.get("data");
             name = all.get("checkboxes");
             north = data[0][0];
