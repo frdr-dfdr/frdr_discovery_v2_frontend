@@ -17,13 +17,16 @@ Blacklight.onLoad(function() {
             item = group[i];
             item.checked = checked;
             ruby_data = $(item).attr("data_val");
-            all = JSON.parse(ruby_data);
-            data = all.get("data");
-            name = all.get("checkboxes");
-            north = data[0][0];
-            west = data[0][1];
-            south = data[1][0];
-            east = data[1][1];
+            text = ruby_data;
+            name = text.substring(text.indexOf("checkboxes")+14, text.indexOf("\"}"));
+            north = text.substring(text.indexOf("data\"=>[[\"")+10,text.indexOf("\", \""));
+            result = text.substring(text.indexOf("\", \"")+4);
+            text = text.substring(text.indexOf("\", \"")+4);
+            west = text.substring(0,text.indexOf("\"]"));
+            text = text.substring(text.indexOf("\"], [\"")+6);
+            let south = text.substring(0,text.indexOf("\", \""));
+            text = text.substring(text.indexOf("\", \"")+4);
+            let east = text.substring(0,text.indexOf("\"]"));
             var bounds = L.bboxToBounds(north + " " + west + " " + south + " " + east);
             if(checked){
                 if(!item.attributes.name.nodeValue.includes("-all")){
