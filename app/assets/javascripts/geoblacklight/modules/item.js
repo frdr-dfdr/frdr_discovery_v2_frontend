@@ -9,7 +9,7 @@ Blacklight.onLoad(function() {
 
     // get new viewer instance and pass in element
     viewer = new window['GeoBlacklight']['Viewer'][viewerName](element);
-    var bounds_old = L.bboxToBounds("-180.0 -86.0 180.0 86.0");
+    var test_bounds = L.bboxToBounds("-180.0 -86.0 180.0 86.0");
 
     /**
     *   Switch all the checkboxes under the Category checkbox to whatever the category checkbox is
@@ -136,7 +136,7 @@ Blacklight.onLoad(function() {
         name = all["checkboxes"];
         viewer.removeSingleBoundsOverlay(name);
         if(checked){
-            viewer.addBoundsOverlaySingle(bounds_old, name);
+            viewer.addBoundsOverlaySingle(test_bounds, name);
         }
     }
 
@@ -147,7 +147,7 @@ Blacklight.onLoad(function() {
         name = all["checkboxes"];
         viewer.removeSingleBoundsOverlay(name);
         if(checked){
-            viewer.addBoundsOverlaySingle(bounds_old, name);
+            viewer.addBoundsOverlaySingle(test_bounds, name);
         }
     }
 
