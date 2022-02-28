@@ -60,19 +60,18 @@ class SolrDocument
     geo_objects["polygons"]
   end
   def get_bboxes
-    arrays_bs = []
-    bs = fetch(Settings.FIELDS.BBOXES, '')
+    array_boxes = []
+    boxes = fetch(Settings.FIELDS.BBOXES, '')
     counter = 1
-    for b in bs do
+    for box in boxes do
         bbox_map = Hash.new
         answer_bb = []
         answer_bb_str = String.new
-        bjson = JSON.parse(b)
-        point_nw = []
-        west = String.new(bjson.fetch("west", String.new))
-        east = String.new(bjson.fetch("east", String.new))
-        north = String.new(bjson.fetch("north", String.new))
-        south = String.new(bjson.fetch("south", String.new))
+        box_json = JSON.parse(box)
+        west = String.new(box_json.fetch("west", String.new))
+        east = String.new(box_json.fetch("east", String.new))
+        north = String.new(box_json.fetch("north", String.new))
+        south = String.new(box_json.fetch("south", String.new))
         point_nw = []
         point_se = []
         point_nw = [north,west]
@@ -80,11 +79,11 @@ class SolrDocument
         answer_bb.push(point_nw)
         answer_bb.push(point_se)
 
-        other = String.new(bjson.fetch("other", String.new))
-        country = String.new(bjson.fetch("country", String.new))
-        province = String.new(bjson.fetch("province", String.new))
-        city = String.new(bjson.fetch("city",String.new))
-        file_name = String.new(bjson.fetch("file_name", String.new))
+        other = String.new(box_json.fetch("other", String.new))
+        country = String.new(box_json.fetch("country", String.new))
+        province = String.new(box_json.fetch("province", String.new))
+        city = String.new(box_json.fetch("city",String.new))
+        file_name = String.new(box_json.fetch("file_name", String.new))
         if !file_name.empty?
             answer_bb_str = file_name
         elsif other.empty? && country.empty? && province.empty? && city.empty?
@@ -94,56 +93,56 @@ class SolrDocument
         end
         bbox_map["data"] = answer_bb
         bbox_map["checkboxes"] = answer_bb_str
-        arrays_bs.push(bbox_map)
+        array_boxes.push(bbox_map)
         counter = counter + 1
     end
-    return arrays_bs
+    return array_boxes
   end
     #TODO update to deal with polylines
   def get_lines
-    array_ls = []
-    ls = fetch(Settings.FIELDS.LINES, '')
-    for l in ls do
+    array_lines = []
+    lines = fetch(Settings.FIELDS.LINES, '')
+    for line in lines do
         answer_str = String.new
-        ljson = JSON.parse(l)
-        answer_str = "(" + ljson["lat1"].to_s + ", " + ljson["long1"].to_s + ") - (" + ljson["lat2"].to_s + ", " + ljson["long2"].to_s + ")"
+        line_json = JSON.parse(line)
+        answer_str = "(" + line_json["lat1"].to_s + ", " + line_json["long1"].to_s + ") - (" + line_json["lat2"].to_s + ", " + line_json["long2"].to_s + ")"
         answer_ls = []
         line_pt_1 = []
         line_pt_2 = []
-        line_pt_1.push(ljson["lat1"])
-        line_pt_1.push(ljson["long1"])
+        line_pt_1.push(line_json["lat1"])
+        line_pt_1.push(line_json["long1"])
         answer_ls.push(line_pt_1)
-        line_pt_2.push(ljson["lat2"])
-        line_pt_2.push(ljson["long2"])
+        line_pt_2.push(line_json["lat2"])
+        line_pt_2.push(line_json["long2"])
         answer_ls.push(line_pt_2)
         line_map = Hash.new
         line_map["data"] = answer_ls
         line_map["checkboxes"] = answer_str
-        array_ls.push(line_map)
+        array_lines.push(line_map)
     end
-    return array_ls
+    return array_lines
   end
 
   def get_polygons
-    arrays_pgs = []
-    pgs = fetch(Settings.FIELDS.POLYGONS, '')
-    for p in pgs do
+    array_polygons = []
+    polygons = fetch(Settings.FIELDS.POLYGONS, '')
+    for polygon in polygons do
         answer_pgs = []
         answer_pg_str = []
-        pjson = JSON.parse(p)
+        polygon_json = JSON.parse(polygon)
         first = String.new
         last = String.new
-        for pt in pjson do
-            point = []
-            point_str = "(" + pt["lat"].to_s + ", " + pt["long"].to_s + ")"
-            point.push(pt["lat"])
-            point.push(pt["long"])
+        for point in polygon_json do
+            single_point = []
+            point_str = "(" + point["lat"].to_s + ", " + point["long"].to_s + ")"
+            single_point.push(point["lat"])
+            single_point.push(point["long"])
             if first.empty?
-                first = point
+                first = single_point
                 first_str = point_str
             end
-            answer_pgs.push(point)
-            last = point
+            answer_pgs.push(single_point)
+            last = single_point
             answer_pg_str.push(point_str)
             last_str = point_str
         end
@@ -163,21 +162,21 @@ class SolrDocument
         poly_map = Hash.new
         poly_map["data"] = answer_pgs
         poly_map["checkboxes"] = label
-        arrays_pgs.push(poly_map)
+        array_polygons.push(poly_map)
     end
-    return arrays_pgs
+    return array_polygons
   end
 
   def get_points
-    arrays_pts = []
-    pts = fetch(Settings.FIELDS.POINTS, '')
-    for p in pts do
+    array_points = []
+    points = fetch(Settings.FIELDS.POINTS, '')
+    for point in points do
         points_map = Hash.new
-        points_map["data"] = "[" + p.to_s + "]"
-        points_map["checkboxes"] = "(" + p.to_s + ")"
-        arrays_pts.push(points_map)
+        points_map["data"] = "[" + point.to_s + "]"
+        points_map["checkboxes"] = "(" + point.to_s + ")"
+        array_points.push(points_map)
     end
-    return arrays_pts
+    return array_points
   end
 
   # Creates a Map of arrays of arrays of geo objects (bboxes, lines, points, and polygons) for the record map to be able to draw
