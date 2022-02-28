@@ -1,5 +1,3 @@
-require 'json'
-
 Blacklight.onLoad(function() {
   $('[data-map="item"]').each(function(i, element) {
 
@@ -18,7 +16,7 @@ Blacklight.onLoad(function() {
         for(let i = 0; i< group.length; i++){
             item = group[i];
             item.checked = checked;
-            ruby_data = $(item).attr("data_val");
+            ruby_data = $(item).attr("data_val").to_json;
             all = JSON.parse(ruby_data);
             data = all.get("data");
             name = all.get("checkboxes");
