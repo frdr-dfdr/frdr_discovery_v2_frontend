@@ -97,7 +97,7 @@ Blacklight.onLoad(function() {
     *  Create or remove bounding box overlay from map. Layer name is bbox name.
     */
     function generateBBox(text,checked){
-        all = JSON.parse(text.replace("=>",":"));
+        all = JSON.parse(text.replaceAll("=>",":"));
         name = all["checkboxes"];
         data = all["data"];
         north = parseFloat(data[0][0]);
