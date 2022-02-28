@@ -140,7 +140,7 @@ Blacklight.onLoad(function() {
     /**
     *  TODO Convert this dummy function to a real one when we start processing polygons
     */
-    function generatePolygon(text,check){
+    function generatePolygon(text,checked){
         name = text.substring(text.indexOf("checkboxes")+14, text.indexOf("\"}"));
         viewer.removeSingleBoundsOverlay(name);
         if(checked){
