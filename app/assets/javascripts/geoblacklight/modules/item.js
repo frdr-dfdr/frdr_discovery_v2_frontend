@@ -119,7 +119,7 @@ Blacklight.onLoad(function() {
         lat = parseFloat(text.substring(text.indexOf("=>\"(")+4,text.indexOf(",")));
         text = text.substring(text.indexOf(",")+2);
         lon = parseFloat(text.substring(0,text.indexOf(")")));
-        point = L.LatLng(lat, lon);
+        point = [lat, lon];
         viewer.removeSingleBoundsOverlay(name);
         if(checked){
             viewer.addPointOverlay(point,name);
