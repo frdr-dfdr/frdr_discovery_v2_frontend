@@ -83,9 +83,9 @@ Blacklight.onLoad(function() {
     }
     function addBBox(){
         swapCheckValue($('input[type="checkbox"]' + '.bbox'), true);
-        swapCheckValue($('input[type="checkbox"]' + '.line'), true);
-        swapCheckValue($('input[type="checkbox"]' + '.point'), true);
-        swapCheckValue($('input[type="checkbox"]' + '.polygon'), true);
+        //swapCheckValue($('input[type="checkbox"]' + '.line'), true);
+        //swapCheckValue($('input[type="checkbox"]' + '.point'), true);
+        //swapCheckValue($('input[type="checkbox"]' + '.polygon'), true);
     }
 
     addBBox();
