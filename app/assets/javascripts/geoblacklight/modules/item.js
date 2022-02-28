@@ -1,3 +1,5 @@
+//= require leaflet
+
 Blacklight.onLoad(function() {
   $('[data-map="item"]').each(function(i, element) {
 
@@ -14,28 +16,21 @@ Blacklight.onLoad(function() {
     */
     function swapCheckValue(group, checked){
         for(let i = 0; i< group.length; i++){
+            if(item.attributes.name.nodeValue.includes("-all")){
+                continue;
+            }
             item = group[i];
             item.checked = checked;
-            ruby_data = $(item).attr("data_val");
-            text = ruby_data;
-            name = text.substring(text.indexOf("checkboxes")+14, text.indexOf("\"}"));
-            north = parseFloat(text.substring(text.indexOf("data\"=>[[\"")+10,text.indexOf("\", \"")));
-            result = text.substring(text.indexOf("\", \"")+4);
-            text = text.substring(text.indexOf("\", \"")+4);
-            west = parseFloat(text.substring(0,text.indexOf("\"]")));
-            text = text.substring(text.indexOf("\"], [\"")+6);
-            south = parseFloat(text.substring(0,text.indexOf("\", \"")));
-            text = text.substring(text.indexOf("\", \"")+4);
-            east = parseFloat(text.substring(0,text.indexOf("\"]")));
-            var bounds = L.bboxToBounds(north + " " + west + " " + south + " " + east);
-            if(checked){
-                if(!item.attributes.name.nodeValue.includes("-all")){
-                    viewer.removeSingleBoundsOverlay(name);
-                    viewer.addBoundsOverlaySingle(bounds, name);
-                }
+            text = $(item).attr("data_val");
+            if(item.attributes.name.nodeValue.includes("bbox"){
+                generateBBox(text,checked);
+            }else if(item.attributes.name.nodeValue.includes("line"){
+                generateLine(text,checked);
+            }else if(item.attributes.name.nodeValue.includes("point"){
+                generatePoint(text,checked);
             }else{
-                 viewer.removeSingleBoundsOverlay(name);
-             }
+                generatePolygon(text,checked);
+            }
         }
     }
 
@@ -55,11 +50,20 @@ Blacklight.onLoad(function() {
         $("input[type='checkbox']").on("change",function(){
                 if ($(this).is(':checked')) {
                     if(!this.attributes.name.nodeValue.includes("-all")){
-                        viewer.removeSingleBoundsOverlay(this.attributes.name.nodeValue);
-                        viewer.addBoundsOverlaySingle(bounds_old, this.attributes.name.nodeValue);
+                        text = $(this).attr("data_val");
+                        name = text.substring(text.indexOf("checkboxes")+14, text.indexOf("\"}"));
+                        if(this.attributes.name.nodeValue.includes("bbox")){
+                            generateBBox(text,true);
+                        } else if(this.attributes.name.nodeValue.includes("point")){
+                            generatePoint(text,true);
+                        } else if(this.attributes.name.nodeValue.includes("line")){
+                            generateLine(text,true);
+                        } else{
+                            generatePolygon(text,true);
+                        }
                     }
                 } else {
-                                    viewer.removeSingleBoundsOverlay(this.attributes.name.nodeValue);
+                    viewer.removeSingleBoundsOverlay(name);
                 }
         });
         $('input[type="checkbox"]' + itemClassSelector).change(function() {
@@ -74,7 +78,6 @@ Blacklight.onLoad(function() {
             else if(allInputs.filter(":checked").length == 0) {
                 $(allIdSelector).prop('checked', false);
                 $(allIdSelector)[0].indeterminate = false;
-                viewer.removeSingleBoundsOverlay(this.attributes.name.nodeValue);
             }
             else {
                 $(allIdSelector)[0].indeterminate = true;
@@ -83,9 +86,66 @@ Blacklight.onLoad(function() {
     }
     function addBBox(){
         swapCheckValue($('input[type="checkbox"]' + '.bbox'), true);
-        //swapCheckValue($('input[type="checkbox"]' + '.line'), true);
-        //swapCheckValue($('input[type="checkbox"]' + '.point'), true);
-        //swapCheckValue($('input[type="checkbox"]' + '.polygon'), true);
+        swapCheckValue($('input[type="checkbox"]' + '.line'), true);
+        swapCheckValue($('input[type="checkbox"]' + '.point'), true);
+        swapCheckValue($('input[type="checkbox"]' + '.polygon'), true);
+    }
+
+    /**
+    *  Create or remove bounding box overlay from map. Layer name is bbox name.
+    */
+    function generateBBox(text,checked){
+        name = text.substring(text.indexOf("checkboxes")+14, text.indexOf("\"}"));
+        north = parseFloat(text.substring(text.indexOf("data\"=>[[\"")+10,text.indexOf("\", \"")));
+        result = text.substring(text.indexOf("\", \"")+4);
+        text = text.substring(text.indexOf("\", \"")+4);
+        west = parseFloat(text.substring(0,text.indexOf("\"]")));
+        text = text.substring(text.indexOf("\"], [\"")+6);
+        south = parseFloat(text.substring(0,text.indexOf("\", \"")));
+        text = text.substring(text.indexOf("\", \"")+4);
+        east = parseFloat(text.substring(0,text.indexOf("\"]")));
+        var bounds = L.bboxToBounds(west + " " + south + " " + east + " " + north);
+        viewer.removeSingleBoundsOverlay(name);
+        if(checked){
+                viewer.addBoundsOverlaySingle(bounds, name);
+            }
+    }
+
+    /**
+    *  Create or remove a point overlay from map. Layer name is point name.
+    */
+    function generatePoint(text,checked){
+        name = text.substring(text.indexOf("checkboxes")+14, text.indexOf("\"}"));
+        lat = parseFloat(text.substring(text.indexOf("[\"")+3,text.indexOf(",")));
+        text = text.substring(text.indexOf(",")+2);
+        lon = parseFloat(text.sunstring(0,text.indexOf("\"]")));
+        point = L.LatLng(lat, lon);
+        viewer.removeSingleBoundsOverlay(name);
+        if(checked){
+            viewer.addPointOverlay(point,name);
+        }
+    }
+
+    /**
+    *  TODO Convert this dummy function to a real one when we start processing polylines
+    */
+    function generateLine(text,checked){
+        name = text.substring(text.indexOf("checkboxes")+14, text.indexOf("\"}"));
+        viewer.removeSingleBoundsOverlay(name);
+        if(checked){
+            viewer.addBoundsOverlaySingle(bounds_old, name);
+        }
+    }
+
+    /**
+    *  TODO Convert this dummy function to a real one when we start processing polygons
+    */
+    function generatePolygon(text,check){
+        name = text.substring(text.indexOf("checkboxes")+14, text.indexOf("\"}"));
+        viewer.removeSingleBoundsOverlay(name);
+        if(checked){
+            viewer.addBoundsOverlaySingle(bounds_old, name);
+        }
     }
 
     addBBox();

@@ -1,4 +1,5 @@
 //= require geoblacklight/viewers/viewer
+//= require leaflet
 
 
 GeoBlacklight.Viewer.Map = GeoBlacklight.Viewer.extend({
@@ -100,7 +101,7 @@ GeoBlacklight.Viewer.Map = GeoBlacklight.Viewer.extend({
      * @param {L.LatLngBounds} bounds Leaflet LatLngBounds
      * @param {string} name
      */
-  addLineOverlay: function(points, name) {
+  addPolygoneOverlay: function(points, name) {
                     if (points.size>0) {
                       pointArray = [];
                       for (let i = 0; i< points.length; i++){
