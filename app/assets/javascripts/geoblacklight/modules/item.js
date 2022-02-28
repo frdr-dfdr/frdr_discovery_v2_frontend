@@ -63,6 +63,8 @@ Blacklight.onLoad(function() {
                         }
                     }
                 } else {
+                    text = $(this).attr("data_val");
+                    name = text.substring(text.indexOf("checkboxes")+14, text.indexOf("\"}"));
                     viewer.removeSingleBoundsOverlay(name);
                 }
         });
