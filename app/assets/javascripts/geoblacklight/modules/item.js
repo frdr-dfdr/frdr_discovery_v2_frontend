@@ -22,11 +22,11 @@ Blacklight.onLoad(function() {
             item = group[i];
             item.checked = checked;
             text = $(item).attr("data_val");
-            if(item.attributes.name.nodeValue.includes("bbox"){
+            if(item.attributes.name.nodeValue.includes("bbox")){
                 generateBBox(text,checked);
-            }else if(item.attributes.name.nodeValue.includes("line"){
+            }else if(item.attributes.name.nodeValue.includes("line")){
                 generateLine(text,checked);
-            }else if(item.attributes.name.nodeValue.includes("point"){
+            }else if(item.attributes.name.nodeValue.includes("point")){
                 generatePoint(text,checked);
             }else{
                 generatePolygon(text,checked);
