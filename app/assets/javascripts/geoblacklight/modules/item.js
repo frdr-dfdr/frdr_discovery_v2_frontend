@@ -1,3 +1,5 @@
+require 'json'
+
 Blacklight.onLoad(function() {
   $('[data-map="item"]').each(function(i, element) {
 
