@@ -16,11 +16,11 @@ Blacklight.onLoad(function() {
     */
     function swapCheckValue(group, checked){
         for(let i = 0; i< group.length; i++){
+            item = group[i];
+            item.checked = checked;
             if(item.attributes.name.nodeValue.includes("-all")){
                 continue;
             }
-            item = group[i];
-            item.checked = checked;
             text = $(item).attr("data_val");
             if(item.attributes.name.nodeValue.includes("bbox")){
                 generateBBox(text,checked);
