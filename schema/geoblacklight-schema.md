@@ -27,8 +27,11 @@ This is an overview of the GeoBlacklight Metadata Schema, Version 1.0. For more 
 | [Temporal Coverage](#temporal-coverage)	| `dct_temporal_sm`||
 | [Geometry Type](#geometry-type)			| `layer_geom_type_sm`||
 | [Layer ID](#layer-id)						| `layer_id_s`||
-| [Modified Date](#modified-date)			| `layer_modified_dt`|||
-
+| [Modified Date](#modified-date)			| `layer_modified_dt`||
+| [Bounding Boxes](#bboxes)                 | `bboxes_sm`||
+| [Points](#points)                         | `points_sm` ||
+| [Lines](#lines)                           | `lines_sm` ||
+| [Polygons](#polygons)                     | `polygons_sm' |||
 
 ## Details
 
@@ -321,3 +324,80 @@ This is an overview of the GeoBlacklight Metadata Schema, Version 1.0. For more 
 | Controlled Vocabulary			| no|
 | Element Set					| GeoBlacklight|
 | Example						| "2015-01-01T12:00:00Z"|
+
+### Bounding Boxes
+| Label							| Bounding Boxes|
+|:------------------------------|:---------------------------------------------------------|
+| uri							| `bboxes_sm`|
+| Required						| no|
+| Type							| array|
+| Description					| This field is for dataset bounding boxes|
+| Entry Guidelines				| north, east, south, and west keys for lat or long coordinates are required, file_name,country, province, city, and other are optional strings|
+| Controlled Vocabulary			| no|
+| Element Set					| FRDR|
+| Example						|   '{ |
+|                               |       "west": "10.0782819", |
+|                               |       "east": "15.9111969",|
+|                               |       "north": "48.6194031",|
+|                               |       "south": "41.5340161",|
+|                               |       "country": "Canada",|
+|                               |       "province": "British Columbia",|
+|                               |       "city": "Vancouver",|
+|                               |       "other": "Stanley Park"|
+|                               |    }'|
+|                               |   ]"|
+
+### Points
+| Label							| Points|
+|:------------------------------|:---------------------------------------------------------|
+| uri							| `points_sm`|
+| Required						| no|
+| Type							| array|
+| Description					| This field is for dataset points|
+| Entry Guidelines				| A latlon coordinate|
+| Controlled Vocabulary			| no|
+| Element Set					| FRDR|
+| Example						| "46.6194031, -95.0782" |
+
+### Points
+| Label							| Lines|
+|:------------------------------|:---------------------------------------------------------|
+| uri							| `lines_sm`|
+| Required						| no|
+| Type							| array|
+| Description					| This field is for dataset lines|
+| Entry Guidelines				| 2 latlon coordinates|
+| Controlled Vocabulary			| no|
+| Element Set					| FRDR|
+| Example						| "lat1": "46.6194031" |
+|                               | "long1": "-95.0782"  |
+|        						| "lat2": "36.6194031" |
+|                               | "long2": "-83.0782"  |
+### Polygons
+| Label							| Polygons|
+|:------------------------------|:---------------------------------------------------------|
+| uri							| `polygons_sm`|
+| Required						| no|
+| Type							| array|
+| Description					| This field is for dataset polygons|
+| Entry Guidelines				| An array of 3+ latlon coordinates|
+| Controlled Vocabulary			| no|
+| Element Set					| FRDR|
+| Example						| ['|       
+|                               |   {|
+|                               |       "lat":"46.6194031",|
+|                               |       "long":"-65.0782"|
+|                               |   }',|
+|                               |  '{|
+|                               |       "lat":"48.6194031",|
+|                               |       "long":"-62.0782"|
+|                               |   }',|
+|                               |   '{|
+|                               |       "lat":"36.6194031",|
+|                               |       "long":"-53.0782"|
+|                               |   }',|
+|                               |   '{|
+|                               |       "lat":"37.6194031",|
+|                               |       "long":"-54.0782"|
+|                               |   }'|
+|                               | ]|
