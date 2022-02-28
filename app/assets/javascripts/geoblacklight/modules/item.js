@@ -97,20 +97,13 @@ Blacklight.onLoad(function() {
     *  Create or remove bounding box overlay from map. Layer name is bbox name.
     */
     function generateBBox(text,checked){
-        name = text.substring(text.indexOf("checkboxes")+14, text.indexOf("\"}"));
-        data = text.substring(text.indexOf("data\"=>[[\"")+7,text.indexOf(", \"check")));
-        north = parseFloat(text.substring(text.indexOf("data\"=>[[\"")+10,text.indexOf("\", \"")));
-        northa = parseFloat(data[0][0]);
-        result = text.substring(text.indexOf("\", \"")+4);
-        text = text.substring(text.indexOf("\", \"")+4);
-        west = parseFloat(text.substring(0,text.indexOf("\"]")));
-        westa = parseFloat(data[0][1]);
-        text = text.substring(text.indexOf("\"], [\"")+6);
-        south = parseFloat(text.substring(0,text.indexOf("\", \"")));
-        southa = parseFloat(data[1][0]);
-        text = text.substring(text.indexOf("\", \"")+4);
-        east = parseFloat(text.substring(0,text.indexOf("\"]")));
-        easta = parseFloat(data[1][1]);
+        all = JSON.parse(text.replace("=>",":"));
+        name = all["checkboxes"];
+        data = all["data"];
+        north = parseFloat(data[0][0]);
+        west = parseFloat(data[0][1]);
+        south = parseFloat(data[1][0]);
+        east = parseFloat(data[1][1]);
         var bounds = L.bboxToBounds(west + " " + south + " " + east + " " + north);
         viewer.removeSingleBoundsOverlay(name);
         if(checked){
