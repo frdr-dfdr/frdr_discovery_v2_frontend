@@ -7,7 +7,7 @@ Blacklight.onLoad(function() {
 
     // get new viewer instance and pass in element
     viewer = new window['GeoBlacklight']['Viewer'][viewerName](element);
-    var bounds = L.bboxToBounds("-180.0 -86.0 180.0 86.0");
+    var bounds_old = L.bboxToBounds("-180.0 -86.0 180.0 86.0");
 
     /**
     *   Switch all the checkboxes under the Category checkbox to whatever the category checkbox is
@@ -16,13 +16,22 @@ Blacklight.onLoad(function() {
         for(let i = 0; i< group.length; i++){
             item = group[i];
             item.checked = checked;
+            ruby_data = $(item).attr("data_val");
+            all = JSON.parse('#{raw(ruby_data.to_json)}');
+            data = all.get("data");
+            name = all.get("checkboxes");
+            north = data[0][0];
+            west = data[0][1];
+            south = data[1][0];
+            east = data[1][1];
+            var bounds = L.bboxToBounds(north + " " + west + " " + south + " " + east);
             if(checked){
                 if(!item.attributes.name.nodeValue.includes("-all")){
-                    viewer.removeSingleBoundsOverlay(item.attributes.name.nodeValue);
-                    viewer.addBoundsOverlaySingle(bounds, item.attributes.name.nodeValue);
+                    viewer.removeSingleBoundsOverlay(name);
+                    viewer.addBoundsOverlaySingle(bounds, name);
                 }
             }else{
-                 viewer.removeSingleBoundsOverlay(item.attributes.name.nodeValue);
+                 viewer.removeSingleBoundsOverlay(name);
              }
         }
     }
@@ -43,8 +52,8 @@ Blacklight.onLoad(function() {
         $("input[type='checkbox']").on("change",function(){
                 if ($(this).is(':checked')) {
                     if(!this.attributes.name.nodeValue.includes("-all")){
-                    viewer.removeSingleBoundsOverlay(this.attributes.name.nodeValue);
-                    viewer.addBoundsOverlaySingle(bounds, this.attributes.name.nodeValue);
+                        viewer.removeSingleBoundsOverlay(this.attributes.name.nodeValue);
+                        viewer.addBoundsOverlaySingle(bounds_old, this.attributes.name.nodeValue);
                     }
                 } else {
                                     viewer.removeSingleBoundsOverlay(this.attributes.name.nodeValue);
