@@ -12,7 +12,7 @@ Blacklight.onLoad(function() {
     var test_bounds = L.bboxToBounds("-180.0 -86.0 180.0 86.0");
 
     /**
-    *   Switch all the checkboxes under the Category checkbox to whatever the category checkbox is
+    *   Switch all the checkboxes under the Category checkbox to match the category checkbox when it is clicked
     */
     function swapCheckValue(group, checked){
         for(let i = 0; i< group.length; i++){
@@ -74,8 +74,6 @@ Blacklight.onLoad(function() {
                 $(allIdSelector).prop('checked', true);
                 $(allIdSelector)[0].indeterminate = false;
 
-                //var bounds = L.bboxToBounds("-180.0 -86.0 180.0 86.0");
-                //viewer.addBoundsOverlay(bounds);
             }
             else if(allInputs.filter(":checked").length == 0) {
                 $(allIdSelector).prop('checked', false);
@@ -88,9 +86,9 @@ Blacklight.onLoad(function() {
     }
     function addBBox(){
         swapCheckValue($('input[type="checkbox"]' + '.bbox'), true);
-        swapCheckValue($('input[type="checkbox"]' + '.line'), true);
+        //swapCheckValue($('input[type="checkbox"]' + '.line'), true);
         swapCheckValue($('input[type="checkbox"]' + '.point'), true);
-        swapCheckValue($('input[type="checkbox"]' + '.polygon'), true);
+        //swapCheckValue($('input[type="checkbox"]' + '.polygon'), true);
     }
 
     /**
