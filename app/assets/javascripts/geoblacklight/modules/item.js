@@ -116,8 +116,7 @@ Blacklight.onLoad(function() {
     function generatePoint(all,checked){
         name = all["checkboxes"];
         data = all["data"];
-        data.replace("[","");
-        data.replace("]","");
+        data = data.replace("[","").replace("]","");
         point = data.split(", ")
         viewer.removeSingleBoundsOverlay(name);
         if(checked){
