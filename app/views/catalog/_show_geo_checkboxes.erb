@@ -6,7 +6,7 @@
     <ul class="list-group list-group-flush">
       <% values.each_with_index do |value, index| %>
         <li class="list-group-item" data-val: value, data-index: index>
-            <%= check_box_tag prefix + index.to_s, prefix + index.to_s, true, class: 'form-check-input feature-checkbox ' + checkbox_class, locals: {data-val: value, data-index: index}%>
+            <%= check_box_tag prefix + index.to_s, prefix + index.to_s, true, class: 'form-check-input feature-checkbox ' + checkbox_class, data_val: value, data_index: index%>
             <%= label_tag prefix + index.to_s, value["checkboxes"], class: 'form-check-label feature-label' %>
         </li>
       <% end %>
