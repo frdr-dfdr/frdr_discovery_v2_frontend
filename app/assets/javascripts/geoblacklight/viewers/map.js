@@ -90,7 +90,7 @@ GeoBlacklight.Viewer.Map = GeoBlacklight.Viewer.extend({
      */
   addPointOverlay: function(point, name) {
                     if (point instanceof L.LatLng) {
-                      mapOverlay = L.circle(point);
+                      mapOverlay = L.circleMarker(point);
                       mapOverlay.id=name;
                       this.overlay.addLayer(mapOverlay);
                     }
