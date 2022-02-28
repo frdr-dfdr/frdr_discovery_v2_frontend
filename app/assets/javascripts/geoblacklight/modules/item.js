@@ -22,14 +22,15 @@ Blacklight.onLoad(function() {
                 continue;
             }
             text = $(item).attr("data_val");
+            all = JSON.parse(text.replaceAll("=>",":"));
             if(item.attributes.name.nodeValue.includes("bbox")){
-                generateBBox(text,checked);
+                generateBBox(all,checked);
             }else if(item.attributes.name.nodeValue.includes("line")){
-                generateLine(text,checked);
+                generateLine(all,checked);
             }else if(item.attributes.name.nodeValue.includes("point")){
-                generatePoint(text,checked);
+                generatePoint(all,checked);
             }else{
-                generatePolygon(text,checked);
+                generatePolygon(all,checked);
             }
         }
     }
@@ -48,23 +49,22 @@ Blacklight.onLoad(function() {
             }
         });
         $("input[type='checkbox']").on("change",function(){
+                text = $(this).attr("data_val");
+                all = JSON.parse(text.replaceAll("=>",":"));
+                name = all["checkboxes"];
                 if ($(this).is(':checked')) {
                     if(!this.attributes.name.nodeValue.includes("-all")){
-                        text = $(this).attr("data_val");
-                        name = text.substring(text.indexOf("checkboxes")+14, text.indexOf("\"}"));
                         if(this.attributes.name.nodeValue.includes("bbox")){
-                            generateBBox(text,true);
+                            generateBBox(all,true);
                         } else if(this.attributes.name.nodeValue.includes("point")){
-                            generatePoint(text,true);
+                            generatePoint(all,true);
                         } else if(this.attributes.name.nodeValue.includes("line")){
-                            generateLine(text,true);
+                            generateLine(all,true);
                         } else{
-                            generatePolygon(text,true);
+                            generatePolygon(all,true);
                         }
                     }
                 } else {
-                    text = $(this).attr("data_val");
-                    name = text.substring(text.indexOf("checkboxes")+14, text.indexOf("\"}"));
                     viewer.removeSingleBoundsOverlay(name);
                 }
         });
@@ -96,8 +96,7 @@ Blacklight.onLoad(function() {
     /**
     *  Create or remove bounding box overlay from map. Layer name is bbox name.
     */
-    function generateBBox(text,checked){
-        all = JSON.parse(text.replaceAll("=>",":"));
+    function generateBBox(all,checked){
         name = all["checkboxes"];
         data = all["data"];
         north = parseFloat(data[0][0]);
@@ -114,11 +113,15 @@ Blacklight.onLoad(function() {
     /**
     *  Create or remove a point overlay from map. Layer name is point name.
     */
-    function generatePoint(text,checked){
-        name = text.substring(text.indexOf("checkboxes")+14, text.indexOf("\"}"));
-        lat = parseFloat(text.substring(text.indexOf("=>\"(")+4,text.indexOf(",")));
-        text = text.substring(text.indexOf(",")+2);
-        lon = parseFloat(text.substring(0,text.indexOf(")")));
+    function generatePoint(all,checked){
+        name = all["checkboxes"];
+        data = all["data"];
+        if(data.isArray){
+            point = data;
+        }else{
+            lat = data.substring(1,data.indexOf(","));
+            lon = data.substring(data.indexOf(",")+2,data.indexOf(")"));
+        }
         point = [lat, lon];
         viewer.removeSingleBoundsOverlay(name);
         if(checked){
@@ -129,8 +132,8 @@ Blacklight.onLoad(function() {
     /**
     *  TODO Convert this dummy function to a real one when we start processing polylines
     */
-    function generateLine(text,checked){
-        name = text.substring(text.indexOf("checkboxes")+14, text.indexOf("\"}"));
+    function generateLine(all,checked){
+        name = all["checkboxes"];
         viewer.removeSingleBoundsOverlay(name);
         if(checked){
             viewer.addBoundsOverlaySingle(bounds_old, name);
@@ -140,8 +143,8 @@ Blacklight.onLoad(function() {
     /**
     *  TODO Convert this dummy function to a real one when we start processing polygons
     */
-    function generatePolygon(text,checked){
-        name = text.substring(text.indexOf("checkboxes")+14, text.indexOf("\"}"));
+    function generatePolygon(all,checked){
+        name = all["checkboxes"];
         viewer.removeSingleBoundsOverlay(name);
         if(checked){
             viewer.addBoundsOverlaySingle(bounds_old, name);
