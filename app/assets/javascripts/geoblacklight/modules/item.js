@@ -19,14 +19,14 @@ Blacklight.onLoad(function() {
             ruby_data = $(item).attr("data_val");
             text = ruby_data;
             name = text.substring(text.indexOf("checkboxes")+14, text.indexOf("\"}"));
-            north = text.substring(text.indexOf("data\"=>[[\"")+10,text.indexOf("\", \""));
+            north = parseFloat(text.substring(text.indexOf("data\"=>[[\"")+10,text.indexOf("\", \"")));
             result = text.substring(text.indexOf("\", \"")+4);
             text = text.substring(text.indexOf("\", \"")+4);
-            west = text.substring(0,text.indexOf("\"]"));
+            west = parseFloat(text.substring(0,text.indexOf("\"]")));
             text = text.substring(text.indexOf("\"], [\"")+6);
-            let south = text.substring(0,text.indexOf("\", \""));
+            south = parseFloat(text.substring(0,text.indexOf("\", \"")));
             text = text.substring(text.indexOf("\", \"")+4);
-            let east = text.substring(0,text.indexOf("\"]"));
+            east = parseFloat(text.substring(0,text.indexOf("\"]")));
             var bounds = L.bboxToBounds(north + " " + west + " " + south + " " + east);
             if(checked){
                 if(!item.attributes.name.nodeValue.includes("-all")){
