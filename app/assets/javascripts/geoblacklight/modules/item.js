@@ -116,13 +116,9 @@ Blacklight.onLoad(function() {
     function generatePoint(all,checked){
         name = all["checkboxes"];
         data = all["data"];
-        if(data.isArray){
-            point = data;
-        }else{
-            lat = data.substring(1,data.indexOf(","));
-            lon = data.substring(data.indexOf(",")+2,data.indexOf(")"));
-        }
-        point = [lat, lon];
+        data.replace("[","");
+        data.replace("]","");
+        point = data.split(", ")
         viewer.removeSingleBoundsOverlay(name);
         if(checked){
             viewer.addPointOverlay(point,name);
