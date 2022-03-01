@@ -61,7 +61,7 @@ class SolrDocument
   end
   def get_bboxes
     array_boxes = []
-    boxes = fetch(Settings.FIELDS.BBOXES, '')
+    boxes = fetch(Settings.FIELDS.BBOXES, [])
     counter = 1
     for box in boxes do
         bbox_map = Hash.new
@@ -101,7 +101,7 @@ class SolrDocument
     #TODO update to deal with polylines
   def get_lines
     array_lines = []
-    lines = fetch(Settings.FIELDS.LINES, '')
+    lines = fetch(Settings.FIELDS.LINES, [])
     for line in lines do
         answer_str = String.new
         line_json = JSON.parse(line)
@@ -125,7 +125,7 @@ class SolrDocument
 
   def get_polygons
     array_polygons = []
-    polygons = fetch(Settings.FIELDS.POLYGONS, '')
+    polygons = fetch(Settings.FIELDS.POLYGONS, [])
     for polygon in polygons do
         answer_pgs = []
         answer_pg_str = []
@@ -169,7 +169,7 @@ class SolrDocument
 
   def get_points
     array_points = []
-    points = fetch(Settings.FIELDS.POINTS, '')
+    points = fetch(Settings.FIELDS.POINTS, [])
     for point in points do
         points_map = Hash.new
         points_map["data"] = "[" + point.to_s + "]"
