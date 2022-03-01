@@ -30,6 +30,7 @@ class SolrDocument
 
   def has_something?
     has_bbox? or has_line? or has_point? or has_polygon?
+  end
 
   def has_bbox?
      geo_objects["bboxes"].length() > 0
