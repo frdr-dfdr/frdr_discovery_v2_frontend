@@ -28,6 +28,9 @@ class SolrDocument
   # Recommendation: Use field names from Dublin Core
   use_extension(Blacklight::Document::DublinCore)
 
+  def has_something?
+    (geo_objects["bboxes"].length()+geo_objects["lines"].length()+geo_objects["points"].length()+geo_objects["polygons"].length())>0
+
   def has_bbox?
      geo_objects["bboxes"].length() > 0
   end
