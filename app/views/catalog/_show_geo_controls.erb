@@ -1,9 +1,9 @@
 <% document ||= @document %>
 
 <% if document.has_something? %>
-<div class="row mb-1">
-    <%= content_tag :div, t('geoblacklight.show.geospatial_info.select.help'), class: 'col' %>
-</div>
+    <div class="row mb-1">
+        <%= content_tag :div, t('geoblacklight.show.geospatial_info.select.help'), class: 'col' %>
+    </div>
 <% end %>
 
 <div class="row">

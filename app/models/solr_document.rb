@@ -29,7 +29,7 @@ class SolrDocument
   use_extension(Blacklight::Document::DublinCore)
 
   def has_something?
-    (geo_objects["bboxes"].length()+geo_objects["lines"].length()+geo_objects["points"].length()+geo_objects["polygons"].length())>0
+    has_bbox? or has_line? or has_point? or has_polygon?
 
   def has_bbox?
      geo_objects["bboxes"].length() > 0
