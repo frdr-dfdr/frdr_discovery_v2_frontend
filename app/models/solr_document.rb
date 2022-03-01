@@ -1,3 +1,4 @@
+require 'json'
 # frozen_string_literal: true
 class SolrDocument
   include Blacklight::Solr::Document
@@ -28,35 +29,140 @@ class SolrDocument
   use_extension(Blacklight::Document::DublinCore)
 
   def has_bbox?
-    @bboxes.length() > 0
+    fetch(Settings.FIELDS.BBOXES, '').length() > 0
   end
 
   def bboxes
-    @bboxes
+    get_bboxes
   end
 
   def has_line?
-    @lines.length() > 0
+    fetch(Settings.FIELDS.LINES, '').length() > 0
   end
 
   def lines
-    @lines
+    get_lines
   end
 
   def has_point?
-    @points.length() > 0
+    fetch(Settings.FIELDS.POINTS, '').length() > 0
   end
 
   def points
-    @points
+    get_points
   end
 
   def has_polygon?
-    @polygons.length() > 0
+    fetch(Settings.FIELDS.POLYGONS, '').length() > 0
   end
 
   def polygons
-    @polygons
+    get_polygons
+  end
+  def get_bboxes
+         bs = fetch(Settings.FIELDS.BBOXES, '')
+         array = []
+         for b in bs do
+             bjson = JSON.parse(b)
+
+             if bjson["bbox_type"] == "bounding box" || bjson["bbox_type"] == "file"
+                  #other = bjson.key?("other") ? bjson["other"] : ""
+                  #country = bjson.key?("country") ? bjson["country"] : ""
+                  #province = bjson.key?("province") ? bjson["province"] : ""
+                  #city = bjson.key?("city") ? bjson["city"] : ""
+                  other = bjson.fetch("other", "")
+                  country = bjson.fetch("country", "")
+                  province = bjson.fetch("province", "")
+                  city = bjson.fetch("city","")
+                  file_name = bjson.fetch("file_name", "")
+                  if !file_name.empty?
+                    array.push(file_name)
+                  elsif other.empty? && country.empty? && province.empty? && city.empty?
+                    array.push(bjson.fetch("north", "failed to grab north") + ", " + bjson.fetch("west", "failed to grab west") + ", " + bjson.fetch("south", "failed to grab south") + ', ' + bjson.fetch("east", "failed to grab east"))
+                  else
+                    answer = ""
+                    if !other.empty?
+                        answer = other
+                    end
+                    if !city.empty?
+                        if !answer.empty?
+                            answer += "; " + city
+                        else
+                            answer = city
+                        end
+                    end
+                    if !province.empty?
+                        if !answer.empty?
+                            answer += "; " + province
+                        else
+                            answer = province
+                        end
+                    end
+                    if !country.empty?
+                        if !answer.empty?
+                            answer += "; " + country
+                        else
+                            answer = country
+                        end
+                    end
+                    array.push(answer)
+                  end
+             end
+         end
+         return array
+  end
+
+  def get_lines
+    ls = fetch(Settings.FIELDS.LINES, '')
+         array = []
+         for l in ls do
+             ljson = JSON.parse(l)
+             answer = ""
+             for p in ljson
+                 answer = "(" + ljson["lat1"].to_s + ", " + ljson["long1"].to_s + ") - (" + ljson["lat2"].to_s + ", " + ljson["long2"].to_s + ")"
+             end
+             array.push(answer)
+         end
+    return array
+    #return ljson
+  end
+
+  def get_polygons
+    ps = fetch(Settings.FIELDS.POLYGONS, '')
+        array = []
+        for p in ps do
+            answer = []
+            point = ""
+            pjson = JSON.parse(p)
+            first = ""
+            last = ""
+            for pt in pjson
+                point = "(" + pt["lat"].to_s + ", " + pt["long"].to_s + ")"
+                if first.empty?
+                    first = point
+                end
+                answer.push(point)
+                last = point
+            end
+            if last != first
+                answer.push(first)
+            end
+            answerStr = ""
+            for pnt in answer
+                if !answerStr.empty?
+                    answerStr += ", "
+                end
+                answerStr += pnt
+            end
+            array.push(answerStr)
+        end
+    return array
+  end
+
+  def get_points
+    fetch(Settings.FIELDS.POINTS, '')
   end
 
 end
+
+

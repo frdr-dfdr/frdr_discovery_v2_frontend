@@ -106,6 +106,7 @@ module Geoblacklight
       type.endpoint if type.present?
     end
 
+
     private
 
     def rights_field_data
@@ -119,5 +120,8 @@ module Geoblacklight
         super
       end
     end
+
+
+
   end
 end

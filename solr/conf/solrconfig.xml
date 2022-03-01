@@ -127,7 +127,7 @@
         dc_title_ti^6
         dc_rights_ti^7
         dct_provenance_ti^8
-        layer_geom_type_ti^9
+        layer_geom_type_tmi^9
         layer_slug_ti^10
         dc_identifier_ti^10
       </str>
@@ -143,7 +143,7 @@
         dc_title_ti^6
         dc_rights_ti^7
         dct_provenance_ti^8
-        layer_geom_type_ti^9
+        layer_geom_type_tmi^9
         layer_slug_ti^10
         dc_identifier_ti^10
       </str>
@@ -154,12 +154,12 @@
       <str name="facet.field">dct_provenance_s</str>
       <str name="facet.field">dct_spatial_sm</str>
       <str name="facet.field">dc_creator_sm</str>
-      <str name="facet.field">dc_format_s</str>
+      <str name="facet.field">dc_format_sm</str>
       <str name="facet.field">dc_language_s</str>
       <str name="facet.field">dc_publisher_s</str>
       <str name="facet.field">dc_rights_s</str>
       <str name="facet.field">dc_subject_sm</str>
-      <str name="facet.field">layer_geom_type_s</str>
+      <str name="facet.field">layer_geom_type_sm</str>
       <str name="facet.field">solr_year_i</str>
 
       <str name="spellcheck">true</str>
