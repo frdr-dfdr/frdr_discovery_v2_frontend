@@ -162,8 +162,11 @@ class CatalogController < ApplicationController
       if: proc { |_, _, doc| doc.external_url },
       helper_method: :render_references_url_with_icon
     )
+
     config.add_show_field Settings.FIELDS.RIGHTS, label: 'Access', itemprop: 'rights'
     config.add_show_field Settings.FIELDS.RIGHTS_URI, label: 'Rights', itemprop: 'rights-uri'
+    config.add_show_field Settings.FIELDS.BBOXES, label: 'Bounding Boxes',
+
 
     # "fielded" search configuration. Used by pulldown among other places.
     # For supported keys in hash, see rdoc for Blacklight::SearchFields

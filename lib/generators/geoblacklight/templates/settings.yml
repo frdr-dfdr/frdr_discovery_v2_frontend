@@ -27,12 +27,12 @@ OVERLAP_RATIO_BOOST: '2'
 
 # Solr field mappings
 FIELDS:
-  :FILE_FORMAT: 'dc_format_s'
+  :FILE_FORMAT: 'dc_format_sm'
   :GEOMETRY: 'solr_geom'
   :WXS_IDENTIFIER: 'layer_id_s'
   :RIGHTS: 'dc_rights_s'
   :PROVENANCE: 'dct_provenance_s'
-  :GEOM_TYPE: 'layer_geom_type_s'
+  :GEOM_TYPE: 'layer_geom_type_sm'
   :SPATIAL_COVERAGE: 'dct_spatial_sm'
   :SUBJECT: 'dc_subject_sm'
   :REFERENCES: 'dct_references_s'
