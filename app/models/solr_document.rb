@@ -10,6 +10,7 @@ class SolrDocument
     @lines = ['123,45, 49.195, -123.45, 49.195', '123.72, 49.195, -123.020, 49.315']
     @points = ['123.72,49.50']
     @polygons = ['123,45, 49.195, 92.321, 35.323, 87.232, 23.231, -123.45, 49.195', '123.72, 49.195, -123.020, 49.315, 122.12, 87.321']
+    @files = [['file1.geojson',"test1"],['file2.geojson',"test2"],['file3.geojson',"test3"],['file4.geojson',"test4"]]
   end
 
   # self.unique_key = 'id'
