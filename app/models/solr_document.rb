@@ -164,6 +164,22 @@ class SolrDocument
     fetch(Settings.FIELDS.POINTS, '')
   end
 
+  # Check if there are geospatial files to preview
+  def has_files?
+    @files.length>0
+  end
+
+  # Return an array of key-value pair with geospatial file names and geoserver ids for geospatial files to preview
+  def files(none)
+    a = []
+    b = [none, ""]
+    a.push(b)
+    for file in @files do
+        a.push(file)
+    end
+    return a
+  end
+
 end
 
 
