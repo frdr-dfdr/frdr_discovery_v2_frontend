@@ -31,6 +31,31 @@ GeoBlacklight.Viewer.Wms = GeoBlacklight.Viewer.Map.extend({
     //this.setupInspection();
   },
 
+  addPreviewLayer: function(old_layerID, new_layerID) {
+      var _this = this;
+      var wmsLayer = L.tileLayer.wms(this.data.url, {
+        layers: old_layerID,
+        format: 'image/png',
+        transparent: true,
+        tiled: true,
+        CRS: 'EPSG:900913',
+        opacity: this.options.opacity,
+        detectRetina: _this.detectRetina()
+      });
+      this.overlay.removeLayer(wmsLayer);
+      wmsLayer = L.tileLayer.wms(this.data.url, {
+              layers: new_layerID,
+              format: 'image/png',
+              transparent: true,
+              tiled: true,
+              CRS: 'EPSG:900913',
+              opacity: this.options.opacity,
+              detectRetina: _this.detectRetina()
+            });
+      this.overlay.addLayer(wmsLayer);
+      //this.setupInspection();
+    },
+
   setupInspection: function() {
     var _this = this;
     this.map.on('click', function(e) {
