@@ -165,7 +165,7 @@ class CatalogController < ApplicationController
 
     config.add_show_field Settings.FIELDS.RIGHTS, label: 'Access', itemprop: 'rights'
     config.add_show_field Settings.FIELDS.RIGHTS_URI, label: 'Rights', itemprop: 'rights-uri'
-    config.add_show_field Settings.FIELDS.BBOXES, label: 'Bounding Boxes',
+    config.add_show_field Settings.FIELDS.BBOXES, label: 'Bounding Boxes'
 
 
     # "fielded" search configuration. Used by pulldown among other places.
