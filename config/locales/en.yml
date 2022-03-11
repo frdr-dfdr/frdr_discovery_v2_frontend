@@ -57,11 +57,12 @@ en:
       fields:
         dc_creator_sm: 'Authors'
         dc_publisher_sm: 'Institution(s)'
+
         dct_issued_s: 'Date published'
-        layer_geom_type_s: 'Data Type'
+        layer_geom_type_sm: 'Data Type'
         dc_rights_s: 'Access'
         dc_subject_sm: 'Keywords'
-        dc_format_s: 'Format'
+        dc_format_sm: 'Format'
         dct_isPartOf_sm: 'Collection'
         dc_description_s: 'Description'
         dct_spatial_sm: 'Place'
