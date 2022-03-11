@@ -84,7 +84,7 @@ en:
     zoom_in: 'Zoom in'
     zoom_out: 'Zoom out'
   item:
-    read_more: 'Read more'
+    read_more: 'Show full description'
     close: 'Close'
   facets:
     authors: 'Author(s)'
