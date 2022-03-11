@@ -1,0 +1,29 @@
+<% document ||= @document %>
+<% doc_presenter = show_presenter(document) %>
+
+<hr class="catalog-section-divider">
+
+<div class="row">
+    <div class="col">
+        <%= content_tag :h3, t('geoblacklight.show.additional_metadata.heading') %>
+    </div>
+</div>
+
+<dl class="row dl-invert document-metadata">
+  <div class="col">
+    <div class="row">
+      <div class="col-sm-12">
+        <hr class="metadata-divider">
+      </div>
+      <% doc_presenter.fields_to_render.each do |field_name, field, field_presenter| -%>
+        <% if is_additional_metadata? field_name or not is_locale_for_metadata? field_name %>
+          <dt class="blacklight-<%= field_name.parameterize %> col-md-3"><%= render_document_show_field_label document, label: field_presenter.label, field: field_name %></dt>
+          <dd class="blacklight-<%= field_name.parameterize %> col-md-9"><%= field_presenter.render %></dd>
+          <div class="col-sm-12">
+            <hr class="metadata-divider">
+          </div>
+        <% end -%>
+      <% end -%>
+    </div>
+  </div>
+</dl>

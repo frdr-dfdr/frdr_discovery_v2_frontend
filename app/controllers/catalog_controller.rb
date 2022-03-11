@@ -4,6 +4,7 @@ require 'blacklight/catalog'
 class CatalogController < ApplicationController
 
   include Blacklight::Catalog
+  include GeodisyHelper
 
   configure_blacklight do |config|
 
@@ -43,12 +44,12 @@ class CatalogController < ApplicationController
 
     config.show.display_type_field = 'format'
     config.show.partials << 'show_default_viewer_container'
-    config.show.partials << 'show_default_attribute_table'
-    config.show.partials << 'show_default_viewer_information'
+    config.show.partials << 'show_default_additional_metadata'
 
     ##
     # Configure the index document presenter.
     config.index.document_presenter_class = Geoblacklight::DocumentPresenter
+    config.show.document_presenter_class = Geodisy::ShowPresenter
 
     # solr fields that will be treated as facets by the blacklight application
     #   The ordering of the field names is the order of the display
@@ -133,21 +134,39 @@ class CatalogController < ApplicationController
     # link_to_search: [Boolean] that can be passed to link to a facet search
     # helper_method: [Symbol] method that can be used to render the value
 
-    config.add_show_field Settings.FIELDS.CREATOR, label: 'Author', itemprop: 'author'
+    # Add additional metadata fields first so they show up before the other locale values
+    config.add_show_field Settings.FIELDS.AFFILIATION, label: 'Author Affiliation', itemprop: 'affiliation', helper_method: :render_value_as_divs
+    config.add_show_field Settings.FIELDS.CONTRIBUTOR, label: 'Contributor(s)', itemprop: 'contributor'
+    config.add_show_field Settings.FIELDS.PUBLISHER, label: 'Publisher', itemprop: 'publisher'
+    config.add_show_field Settings.FIELDS.SERIES, label: 'Series', itemprop: 'series'
+
+    config.add_show_field Settings.FIELDS.TITLE_EN, label: 'Title (EN)', itemprop: 'title'
+    config.add_show_field Settings.FIELDS.TITLE_FR, label: 'Title (FR)', itemprop: 'title'
+    config.add_show_field Settings.FIELDS.DATE_PUBLISHED, label: 'Date Published', itemprop: 'temporal'
+    config.add_show_field Settings.FIELDS.PROVENANCE, label: 'Held by', link_to_facet: true
+    config.add_show_field Settings.FIELDS.CREATOR, label: 'Author', itemprop: 'author', link_to_facet: true
     config.add_show_field Settings.FIELDS.DESCRIPTION, label: 'Description', itemprop: 'description', helper_method: :render_value_as_truncate_abstract
+    config.add_show_field Settings.FIELDS.DESCRIPTION_EN, label: 'Description (EN)', itemprop: 'description', helper_method: :render_value_as_truncate_abstract
+    config.add_show_field Settings.FIELDS.DESCRIPTION_FR, label: 'Description (FR)', itemprop: 'description', helper_method: :render_value_as_truncate_abstract
     config.add_show_field Settings.FIELDS.PART_OF, label: 'Collection', itemprop: 'isPartOf'
     config.add_show_field Settings.FIELDS.SPATIAL_COVERAGE, label: 'Place(s)', itemprop: 'spatial', link_to_facet: true
-    config.add_show_field Settings.FIELDS.SUBJECT, label: 'Subject(s)', itemprop: 'keywords', link_to_facet: true
+    config.add_show_field Settings.FIELDS.SUBJECT, label: 'Keywords', itemprop: 'keywords', link_to_facet: true
+    config.add_show_field Settings.FIELDS.SUBJECT_EN, label: 'Keywords (EN)', itemprop: 'keywords', link_to_facet: true
+    config.add_show_field Settings.FIELDS.SUBJECT_FR, label: 'Keywords (FR)', itemprop: 'keywords', link_to_facet: true
+
     config.add_show_field Settings.FIELDS.TEMPORAL, label: 'Year', itemprop: 'temporal'
-    config.add_show_field Settings.FIELDS.PROVENANCE, label: 'Held by', link_to_facet: true
     config.add_show_field(
       Settings.FIELDS.REFERENCES,
-      label: 'Data source',
+      label: 'URL',
       accessor: [:external_url],
       if: proc { |_, _, doc| doc.external_url },
-      helper_method: :render_references_url
+      helper_method: :render_references_url_with_icon
     )
-    config.add_show_field Settings.FIELDS.BBOXES, label: 'Bounding Boxes',
+
+    config.add_show_field Settings.FIELDS.RIGHTS, label: 'Access', itemprop: 'rights'
+    config.add_show_field Settings.FIELDS.RIGHTS_URI, label: 'Rights', itemprop: 'rights-uri'
+    config.add_show_field Settings.FIELDS.BBOXES, label: 'Bounding Boxes'
+
 
     # "fielded" search configuration. Used by pulldown among other places.
     # For supported keys in hash, see rdoc for Blacklight::SearchFields
@@ -261,6 +280,13 @@ class CatalogController < ApplicationController
     config.autocomplete_path = 'suggest'
   end
 
-
+  def download_bibtex
+    solr_response = search_service.fetch params[:id]
+    document = solr_response&.first()&.documents&.first()
+    bibtex = get_document_bibtex document
+    filename = document.fetch(:dc_title_s, "new_reference")
+    filename = filename.parameterize(separator: '_') + ".bib"
+    send_data bibtex.to_s, :type => 'text/plain; charset=UTF-8', :filename => filename, :disposition => :attachment
+  end
 
 end

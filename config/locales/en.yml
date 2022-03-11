@@ -55,19 +55,20 @@ en:
         example_query_facet_field: 'Publish Date'
     search:
       fields:
-        dc_creator_sm: 'Author(s)'
+        dc_creator_sm: 'Authors'
         dc_publisher_sm: 'Institution(s)'
-        dct_issued_s: 'Year(s)'
+
+        dct_issued_s: 'Date published'
         layer_geom_type_sm: 'Data Type'
         dc_rights_s: 'Access'
-        dc_subject_sm: 'Subject(s)'
+        dc_subject_sm: 'Keywords'
         dc_format_sm: 'Format'
         dct_isPartOf_sm: 'Collection'
         dc_description_s: 'Description'
         dct_spatial_sm: 'Place'
         dct_provenance_s: 'Source Repository'
         dc_identifier_s: 'Data Source'
-        dct_references_s: 'Data Source'
+        dct_references_s: 'URL'
 
         dc_title_s: 'title'
         sort:
@@ -83,7 +84,7 @@ en:
     zoom_in: 'Zoom in'
     zoom_out: 'Zoom out'
   item:
-    read_more: 'Read more'
+    read_more: 'Show full description'
     close: 'Close'
   facets:
     authors: 'Author(s)'
