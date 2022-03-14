@@ -195,8 +195,8 @@ class SolrDocument
     for prev in prevs do
         answer = Hash.new
         prev_json = JSON.parse(prev)
-        answer["file_name"] = prev_json.get("file_name")
-        answer["geoserver_id"] = prev_json.get("geoserver_id")
+        answer["file_name"] = prev_json.fetch("file_name","")
+        answer["geoserver_id"] = prev_json.fetch("geoserver_id","")
         array.push(answer)
     end
     return array
