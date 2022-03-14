@@ -48,6 +48,7 @@ FIELDS:
   :LINES: 'lines_sm'
   :POINTS: 'points_sm'
   :POLYGONS: 'polygons_sm'
+  :GEO_PREVIEWS: 'geo_preview_sm'
 
 # Institution deployed at
 INSTITUTION: 'FRDR'
