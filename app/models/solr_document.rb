@@ -10,7 +10,7 @@ class SolrDocument
     @lines = ['123,45, 49.195, -123.45, 49.195', '123.72, 49.195, -123.020, 49.315']
     @points = ['123.72,49.50']
     @polygons = ['123,45, 49.195, 92.321, 35.323, 87.232, 23.231, -123.45, 49.195', '123.72, 49.195, -123.020, 49.315, 122.12, 87.321']
-    @files = [['file1.geojson',"test1"],['file2.geojson',"test2"],['file3.geojson',"test3"],['file4.geojson',"test4"]]
+    @files = [{"geoserver_id":"file1.geojson","file_name":"test1"},{"geoserver_id":"file2.geojson","file_name":"test2"},{"geoserver_id":"file3.geojson","file_name":"test3"}{"geoserver_id":"file4.geojson","file_name":"test4"}]
   end
 
   # self.unique_key = 'id'
@@ -172,9 +172,10 @@ class SolrDocument
   # Return an array of key-value pair with geospatial file names and geoserver ids for geospatial files to preview
   def files(none)
     a = []
-    b = [none, ""]
+    b = {"file_name":none, "geoserver_id":""}
     a.push(b)
-    for file in @files do
+    files = @files
+    for file in files do
         a.push(file)
     end
     return a
