@@ -167,6 +167,8 @@ class SolrDocument
   # Check if there are geospatial files to preview
   def has_files?
     @files.length>0
+    #once we are putting in real values from the GBL JSON use the below rather than the above
+    #return has_previews?
   end
 
   # Return an array of key-value pair with geospatial file names and geoserver ids for geospatial files to preview
@@ -175,12 +177,30 @@ class SolrDocument
     b = {"file_name":none, "geoserver_id":""}
     a.push(b)
     files = @files
+    #once we are putting in real values from the GBL JSON use the below rather than the above
+    #files = get_previews
     for file in files do
         a.push(file)
     end
     return a
   end
 
+  def has_previews?
+    fetch(Settings.FIELDS.GEO_PREVIEWS,[]).length>0
+  end
+
+  def get_previews
+    prevs = fetch(Settings.FIELDS.GEO_PREVIEWS,[])
+    array = []
+    for prev in prevs do
+        answer = Hash.new
+        prev_json = JSON.parse(prev)
+        answer["file_name"] = prev_json.get("file_name")
+        answer["geoserver_id"] = prev_json.get("geoserver_id")
+        array.push(answer)
+    end
+    return array
+  end
 end
 
 
