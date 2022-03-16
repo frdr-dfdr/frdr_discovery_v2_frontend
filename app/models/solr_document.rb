@@ -66,7 +66,6 @@ class SolrDocument
   def get_bboxes
     array_boxes = []
     boxes = fetch(Settings.FIELDS.BBOXES, [])
-    counter = 1
     for box in boxes do
         bbox_map = Hash.new
         answer_bb = []
@@ -98,7 +97,6 @@ class SolrDocument
         bbox_map["data"] = answer_bb
         bbox_map["checkboxes"] = answer_bb_str
         array_boxes.push(bbox_map)
-        counter = counter + 1
     end
     return array_boxes
   end
