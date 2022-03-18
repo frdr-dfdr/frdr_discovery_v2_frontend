@@ -93,7 +93,8 @@ class SolrDocument
                 next
             end
         rescue
-            logger.error("Somehow got an invalid bounding box to GBL: W " + west + " E " + east + " N " + north + " S " + south)
+            error_message = "Somehow got an invalid bounding box to GBL: W " + west + " E " + east + " N " + north + " S " + south
+            Geoblacklight.logger.error error_message
             next
         end
 
@@ -164,7 +165,8 @@ class SolrDocument
             lon = point.fetch("long",181).to_f.round(6)
             if lat > 90 || lat< -90 || lon > 180 || lon < -180
                 bad = true
-                logger.error("Somehow got an invalid point in a polygon to GBL: Lat " + lat + " Long " + lon)
+                error_message = "Somehow got an invalid point in a polygon to GBL: Lat " + lat + " Long " + lon
+                Geoblacklight.logger.error error_message
                 break
             end
             single_point.push(point["lat"])
@@ -211,7 +213,8 @@ class SolrDocument
         lat = point_json.fetch("lat",181).to_f.round(6)
         lon = point_json.fetch("long",181).to_f.round(6)
         if lat > 90 || lat < -90 || lon >180 || lon < -180
-            logger.error("Somehow got an invalid point to GBL: lat " + lat + " long " + long)
+            error_message = "Somehow got an invalid point to GBL: lat " + lat + " long " + long
+            Geoblacklight.logger.error error_message
             next
         end
         point_string = lat.to_s + ", " + lon.to_s
