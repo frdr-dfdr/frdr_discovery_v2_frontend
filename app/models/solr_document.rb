@@ -113,7 +113,7 @@ class SolrDocument
         elsif other.empty? && country.empty? && province.empty? && city.empty?
             answer_bb_str = "North: " + north.to_s + ", West: " + west.to_s + ", South: " + south.to_s + ', East: ' + east.to_s
         else
-            answer_bb_str = (([other, city, province, country] - ["", nil]).join(";"))
+            answer_bb_str = (([other, city, province, country] - ["", nil]).join("; "))
         end
         bbox_map["data"] = answer_bb
         bbox_map["checkboxes"] = answer_bb_str
@@ -159,8 +159,8 @@ class SolrDocument
         for point in polygon_json do
             single_point = []
             point_str = "(" + point["lat"].to_s + ", " + point["long"].to_s + ")"
-            lat = point.fetch("lat",181)
-            lon = point.fetch("long",181)
+            lat = point.fetch("lat",181).to_f.round(6)
+            lon = point.fetch("long",181).to_f.round(6)
             if lat > 90 || lat< -90 || lon > 180 || lon < -180
                 bad = true
                 break
