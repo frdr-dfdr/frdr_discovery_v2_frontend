@@ -204,10 +204,11 @@ class SolrDocument
     array_points = []
     points = fetch(Settings.FIELDS.POINTS, [])
     points_json = JSON.parse(points)
-    for point in points_json do
+    for point in points do
+        point_json = JSON.parse(point)
         points_map = Hash.new
-        lat = point.fetch("lat",181).to_f.round(6)
-        lon = point.fetch("long",181).to_f.round(6)
+        lat = point_json.fetch("lat",181).to_f.round(6)
+        lon = point_json.fetch("long",181).to_f.round(6)
         if lat > 90 || lat < -90 || lon >180 || lon < -180
             next
         end
