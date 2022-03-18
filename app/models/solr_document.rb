@@ -75,10 +75,31 @@ class SolrDocument
         east = String.new(box_json.fetch("east", String.new))
         north = String.new(box_json.fetch("north", String.new))
         south = String.new(box_json.fetch("south", String.new))
+        begin
+            west_f = west.to_f.round(6)
+            if west_f > 180 || west_f < -180
+                next
+            end
+            east_f = east.to_f.round(6)
+            if east_f > 180 || east_f < -180
+                next
+            end
+            north_f = north.to_f.round(6)
+            if north_f > 90 || north_f < -90
+                next
+            end
+            south_f = south.to_f.round(6)
+            if south_f > 90 || south_f < -90
+                next
+            end
+        rescue
+            next
+        end
+
         point_nw = []
         point_se = []
-        point_nw = [north,west]
-        point_se = [south,east]
+        point_nw = [north_f.to_s,west_f.to_s]
+        point_se = [south_f.to_s,east_f.to_s]
         answer_bb.push(point_nw)
         answer_bb.push(point_se)
 
@@ -134,9 +155,16 @@ class SolrDocument
         polygon_json = JSON.parse(polygon)
         first = String.new
         last = String.new
+        bad =  false
         for point in polygon_json do
             single_point = []
             point_str = "(" + point["lat"].to_s + ", " + point["long"].to_s + ")"
+            lat = point.fetch("lat",181)
+            lon = point.fetch("long",181)
+            if lat > 90 || lat< -90 || lon > 180 || lon < -180
+                bad = true
+                break
+            end
             single_point.push(point["lat"])
             single_point.push(point["long"])
             if first.empty?
@@ -147,6 +175,9 @@ class SolrDocument
             last = single_point
             answer_pg_str.push(point_str)
             last_str = point_str
+        end
+        if bad
+            next
         end
         if last == first
             answer_pgs.pop()
@@ -177,6 +208,9 @@ class SolrDocument
         points_map = Hash.new
         lat = point.fetch("lat",181).to_f.round(6)
         lon = point.fetch("long",181).to_f.round(6)
+        if lat > 90 || lat < -90 || lon >180 || lon < -180
+            next
+        end
         point_string = lat.to_s + ", " + lon.to_s
         points_map["data"] = "[" + point_string + "]"
         points_map["checkboxes"] = "(" + point_string + ")"
