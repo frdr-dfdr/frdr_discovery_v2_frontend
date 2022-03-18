@@ -203,7 +203,6 @@ class SolrDocument
   def get_points
     array_points = []
     points = fetch(Settings.FIELDS.POINTS, [])
-    points_json = JSON.parse(points)
     for point in points do
         point_json = JSON.parse(point)
         points_map = Hash.new
