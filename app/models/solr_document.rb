@@ -71,10 +71,10 @@ class SolrDocument
         answer_bb = []
         answer_bb_str = String.new
         box_json = JSON.parse(box)
-        west = String.new(box_json.fetch("west", String.new))
-        east = String.new(box_json.fetch("east", String.new))
-        north = String.new(box_json.fetch("north", String.new))
-        south = String.new(box_json.fetch("south", String.new))
+        west = String.new(box_json.fetch("west", "181"))
+        east = String.new(box_json.fetch("east", "181"))
+        north = String.new(box_json.fetch("north", "181"))
+        south = String.new(box_json.fetch("south", "181"))
         begin
             west_f = west.to_f.round(6)
             if west_f > 180 || west_f < -180
