@@ -94,7 +94,7 @@ class SolrDocument
             end
         rescue
             error_message = "Somehow got an invalid bounding box to GBL: W " + west + " E " + east + " N " + north + " S " + south
-            SolrDocument.logger.error error_message
+            Rails.logger.error error_message
             next
         end
 
@@ -166,7 +166,7 @@ class SolrDocument
             if lat > 90 || lat< -90 || lon > 180 || lon < -180
                 bad = true
                 error_message = "Somehow got an invalid point in a polygon to GBL: Lat " + lat + " Long " + lon
-                SolrDocument.logger.error error_message
+                Rails.logger.error error_message
                 break
             end
             single_point.push(point["lat"])
@@ -214,7 +214,7 @@ class SolrDocument
         lon = point_json.fetch("long",181).to_f.round(6)
         if lat > 90 || lat < -90 || lon >180 || lon < -180
             error_message = "Somehow got an invalid point to GBL: lat " + lat + " long " + long
-            SolrDocument.logger.error error_message
+            Rails.logger.error error_message
             next
         end
         point_string = lat.to_s + ", " + lon.to_s
