@@ -21,6 +21,7 @@ module API
 
           def logger
             Rails.logger
+            config.logger = Logger.new(STDOUT)
           end
         end
 
