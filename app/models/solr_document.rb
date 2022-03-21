@@ -166,8 +166,8 @@ class SolrDocument
             if lat > 90 || lat< -90 || lon > 180 || lon < -180
                 bad = true
                 error_message = "Somehow got an invalid point in a polygon to GBL: Lat " + lat + " Long " + lon
-                logger = Logger.new(STDOUT)
-                logger.error error_message
+                Rails.logger = Logger.new(STDOUT)
+                Rails.logger.error error_message
                 break
             end
             single_point.push(point["lat"])
