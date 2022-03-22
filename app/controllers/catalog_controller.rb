@@ -105,25 +105,9 @@ class CatalogController < ApplicationController
 
     # solr fields to be displayed in the index (search results) view
     #   The ordering of the field names is the order of the display
-    # config.add_index_field 'title_display', :label => 'Title:'
-    # config.add_index_field 'title_vern_display', :label => 'Title:'
-    # config.add_index_field 'author_display', :label => 'Author:'
-    # config.add_index_field 'author_vern_display', :label => 'Author:'
-    # config.add_index_field 'format', :label => 'Format:'
-    # config.add_index_field 'language_facet', :label => 'Language:'
-    # config.add_index_field 'published_display', :label => 'Published:'
-    # config.add_index_field 'published_vern_display', :label => 'Published:'
-    # config.add_index_field 'lc_callnum_display', :label => 'Call number:'
-
-    # config.add_index_field 'dc_title_t', :label => 'Display Name:'
-    # config.add_index_field Settings.FIELDS.PROVENANCE, :label => 'Institution:'
-    # config.add_index_field Settings.FIELDS.RIGHTS, :label => 'Access:'
-    # # config.add_index_field 'Area', :label => 'Area:'
-    # config.add_index_field Settings.FIELDS.SUBJECT, :label => 'Keywords:'
-    config.add_index_field Settings.FIELDS.YEAR
-    config.add_index_field Settings.FIELDS.CREATOR
-    config.add_index_field Settings.FIELDS.DESCRIPTION, helper_method: :snippit
     config.add_index_field Settings.FIELDS.PUBLISHER
+    config.add_index_field Settings.FIELDS.CREATOR
+    config.add_index_field Settings.FIELDS.YEAR
 
 
 

@@ -163,3 +163,33 @@ hr.metadata-divider {
 .card-header {
     font-weight: 500;
 }
+
+@media (min-width: 1400px) {
+  .container {
+      max-width: 95% !important;
+  }
+}
+
+.index_title > span > a {
+    color: black;
+    font-size: 1.3em;
+    margin-bottom: 0px;
+    overflow-x: inherit;
+    white-space: normal;
+}
+
+.index_creators {
+    font-style: italic;
+}
+
+.index_date {
+    font-style: italic;
+}
+
+.documents-list .document {
+    border-bottom: 1px solid #dee2e6;
+}
+
+.repo-icon {
+    width: 72px;
+}
