@@ -65,6 +65,10 @@ class SolrDocument
     geo_objects["polygons"]
   end
   def get_bboxes
+      error_message = "BBBBBBBBBBBBBBBBB"
+      logger = Logging.logger(STDERR)
+      logger.level = :warn
+      logger.error error_message
     array_boxes = []
     boxes = fetch(Settings.FIELDS.BBOXES, [])
     for box in boxes do
