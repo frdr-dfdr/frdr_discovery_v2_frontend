@@ -1,4 +1,5 @@
 require 'json'
+require 'logging'
 # frozen_string_literal: true
 class SolrDocument
   include Blacklight::Solr::Document
@@ -94,7 +95,12 @@ class SolrDocument
             end
         rescue
             error_message = "Somehow got an invalid bounding box to GBL: W " + west + " E " + east + " N " + north + " S " + south
+            error_message = "AAAAAAAAAAAAAAAAAAAA"
             puts error_message
+            error_message = "BBBBBBBBBBBBBBBBB"
+            logger = Logging.logger(STDOUT)
+            logger.level = :warn
+            logger.error error_message
             next
         end
 
