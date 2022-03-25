@@ -98,7 +98,7 @@ class SolrDocument
             error_message = "AAAAAAAAAAAAAAAAAAAA"
             puts error_message
             error_message = "BBBBBBBBBBBBBBBBB"
-            logger = Logging.logger(STDOUT)
+            logger = Logging.logger(STDERR)
             logger.level = :warn
             logger.error error_message
             next
