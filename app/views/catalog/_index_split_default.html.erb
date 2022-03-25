@@ -1,0 +1,34 @@
+<% # header bar for doc items in index view -%>
+<% icon_src = "" %>
+<% icon_src = document[Settings.FIELDS.SOURCE_ICON] if !document[Settings.FIELDS.SOURCE_ICON].blank? %>
+<%= content_tag :div, class: 'documentHeader row', data: { layer_id: document.id, bbox: document.bounding_box_as_wsen } do %>
+  <span class="col-2 col-md-3 col-xl-2 p-0">
+    <img class="pull-right repo-icon" src="<%= icon_src %>"/>
+  </span>
+  <span class="col-10 col-md-9 col-xl-10">
+    <div class="index_title col">
+      <span class="title-wrapper">
+        <%= link_to_document document, title: document[blacklight_config.index.title_field] %>
+      </span>
+      <span class='status-icons'>
+        <%= render partial: 'header_icons', locals: { document: document } %>
+      </span>
+    </div>
+
+    <div class='col more-info-area'>
+      <div class="index_publisher">
+        <%= document[Settings.FIELDS.PUBLISHER] %>
+      </div>
+      <% if document[Settings.FIELDS.DATE_PUBLISHED].blank? || document[Settings.FIELDS.DATE_PUBLISHED].nil?
+           date = ""
+         else
+           date = " — " + document[Settings.FIELDS.DATE_PUBLISHED]
+         end
+         creators = document[Settings.FIELDS.CREATOR].join("; ")
+       %>
+      <div>
+        <span class="index_creators"><%= creators %></span><span class="index_date"><%= date %></span>
+      </div>
+    </div>
+  </span>
+<% end %>

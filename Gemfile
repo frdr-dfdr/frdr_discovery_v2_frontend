@@ -90,4 +90,9 @@ gem 'rails-i18n', '~> 5.1'
 gem 'i18n-js'
 gem 'font-awesome-rails'
 
+# Gems for citation generation
+gem 'csl-styles'
+gem 'citeproc-ruby', '~> 1.1', '>= 1.1.10'
+gem 'bibtex-ruby'
+
 gem 'logging'
