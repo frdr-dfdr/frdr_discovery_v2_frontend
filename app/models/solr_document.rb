@@ -85,21 +85,25 @@ class SolrDocument
             west_f = west.to_f.round(6)
             if west_f > 180 || west_f < -180
                 logger.error error_message
+                puts "AAAAAAAAAAA"
                 next
             end
             east_f = east.to_f.round(6)
             if east_f > 180 || east_f < -180
                 logger.error error_message
+                puts "AAAAAAAAAAA"
                 next
             end
             north_f = north.to_f.round(6)
             if north_f > 90 || north_f < -90
                 logger.error error_message
+                puts "AAAAAAAAAAA"
                 next
             end
             south_f = south.to_f.round(6)
             if south_f > 90 || south_f < -90
                 logger.error error_message
+                puts "AAAAAAAAAAA"
                 next
             end
         rescue
