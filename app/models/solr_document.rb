@@ -29,6 +29,9 @@ class SolrDocument
   # Recommendation: Use field names from Dublin Core
   use_extension(Blacklight::Document::DublinCore)
 
+  logger = Logging.logger(STDERR)
+  logger.level = :warn
+
   def has_something?
     has_bbox? or has_line? or has_point? or has_polygon?
   end
@@ -65,10 +68,6 @@ class SolrDocument
     geo_objects["polygons"]
   end
   def get_bboxes
-      error_message = "BBBBBBBBBBBBBBBBB"
-      logger = Logging.logger(STDERR)
-      logger.level = :warn
-      logger.error error_message
     array_boxes = []
     boxes = fetch(Settings.FIELDS.BBOXES, [])
     for box in boxes do
@@ -80,30 +79,30 @@ class SolrDocument
         east = String.new(box_json.fetch("east", "181"))
         north = String.new(box_json.fetch("north", "181"))
         south = String.new(box_json.fetch("south", "181"))
+        error_message = "Somehow got an invalid bounding box to GBL: W " + west + " E " + east + " N " + north + " S " + south
         begin
             west_f = west.to_f.round(6)
             if west_f > 180 || west_f < -180
+                logger.error error_message
                 next
             end
             east_f = east.to_f.round(6)
             if east_f > 180 || east_f < -180
+                logger.error error_message
                 next
             end
             north_f = north.to_f.round(6)
             if north_f > 90 || north_f < -90
+                logger.error error_message
                 next
             end
             south_f = south.to_f.round(6)
             if south_f > 90 || south_f < -90
+                logger.error error_message
                 next
             end
         rescue
-            error_message = "Somehow got an invalid bounding box to GBL: W " + west + " E " + east + " N " + north + " S " + south
-            error_message = "AAAAAAAAAAAAAAAAAAAA"
-            puts error_message
-            error_message = "BBBBBBBBBBBBBBBBB"
-            logger = Logging.logger(STDERR)
-            logger.level = :warn
+            error_message = "Somehow got an invalid entry in one of box coordinates: W " + west + " E " + east + " N " + north + " S " + south
             logger.error error_message
             next
         end
@@ -176,7 +175,7 @@ class SolrDocument
             if lat > 90 || lat< -90 || lon > 180 || lon < -180
                 bad = true
                 error_message = "ERROR: Somehow got an invalid point in a polygon to GBL: Lat " + lat + " Long " + lon
-                puts error_message
+                logger.error error_message
                 break
             end
             single_point.push(point["lat"])
@@ -224,7 +223,7 @@ class SolrDocument
         lon = point_json.fetch("long",181).to_f.round(6)
         if lat > 90 || lat < -90 || lon >180 || lon < -180
             error_message = "Somehow got an invalid point to GBL: lat " + lat + " long " + long
-            Geoblacklight.logger.error error_message
+            logger.error error_message
             next
         end
         point_string = lat.to_s + ", " + lon.to_s
