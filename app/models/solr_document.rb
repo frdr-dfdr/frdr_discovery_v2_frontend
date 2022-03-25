@@ -29,8 +29,7 @@ class SolrDocument
   # Recommendation: Use field names from Dublin Core
   use_extension(Blacklight::Document::DublinCore)
 
-  logger = Logging.logger(STDERR)
-  logger.level = :warn
+
 
   def has_something?
     has_bbox? or has_line? or has_point? or has_polygon?
@@ -68,6 +67,8 @@ class SolrDocument
     geo_objects["polygons"]
   end
   def get_bboxes
+    logger = Logging.logger(STDERR)
+    logger.level = :warn
     array_boxes = []
     boxes = fetch(Settings.FIELDS.BBOXES, [])
     for box in boxes do
@@ -158,6 +159,8 @@ class SolrDocument
   end
 
   def get_polygons
+    logger = Logging.logger(STDERR)
+    logger.level = :warn
     array_polygons = []
     polygons = fetch(Settings.FIELDS.POLYGONS, [])
     for polygon in polygons do
@@ -214,6 +217,8 @@ class SolrDocument
   end
 
   def get_points
+    logger = Logging.logger(STDERR)
+    logger.level = :warn
     array_points = []
     points = fetch(Settings.FIELDS.POINTS, [])
     for point in points do
