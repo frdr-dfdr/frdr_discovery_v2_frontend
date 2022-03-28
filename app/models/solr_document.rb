@@ -299,11 +299,10 @@ class SolrDocument
         if label == "" || file_name == ""
             next
         end
-        group[label] = val
+        group["file_name"] = label
+        group["geoserver_id"] = val
         array.push(group)
     end
-    sanity = {}
-    sanity["test"] = "123"
     return array
   end
 end
