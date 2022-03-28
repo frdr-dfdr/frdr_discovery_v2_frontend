@@ -271,9 +271,9 @@ class SolrDocument
     answer = []
     b = [none, ""]
     answer.push(b)
-    geo_files = @files
+    #geo_files = @files
     #once we are putting in real values from the GBL JSON use the below rather than the above
-    #files = get_previews
+    geo_files = get_previews
     geo_files.each do |file|
         label = file["file_name"]
         val = file["geoserver_id"]
