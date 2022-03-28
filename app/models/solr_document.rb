@@ -11,7 +11,7 @@ class SolrDocument
     @lines = ['123,45, 49.195, -123.45, 49.195', '123.72, 49.195, -123.020, 49.315']
     @points = ['123.72,49.50']
     @polygons = ['123,45, 49.195, 92.321, 35.323, 87.232, 23.231, -123.45, 49.195', '123.72, 49.195, -123.020, 49.315, 122.12, 87.321']
-    @files = [{"geoserver_id": "file1.geojson","file_name": "test1"},{"geoserver_id": "file2.geojson","file_name": "test2"},{"geoserver_id": "file3.geojson","file_name": "test3"}]
+    @files = [{"geoserver_id" => 'file1.geojson',"file_name" => 'test1'},{"geoserver_id" => 'file2.geojson',"file_name" => 'test2'},{"geoserver_id" => 'file3.geojson',"file_name" => 'test3'}]
     @files2 = ["file1.geojson","file2.geojson","file3.geojson"]
   end
 
