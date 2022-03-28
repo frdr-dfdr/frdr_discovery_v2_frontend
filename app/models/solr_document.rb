@@ -261,9 +261,9 @@ class SolrDocument
   end
   # Check if there are geospatial files to preview
   def has_files?
-    @files.length>0
+    #@files.length>0
     #once we are putting in real values from the GBL JSON use the below rather than the above
-    #return has_previews?
+    return has_previews?
   end
 
   # Return an array of key-value pair with geospatial file names and geoserver ids for geospatial files to preview
@@ -292,7 +292,7 @@ class SolrDocument
     logger = Logging.logger(STDERR)
     logger.level = :warn
     logger.error Settings.FIELDS.GEO_PREVIEWS
-    prevs = fetch(Settings.FIELDS.POINTS,[])
+    prevs = fetch(Settings.FIELDS.GEO_PREVIEWS,[])
     array = []
     logger.error prevs.length()
     prevs.each do |prev|
