@@ -303,6 +303,10 @@ class SolrDocument
         group["geoserver_id"] = val
         array.push(group)
     end
+    sanity = {}
+    sanity["file_name"] = label
+    sanity["geoserver_id"] = val
+    array.push(sanity)
     return array
   end
 end
