@@ -273,7 +273,7 @@ class SolrDocument
     geo_files = @files
     #once we are putting in real values from the GBL JSON use the below rather than the above
     #files = get_previews
-    for file in geo_files do
+    geo_files.each do |file|
         c = []
         label = file["file_name"]
         val = file["geoserver_id"]
