@@ -151,9 +151,10 @@ Blacklight.onLoad(function() {
     addAllControl('#polygon-all', '.polygon');
 
   });
-  $"download-select").preview(function(){
+  $("download-select").preview(function(){
         var file = $('option:selected',this);
       });
+
   $('.truncate-abstract').each(function(i, element) {
       
     var lines = 12 * parseFloat(getComputedStyle(element).fontSize);
