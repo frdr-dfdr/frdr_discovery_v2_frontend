@@ -12,6 +12,7 @@ class SolrDocument
     @points = ['123.72,49.50']
     @polygons = ['123,45, 49.195, 92.321, 35.323, 87.232, 23.231, -123.45, 49.195', '123.72, 49.195, -123.020, 49.315, 122.12, 87.321']
     @files = [{"geoserver_id":"file1.geojson","file_name":"test1"},{"geoserver_id":"file2.geojson","file_name":"test2"},{"geoserver_id":"file3.geojson","file_name":"test3"}]
+    @files2 = ["file1.geojson","file2.geojson","file3.geojson"]
   end
 
   # self.unique_key = 'id'
@@ -270,14 +271,13 @@ class SolrDocument
     answer = []
     b = [none, ""]
     answer.push(b)
-    geo_files = @files
+    geo_files = @files2
     #once we are putting in real values from the GBL JSON use the below rather than the above
     #files = get_previews
     geo_files.each do |file|
         c = []
-        label = file["file_name"]
-        put label
-        val = file["geoserver_id"]
+        label = file
+        val = "test"
         c.push(label)
         c.push(val)
         answer.push(c)
