@@ -304,8 +304,8 @@ class SolrDocument
         array.push(group)
     end
     sanity = {}
-    sanity["file_name"] = label
-    sanity["geoserver_id"] = val
+    sanity["file_name"] = "test"
+    sanity["geoserver_id"] = "test_geoserver"
     array.push(sanity)
     return array
   end
