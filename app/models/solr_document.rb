@@ -268,13 +268,16 @@ class SolrDocument
   # Return an array of key-value pair with geospatial file names and geoserver ids for geospatial files to preview
   def files(none)
     answer = []
-    b = [:none, ""]
+    b = [none, ""]
     answer.push(b)
     files = @files
     #once we are putting in real values from the GBL JSON use the below rather than the above
     #files = get_previews
     for file in files do
-        answer.push([file["file_name"],file["geoserver_id"]])
+        c = []
+        c.push(file["file_name"])
+        c.push(file["geoserver_id"])
+        answer.push(c)
     end
     return answer
   end
