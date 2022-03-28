@@ -291,8 +291,11 @@ class SolrDocument
   def get_previews
     logger = Logging.logger(STDERR)
     logger.level = :warn
+    error_message = "got here"
+    logger.error error_message
     prevs = fetch(Settings.FIELDS.GEO_PREVIEWS,[])
     array = []
+    logger.error prevs
     prevs.each do |prev|
         group = Hash.new
         prev_json = JSON.parse(prev)
