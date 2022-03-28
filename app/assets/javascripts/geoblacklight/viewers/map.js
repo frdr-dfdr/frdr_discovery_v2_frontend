@@ -1,4 +1,5 @@
 //= require geoblacklight/viewers/viewer
+//= require leaflet
 
 
 GeoBlacklight.Viewer.Map = GeoBlacklight.Viewer.extend({
@@ -47,6 +48,78 @@ GeoBlacklight.Viewer.Map = GeoBlacklight.Viewer.extend({
     }
   },
 
+  /**
+   * Add a bounding box overlay from checkbox previews to map.
+   * @param {L.LatLngBounds} bounds Leaflet LatLngBounds
+   * @param {string} name
+   */
+  addBoundsOverlaySingle: function(bounds, name) {
+    if (bounds instanceof L.LatLngBounds) {
+      mapOverlay = L.polygon([
+                           bounds.getSouthWest(),
+                           bounds.getSouthEast(),
+                           bounds.getNorthEast(),
+                           bounds.getNorthWest()
+                         ]);
+      mapOverlay.id=name;
+      this.overlay.addLayer(mapOverlay);
+    }
+  },
+
+    /**
+     * Add a polyline overlay from checkbox previews to map.
+     * @param {L.LatLng[]} points Leaflet LatLng array
+     * @param {string} name
+     */
+  addLineOverlay: function(points, name) {
+                    if (points.size>0) {
+                      pointArray = [];
+                      for (let i = 0; i< points.length; i++){
+                      pointArray.push(points[i]);
+                      }
+                      mapOverlay = L.polyline(pointArray);
+                      mapOverlay.id=name;
+                      this.overlay.addLayer(mapOverlay);
+                    }
+  },
+
+    /**
+     * Add a point overlay from checkbox previews to map.
+     * @param {L.LatLng} point Leaflet LatLng
+     * @param {string} name
+     */
+  addPointOverlay: function(point, name) {
+                    if (Array.isArray(point)) {
+                      mapOverlay = L.circleMarker(point,{"radius": 1});
+                      mapOverlay.id=name;
+                      this.overlay.addLayer(mapOverlay);
+                    }
+  },
+
+  /**
+     * Add a polygon overlay from checkbox previews to map.
+     * @param {L.LatLngBounds} bounds Leaflet LatLngBounds
+     * @param {string} name
+     */
+  addPolygoneOverlay: function(points, name) {
+                    if (points.size>0) {
+                      pointArray = [];
+                      for (let i = 0; i< points.length; i++){
+                      pointArray.push(points[i]);
+                      }
+                      mapOverlay = L.polygon(pointArray);
+                      mapOverlay.id=name;
+                      this.overlay.addLayer(mapOverlay);
+                    }
+  },
+
+  removeSingleBoundsOverlay: function(name) {
+    for(var i in this.overlay._layers){
+        if (this.overlay._layers[i].id == name){
+            this.overlay.removeLayer(i);
+        }
+    }
+  },
   /**
    * Remove bounding box overlay from map.
    */

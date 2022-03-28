@@ -203,6 +203,60 @@
           "enum": [
             "1.0"
           ]
+        },
+        "bboxes_sm": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "east",
+              "west",
+              "north",
+              "south"
+            ],
+              "file_name": "string",
+              "other": "string",
+              "country": "string",
+              "province":  "string",
+              "city": "string"
+
+          },
+          "description": "Array of individual bounding boxes in a dataset."
+        },
+        "points_sm": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "lat": "latitude string",
+              "long": "longitude string"
+            }
+          },
+          "description": "Array of individual points in a dataset."
+        },
+        "lines_sm": {
+          "type": "object",
+          "required": [
+            "lat1",
+            "long1",
+            "lat2",
+            "long2"
+          ],
+          "description": "Array of individual lines in a dataset."
+        },
+        "polygons_sm": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "lat",
+                "long"
+              ]
+            }
+          },
+          "description": "Array of arrays of points that each make a polygon in a dataset."
         }
       }
     }
