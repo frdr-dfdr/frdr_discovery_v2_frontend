@@ -300,7 +300,7 @@ class SolrDocument
         prev_json = JSON.parse(prev)
         label = prev_json.fetch("file_name",String.new)
         val = prev_json.fetch("geoserver_id",String.new)
-        error_message = "file_name: " + label + " geoserver_id: " + geoserver_id
+        error_message = "file_name: " + label + " geoserver_id: " + val
         logger.error error_message
         if label == "" || file_name == ""
             next
