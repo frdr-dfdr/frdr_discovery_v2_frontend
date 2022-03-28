@@ -150,7 +150,12 @@ Blacklight.onLoad(function() {
     addAllControl('#point-all', '.point');
     addAllControl('#polygon-all', '.polygon');
 
-  });
+  }
+    $"download-select").preview(function(){
+      var file = $('option:selected',this);
+    })
+
+  );
 
   $('.truncate-abstract').each(function(i, element) {
       

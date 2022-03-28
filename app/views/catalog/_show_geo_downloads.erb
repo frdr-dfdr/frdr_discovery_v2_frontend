@@ -5,7 +5,7 @@
         <%= content_tag :div, t('geoblacklight.show.geospatial_info.file.help'), class: 'col' %>
     </div>
     <div class="row mb-2">
-        <%= select_tag 'download_geo_file_choose', options_for_select(document.files(t('geoblacklight.show.geospatial_info.file.none'))), class: 'form-select col-sm-9' %>
+        <%= select_tag 'download_geo_file_choose', options_for_select(document.files(t('geoblacklight.show.geospatial_info.file.none'))), class: 'download-select col-sm-9' %>
     </div>
 
     <div class="row mb-3">
