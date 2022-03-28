@@ -292,7 +292,7 @@ class SolrDocument
     logger = Logging.logger(STDERR)
     logger.level = :warn
     logger.error Settings.FIELDS.GEO_PREVIEWS
-    prevs = fetch(Settings.FIELDS.GEO_PREVIEWS,[])
+    prevs = fetch(Settings.FIELDS.POINTS,[])
     array = []
     logger.error prevs.length()
     prevs.each do |prev|
