@@ -289,6 +289,8 @@ class SolrDocument
 
   # Parse the incoming previewable file info and return an array of Hashes to the files method
   def get_previews
+    logger = Logging.logger(STDERR)
+    logger.level = :warn
     prevs = fetch(Settings.FIELDS.GEO_PREVIEWS,[])
     array = []
     prevs.each do |prev|
@@ -296,6 +298,8 @@ class SolrDocument
         prev_json = JSON.parse(prev)
         label = prev_json.fetch("file_name",String.new)
         val = prev_json.fetch("geoserver_id",String.new)
+        error_message = "file_name: " + label + " geoserver_id: " + geoserver_id
+        logger.error error_message
         if label == "" || file_name == ""
             next
         end
