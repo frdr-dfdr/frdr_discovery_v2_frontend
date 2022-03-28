@@ -302,6 +302,8 @@ class SolrDocument
         group[label] = val
         array.push(group)
     end
+    sanity = []
+    sanity["test"] = "123"
     return array
   end
 end
