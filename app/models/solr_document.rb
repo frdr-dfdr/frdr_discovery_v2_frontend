@@ -294,7 +294,7 @@ class SolrDocument
     logger.error Settings.FIELDS.GEO_PREVIEWS
     prevs = fetch(Settings.FIELDS.GEO_PREVIEWS,[])
     array = []
-    logger.error prevs[0]
+    logger.error prevs.length()
     prevs.each do |prev|
         group = Hash.new
         prev_json = JSON.parse(prev)
