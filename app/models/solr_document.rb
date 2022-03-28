@@ -270,19 +270,17 @@ class SolrDocument
     answer = []
     b = [none, ""]
     answer.push(b)
-    files = @files
+    geo_files = @files
     #once we are putting in real values from the GBL JSON use the below rather than the above
     #files = get_previews
-    for file in files do
+    for file in geo_files do
         c = []
-        c.push(file["file_name"])
-        c.push(file["geoserver_id"])
+        label = file["file_name"]
+        val = file["geoserver_id"]
+        c.push(label)
+        c.push(val)
         answer.push(c)
     end
-    c = []
-    c.push("a")
-    c.push("b")
-    answer.push(c)
     return answer
   end
 
