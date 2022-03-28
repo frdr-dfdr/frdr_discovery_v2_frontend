@@ -277,7 +277,8 @@ class SolrDocument
     geo_files.each do |file|
         label = file["file_name"]
         val = file["geoserver_id"]
-        answer.push([label,value])
+        group = [label, val]
+        answer.push(group)
     end
     return answer
   end
