@@ -279,6 +279,10 @@ class SolrDocument
         c.push(file["geoserver_id"])
         answer.push(c)
     end
+    c = []
+    c.push("a")
+    c.push("b")
+    answer.push(c)
     return answer
   end
 
