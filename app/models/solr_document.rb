@@ -291,8 +291,6 @@ class SolrDocument
   def get_previews
     logger = Logging.logger(STDERR)
     logger.level = :warn
-    error_message = "got here"
-    logger.error error_message
     logger.error Settings.FIELDS.GEO_PREVIEWS
     prevs = fetch(Settings.FIELDS.GEO_PREVIEWS,[])
     array = []

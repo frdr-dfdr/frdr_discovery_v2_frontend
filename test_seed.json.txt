@@ -17,6 +17,14 @@
         "layer_id_s":"cioos_3ead5773-87a5-440f-a31f-b40e800bea50",
         "timestamp":"2021-10-07T21:24:08.921Z",
         "dc_format_sm":["GeoTIFF"],
+        "geo_preview_sm": ['{
+                        "file_name": "test_file_1.tif",
+                        "geoserver_id": "test_geoserver_id"
+                    }',
+                    '{
+                        "file_name": "test_file_2.tif",
+                        "geoserver_id": "test_geoserver_id_2"
+                    }'],
         "bboxes_sm":['{
                         "west": "-65.0782819",
                         "east": "-64.9111969",
@@ -38,10 +46,10 @@
                         "north": "48.6194031",
                         "south": "41.5340161",
                         "bbox_type": "bounding box",
-			"country": "Canada",
+			            "country": "Canada",
                         "province": "British Columbia",
-			"city": "Vancouver",
-			"other": "Stanley Park"
+			            "city": "Vancouver",
+			            "other": "Stanley Park"
                 }'
                 ],
 	"lines_sm":['{
@@ -104,19 +112,7 @@
                                         "long":"-65.0782"
                                 }'
                         ]
-		      ],
-    "geo_preview_sm": [
-            '{
-                "file_name":"test_file_1.tif",
-                "geoserver_id":"test_geoserver_id"
-            }',
-            '{
-                "file_name":"test_file_2.tif",
-                "geoserver_id":"test_geoserver_id_2"
-            }'
-            ]
-
-
+		      ]
 },
 	
       {
