@@ -14,6 +14,7 @@ GeoBlacklight.Viewer.Map = GeoBlacklight.Viewer.extend({
   },
 
   overlay: L.layerGroup(),
+  preview: L.layerGroup(),
 
   load: function() {
     if (this.data.mapBbox) {
@@ -28,6 +29,7 @@ GeoBlacklight.Viewer.Map = GeoBlacklight.Viewer.extend({
 
     this.map.addLayer(this.selectBasemap());
     this.map.addLayer(this.overlay);
+    this.map.addLayer(this.preview);
     if (this.data.map !== 'index') {
       this.addBoundsOverlay(this.options.bbox);
     }
@@ -137,5 +139,12 @@ GeoBlacklight.Viewer.Map = GeoBlacklight.Viewer.extend({
     } else {
       return GeoBlacklight.Basemaps.positron;
     }
+  },
+
+  /**
+  * Clear Preview Overlay
+  */
+  clearPreviewOverlay: function(){
+  this.preview.clearLayers()l
   }
 });
