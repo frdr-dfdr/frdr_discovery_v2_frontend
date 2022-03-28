@@ -4,6 +4,7 @@ require 'blacklight/catalog'
 class CatalogController < ApplicationController
 
   include Blacklight::Catalog
+  include GeodisyHelper
 
   configure_blacklight do |config|
 
@@ -22,7 +23,7 @@ class CatalogController < ApplicationController
 
     ## Default rows returned from Solr
     ## @see https://lucene.apache.org/solr/guide/6_6/common-query-parameters.html
-    config.default_per_page = 10
+    config.default_per_page = 20
 
     ## Default parameters to send on single-document requests to Solr. These settings are the Blackligt defaults (see SolrHelper#solr_doc_params) or
     ## parameters included in the Blacklight-jetty document requestHandler.
@@ -43,12 +44,12 @@ class CatalogController < ApplicationController
 
     config.show.display_type_field = 'format'
     config.show.partials << 'show_default_viewer_container'
-    config.show.partials << 'show_default_attribute_table'
-    config.show.partials << 'show_default_viewer_information'
+    config.show.partials << 'show_default_additional_metadata'
 
     ##
     # Configure the index document presenter.
     config.index.document_presenter_class = Geoblacklight::DocumentPresenter
+    config.show.document_presenter_class = Geodisy::ShowPresenter
 
     # solr fields that will be treated as facets by the blacklight application
     #   The ordering of the field names is the order of the display
@@ -104,25 +105,9 @@ class CatalogController < ApplicationController
 
     # solr fields to be displayed in the index (search results) view
     #   The ordering of the field names is the order of the display
-    # config.add_index_field 'title_display', :label => 'Title:'
-    # config.add_index_field 'title_vern_display', :label => 'Title:'
-    # config.add_index_field 'author_display', :label => 'Author:'
-    # config.add_index_field 'author_vern_display', :label => 'Author:'
-    # config.add_index_field 'format', :label => 'Format:'
-    # config.add_index_field 'language_facet', :label => 'Language:'
-    # config.add_index_field 'published_display', :label => 'Published:'
-    # config.add_index_field 'published_vern_display', :label => 'Published:'
-    # config.add_index_field 'lc_callnum_display', :label => 'Call number:'
-
-    # config.add_index_field 'dc_title_t', :label => 'Display Name:'
-    # config.add_index_field Settings.FIELDS.PROVENANCE, :label => 'Institution:'
-    # config.add_index_field Settings.FIELDS.RIGHTS, :label => 'Access:'
-    # # config.add_index_field 'Area', :label => 'Area:'
-    # config.add_index_field Settings.FIELDS.SUBJECT, :label => 'Keywords:'
-    config.add_index_field Settings.FIELDS.YEAR
-    config.add_index_field Settings.FIELDS.CREATOR
-    config.add_index_field Settings.FIELDS.DESCRIPTION, helper_method: :snippit
     config.add_index_field Settings.FIELDS.PUBLISHER
+    config.add_index_field Settings.FIELDS.CREATOR
+    config.add_index_field Settings.FIELDS.YEAR
 
 
 
@@ -133,21 +118,39 @@ class CatalogController < ApplicationController
     # link_to_search: [Boolean] that can be passed to link to a facet search
     # helper_method: [Symbol] method that can be used to render the value
 
-    config.add_show_field Settings.FIELDS.CREATOR, label: 'Author', itemprop: 'author'
+    # Add additional metadata fields first so they show up before the other locale values
+    config.add_show_field Settings.FIELDS.AFFILIATION, label: 'Author Affiliation', itemprop: 'affiliation', helper_method: :render_value_as_divs
+    config.add_show_field Settings.FIELDS.CONTRIBUTOR, label: 'Contributor(s)', itemprop: 'contributor'
+    config.add_show_field Settings.FIELDS.PUBLISHER, label: 'Publisher', itemprop: 'publisher'
+    config.add_show_field Settings.FIELDS.SERIES, label: 'Series', itemprop: 'series'
+
+    config.add_show_field Settings.FIELDS.TITLE_EN, label: 'Title (EN)', itemprop: 'title'
+    config.add_show_field Settings.FIELDS.TITLE_FR, label: 'Title (FR)', itemprop: 'title'
+    config.add_show_field Settings.FIELDS.DATE_PUBLISHED, label: 'Date Published', itemprop: 'temporal'
+    config.add_show_field Settings.FIELDS.PROVENANCE, label: 'Held by', link_to_facet: true
+    config.add_show_field Settings.FIELDS.CREATOR, label: 'Author', itemprop: 'author', link_to_facet: true
     config.add_show_field Settings.FIELDS.DESCRIPTION, label: 'Description', itemprop: 'description', helper_method: :render_value_as_truncate_abstract
+    config.add_show_field Settings.FIELDS.DESCRIPTION_EN, label: 'Description (EN)', itemprop: 'description', helper_method: :render_value_as_truncate_abstract
+    config.add_show_field Settings.FIELDS.DESCRIPTION_FR, label: 'Description (FR)', itemprop: 'description', helper_method: :render_value_as_truncate_abstract
     config.add_show_field Settings.FIELDS.PART_OF, label: 'Collection', itemprop: 'isPartOf'
     config.add_show_field Settings.FIELDS.SPATIAL_COVERAGE, label: 'Place(s)', itemprop: 'spatial', link_to_facet: true
-    config.add_show_field Settings.FIELDS.SUBJECT, label: 'Subject(s)', itemprop: 'keywords', link_to_facet: true
+    config.add_show_field Settings.FIELDS.SUBJECT, label: 'Keywords', itemprop: 'keywords', link_to_facet: true
+    config.add_show_field Settings.FIELDS.SUBJECT_EN, label: 'Keywords (EN)', itemprop: 'keywords', link_to_facet: true
+    config.add_show_field Settings.FIELDS.SUBJECT_FR, label: 'Keywords (FR)', itemprop: 'keywords', link_to_facet: true
+
     config.add_show_field Settings.FIELDS.TEMPORAL, label: 'Year', itemprop: 'temporal'
-    config.add_show_field Settings.FIELDS.PROVENANCE, label: 'Held by', link_to_facet: true
     config.add_show_field(
       Settings.FIELDS.REFERENCES,
-      label: 'Data source',
+      label: 'URL',
       accessor: [:external_url],
       if: proc { |_, _, doc| doc.external_url },
-      helper_method: :render_references_url
+      helper_method: :render_references_url_with_icon
     )
-    config.add_show_field Settings.FIELDS.BBOXES, label: 'Bounding Boxes',
+
+    config.add_show_field Settings.FIELDS.RIGHTS, label: 'Access', itemprop: 'rights'
+    config.add_show_field Settings.FIELDS.RIGHTS_URI, label: 'Rights', itemprop: 'rights-uri'
+    config.add_show_field Settings.FIELDS.BBOXES, label: 'Bounding Boxes'
+
 
     # "fielded" search configuration. Used by pulldown among other places.
     # For supported keys in hash, see rdoc for Blacklight::SearchFields
@@ -221,10 +224,11 @@ class CatalogController < ApplicationController
     # label in pulldown is followed by the name of the SOLR field to sort by and
     # whether the sort is ascending or descending (it must be asc or desc
     # except in the relevancy case).
-    config.add_sort_field 'score desc, dc_title_sort asc', :label => 'relevance'
-    config.add_sort_field "#{Settings.FIELDS.YEAR} desc, dc_title_sort asc", :label => 'year'
-    config.add_sort_field "#{Settings.FIELDS.PUBLISHER} asc, dc_title_sort asc", :label => 'publisher'
-    config.add_sort_field 'dc_title_sort asc', :label => 'title'
+    config.add_sort_field 'score desc, dc_title_sort asc', :label => 'blacklight.search_fields.sort.relevancy'
+    config.add_sort_field "#{Settings.FIELDS.DATE_PUBLISHED} desc, dc_title_sort asc", :label => 'geoblacklight.sort.publication_date_newest'
+    config.add_sort_field "#{Settings.FIELDS.DATE_PUBLISHED} asc, dc_title_sort asc", :label => 'geoblacklight.sort.publication_date_oldest'
+    config.add_sort_field 'dc_title_sort asc', :label =>  'geoblacklight.sort.title_a_z'
+    config.add_sort_field 'dc_title_sort desc', :label => 'geoblacklight.sort.title_z_a'
 
     # If there are more than this many search results, no spelling ("did you
     # mean") suggestion is offered.
@@ -235,7 +239,6 @@ class CatalogController < ApplicationController
 
     # Tools from Blacklight
     config.add_results_collection_tool(:sort_widget)
-    config.add_results_collection_tool(:per_page_widget)
 
     # Custom tools for GeoBlacklight
     config.add_show_tools_partial :metadata, if: proc { |_context, _config, options| options[:document] && (Settings.METADATA_SHOWN & options[:document].references.refs.map(&:type).map(&:to_s)).any? }
@@ -261,6 +264,13 @@ class CatalogController < ApplicationController
     config.autocomplete_path = 'suggest'
   end
 
-
+  def download_bibtex
+    solr_response = search_service.fetch params[:id]
+    document = solr_response&.first()&.documents&.first()
+    bibtex = get_document_bibtex document
+    filename = document.fetch(:dc_title_s, "new_reference")
+    filename = filename.parameterize(separator: '_') + ".bib"
+    send_data bibtex.to_s, :type => 'text/plain; charset=UTF-8', :filename => filename, :disposition => :attachment
+  end
 
 end

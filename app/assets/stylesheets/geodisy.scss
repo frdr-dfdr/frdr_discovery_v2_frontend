@@ -24,6 +24,7 @@ $logo-image: image_url('blacklight/geodisy.svg') !default
  }
 
 a:link {
+    text-decoration: underline;
     color: #3344dd !important;
 }
 
@@ -126,6 +127,63 @@ label.feature-label {
     margin-left: 20px;
 }
 
+hr.catalog-section-divider {
+    border: 1px solid rgba(0,0,0,0.1);
+}
+
 .card-header {
     font-weight: 500;
+}
+
+.card.sidebar {
+    margin-bottom: 16px;
+    margin-top: 16px;
+}
+
+h2 > span {
+    font-size: 1.70rem;
+}
+
+ul.list-group.list-group-flush {
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+hr.metadata-divider {
+    margin-top: 0.25rem;
+    margin-bottom: 0.25rem;
+}
+
+.document-additional-metadata.dl-invert {
+ dt {
+  font-weight: bold;
+ }
+}
+
+.card-header {
+    font-weight: 500;
+}
+
+.index_title > span > a {
+    color: black;
+    font-size: 1.3em;
+    margin-bottom: 0px;
+    overflow-x: inherit;
+    white-space: normal;
+}
+
+.index_creators {
+    font-style: italic;
+}
+
+.index_date {
+    font-style: italic;
+}
+
+.documents-list .document {
+    border-bottom: 1px solid #dee2e6;
+}
+
+.repo-icon {
+    width: 72px;
 }

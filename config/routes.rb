@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   # for CANARIE routes
   mount API::Base, at: "/"
 
+  get 'catalog/citations/:id/download_bibtex', to: 'catalog#download_bibtex', as: 'download_bibtex'
 
   scope "(:locale)", locale: /en|fr/ do
     mount Blacklight::Engine => '/'
