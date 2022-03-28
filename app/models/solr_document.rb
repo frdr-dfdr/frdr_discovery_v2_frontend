@@ -271,16 +271,13 @@ class SolrDocument
     answer = []
     b = [none, ""]
     answer.push(b)
-    geo_files = @files2
+    geo_files = @files
     #once we are putting in real values from the GBL JSON use the below rather than the above
     #files = get_previews
     geo_files.each do |file|
-        c = []
         label = file["file_name"]
         val = file["geoserver_id"]
-        c.push(label)
-        c.push(val)
-        answer.push(c)
+        answer.push([label,value])
     end
     return answer
   end
@@ -295,9 +292,12 @@ class SolrDocument
     for prev in prevs do
         answer = Hash.new
         prev_json = JSON.parse(prev)
-        answer["file_name"] = prev_json.fetch("file_name",String.new)
-        answer["geoserver_id"] = prev_json.fetch("geoserver_id",String.new)
-        array.push(answer)
+        label = prev_json.fetch("file_name",String.new)
+        val = prev_json.fetch("geoserver_id",String.new)
+        if label == "" || file_name == ""
+            next
+        end
+        array.push([label,val])
     end
     return array
   end
