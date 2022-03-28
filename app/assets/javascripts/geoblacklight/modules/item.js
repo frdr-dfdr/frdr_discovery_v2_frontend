@@ -151,8 +151,8 @@ Blacklight.onLoad(function() {
     addAllControl('#polygon-all', '.polygon');
 
   });
-  $(".download-select").each(function(i, element){
-        var file = $('option:selected',element);
+  $(".download-select").on("selected", function(){
+        var file = $(this);
       });
 
   $('.truncate-abstract').each(function(i, element) {
