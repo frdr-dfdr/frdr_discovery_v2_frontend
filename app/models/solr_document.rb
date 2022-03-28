@@ -287,18 +287,20 @@ class SolrDocument
     fetch(Settings.FIELDS.GEO_PREVIEWS,[]).length>0
   end
 
+  # Parse the incoming previewable file info and return an array of Hashes to the files method
   def get_previews
     prevs = fetch(Settings.FIELDS.GEO_PREVIEWS,[])
     array = []
-    for prev in prevs do
-        answer = Hash.new
+    prevs.each do |prev|
+        group = Hash.new
         prev_json = JSON.parse(prev)
         label = prev_json.fetch("file_name",String.new)
         val = prev_json.fetch("geoserver_id",String.new)
         if label == "" || file_name == ""
             next
         end
-        array.push([label,val])
+        group[label] = val
+        array.push(group)
     end
     return array
   end
