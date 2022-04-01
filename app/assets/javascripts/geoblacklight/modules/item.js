@@ -11,6 +11,31 @@ Blacklight.onLoad(function() {
     viewer = new window['GeoBlacklight']['Viewer'][viewerName](element);
     var test_bounds = L.bboxToBounds("-180.0 -86.0 180.0 86.0");
 
+    // set hover listeners on map
+        $(this)
+          .on('mouseenter', function() {
+            text = $(item).attr("data_val");
+            all = JSON.parse(text.replaceAll("=>",":"));
+            if(item.attributes.name.nodeValue.includes("bbox")){
+              data = all["data"];
+              north = parseFloat(data[0][0]);
+              west = parseFloat(data[0][1]);
+              south = parseFloat(data[1][0]);
+              east = parseFloat(data[1][1]);
+              var bounds = L.bboxToBounds(west + " " + south + " " + east + " " + north);
+              var name = "preview-item"
+              viewer.addBoundsOverlaySingle(bounds,name)
+            }else if(item.attributes.name.nodeValue.includes("point")){
+                 data = all["data"];
+                 data = data.replace("[","").replace("]","");
+                 point = data.split(", ")
+              viewer.addPointOverlay(bounds, name);
+            }
+          })
+          .on('mouseleave', '#documents [data-layer-id]', function() {
+            var name = "preview-item"
+            viewer.removeSingleBoundsOverlay(name);
+          });
     /**
     *   Switch all the checkboxes under the Category checkbox to match the category checkbox when it is clicked
     */
