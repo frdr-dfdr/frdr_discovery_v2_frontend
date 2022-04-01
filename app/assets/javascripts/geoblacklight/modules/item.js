@@ -12,7 +12,7 @@ Blacklight.onLoad(function() {
     var test_bounds = L.bboxToBounds("-180.0 -86.0 180.0 86.0");
 
     // set hover listeners on map
-        $(this)
+        $("input[type='checkbox']")
           .on('mouseenter', function() {
             text = $(item).attr("data_val");
             all = JSON.parse(text.replaceAll("=>",":"));
