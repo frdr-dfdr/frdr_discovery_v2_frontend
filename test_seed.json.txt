@@ -26,10 +26,10 @@
                     }',
                     '{
                         "file_name": "test_file_2.tif",
-                        "geoserver_stuff": [
+                        "geoserver_stuff": '[
                             "geoserver_id": "test_geoserver_id_2",
                             "download_url": "test_download_url2"
-                        ]
+                        ]'
                     }'
                     ],
         "bboxes_sm":['{
