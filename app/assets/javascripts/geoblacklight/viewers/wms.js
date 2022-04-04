@@ -16,6 +16,7 @@ GeoBlacklight.Viewer.Wms = GeoBlacklight.Viewer.Map.extend({
     }
   },
 
+  //function used by esri and some other files that we probably won't use
   addPreviewLayer: function() {
     var _this = this;
     var wmsLayer = L.tileLayer.wms(this.data.url, {
@@ -26,10 +27,30 @@ GeoBlacklight.Viewer.Wms = GeoBlacklight.Viewer.Map.extend({
       CRS: 'EPSG:900913',
       opacity: this.options.opacity,
       detectRetina: _this.detectRetina()
+      id: "_preview_"
     });
+    removeSingleBoundsOverlay("_preview_");
     this.overlay.addLayer(wmsLayer);
     //this.setupInspection();
   },
+
+  // new function for previewing files when there are multiple files
+  addPreviewLayer: function(new_layerID) {
+      var _this = this;
+      var wmsLayer = L.tileLayer.wms(this.data.url, {
+        layers: this.data.layerId,
+        format: 'image/png',
+        transparent: true,
+        tiled: true,
+        CRS: 'EPSG:900913',
+        opacity: this.options.opacity,
+        detectRetina: _this.detectRetina()
+        id: "_preview_"
+      });
+      removeSingleBoundsOverlay("_preview_");
+      this.overlay.addLayer(wmsLayer);
+      //this.setupInspection();
+    },
 
   addPreviewLayer: function(old_layerID, new_layerID) {
       var _this = this;

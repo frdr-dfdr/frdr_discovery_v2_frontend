@@ -179,9 +179,7 @@ Blacklight.onLoad(function() {
             var file = $(".download-select option:selected");
             var text = $(".download-select option:selected").text();
             var val = $(".download-select option:selected").val();
-            val = JSON.parse(val);
-            var geoserverID = val[0];
-            var download = val[1];
+            addPreviewLayer(val);
           });
 
   });
