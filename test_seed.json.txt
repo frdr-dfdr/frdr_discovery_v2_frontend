@@ -4,7 +4,7 @@
         "dc_rights_s":"Public",
         "layer_slug_s":"geodisy:cioos_3ead5773-87a5-440f-a31f-b40e800bea50",
         "dc_title_s":"« J’y mets mon grain de sable » Project - Dune restoration on the Magdalen Islands (2009-2011)",
-        "solr_geom":"ENVELOPE(-62.4610937, -60.8734899, 47.9806584, 46.9241249)",
+        "solr_geom":"ENVELOPE(-66.4610937, 15.9111969, 49.9806584, 40.9241249)",
         "dct_issued_s":"2020-03-11",
         "dc_publisher_s":"Canadian Integrated Ocean Observing System (CIOOS)",
         "layer_geom_type_sm":"Undetermined",
@@ -47,10 +47,10 @@
                         "north": "48.6194031",
                         "south": "41.5340161",
                         "bbox_type": "bounding box",
-			            "country": "Canada",
-                        "province": "British Columbia",
-			            "city": "Vancouver",
-			            "other": "Stanley Park"
+			            "country": "Italy",
+                        "province": "Lombardy",
+			            "city": "Milan",
+			            "other": "Parco Sempione"
                 }'
                 ],
 	"lines_sm":['{
