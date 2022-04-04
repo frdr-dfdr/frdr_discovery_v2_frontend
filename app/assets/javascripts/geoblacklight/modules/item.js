@@ -178,6 +178,7 @@ Blacklight.onLoad(function() {
   });
   $(".download-select").on("selected", function(){
         var file = $(this);
+        var text = $(".download-select option:selected").text();
       });
 
   $('.truncate-abstract').each(function(i, element) {
