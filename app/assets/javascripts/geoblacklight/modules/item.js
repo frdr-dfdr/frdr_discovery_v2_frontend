@@ -16,6 +16,7 @@ Blacklight.onLoad(function() {
           .on('mouseenter', function() {
             text = $(this).attr("data_val");
             all = JSON.parse(text.replaceAll("=>",":"));
+            var name = "hover-item"
             if(this.htmlFor.includes("bbox")){
                 data = all["data"];
                 north = parseFloat(data[0][0]);
@@ -23,7 +24,6 @@ Blacklight.onLoad(function() {
                 south = parseFloat(data[1][0]);
                 east = parseFloat(data[1][1]);
                 var bounds = L.bboxToBounds(west + " " + south + " " + east + " " + north);
-                var name = "preview-item"
                 viewer.addBoundsOverlaySingle(bounds,name)
             }else if(this.htmlFor.includes("point")){
                 data = all["data"];
@@ -33,7 +33,7 @@ Blacklight.onLoad(function() {
             }
           })
           .on('mouseleave', function() {
-            var name = "preview-item"
+            var name = "hover-item"
             viewer.removeSingleBoundsOverlay(name);
           });
     /**
