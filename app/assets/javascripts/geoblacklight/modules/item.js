@@ -25,14 +25,14 @@ Blacklight.onLoad(function() {
               var bounds = L.bboxToBounds(west + " " + south + " " + east + " " + north);
               var name = "preview-item"
               viewer.addBoundsOverlaySingle(bounds,name)
-            }else if($(this).attributes.name.nodeValue.includes("point")){
+            }else if(this.htmlFor.includes("point")){
                  data = all["data"];
                  data = data.replace("[","").replace("]","");
                  point = data.split(", ")
               viewer.addPointOverlay(bounds, name);
             }
           })
-          .on('mouseleave', '#documents [data-layer-id]', function() {
+          .on('mouseleave', function() {
             var name = "preview-item"
             viewer.removeSingleBoundsOverlay(name);
           });
