@@ -175,11 +175,13 @@ Blacklight.onLoad(function() {
     addAllControl('#point-all', '.point');
     addAllControl('#polygon-all', '.polygon');
 
+    $(".download-select").on("selected", function(){
+            var file = $(this);
+            var text = $(".download-select option:selected").text();
+          });
+
   });
-  $(".download-select").on("selected", function(){
-        var file = $(this);
-        var text = $(".download-select option:selected").text();
-      });
+
 
   $('.truncate-abstract').each(function(i, element) {
       
