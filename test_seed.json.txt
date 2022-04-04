@@ -4,7 +4,7 @@
         "dc_rights_s":"Public",
         "layer_slug_s":"geodisy:cioos_3ead5773-87a5-440f-a31f-b40e800bea50",
         "dc_title_s":"« J’y mets mon grain de sable » Project - Dune restoration on the Magdalen Islands (2009-2011)",
-        "solr_geom":"ENVELOPE(-66.4610937, 15.9111969, 49.9806584, 40.9241249)",
+        "solr_geom":"ENVELOPE(-66.4610937, 15.9111969, 57.9806584, 35.9241249)",
         "dct_issued_s":"2020-03-11",
         "dc_publisher_s":"Canadian Integrated Ocean Observing System (CIOOS)",
         "layer_geom_type_sm":"Undetermined",
