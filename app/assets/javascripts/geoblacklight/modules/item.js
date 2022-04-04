@@ -16,7 +16,7 @@ Blacklight.onLoad(function() {
           .on('mouseenter', function() {
             text = $(this).attr("data_val");
             all = JSON.parse(text.replaceAll("=>",":"));
-            if($(this).attributes.name.nodeValue.includes("bbox")){
+            if(this.htmlFor.includes("bbox")){
               data = all["data"];
               north = parseFloat(data[0][0]);
               west = parseFloat(data[0][1]);
