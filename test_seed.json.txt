@@ -19,11 +19,11 @@
         "dc_format_sm":["GeoTIFF"],
         "geo_preview_sm": ['{
                         "file_name": "test_file_1.tif",
-                         "geoserver_id": "test_geoserver_id",
+                         "geoserver_id": "test_geoserver_id"
                     }',
                     '{
                         "file_name": "test_file_2.tif",
-                        "geoserver_id": "test_geoserver_id_2",
+                        "geoserver_id": "test_geoserver_id_2"
                     }'
                     ],
         "bboxes_sm":['{
