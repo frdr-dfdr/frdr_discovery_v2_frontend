@@ -20,15 +20,15 @@
         "geo_preview_sm": ['{
                         "file_name": "test_file_1.tif",
                         "geoserver_stuff": "[
-                            \"geoserver_id\": \"test_geoserver_id\",
-                            \"download_url\": \"test_download_url\"
+                            \\"geoserver_id\\": \\"test_geoserver_id\\",
+                            \\"download_url\\": \\"test_download_url\\"
                         ]"
                     }',
                     '{
                         "file_name": "test_file_2.tif",
                         "geoserver_stuff": "[
-                            \"geoserver_id\": \"test_geoserver_id_2\",
-                            \"download_url\": \"test_download_url2\"
+                            \\"geoserver_id\\": \\"test_geoserver_id_2\\",
+                            \\"download_url\\": \\"test_download_url2\\"
                         ]"
                     }'
                     ],
