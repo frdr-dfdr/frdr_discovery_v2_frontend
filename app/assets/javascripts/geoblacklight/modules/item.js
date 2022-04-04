@@ -12,11 +12,11 @@ Blacklight.onLoad(function() {
     var test_bounds = L.bboxToBounds("-180.0 -86.0 180.0 86.0");
 
     // set hover listeners on map
-        $("input[type='checkbox']")
+        $(".hover")
           .on('mouseenter', function() {
-            text = $(item).attr("data_val");
+            text = $(this).attr("data_val");
             all = JSON.parse(text.replaceAll("=>",":"));
-            if(item.attributes.name.nodeValue.includes("bbox")){
+            if($(this).attributes.name.nodeValue.includes("bbox")){
               data = all["data"];
               north = parseFloat(data[0][0]);
               west = parseFloat(data[0][1]);
@@ -25,7 +25,7 @@ Blacklight.onLoad(function() {
               var bounds = L.bboxToBounds(west + " " + south + " " + east + " " + north);
               var name = "preview-item"
               viewer.addBoundsOverlaySingle(bounds,name)
-            }else if(item.attributes.name.nodeValue.includes("point")){
+            }else if($(this).attributes.name.nodeValue.includes("point")){
                  data = all["data"];
                  data = data.replace("[","").replace("]","");
                  point = data.split(", ")
