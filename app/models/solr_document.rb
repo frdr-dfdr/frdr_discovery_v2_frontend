@@ -157,7 +157,9 @@ class SolrDocument
         line_map["checkboxes"] = answer_str
         array_lines.push(line_map)
     end
-    return array_lines
+    return []
+    #Uncomment this and remove above return if we start showing polylines
+    #return array_lines
   end
 
   def get_polygons
@@ -215,7 +217,9 @@ class SolrDocument
         poly_map["checkboxes"] = label
         array_polygons.push(poly_map)
     end
-    return array_polygons
+    return []
+    #Uncomment this and remove above return if we start showing polygons
+    #return array_polygons
   end
 
   def get_points
