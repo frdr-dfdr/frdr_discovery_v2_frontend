@@ -1,5 +1,6 @@
-//= require leaflet
 //= require geoblacklight/viewers/wms
+//= require leaflet
+
 
 Blacklight.onLoad(function() {
   $('[data-map="item"]').each(function(i, element) {
@@ -180,7 +181,7 @@ Blacklight.onLoad(function() {
             var file = $(".download-select option:selected");
             var text = $(".download-select option:selected").text();
             var val = $(".download-select option:selected").val();
-            this.addPreviewLayer(val);
+            addPreviewLayer(val);
           });
 
   });
