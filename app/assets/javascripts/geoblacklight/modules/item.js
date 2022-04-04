@@ -180,7 +180,7 @@ Blacklight.onLoad(function() {
             var file = $(".download-select option:selected");
             var text = $(".download-select option:selected").text();
             var val = $(".download-select option:selected").val();
-            addPreviewLayer(val);
+            this.addPreviewLayer(val);
           });
 
   });
