@@ -175,7 +175,7 @@ Blacklight.onLoad(function() {
     addAllControl('#point-all', '.point');
     addAllControl('#polygon-all', '.polygon');
 
-    $(".download-select").on("selected", function(){
+    $(".download-select").change( function(){
             var file = $(this);
             var text = $(".download-select option:selected").text();
           });
