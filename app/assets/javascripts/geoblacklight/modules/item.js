@@ -176,8 +176,11 @@ Blacklight.onLoad(function() {
     addAllControl('#polygon-all', '.polygon');
 
     $(".download-select").change( function(){
-            var file = $(this);
+            var file = $(".download-select option:selected");
             var text = $(".download-select option:selected").text();
+            var val = $(".download-select option:selected").val();
+            var geoserverID = val["geoserver_id"];
+            var download = val["download_url"];
           });
 
   });
