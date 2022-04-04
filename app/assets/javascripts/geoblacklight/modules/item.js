@@ -17,19 +17,19 @@ Blacklight.onLoad(function() {
             text = $(this).attr("data_val");
             all = JSON.parse(text.replaceAll("=>",":"));
             if(this.htmlFor.includes("bbox")){
-              data = all["data"];
-              north = parseFloat(data[0][0]);
-              west = parseFloat(data[0][1]);
-              south = parseFloat(data[1][0]);
-              east = parseFloat(data[1][1]);
-              var bounds = L.bboxToBounds(west + " " + south + " " + east + " " + north);
-              var name = "preview-item"
-              viewer.addBoundsOverlaySingle(bounds,name)
+                data = all["data"];
+                north = parseFloat(data[0][0]);
+                west = parseFloat(data[0][1]);
+                south = parseFloat(data[1][0]);
+                east = parseFloat(data[1][1]);
+                var bounds = L.bboxToBounds(west + " " + south + " " + east + " " + north);
+                var name = "preview-item"
+                viewer.addBoundsOverlaySingle(bounds,name)
             }else if(this.htmlFor.includes("point")){
-                 data = all["data"];
-                 data = data.replace("[","").replace("]","");
-                 point = data.split(", ")
-              viewer.addPointOverlay(bounds, name);
+                data = all["data"];
+                data = data.replace("[","").replace("]","");
+                var point = data.split(", ")
+                viewer.addPointOverlay(point, name);
             }
           })
           .on('mouseleave', function() {
