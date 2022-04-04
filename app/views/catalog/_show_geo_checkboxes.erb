@@ -7,7 +7,7 @@
       <% values.each_with_index do |value, index| %>
         <li class="list-group-item">
             <%= check_box_tag prefix + index.to_s, prefix + index.to_s, true, class: 'form-check-input feature-checkbox ' + checkbox_class, data_val: value.as_json, data_index: index%>
-            <%= label_tag prefix + index.to_s, value["checkboxes"], class: 'form-check-label feature-label hover ' ,data_val: value.as_json, data_index: index%>
+            <%= label_tag prefix + index.to_s, value["checkboxes"], class: 'form-check-label feature-label hover-display ' ,data_val: value.as_json, data_index: index%>
         </li>
       <% end %>
     </ul>
