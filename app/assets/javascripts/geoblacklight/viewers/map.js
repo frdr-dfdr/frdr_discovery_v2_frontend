@@ -161,7 +161,7 @@ GeoBlacklight.Viewer.Map = GeoBlacklight.Viewer.extend({
         detectRetina: _this.detectRetina(),
         id: "_preview_"
       });
-      removeSingleBoundsOverlay("_preview_");
+      this.removeSingleBoundsOverlay("_preview_");
       this.overlay.addLayer(wmsLayer);
       //this.setupInspection();
     }
