@@ -152,7 +152,7 @@ GeoBlacklight.Viewer.Map = GeoBlacklight.Viewer.extend({
      addPreviewLayer: function(new_layerID) {
          var _this = this;
          var wmsLayer = L.tileLayer.wms(this.data.url, {
-           layers: this.data.layerId,
+           layers: new_layerID,
            format: 'image/png',
            transparent: true,
            tiled: true,
