@@ -287,6 +287,17 @@ class SolrDocument
     return answer
   end
 
+  def download_url()
+    answer = {}
+    geo_downloads = get_previews
+    geo_downloads.each do |file|
+        label = file["geoserver_id"]
+        val = file["download_url"]
+        answer[label] = val
+    end
+    return answer
+  end
+
   def has_previews?
     fetch(Settings.FIELDS.GEO_PREVIEWS,[]).length>0
   end
