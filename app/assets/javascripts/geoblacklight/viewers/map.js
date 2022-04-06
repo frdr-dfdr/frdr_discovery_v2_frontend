@@ -145,7 +145,7 @@ GeoBlacklight.Viewer.Map = GeoBlacklight.Viewer.extend({
   * Clear Preview Overlay
   */
   clearPreviewOverlay: function(){
-  this.preview.clearLayers()l
+  this.preview.clearLayers();
   },
 
     //function used by esri and some other files that we probably won't use
