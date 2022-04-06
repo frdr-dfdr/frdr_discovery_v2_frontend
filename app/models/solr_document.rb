@@ -324,10 +324,6 @@ class SolrDocument
         group["geoserver_id"] = val
         array.push(group)
     end
-    sanity = {}
-    sanity["file_name"] = "test"
-    sanity["geoserver_id"] = "test_geoserver"
-    array.push(sanity)
     return array
   end
 end
