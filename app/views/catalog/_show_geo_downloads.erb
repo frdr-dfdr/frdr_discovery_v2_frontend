@@ -8,7 +8,7 @@
         <%= select_tag 'download_geo_file_choose', options_for_select(document.files(t('geoblacklight.show.geospatial_info.file.none'))), class: 'form-select col-sm-9 download-select' %>
     </div>
 
-    <div disabled id="download_button" class="row mb-3">
+    <div id="download_button" class="row mb-3">
         <% button_to fa_icon("download", text: t('geoblacklight.show.geospatial_info.file.download')), 'http://ipv4.download.thinkbroadband.com/5MB.zip', class: 'btn btn-primary col-sm-7', id: 'download_geo_file', download: '5MB.zip', method: 'get'%>
     </div>
 <% end %>
