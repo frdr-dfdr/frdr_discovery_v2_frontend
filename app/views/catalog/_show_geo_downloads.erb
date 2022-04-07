@@ -9,6 +9,6 @@
     </div>
 
     <div disabled id="download_button" class="row mb-3">
-        <%= button_tag fa_icon("download", text: t('geoblacklight.show.geospatial_info.file.download')), class: 'btn btn-primary col-sm-7', id: 'download_geo_file', href: 'http://ipv4.download.thinkbroadband.com/5MB.zip', download: '5MB.zip' %>
+        <%= link_to fa_icon("download", text: t('geoblacklight.show.geospatial_info.file.download')), class: 'btn btn-primary col-sm-7', id: 'download_geo_file', href: 'http://ipv4.download.thinkbroadband.com/5MB.zip', download: '5MB.zip', method: 'get'%>
     </div>
 <% end %>
