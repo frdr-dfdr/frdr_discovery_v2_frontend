@@ -188,3 +188,15 @@ hr.metadata-divider {
 .repo-icon {
     width: 72px;
 }
+
+.disabled_button {
+    background-color: #6c757d !important;
+    border-color: #6c757d !important;
+    text-decoration: none !important;
+    cursor: not-allowed !important;
+}
+
+.disabled_button:hover {
+    text-decoration: none !important;
+}
+

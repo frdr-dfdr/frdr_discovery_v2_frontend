@@ -13,6 +13,7 @@ class SolrDocument
     @polygons = ['123,45, 49.195, 92.321, 35.323, 87.232, 23.231, -123.45, 49.195', '123.72, 49.195, -123.020, 49.315, 122.12, 87.321']
     @files = [{"geoserver_id" => 'file1.geojson',"file_name" => 'test1'},{"geoserver_id" => 'file2.geojson',"file_name" => 'test2'},{"geoserver_id" => 'file3.geojson',"file_name" => 'test3'}]
     @files2 = ["file1.geojson","file2.geojson","file3.geojson"]
+    @download_info = download_info
   end
 
   # self.unique_key = 'id'
@@ -287,16 +288,37 @@ class SolrDocument
     return answer
   end
 
-  def download_url()
+  #Load all the previewable file geoserver_ids, file urls, and file names into a hash with geoserver_id as the key
+  def download_info
     answer = {}
     geo_downloads = get_previews
     geo_downloads.each do |file|
         label = file["geoserver_id"]
-        val = file["download_url"]
-        answer[label] = val
+        items = {}
+        items["url"] = file["url"]
+        items["filename"] = file["file_name"]
+        answer[label] = items
     end
     return answer
   end
+
+  # Get the url for the file download
+  def get_download_url(geoserver_id)
+    if @download_info.key?(geoserver_id)
+        return @download_info[geoserver_id]["url"]
+    else
+        return ""
+    end
+  end
+
+  # Get the filename for the file download
+    def get_download_filename(geoserver_id)
+      if @download_info.key?(geoserver_id)
+          return @download_info[geoserver_id]["filename"]
+      else
+          return ""
+      end
+    end
 
   def has_previews?
     fetch(Settings.FIELDS.GEO_PREVIEWS,[]).length>0
@@ -315,13 +337,15 @@ class SolrDocument
         prev_json = JSON.parse(prev)
         label = prev_json.fetch("file_name",String.new)
         val = prev_json.fetch("geoserver_id",String.new)
-        error_message = "file_name: " + label + " geoserver_id: " + val
+        url = prev_json.fetch("download_url",String.new)
+        error_message = "file_name: " + label + " geoserver_id: " + val + " download_url: "+ url
         logger.error error_message
-        if label == "" || val == ""
+        if label == "" || val == "" || url == ""
             next
         end
         group["file_name"] = label
         group["geoserver_id"] = val
+        group["url"] = url
         array.push(group)
     end
     return array

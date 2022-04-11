@@ -4,6 +4,9 @@
 
 Blacklight.onLoad(function() {
   $('[data-map="item"]').each(function(i, element) {
+    $('#download_button').addClass("disabled_button");
+    $('#download_button').removeAttr("href");
+    $("#download_button").removeAttr("download")
 
     // get viewer module from protocol value and capitalize to match class name
     var viewerName = $(element).data().protocol,
@@ -182,7 +185,38 @@ Blacklight.onLoad(function() {
             var text = $(".download-select option:selected").text();
             var val = $(".download-select option:selected").val();
             viewer.addPreviewLayer(val);
+            var info = getInfo($("#download_button").attr("data_info"));
+            if(text == "None"){
+                $('#download_button').addClass("disabled_button");
+                $('#download_button').removeAttr("href");
+                $("#download_button").removeAttr("download")
+
+            }
+            else{
+                $('#download_button').removeClass("disabled_button");
+                $("#download_button").attr("href", get_download_url(info,val));
+                $("#download_button").attr("download",get_download_filename(info, val));
+            }
           });
+
+    function getInfo(hash_string){
+        return JSON.parse(hash_string.replaceAll("=>",":"));
+    }
+
+    function get_download_url(info,geoserver_id){
+        if(geoserver_id in info)
+            return info[geoserver_id]["url"]
+        else
+            return ""
+    }
+
+    function get_download_filename(info,geoserver_id){
+        if(geoserver_id in info)
+            return info[geoserver_id]["filename"]
+        else
+            return ""
+        }
+
 
   });
 
