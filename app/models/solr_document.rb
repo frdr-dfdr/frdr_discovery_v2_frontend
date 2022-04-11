@@ -13,6 +13,7 @@ class SolrDocument
     @polygons = ['123,45, 49.195, 92.321, 35.323, 87.232, 23.231, -123.45, 49.195', '123.72, 49.195, -123.020, 49.315, 122.12, 87.321']
     @files = [{"geoserver_id" => 'file1.geojson',"file_name" => 'test1'},{"geoserver_id" => 'file2.geojson',"file_name" => 'test2'},{"geoserver_id" => 'file3.geojson',"file_name" => 'test3'}]
     @files2 = ["file1.geojson","file2.geojson","file3.geojson"]
+    @download_urls = download_url()
   end
 
   # self.unique_key = 'id'
@@ -287,16 +288,37 @@ class SolrDocument
     return answer
   end
 
+  #Load all the previewable file geoserver_ids and file urls into a hash with geoserver_id as the key
   def download_url()
     answer = {}
     geo_downloads = get_previews
     geo_downloads.each do |file|
         label = file["geoserver_id"]
-        val = file["download_url"]
-        answer[label] = val
+        items = Hash.new
+        items["url"] = file["download_url"]
+        items["filename"] = file["filename"]
+        answer[label] = items
     end
     return answer
   end
+
+  # Get the url for the file download
+  def get_download_url(geoserver_id)
+    if @download_urls.key?(geoserver_id)
+        return @download_urls[geoserver_id]["url"]
+    else
+        return ""
+    end
+  end
+
+  # Get the filename for the file download
+    def get_download_filename(geoserver_id)
+      if @download_urls.key?(geoserver_id)
+          return @download_urls[geoserver_id]["filename"]
+      else
+          return ""
+      end
+    end
 
   def has_previews?
     fetch(Settings.FIELDS.GEO_PREVIEWS,[]).length>0

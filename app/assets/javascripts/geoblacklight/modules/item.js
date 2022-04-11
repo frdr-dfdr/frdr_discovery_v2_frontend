@@ -182,6 +182,14 @@ Blacklight.onLoad(function() {
             var text = $(".download-select option:selected").text();
             var val = $(".download-select option:selected").val();
             viewer.addPreviewLayer(val);
+            if(text == "None"){
+                $('#download_button').prop('disabled', true);
+            }
+            else{
+                $('#download_button').prop('disabled', false);
+                $("#download_button").attr("href",viewer.get_download_url(val));
+                $("#download_button").attr("download",viewer.get_download_filename(val));
+            }
           });
 
   });
