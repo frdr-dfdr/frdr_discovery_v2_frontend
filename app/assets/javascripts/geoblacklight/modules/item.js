@@ -182,15 +182,20 @@ Blacklight.onLoad(function() {
             var text = $(".download-select option:selected").text();
             var val = $(".download-select option:selected").val();
             viewer.addPreviewLayer(val);
+            var info = getInfo($("#download_button").attr("data_info"));
             if(text == "None"){
                 $('#download_button').prop('disabled', true);
             }
             else{
                 $('#download_button').prop('disabled', false);
-                $("#download_button").attr("href", get_download_url(val));
-                $("#download_button").attr("download",get_download_filename(val));
+                $("#download_button").attr("href", get_download_url(info,val));
+                $("#download_button").attr("download",get_download_filename(info, val));
             }
           });
+
+    function getInfo(hash_string){
+        return JSON.parse(hash_string.replaceAll("=>",":"));
+    }
 
     function get_download_url(info,geoserver_id){
         if(info.has(geoserver_id))
