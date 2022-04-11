@@ -184,12 +184,12 @@ Blacklight.onLoad(function() {
             viewer.addPreviewLayer(val);
             var info = getInfo($("#download_button").attr("data_info"));
             if(text == "None"){
-                $('#download_button').addClass("disable-button");
+                $('#download_button').addClass("disable-link_button");
                 $('#download_button').attr("href","");
 
             }
             else{
-                $('#download_button').removeClass("disable-button");
+                $('#download_button').removeClass("disable-link_button");
                 $("#download_button").attr("href", get_download_url(info,val));
                 $("#download_button").attr("download",get_download_filename(info, val));
             }
