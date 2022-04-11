@@ -294,9 +294,9 @@ class SolrDocument
     geo_downloads = get_previews
     geo_downloads.each do |file|
         label = file["geoserver_id"]
-        items = Hash.new
+        items = {}
         items["url"] = file["download_url"]
-        items["filename"] = file["filename"]
+        items["filename"] = file["file_name"]
         answer[label] = items
     end
     return answer
