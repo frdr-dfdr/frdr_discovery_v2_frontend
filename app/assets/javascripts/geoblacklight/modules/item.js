@@ -4,6 +4,9 @@
 
 Blacklight.onLoad(function() {
   $('[data-map="item"]').each(function(i, element) {
+    $('#download_button').addClass("disabled_button");
+    $('#download_button').removeAttr("href");
+    $("#download_button").removeAttr("download")
 
     // get viewer module from protocol value and capitalize to match class name
     var viewerName = $(element).data().protocol,
@@ -185,7 +188,8 @@ Blacklight.onLoad(function() {
             var info = getInfo($("#download_button").attr("data_info"));
             if(text == "None"){
                 $('#download_button').addClass("disabled_button");
-                $('#download_button').attr("href","");
+                $('#download_button').removeAttr("href");
+                $("#download_button").removeAttr("download")
 
             }
             else{
