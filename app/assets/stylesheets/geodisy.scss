@@ -192,6 +192,11 @@ hr.metadata-divider {
 .disabled_button {
     background-color: #6c757d !important
     outline-color: #6c757d !important
-    text-decoration: None !important
+    text-decoration: none !important
     cursor: default !important
 }
+.disabled_button:hover {
+    text-decoration: none !important
+    cursor: default !important
+}
+
