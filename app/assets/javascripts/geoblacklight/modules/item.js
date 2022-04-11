@@ -198,14 +198,14 @@ Blacklight.onLoad(function() {
     }
 
     function get_download_url(info,geoserver_id){
-        if(info.has(geoserver_id))
+        if(geoserver_id in info)
             return info[geoserver_id]["url"]
         else
             return ""
     }
 
     function get_download_filename(info,geoserver_id){
-        if(info.has(geoserver_id))
+        if(geoserver_id in info)
             return info[geoserver_id]["filename"]
         else
             return ""
