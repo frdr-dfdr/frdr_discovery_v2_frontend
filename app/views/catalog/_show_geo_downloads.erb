@@ -9,6 +9,8 @@
     </div>
 
     <div id="download_button" class="row mb-3">
-                <%= f.submit (fa_icon "download", text: t('geoblacklight.show.geospatial_info.file.download')), 'https://ipv4.download.thinkbroadband.com/5MB.zip', class: 'btn btn-primary col-sm-7', method: :get %>
+                <%= f.button(:class => 'btn btn-primary col-sm-7', :method => :get)  do %>
+                    <% fa_icon("download", text: t('geoblacklight.show.geospatial_info.file.download')) %>
+                <% end %>
     </div>
 <% end %>
