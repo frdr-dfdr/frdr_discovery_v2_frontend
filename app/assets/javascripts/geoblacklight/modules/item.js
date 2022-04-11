@@ -187,10 +187,25 @@ Blacklight.onLoad(function() {
             }
             else{
                 $('#download_button').prop('disabled', false);
-                $("#download_button").attr("href",viewer.get_download_url(val));
-                $("#download_button").attr("download",viewer.get_download_filename(val));
+                $("#download_button").attr("href", get_download_url(val));
+                $("#download_button").attr("download",get_download_filename(val));
             }
           });
+
+    function get_download_url(info,geoserver_id){
+        if(info.has(geoserver_id))
+            return info[geoserver_id]["url"]
+        else
+            return ""
+    }
+
+    function get_download_filename(info,geoserver_id){
+        if(info.has(geoserver_id))
+            return info[geoserver_id]["filename"]
+        else
+            return ""
+        }
+
 
   });
 

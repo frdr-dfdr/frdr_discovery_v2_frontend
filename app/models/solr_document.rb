@@ -13,7 +13,7 @@ class SolrDocument
     @polygons = ['123,45, 49.195, 92.321, 35.323, 87.232, 23.231, -123.45, 49.195', '123.72, 49.195, -123.020, 49.315, 122.12, 87.321']
     @files = [{"geoserver_id" => 'file1.geojson',"file_name" => 'test1'},{"geoserver_id" => 'file2.geojson',"file_name" => 'test2'},{"geoserver_id" => 'file3.geojson',"file_name" => 'test3'}]
     @files2 = ["file1.geojson","file2.geojson","file3.geojson"]
-    @download_urls = download_url()
+    @download_info = download_info
   end
 
   # self.unique_key = 'id'
@@ -288,8 +288,8 @@ class SolrDocument
     return answer
   end
 
-  #Load all the previewable file geoserver_ids and file urls into a hash with geoserver_id as the key
-  def download_url()
+  #Load all the previewable file geoserver_ids, file urls, and file names into a hash with geoserver_id as the key
+  def download_info
     answer = {}
     geo_downloads = get_previews
     geo_downloads.each do |file|
@@ -304,8 +304,8 @@ class SolrDocument
 
   # Get the url for the file download
   def get_download_url(geoserver_id)
-    if @download_urls.key?(geoserver_id)
-        return @download_urls[geoserver_id]["url"]
+    if @download_info.key?(geoserver_id)
+        return @download_info[geoserver_id]["url"]
     else
         return ""
     end
@@ -313,8 +313,8 @@ class SolrDocument
 
   # Get the filename for the file download
     def get_download_filename(geoserver_id)
-      if @download_urls.key?(geoserver_id)
-          return @download_urls[geoserver_id]["filename"]
+      if @download_info.key?(geoserver_id)
+          return @download_info[geoserver_id]["filename"]
       else
           return ""
       end
