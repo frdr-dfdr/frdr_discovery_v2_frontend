@@ -295,7 +295,7 @@ class SolrDocument
     geo_downloads.each do |file|
         label = file["geoserver_id"]
         items = {}
-        items["url"] = file["download_url"]
+        items["url"] = file["url"]
         items["filename"] = file["file_name"]
         answer[label] = items
     end
@@ -337,13 +337,16 @@ class SolrDocument
         prev_json = JSON.parse(prev)
         label = prev_json.fetch("file_name",String.new)
         val = prev_json.fetch("geoserver_id",String.new)
-        error_message = "file_name: " + label + " geoserver_id: " + val
+        url = prev_json.fetch("download_url",String.new)
+        error_message = "file_name: " + label + " geoserver_id: " + val + " dowload_url: "+ url
         logger.error error_message
-        if label == "" || val == ""
+        if label == "" || val == "" || url == ""
             next
         end
         group["file_name"] = label
         group["geoserver_id"] = val
+        group["url"] = url
+        group[]
         array.push(group)
     end
     return array
