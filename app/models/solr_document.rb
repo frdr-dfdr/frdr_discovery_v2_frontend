@@ -338,7 +338,7 @@ class SolrDocument
         label = prev_json.fetch("file_name",String.new)
         val = prev_json.fetch("geoserver_id",String.new)
         url = prev_json.fetch("download_url",String.new)
-        error_message = "file_name: " + label + " geoserver_id: " + val + " dowload_url: "+ url
+        error_message = "file_name: " + label + " geoserver_id: " + val + " download_url: "+ url
         logger.error error_message
         if label == "" || val == "" || url == ""
             next
@@ -346,7 +346,6 @@ class SolrDocument
         group["file_name"] = label
         group["geoserver_id"] = val
         group["url"] = url
-        group[]
         array.push(group)
     end
     return array
