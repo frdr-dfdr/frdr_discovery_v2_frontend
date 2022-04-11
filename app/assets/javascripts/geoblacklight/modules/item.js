@@ -184,10 +184,12 @@ Blacklight.onLoad(function() {
             viewer.addPreviewLayer(val);
             var info = getInfo($("#download_button").attr("data_info"));
             if(text == "None"){
-                $('#download_button').prop('disabled', true);
+                $('#download_button').addClass("disabled");
+                $('#download_button').attr("href","");
+
             }
             else{
-                $('#download_button').prop('disabled', false);
+                $('#download_button').removeClass("disabled");
                 $("#download_button").attr("href", get_download_url(info,val));
                 $("#download_button").attr("download",get_download_filename(info, val));
             }
