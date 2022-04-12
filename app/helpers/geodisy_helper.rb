@@ -1,4 +1,6 @@
 module GeodisyHelper
+  include Blacklight::UrlHelperBehavior
+
   ##
   # Selects the basemap used for map displays
   # @return [String]
@@ -81,6 +83,28 @@ module GeodisyHelper
     content_tag :div do
       args[:value].collect { |value| concat content_tag(:div, value) }
     end
+  end
+
+  # Try to get the correct title for the current locale, fallback to others
+  def get_locale_title(blacklight_config, document)
+    if I18n.locale == :fr then
+      # Try to use fr, then generic title, then en then id
+      fields = [:dc_title_fr_s, "dc_title_s", "dc_title_en_s", blacklight_config.document_model.unique_key]
+    else
+      # Try to use en, then generic title, then fr then id
+      fields = [:dc_title_en_s, "dc_title_s", "dc_title_fr_s", blacklight_config.document_model.unique_key]
+    end
+    f = fields.find { |field| document.key?(field) }
+    return document[f]
+  end
+
+  def get_title_url(document)
+    return url_for_document(document)
+  end
+
+  def get_title_opts(doc, counter)
+    opts = { counter: counter }
+    return document_link_params(doc, opts)
   end
 
   # Change repository name to match icon files stored as assets
