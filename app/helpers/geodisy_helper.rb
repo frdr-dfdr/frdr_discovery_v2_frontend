@@ -107,4 +107,11 @@ module GeodisyHelper
     return document_link_params(doc, opts)
   end
 
+  # Change repository name to match icon files stored as assets
+  def get_safe_repo_name(name)
+    safe = name.downcase
+    safe = safe.delete('()')
+    safe = safe.gsub(' ', '+')
+    return safe
+  end
 end

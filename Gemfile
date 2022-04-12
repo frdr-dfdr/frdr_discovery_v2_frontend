@@ -94,3 +94,5 @@ gem 'font-awesome-rails'
 gem 'csl-styles'
 gem 'citeproc-ruby', '~> 1.1', '>= 1.1.10'
 gem 'bibtex-ruby'
+
+gem 'logging'
