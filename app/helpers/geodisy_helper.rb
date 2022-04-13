@@ -114,4 +114,12 @@ module GeodisyHelper
     safe = safe.gsub(' ', '+')
     return safe
   end
+
+  def main_content_classes
+    'col-xl-9'
+  end
+
+  def sidebar_classes
+    'page-sidebar col-xl-3'
+  end
 end

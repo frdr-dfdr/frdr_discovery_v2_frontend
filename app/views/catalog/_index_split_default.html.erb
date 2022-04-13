@@ -1,23 +1,23 @@
 <% # header bar for doc items in index view -%>
 <%= content_tag :div, class: 'documentHeader row', data: { layer_id: document.id, bbox: document.bounding_box_as_wsen } do %>
-  <span class="col-2 col-md-3 col-xl-2 p-0">
+  <span>
     <% if !document[Settings.FIELDS.PROVENANCE].blank? %>
       <% safe_img_src =  "repo/" + get_safe_repo_name(document[Settings.FIELDS.PROVENANCE]) + ".png" %>
-      <%= image_tag safe_img_src, alt: document[Settings.FIELDS.PROVENANCE] + " " + I18n.t("blacklight.search.logo"), class: "pull-right repo-icon" %>
+      <%= image_tag safe_img_src, alt: document[Settings.FIELDS.PROVENANCE] + " " + I18n.t("blacklight.search.logo"), class: "repo-icon" %>
     <% end %>
   </span>
-  <span class="col-10 col-md-9 col-xl-10 p-1">
-    <div class="col index_title pl-0">
+  <span class="index-details">
+    <div class="col index_title pl-0 pr-0">
       <span class="title-wrapper">
         <% counter = document_counter_with_offset(document_counter) %>
         <%= link_to get_locale_title(blacklight_config, document), get_title_url(document), get_title_opts(document, counter) %>
-      </span>
-      <span class='status-icons'>
-        <%= render partial: 'header_icons', locals: { document: document } %>
+        <% if defined?(document[Settings.FIELDS.RIGHTS]) && document[Settings.FIELDS.RIGHTS] != 'Public' %>
+          <%= geoblacklight_icon('restricted') %>
+        <% end %>
       </span>
     </div>
 
-    <div class='col more-info-area pl-1'>
+    <div class='col more-info-area pl-0 pr-0'>
       <div class="index_publisher">
         <%= document[Settings.FIELDS.PUBLISHER] %>
       </div>

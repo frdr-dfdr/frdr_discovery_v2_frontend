@@ -164,9 +164,13 @@ hr.metadata-divider {
     font-weight: 500;
 }
 
+.index_title {
+    margin-bottom: 0px;
+}
+
 .index_title > span > a {
     color: black;
-    font-size: 1.3em;
+    font-size: 1.1em;
     margin-bottom: 0px;
     overflow-x: inherit;
     white-space: normal;
@@ -180,10 +184,161 @@ hr.metadata-divider {
     font-style: italic;
 }
 
+/** Make sure the list of documents isn't shorter than the map **/
+.documents-list {
+    min-height: 400px;
+}
+
 .documents-list .document {
     border-bottom: 1px solid #dee2e6;
+    margin-right: 15px;
+    margin-left: 28px;
 }
 
 .repo-icon {
     width: 80px;
+    margin-bottom: 12px;
+    margin-left: 8px;
+    margin-right: 8px;
+}
+
+/** xs size breakpoint **/
+@media (min-width: 1px) and (max-width: 576px) {
+    /**
+    In mobile disable scrollbar and full height of list based on
+    screensize for mobile size.
+    **/
+    .documents-list {
+        max-height: 100%;
+        height: 100%;
+        overflow-y: auto;
+        width: 100%;
+    }
+
+    .documents-map {
+        width: 400px;
+    }
+
+    .repo-icon {
+        width: 60px;
+    }
+
+    .index-details {
+        width: calc(100% - 60px);
+    }
+}
+
+/** sm size breakpoint **/
+@media (min-width: 577px) and (max-width: 768px) {
+    /**
+    In mobile disable scrollbar and full height of list based on
+    screensize for mobile size.
+    **/
+    .documents-list {
+        max-height: 100%;
+        height: 100%;
+        overflow-y: auto;
+        width: 100%;
+    }
+
+    .documents-map {
+        width: 400px;
+    }
+
+    .repo-icon {
+        width: 60px;
+    }
+
+    .index-details {
+        width: calc(100% - 60px);
+    }
+
+}
+
+/** md size breakpoint **/
+@media (min-width: 769px) and (max-width: 992px) {
+    .documents-list {
+        width: calc(100% - 424px);
+        max-height: calc(100vh - 380px);
+        overflow-y: scroll;
+    }
+
+    .documents-map {
+        width: 400px;
+    }
+
+    .repo-icon {
+        width: 60px;
+    }
+
+}
+
+/** lg size breakpoint **/
+@media (min-width: 993px) and (max-width: 1200px) {
+    .documents-list {
+        width: calc(100% - 424px);
+        max-height: calc(100vh - 380px);
+        overflow-y: scroll;
+    }
+
+    .documents-map {
+        width: 400px;
+    }
+}
+
+/** xl size breakpoint **/
+@media (min-width: 1201px) and (max-width: 1400px) {
+    .documents-list {
+        width: calc(100% - 424px);
+        max-height: calc(100vh - 380px);
+        overflow-y: scroll;
+    }
+
+    .documents-map {
+        width: 400px;
+    }
+}
+
+/** > xl size breakpoint **/
+@media (min-width: 1401px) {
+    .documents-list {
+        max-height: calc(100vh - 380px);
+        overflow-y: scroll;
+        width: calc(100% - 524px);
+    }
+
+    .documents-map {
+        width: 504px;
+    }
+
+    .container {
+      max-width: 95% !important;
+    }
+}
+
+[data-map="home"] {
+    width: 504px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.documents-map {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.more-info-area {
+    font-size: 0.9em;
+}
+
+.index-details {
+    width: calc(100% - 100px);
+}
+
+.page-links, .sort-dropdown > button, .sort-dropdown > button > span {
+    font-size: 12px;
+}
+
+.blacklight-icon-restricted {
+    margin-left: 6px;
 }
