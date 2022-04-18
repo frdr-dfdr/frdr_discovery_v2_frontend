@@ -26,7 +26,11 @@
          else
            date = " — " + document[Settings.FIELDS.DATE_PUBLISHED]
          end
-         creators = document[Settings.FIELDS.CREATOR].join("; ")
+         if document[Settings.FIELDS.CREATOR].blank? || document[Settings.FIELDS.CREATOR].nil?
+           creators = ""
+         else
+           creators = document[Settings.FIELDS.CREATOR].join("; ")
+         end
        %>
       <div>
         <span class="index_creators"><%= creators %></span><span class="index_date"><%= date %></span>
