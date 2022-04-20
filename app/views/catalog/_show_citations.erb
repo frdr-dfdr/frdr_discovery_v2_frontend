@@ -40,7 +40,7 @@
 
               <%= content_tag :div do %>
                 <%= link_to download_bibtex_url do %>
-                  <%= fa_icon "download", text: t('geoblacklight.show.citation.bibtex'), right: true %>
+                  <%= fa_icon "download", text: t('geoblacklight.show.citation.bibtex'), right: false %>
                 <% end %>
               <% end %>
 
@@ -56,6 +56,6 @@
 
 <dd class="offset-md-3 offset-lg-0 col-12">
   <button class='btn btn-secondary' type="button" data-toggle="modal" data-target="#apaModal">
-    <%= fa_icon "file", text: t('geoblacklight.show.citation.apa.button'), right: true %>
+    <%= fa_icon "file", text: t('geoblacklight.show.citation.apa.button'), right: false %>
   </button>
 </dd>
