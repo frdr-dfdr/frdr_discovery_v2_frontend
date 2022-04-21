@@ -259,7 +259,7 @@ hr.metadata-divider {
 @media (min-width: 769px) and (max-width: 992px) {
     .documents-list {
         width: calc(100% - 424px);
-        max-height: calc(100vh - 380px);
+        max-height: calc(100vh - 280px);
         overflow-y: scroll;
     }
 
@@ -277,7 +277,7 @@ hr.metadata-divider {
 @media (min-width: 993px) and (max-width: 1200px) {
     .documents-list {
         width: calc(100% - 424px);
-        max-height: calc(100vh - 380px);
+        max-height: calc(100vh - 280px);
         overflow-y: scroll;
     }
 
@@ -290,7 +290,7 @@ hr.metadata-divider {
 @media (min-width: 1201px) and (max-width: 1400px) {
     .documents-list {
         width: calc(100% - 424px);
-        max-height: calc(100vh - 380px);
+        max-height: calc(100vh - 280px);
         overflow-y: scroll;
     }
 
@@ -302,7 +302,7 @@ hr.metadata-divider {
 /** > xl size breakpoint **/
 @media (min-width: 1401px) {
     .documents-list {
-        max-height: calc(100vh - 380px);
+        max-height: calc(100vh - 280px);
         overflow-y: scroll;
         width: calc(100% - 524px);
     }
@@ -346,4 +346,18 @@ hr.metadata-divider {
 .search-query-form {
     margin-left: auto;
     margin-right: auto;
+}
+
+.facets-heading {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.search-details {
+    max-width: 100%;
+}
+
+.facet-content {
+    max-height: 230px;
+    overflow-y: auto;
 }

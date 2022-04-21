@@ -183,7 +183,9 @@ en:
           limit_search: 'limit your search'
         counter: '%{counter}. '
       facets:
-        title: 'Limit your search'
+        details: "Search Details"
+        title: 'Limit by ...'
+        clear_all: 'Clear all'
         clear: 'Clear Filter'
         sort:
           count: 'Numerical Sort'
