@@ -258,9 +258,10 @@ hr.metadata-divider {
 /** md size breakpoint **/
 @media (min-width: 769px) and (max-width: 992px) {
     .documents-list {
-        width: calc(100% - 424px);
-        max-height: calc(100vh - 280px);
-        overflow-y: scroll;
+        max-height: 100%;
+        height: 100%;
+        overflow-y: auto;
+        width: 100%;
     }
 
     .documents-map {
