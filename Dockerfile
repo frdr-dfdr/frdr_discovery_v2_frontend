@@ -10,7 +10,6 @@ RUN apt-get update \
         postgresql-client \
         nodejs \
         npm \
-        jake \
         yarn \
     && rm -rf /var/lib/apt/lists/*
 
