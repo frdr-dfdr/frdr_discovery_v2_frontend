@@ -12,6 +12,8 @@ RUN apt-get update \
         npm \
         yarn \
     && rm -rf /var/lib/apt/lists/*
+RUN apt update \
+    && apt install nano
 
 WORKDIR /usr/src
 
