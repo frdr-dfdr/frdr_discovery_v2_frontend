@@ -19,6 +19,11 @@ a:hover, a:focus, a:active {
     color: $primary ;
 }
 
+/** Disable mustard halo on focus of button **/
+.btn:focus {
+    box-shadow: none !important;
+}
+
 .dropdown-toggle {
     padding: 8px;
 }
