@@ -1,0 +1,31 @@
+/**
+    Styling rules for maps
+**/
+@import "bootstrap";
+
+#map_instructions {
+    text-align: left;
+    padding-top: 2px;
+    width: 504px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.leaflet-control-zoom-in:hover,
+.leaflet-control-zoom-out:hover,
+.leaflet-control-zoom-in:focus,
+.leaflet-control-zoom-out:focus {
+    color: $primary !important;
+}
+
+[data-map="home"] {
+    width: 504px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.documents-map {
+    margin-left: auto;
+    margin-right: auto;
+}
+
