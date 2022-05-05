@@ -1,0 +1,29 @@
+/**
+    Styling rules for header navbar
+**/
+
+/** Top lunaris logo **/
+$logo-image: image_url('LUNARIS_logo_horizontal_reversed.svg') !default
+
+/* The main logo image for the Blacklight instance */
+.navbar-logo {
+    background-size: 230px !important;
+    background-position-x: center !important;
+    background-position-y: center !important;
+    @if $logo-image {
+        background: transparent $logo-image no-repeat top left;
+    }
+}
+
+.nav-link,
+.nav > .dropdown > .dropdown-toggle {
+    color: #FAFAFA !important;
+}
+
+.nav-link:hover,
+.nav > .dropdown > .dropdown-toggle:hover {
+    color: #343a40 !important;
+    background-color: #FAFAFA;
+    text-decoration: underline;
+    border-radius: 5px 5px 5px 5px;
+}

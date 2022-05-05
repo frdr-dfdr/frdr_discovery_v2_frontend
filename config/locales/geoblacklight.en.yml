@@ -35,7 +35,6 @@ en:
       about_uri: 'https://www.frdr-dfdr.ca/docs/en/about/#geodisy-project'
       help: 'Help'
       help_uri: 'https://github.com/ubc-library/geodisy/blob/master/Documentation/FRDR/Help.md'
-      frdr_logo: 'frdr.png'
       language: 'EN'
       search_here: 'Search Here'
       left_quote: '"'
@@ -44,7 +43,6 @@ en:
       move_map: 'Move the map to display your area of interest. You can also hold the shift key and click to draw a box for the map to zoom toward'
       click: 'Click'
       results: 'to see the results'
-      frdr: 'https://www.frdr-dfdr.ca'
       alliance:
         logo: 'alliance_logo.svg'
         name: 'Digital Research Alliance of Canada'

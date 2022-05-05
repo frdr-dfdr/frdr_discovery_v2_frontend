@@ -1,4 +1,77 @@
+/*
+*= require_tree .
+*= require_self
+*/
+
+/** Override bootstrap variables **/
+$primary: rgb(214, 171, 0);
+$success: rgb(214, 171, 0);
+
+/** Setup link color **/
+$link-color: black;
+$link-decoration: underline;
+
+$link-hover-color: $primary;
+$link-hover-decoration: underline;
+
+/** Global CSS rules across the site **/
+a:hover, a:focus, a:active {
+    color: $primary ;
+}
+
+/** Disable mustard halo on focus of button **/
+.btn:focus {
+    box-shadow: none !important;
+}
+
+.dropdown-toggle {
+    padding: 8px;
+}
+
+.dropdown-menu > li > a {
+    display: block;
+    padding: 3px 20px;
+}
+
+.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
+    background-color: $primary;
+    color: #FFFFFF !important;
+}
+
+input.feature-checkbox {
+    margin-left: 1px;
+}
+
+label.feature-label {
+    margin-left: 20px;
+}
+
+.card-header {
+    font-weight: 500;
+}
+
+.card-header {
+    font-weight: 500;
+}
+
+.search-query-form {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/** Css rules for navbar header **/
+@import 'header';
+/** Css rules for footer **/
+@import "footer";
+/** Css rules only for maps **/
+@import 'map';
+/** Css rules for search results **/
+@import 'index';
+
 @import 'blacklight';
 @import 'geoblacklight';
-@import 'geodisy';
 @import "font-awesome";
+@import 'bootstrap/functions';
+@import 'bootstrap/variables';
+@import 'bootstrap/mixins';
+@import "bootstrap";

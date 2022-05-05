@@ -1,3 +1,6 @@
+/**
+    Styling rules for footer content.
+**/
 @import 'bootstrap';
 
 #geo-content {
@@ -46,6 +49,13 @@
   vertical-align: middle;
   width: 162px;
   padding-top: 16px;
+}
+
+/** On super small displays make sure the
+Alliance logo doesn't make the footer wider
+than the full width of the display **/
+#geo-footer-img > a > img {
+  max-width: calc(100vw - 30px);
 }
 
 #geo-footer-links {

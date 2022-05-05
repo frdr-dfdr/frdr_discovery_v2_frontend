@@ -1,0 +1,242 @@
+/**
+    Styling rules for search results page.
+**/
+
+@import "bootstrap";
+.blacklight-dc_description_s {
+    white-space: pre-line;
+}
+
+.facets-heading {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.facet-field-heading:hover {
+    background:#212529;
+    color:#f7f7f7 !important;
+}
+
+.facet-field-heading:hover > button {
+    color:#f7f7f7 !important;
+}
+
+.facet-content {
+    max-height: 230px;
+    overflow-y: auto;
+}
+
+.catalog-section-divider {
+    border: 1px solid rgba(0,0,0,0.1);
+}
+
+h2 > span {
+    font-size: 1.70rem;
+}
+
+ul.list-group.list-group-flush {
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+hr.metadata-divider {
+    margin-top: 0.25rem;
+    margin-bottom: 0.25rem;
+}
+
+.document-additional-metadata.dl-invert {
+ dt {
+  font-weight: bold;
+ }
+}
+
+.index_title {
+    margin-bottom: 0px;
+}
+
+.index_title > span > a:hover {
+    color: $primary;
+}
+
+.index_title > span > a {
+    color: black;
+    font-size: 1.1em;
+    margin-bottom: 0px;
+    overflow-x: inherit;
+    white-space: normal;
+}
+
+.index_creators {
+    font-style: italic;
+}
+
+.index_date {
+    font-style: italic;
+}
+
+/** Make sure the list of documents isn't shorter than the map **/
+.documents-list {
+    min-height: 400px;
+}
+
+.documents-list .document {
+    border-bottom: 1px solid #dee2e6;
+    margin-right: 15px;
+    margin-left: 28px;
+}
+
+.repo-icon {
+    width: 80px;
+    margin-bottom: 12px;
+    margin-left: 8px;
+    margin-right: 8px;
+}
+
+.blacklight-icon-restricted {
+    margin-left: 6px;
+}
+
+.page-links, .sort-dropdown > button, .sort-dropdown > button > span {
+    font-size: 13px;
+}
+
+.index-details {
+    width: calc(100% - 100px);
+}
+
+.more-info-area {
+    font-size: 0.9em;
+}
+
+/** xs size breakpoint **/
+@media (min-width: 1px) and (max-width: 576px) {
+    /**
+    In mobile disable scrollbar and full height of list based on
+    screensize for mobile size.
+    **/
+    .centre-pane {
+        width: 100%;
+    }
+
+    .documents-list {
+        max-height: 100%;
+        height: 100%;
+        overflow-y: auto;
+    }
+
+    .documents-map {
+        width: 400px;
+    }
+
+    .repo-icon {
+        width: 60px;
+    }
+
+    .index-details {
+        width: calc(100% - 60px);
+    }
+}
+
+/** sm size breakpoint **/
+@media (min-width: 577px) and (max-width: 768px) {
+    /**
+    In mobile disable scrollbar and full height of list based on
+    screensize for mobile size.
+    **/
+    .centre-pane {
+        width: 100%;
+    }
+
+    .documents-list {
+        max-height: 100%;
+        height: 100%;
+        overflow-y: auto;
+    }
+
+    .documents-map {
+        width: 400px;
+    }
+
+    .repo-icon {
+        width: 60px;
+    }
+
+    .index-details {
+        width: calc(100% - 60px);
+    }
+
+}
+
+/** md size breakpoint **/
+@media (min-width: 769px) and (max-width: 992px) {
+    .centre-pane {
+        width: 100%;
+    }
+
+    .documents-list {
+        max-height: 100%;
+        height: 100%;
+        overflow-y: auto;
+    }
+
+    .documents-map {
+        width: 400px;
+    }
+
+    .repo-icon {
+        width: 60px;
+    }
+
+}
+
+/** lg size breakpoint **/
+@media (min-width: 993px) and (max-width: 1200px) {
+    .centre-pane {
+        width: calc(100% - 424px);
+    }
+
+    .documents-list {
+        max-height: calc(100vh - 340px);
+        overflow-y: scroll;
+    }
+
+    .documents-map {
+        width: 400px;
+    }
+}
+
+/** xl size breakpoint **/
+@media (min-width: 1201px) and (max-width: 1400px) {
+    .centre-pane {
+        width: calc(100% - 424px);
+    }
+
+    .documents-list {
+        max-height: calc(100vh - 340px);
+        overflow-y: scroll;
+    }
+
+    .documents-map {
+        width: 400px;
+    }
+}
+
+/** > xl size breakpoint **/
+@media (min-width: 1401px) {
+    .centre-pane {
+        width: calc(100% - 524px);
+    }
+
+    .documents-list {
+        max-height: calc(100vh - 340px);
+        overflow-y: scroll;
+    }
+
+    .documents-map {
+        width: 504px;
+    }
+
+    .container {
+      max-width: 95% !important;
+    }
+}
