@@ -35,7 +35,6 @@ fr:
       about_uri: 'https://www.frdr-dfdr.ca/docs/fr/a_propos/#projet-geodisy'
       help: 'Aide'
       help_uri: 'https://github.com/ubc-library/geodisy/blob/master/Documentation/FRDR/Aide.md'
-      frdr_logo: 'sitelogo_fr.png'
       language: 'FR'
       search_here: 'Faire une recherche ici'
       left_quote: '« '
@@ -44,7 +43,6 @@ fr:
       move_map: "Déplacez la carte pour afficher votre région d’intérêt. Vous pouvez également tenir la touche Majuscule enfoncée et cliquer pour encadrer une région sur la carte afin de l’agrandir."
       click: 'Cliquez sur'
       results: 'pour voir les résultats'
-      frdr: 'https://www.frdr-dfdr.ca/repo/?locale=fr'
       alliance:
         logo: 'alliance_logo_french-first.svg'
         name: 'Alliance de recherche numérique du Canada'
