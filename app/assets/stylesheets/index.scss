@@ -114,11 +114,14 @@ hr.metadata-divider {
     In mobile disable scrollbar and full height of list based on
     screensize for mobile size.
     **/
+    .centre-pane {
+        width: 100%;
+    }
+
     .documents-list {
         max-height: 100%;
         height: 100%;
         overflow-y: auto;
-        width: 100%;
     }
 
     .documents-map {
@@ -140,11 +143,14 @@ hr.metadata-divider {
     In mobile disable scrollbar and full height of list based on
     screensize for mobile size.
     **/
+    .centre-pane {
+        width: 100%;
+    }
+
     .documents-list {
         max-height: 100%;
         height: 100%;
         overflow-y: auto;
-        width: 100%;
     }
 
     .documents-map {
@@ -163,11 +169,14 @@ hr.metadata-divider {
 
 /** md size breakpoint **/
 @media (min-width: 769px) and (max-width: 992px) {
+    .centre-pane {
+        width: 100%;
+    }
+
     .documents-list {
         max-height: 100%;
         height: 100%;
         overflow-y: auto;
-        width: 100%;
     }
 
     .documents-map {
@@ -182,8 +191,11 @@ hr.metadata-divider {
 
 /** lg size breakpoint **/
 @media (min-width: 993px) and (max-width: 1200px) {
-    .documents-list {
+    .centre-pane {
         width: calc(100% - 424px);
+    }
+
+    .documents-list {
         max-height: calc(100vh - 280px);
         overflow-y: scroll;
     }
@@ -195,8 +207,11 @@ hr.metadata-divider {
 
 /** xl size breakpoint **/
 @media (min-width: 1201px) and (max-width: 1400px) {
-    .documents-list {
+    .centre-pane {
         width: calc(100% - 424px);
+    }
+
+    .documents-list {
         max-height: calc(100vh - 280px);
         overflow-y: scroll;
     }
@@ -208,10 +223,13 @@ hr.metadata-divider {
 
 /** > xl size breakpoint **/
 @media (min-width: 1401px) {
+    .centre-pane {
+        width: calc(100% - 524px);
+    }
+
     .documents-list {
         max-height: calc(100vh - 280px);
         overflow-y: scroll;
-        width: calc(100% - 524px);
     }
 
     .documents-map {
