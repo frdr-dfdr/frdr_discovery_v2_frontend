@@ -2,8 +2,8 @@
 
 <% if document.external_url.present? %>
   <dd class="offset-md-3 offset-lg-0 col-12">
-    <%= link_to document.external_url do %>
-      <%= fa_icon "external-link", text: t('geoblacklight.tools.explore') + document.holding_institute, right: false %>
+    <%= link_to document.external_url, class: 'btn btn-primary' do %>
+      <%= fa_icon "external-link", text: t('geoblacklight.tools.access'), right: false %>
     <% end %>
   </dd>
 <% end %>

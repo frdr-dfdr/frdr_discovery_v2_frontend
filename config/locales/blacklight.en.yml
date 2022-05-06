@@ -184,7 +184,7 @@ en:
         counter: '%{counter}. '
       facets:
         details: "Search Details"
-        title: 'Limit by ...'
+        title: 'Limit by:'
         clear_all: 'Clear all'
         clear: 'Clear Filter'
         sort:
