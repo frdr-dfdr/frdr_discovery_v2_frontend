@@ -9,7 +9,6 @@ RUN apt-get update \
     && apt-get install -y --no-install-recommends \
         postgresql-client \
         nodejs \
-        npm \
         yarn \
     && rm -rf /var/lib/apt/lists/*
 RUN apt update \
