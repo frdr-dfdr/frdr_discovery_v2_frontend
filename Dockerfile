@@ -11,8 +11,6 @@ RUN apt-get update \
         nodejs \
         yarn \
     && rm -rf /var/lib/apt/lists/*
-RUN apt update \
-    && apt install nano
 
 WORKDIR /usr/src
 
@@ -43,3 +41,5 @@ EXPOSE 3000
 
 CMD ["rails","server","-e","$RAILS_ENV","-p","3000"]
 
+RUN apt update \
+    && apt install nano
