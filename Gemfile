@@ -11,7 +11,7 @@ gem 'pg', '~> 1.2.3'
 # Use Puma as the app server
 gem 'puma', '~> 3.12'
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 5.0'
+gem 'sass-rails', '~> 6.0'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
@@ -62,12 +62,12 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
-gem 'blacklight', '~> 7.0'
+gem 'blacklight', '~> 7.24.0'
 
 # Uncomment to use frdr's fork of geoblacklight. Not required, only for development of pull requests
 # gem 'geoblacklight', :git => 'http://github.com/frdr-dfdr/geoblacklight', :tag => 'v2.4.1'
 
-gem 'geoblacklight', '~> 2.0'
+gem 'geoblacklight', '~> 3.0.0'
 
 gem 'webpacker'
 group :development, :test do
@@ -86,7 +86,7 @@ gem 'grape'
 gem 'grape-active_model_serializers'
 gem 'rack-cors'
 
-gem 'rails-i18n', '~> 5.1'
+gem 'rails-i18n', '~> 6.0'
 gem 'i18n-js'
 gem 'font-awesome-rails'
 
@@ -94,5 +94,5 @@ gem 'font-awesome-rails'
 gem 'csl-styles'
 gem 'citeproc-ruby', '~> 1.1', '>= 1.1.10'
 gem 'bibtex-ruby'
-
+gem 'readmore', '~> 0.0.1'
 gem 'logging'
