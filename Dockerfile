@@ -11,6 +11,7 @@ RUN apt-get update \
         nodejs \
         yarn \
     && rm -rf /var/lib/apt/lists/*
+run yarn install --check-files
 
 WORKDIR /usr/src
 
