@@ -16,22 +16,5 @@ module Geodisy
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
     #
-    config.paths.add File.join('app', 'api'), glob: File.join('**', '*.rb')
-    config.autoload_paths += Dir[Rails.root.join('app', 'api', '*')]
-
-    config.middleware.insert_before 0, Rack::Cors do
-      allow do
-        origins '*'
-        resource '*', headers: :any, methods: [:get, :post, :put, :delete, :options]
-      end
-    end
-    # Where the I18n library should search for translation files
-    config.i18n.load_path += Dir[Rails.root.join('lib', 'locale', '*.{rb,yml}')]
-    #
-    # Permitted locales available for the application
-    config.i18n.available_locales = [:en, :fr]
-
-    # Set default locale to something other than :en
-    config.i18n.default_locale = :en
   end
 end
