@@ -25,6 +25,7 @@ ENV GEOBLACKLIGHT_POSTGRES_PORT=5432
 
 COPY ./Gemfile* /usr/src/
 
+RUN yarn install --check-files
 RUN gem install bundler -v 2.3.13
 
 RUN bundle install
@@ -33,7 +34,7 @@ RUN bundle update rails
 COPY . /usr/src
 RUN bundle exec rake assets:precompile --trace
 
-RUN yarn install --check-files
+
 
 COPY entrypoint.sh /usr/bin/
 RUN chmod +x /usr/bin/entrypoint.sh
