@@ -20,6 +20,10 @@ a:hover, a:focus, a:active {
     color: $primary ;
 }
 
+.btn-primary {
+    color: rgb(255, 255, 255) !important;
+}
+
 /** Disable mustard halo on focus of button **/
 .btn:focus {
     box-shadow: none !important;
