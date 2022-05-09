@@ -41,5 +41,5 @@ EXPOSE 3000
 
 CMD ["rails","server","-e","$RAILS_ENV","-p","3000"]
 
-RUN apt update \
-    && apt install nano
+RUN apt update
+RUN apt install nano
