@@ -26,7 +26,7 @@ ENV GEOBLACKLIGHT_POSTGRES_PORT=5432
 
 COPY ./Gemfile* /usr/src/
 
-RUN gem install bundler -v 2.2.0.rc.2
+RUN gem install bundler -v 2.3.13
 
 RUN bundle install
 
