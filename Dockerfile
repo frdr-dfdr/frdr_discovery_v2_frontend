@@ -11,7 +11,6 @@ RUN apt-get update \
         nodejs \
         yarn \
     && rm -rf /var/lib/apt/lists/*
-run yarn install --check-files
 
 WORKDIR /usr/src
 
@@ -29,6 +28,7 @@ COPY ./Gemfile* /usr/src/
 RUN gem install bundler -v 2.3.13
 
 RUN bundle install
+RUN bundle update rails
 
 COPY . /usr/src
 RUN bundle exec rake assets:precompile --trace
