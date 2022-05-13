@@ -62,7 +62,7 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
-gem 'blacklight', '~> 7.24.0'
+gem 'blacklight', '~> 7.25.0'
 
 # Uncomment to use frdr's fork of geoblacklight. Not required, only for development of pull requests
 # gem 'geoblacklight', :git => 'http://github.com/frdr-dfdr/geoblacklight', :tag => 'v2.4.1'
