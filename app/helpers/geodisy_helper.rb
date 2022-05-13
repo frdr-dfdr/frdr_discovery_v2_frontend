@@ -43,9 +43,9 @@ module GeodisyHelper
     currentDoc.author = document.fetch(:dc_creator_sm, []).join(' and ')
     currentDoc.title = document.fetch(:dc_title_s, '')
     if full_date
-      currentDoc.issued = get_full_issued_date(document.fetch(:dct_issued_s, ''))
+      currentDoc.issued = get_full_issued_date(document.fetch(:dct_issued_s, '')) if document.has?(:dct_issued_s)
     else
-      currentDoc.issued = document.fetch(:dct_issued_s, '')
+      currentDoc.issued = document.fetch(:dct_issued_s, '') if document.has?(:dct_issued_s)
     end
     currentDoc.howpublished ='{\\url{' + document.fetch(:dc_identifier_s) + '}}' if document.has?(:dc_identifier_s)
 
