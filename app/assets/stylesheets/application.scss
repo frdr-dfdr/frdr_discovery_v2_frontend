@@ -64,6 +64,16 @@ label.feature-label {
     margin-right: auto;
 }
 
+/** Change layout and colour of main container **/
+#main-container {
+    margin-left: 0px;
+    margin-right: 0px;
+    padding-top: 0px !important;
+    padding-bottom: 0px !important;
+    width: 100%;
+    max-width: 100% !important;
+}
+
 /** Css rules for navbar header **/
 @import 'header';
 /** Css rules for footer **/

@@ -116,7 +116,7 @@ module GeodisyHelper
   end
 
   def main_content_classes
-    'col-xl-9'
+    'index-main col-xl-9'
   end
 
   def sidebar_classes
