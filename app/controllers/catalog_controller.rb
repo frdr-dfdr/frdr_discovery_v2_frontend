@@ -86,7 +86,7 @@ class CatalogController < ApplicationController
     #    :years_25 => { :label => 'within 25 Years', :fq => "pub_date:[#{Time.now.year - 25 } TO *]" }
     # }
 
-    config.add_facet_field Settings.FIELDS.PROVENANCE, label: 'Institution', limit: 8, partial: "lunaris_facet"
+    config.add_facet_field Settings.FIELDS.PROVENANCE, label: 'Institution', limit: 8, partial: "lunaris_facet", collapse: false
     config.add_facet_field Settings.FIELDS.DATE_PUBLISHED, :label => 'Publication Date', limit: 10, partial: "lunaris_date_facet"
     config.add_facet_field Settings.FIELDS.CREATOR, :label => 'Author', limit: 8, partial: "lunaris_facet"
     config.add_facet_field Settings.FIELDS.RIGHTS, label: 'Access', limit: 8, partial: "lunaris_facet"
