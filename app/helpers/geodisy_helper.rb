@@ -122,4 +122,8 @@ module GeodisyHelper
   def sidebar_classes
     'page-sidebar col-xl-3'
   end
+
+  def has_active_facet? fields, response
+      facets_from_request(fields, response).any? { |display_facet| facet_field_in_params?(display_facet.name) }
+  end
 end
