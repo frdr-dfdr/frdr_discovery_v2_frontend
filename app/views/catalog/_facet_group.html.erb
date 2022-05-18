@@ -5,12 +5,16 @@
   <div class="card facet-limit blacklight-search_details">
     <h3 class="card-header p-0 facet-field-heading" id="facet-search_details-header">
         <button type="button" class="btn w-100 d-block btn-block p-2 text-start text-left collapse-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#facet-search_details" data-bs-target="#facet-search_details" aria-expanded="false">
-          <%= I18n.t("blacklight.search.facets.details") %>
+          <%= I18n.t("blacklight.search.facets.details.title") %>
         </button>
     </h3>
     <div id="facet-search_details" aria-labelledby="facet-search_details-header" class="panel-collapse facet-content collapse" style="">
         <div class="card-body">
-          calculus AND (subject: Mathematics) AND (source: Open Data Canada)
+          <% unless get_search_details(controller).to_s.empty? %>
+            <%= get_search_details(controller) %>
+          <% else %>
+            <%= I18n.t("blacklight.search.facets.details.none") %>
+          <% end %>
         </div>
     </div>
   </div>

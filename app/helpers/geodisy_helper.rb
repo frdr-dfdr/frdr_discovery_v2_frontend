@@ -126,4 +126,22 @@ module GeodisyHelper
   def has_active_facet? fields, response
       facets_from_request(fields, response).any? { |display_facet| facet_field_in_params?(display_facet.name) }
   end
+
+  def get_search_details(controller)
+    search = controller.view_context.search_state.query_param()
+    filters = controller.view_context.search_state.filter_params()
+    details = []
+
+    details.append(search.to_s.strip) unless search.to_s.strip.empty?
+
+    filters.each do | key, values |
+      filter = "("
+      filter += I18n.t("blacklight.search.facets.details." + key) + ": "
+      filter += values.join(", ")
+      filter += ")"
+      details.append(filter)
+    end
+
+    details.join(" AND ")
+  end
 end
