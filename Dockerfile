@@ -26,6 +26,7 @@ ENV GEOBLACKLIGHT_POSTGRES_PORT=5432
 COPY ./Gemfile* /usr/src/
 
 RUN yarn install --check-files
+RUN gem uninstall bundler
 RUN gem install bundler -v 2.3.13
 
 RUN bundle install
