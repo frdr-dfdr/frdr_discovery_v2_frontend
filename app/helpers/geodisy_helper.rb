@@ -146,13 +146,7 @@ module GeodisyHelper
   end
 
   def url_no_facets(view_context)
-    search_state = view_context.search_state
-    unless search_state.query_param.empty?
-      query_params = { :q => search_state.query_param }
-    else
-      # Need special params if no search term to not go to main page
-      query_params = { :search_field => 'all_fields', :q => '' }
-    end
-    view_context.search_action_path(search_state.reset(query_params))
+    no_filters = view_context.search_state.params.except(:f)
+    view_context.search_action_path(view_context.search_state.reset(no_filters))
   end
 end
