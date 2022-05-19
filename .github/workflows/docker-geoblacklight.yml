@@ -5,8 +5,10 @@ on:
     # Publish `main` as Docker `latest` image.
     branches:
       - main
+      - dev
       - docker
       - akm220
+      - pmd
 
     # Publish `v1.2.3` tags as releases.
     tags:

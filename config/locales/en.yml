@@ -58,7 +58,7 @@ en:
         dc_creator_sm: 'Authors'
         dc_publisher_sm: 'Institution(s)'
 
-        dct_issued_s: 'Date published'
+        dct_issued_s: 'Publication date'
         layer_geom_type_sm: 'Data Type'
         dc_rights_s: 'Access'
         dc_subject_sm: 'Keywords'
@@ -79,6 +79,7 @@ en:
           dct_issued_s asc, dc_title_sort asc: 'Date Published (oldest first)'
           dc_title_sort asc: 'Title (a-z)'
           dc_title_sort desc: 'Title (z-a)'
+      logo: 'Logo'
 
   map:
     move_map_search: 'Search when I move the map'

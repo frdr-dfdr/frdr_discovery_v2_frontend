@@ -1,4 +1,6 @@
 module GeodisyHelper
+  include Blacklight::UrlHelperBehavior
+
   ##
   # Selects the basemap used for map displays
   # @return [String]
@@ -41,9 +43,9 @@ module GeodisyHelper
     currentDoc.author = document.fetch(:dc_creator_sm, []).join(' and ')
     currentDoc.title = document.fetch(:dc_title_s, '')
     if full_date
-      currentDoc.issued = get_full_issued_date(document.fetch(:dct_issued_s, ''))
+      currentDoc.issued = get_full_issued_date(document.fetch(:dct_issued_s, '')) if document.has?(:dct_issued_s)
     else
-      currentDoc.issued = document.fetch(:dct_issued_s, '')
+      currentDoc.issued = document.fetch(:dct_issued_s, '') if document.has?(:dct_issued_s)
     end
     currentDoc.howpublished ='{\\url{' + document.fetch(:dc_identifier_s) + '}}' if document.has?(:dc_identifier_s)
 
@@ -83,4 +85,41 @@ module GeodisyHelper
     end
   end
 
+  # Try to get the correct title for the current locale, fallback to others
+  def get_locale_title(blacklight_config, document)
+    if I18n.locale == :fr then
+      # Try to use fr, then generic title, then en then id
+      fields = [:dc_title_fr_s, "dc_title_s", "dc_title_en_s", blacklight_config.document_model.unique_key]
+    else
+      # Try to use en, then generic title, then fr then id
+      fields = [:dc_title_en_s, "dc_title_s", "dc_title_fr_s", blacklight_config.document_model.unique_key]
+    end
+    f = fields.find { |field| document.key?(field) }
+    return document[f]
+  end
+
+  def get_title_url(document)
+    return url_for_document(document)
+  end
+
+  def get_title_opts(doc, counter)
+    opts = { counter: counter }
+    return document_link_params(doc, opts)
+  end
+
+  # Change repository name to match icon files stored as assets
+  def get_safe_repo_name(name)
+    safe = name.downcase
+    safe = safe.delete('()')
+    safe = safe.gsub(' ', '+')
+    return safe
+  end
+
+  def main_content_classes
+    'index-main col-xl-9'
+  end
+
+  def sidebar_classes
+    'page-sidebar col-xl-3'
+  end
 end
