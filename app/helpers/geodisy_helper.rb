@@ -144,4 +144,10 @@ module GeodisyHelper
 
     details.join(" AND ")
   end
+
+  def url_no_facets(view_context)
+    search_state = view_context.search_state
+    query_params = { :q => search_state.query_param }
+    view_context.search_action_path(search_state.reset(query_params))
+  end
 end
