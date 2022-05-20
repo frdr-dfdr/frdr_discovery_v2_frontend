@@ -2,6 +2,10 @@
 *= require_tree .
 *= require_self
 */
+@import 'leaflet/leaflet';
+@import 'Leaflet.fullscreen/leaflet.fullscreen';
+@import 'leaflet.markercluster/MarkerCluster';
+@import 'leaflet.prunecluster/LeafletStyleSheet';
 
 /** Override bootstrap variables **/
 $primary: rgb(214, 171, 0);
