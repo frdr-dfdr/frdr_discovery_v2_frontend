@@ -96,7 +96,7 @@ hr.metadata-divider {
 }
 
 /** Make sure the list of documents isn't shorter than the map **/
-.documents-list {
+.documents-list, .noresults {
     min-height: 400px;
 }
 
