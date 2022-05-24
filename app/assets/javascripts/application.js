@@ -26,7 +26,4 @@
 //= require i18n/translations
 //= require_tree .
 
-// Clustering
-//= require Leaflet/leaflet.prunecluster/PruneCluster.js
-//= require oboe/oboe-browser.js
 

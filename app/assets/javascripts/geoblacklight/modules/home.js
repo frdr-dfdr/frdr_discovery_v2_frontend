@@ -22,6 +22,7 @@ Blacklight.onLoad(function() {
 
     oboe('/centroids.json')
       .node('*', function( doc ){
+          puts("here")
           if(typeof doc.c != 'undefined'){
             var latlng = doc.c.split(",")
 
