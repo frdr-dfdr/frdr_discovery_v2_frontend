@@ -48,12 +48,13 @@
 
 //= require geoblacklight/downloaders
 //= require readmore
-//= require leaflet-iiif.js
-//= require esri-leaflet.js
+//= require leaflet
+//= require leaflet-iiif
+//= require esri-leaflet
 
 // Required for bounding box, line, point, polygon all checkboxes to change
 // all of the other individual checkboxes in map controls on show
-//= requre geoblacklight/modules/items.js
+//= require geoblacklight/modules/items.js
 //= require geoblacklight/modules/show_citation_controls.js
 
 // Clustering
