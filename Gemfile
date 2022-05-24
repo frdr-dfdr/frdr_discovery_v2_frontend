@@ -96,5 +96,3 @@ gem 'citeproc-ruby', '~> 1.1', '>= 1.1.10'
 gem 'bibtex-ruby'
 
 gem 'logging'
-
-gem 'leaflet-rails', '=1.7.0'
