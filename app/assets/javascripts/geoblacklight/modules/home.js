@@ -15,24 +15,25 @@ Blacklight.onLoad(function() {
       },
       staticButton: '<a class="search_here btn btn-primary"></a>'
     }));
-    var pruneCluster = new PruneClusterForLeaflet();
+    load: function() {
+        var pruneCluster = new PruneClusterForLeaflet();
 
-    // Oboe - SAX steam JSON results from Solr /export
-    // oboe('http://localhost:8983/solr/geoportal/export?fl=uuid_sdv,dc_title_sdv,centroid_sdv&indent=on&q=*:*&wt=json&sort=dc_title_sdv%20asc&rows=10000')
+        // Oboe - SAX steam JSON results from Solr /export
+        // oboe('http://localhost:8983/solr/geoportal/export?fl=uuid_sdv,dc_title_sdv,centroid_sdv&indent=on&q=*:*&wt=json&sort=dc_title_sdv%20asc&rows=10000')
 
-    oboe('/centroids.json')
-      .node('*', function( doc ){
-          puts("here")
-          if(typeof doc.c != 'undefined'){
-            var latlng = doc.c.split(",")
+        oboe('/centroids.json')
+          .node('*', function( doc ){
+              if(typeof doc.c != 'undefined'){
+                var latlng = doc.c.split(",")
 
-            var marker = new PruneCluster.Marker(latlng[0],latlng[1], {popup: "<a href='/catalog/" + doc.l + "'>" + doc.t + "</a>"});
-            pruneCluster.RegisterMarker(marker);
-          }
-        }
-      )
-      .done(function(){
-        geoblacklight.map.addLayer(pruneCluster)
-    })
+                var marker = new PruneCluster.Marker(latlng[0],latlng[1], {popup: "<a href='/catalog/" + doc.l + "'>" + doc.t + "</a>"});
+                pruneCluster.RegisterMarker(marker);
+              }
+            }
+          )
+          .done(function(){
+            geoblacklight.map.addLayer(pruneCluster)
+        })
+    }
   });
 });

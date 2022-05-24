@@ -25,6 +25,9 @@
 
 //= require geoblacklight/downloaders
 //= require readmore
+//= require leaflet-iiif.js
+//= require esri-leaflet.js
+
 
 
 // Required for bounding box, line, point, polygon all checkboxes to change
