@@ -11,8 +11,8 @@ namespace :geoportal do
       begin
         if doc.key?('solr_geom') && !doc['solr_geom'].empty?
           entry = {}
-          entry['l'] = doc['layer_id_s']
-          entry['t'] = ActionController::Base.helpers.truncate(doc['dct_title_s'], length: 50)
+          entry['l'] = doc['layer_slug_s']
+          entry['t'] = doc['dc_title_s'].truncate(50)
           geom = doc['solr_geom']
           geom = geom[geom.index('(')+1..geom.index(')')-1]
           w,e,n,s    = geom.split(",")
@@ -23,7 +23,7 @@ namespace :geoportal do
         end
       rescue Exception => e
         puts "Caught #{e}"
-        puts "BBox or centroid no good - #{doc['layer_id_s']}"
+        puts "BBox or centroid no good - #{doc['layer_slug_s']}"
       end
     end
 
