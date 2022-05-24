@@ -54,7 +54,7 @@
 
 // Required for bounding box, line, point, polygon all checkboxes to change
 // all of the other individual checkboxes in map controls on show
-//= require geoblacklight/modules/items.js
+//= require geoblacklight/modules/item.js
 //= require geoblacklight/modules/show_citation_controls.js
 
 // Clustering
