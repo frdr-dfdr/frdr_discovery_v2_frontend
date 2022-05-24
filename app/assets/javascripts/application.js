@@ -22,8 +22,40 @@
 //= require bootstrap
 //= require blacklight/blacklight
 
-//= require i18n
-//= require i18n/translations
 //= require_tree .
 
+// FRDR Discovery
+//= require handlebars.runtime
+//= require geoblacklight/geoblacklight
+//= require geoblacklight/basemaps
+//= require geoblacklight/controls
+//= require geoblacklight/viewers
 
+//The following line will tell sprockets to add the modules directory from our app,
+// but we need to manually list all the files within modules that we want sprockets
+// to look for in the geoblacklight gem asset location.
+//= require geoblacklight/modules
+
+// After importing modules from our app, look for these files...If the file
+// has been overridden in our app it does not need to be specified here
+//= require geoblacklight/modules/download
+//= require geoblacklight/modules/help_text
+//= require geoblacklight/modules/layer_opacity
+//= require geoblacklight/modules/metadata
+//= require geoblacklight/modules/metadata_download_button
+//= require geoblacklight/modules/results
+//= require geoblacklight/modules/util
+
+//= require geoblacklight/downloaders
+//= require readmore
+//= require leaflet-iiif.js
+//= require esri-leaflet.js
+
+// Required for bounding box, line, point, polygon all checkboxes to change
+// all of the other individual checkboxes in map controls on show
+//= requre geoblacklight/modules/items.js
+//= require geoblacklight/modules/show_citation_controls.js
+
+// Clustering
+//= require Leaflet/leaflet.prunecluster/PruneCluster.js
+//= require oboe/oboe-browser.js
