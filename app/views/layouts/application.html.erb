@@ -6,7 +6,7 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
     <%= javascript_tag '$.fx.off = true;' if Rails.env.test? %>
 </head>
 
@@ -26,5 +26,6 @@
   </div>
 
   <%= render :partial => 'shared/geo_footer' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </body>
 </html>
