@@ -27,9 +27,6 @@
 //= require_tree .
 
 // Clustering
-//= require Leaflet/Leaflet.fullscreen/Leaflet.fullscreen.js
-//= require Leaflet/leaflet.markercluster/leaflet.markercluster.js
 //= require Leaflet/leaflet.prunecluster/PruneCluster.js
 //= require oboe/oboe-browser.js
-//= require ./geoblacklight/modules/results
 
