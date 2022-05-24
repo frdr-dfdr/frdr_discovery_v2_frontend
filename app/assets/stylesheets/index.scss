@@ -7,13 +7,13 @@
     white-space: pre-line;
 }
 
-.facets-checkbox {
-    margin-right: 5px;
-}
-
 .facets-heading {
     font-size: 1.1rem;
     font-weight: 600;
+}
+
+.facet-checkbox {
+    margin-right: 5px;
 }
 
 .facet-content {
@@ -28,6 +28,15 @@
 
 .facet-field-heading:hover > button {
     color:#f7f7f7 !important;
+}
+
+.facet-label {
+    /** Make the facet label look like a link, it can be clicked **/
+    text-decoration-color: rgb(0, 0, 0);
+    text-decoration-line: underline;
+    text-decoration-style: solid;
+    text-decoration-thickness: auto;
+    cursor: pointer;
 }
 
 .card.facet-limit.facet-limit-active {

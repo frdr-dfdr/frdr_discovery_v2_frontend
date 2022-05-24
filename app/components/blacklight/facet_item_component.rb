@@ -73,10 +73,13 @@ module Blacklight
     # @return [String]
     # @private
     def render_facet_value
-      content_tag(:span, class: "facet-label") do
+      content_tag(:span) do
         if not @suppress_link
           link_to(@href, class: "facet-select render-facet-value") do
-            check_box_tag(@label, @label, false, class: "facets-checkbox", :onclick => 'location.href="' + @href + '"') + @label
+            label_tag(@label, class: "facet-label") do
+              concat check_box_tag(@label, @label, false, class: "facet-checkbox", :onclick => 'location.href="' + @href + '"')
+              concat @label
+            end
           end
         else
           @label
@@ -91,9 +94,12 @@ module Blacklight
     # @param [String] item
     # @private
     def render_selected_facet_value
-      content_tag(:span, class: "facet-label") do
+      content_tag(:span) do
         link_to(@href) do
-          check_box_tag(@label, @label, true, class: "facets-checkbox", :onclick => 'location.href="' + @href + '"') + @label
+          label_tag(@label, class: "facet-label") do
+            concat check_box_tag(@label, @label, true, class: "facet-checkbox", :onclick => 'location.href="' + @href + '"')
+            concat @label
+          end
         end
       end + render_facet_count(classes: [""])
     end
