@@ -183,7 +183,13 @@ en:
           limit_search: 'limit your search'
         counter: '%{counter}. '
       facets:
-        details: "Search Details"
+        details:
+          title: 'Search Details'
+          none: 'No search details.'
+          dc_creator_sm: 'author'
+          dc_rights_s: 'access'
+          dct_issued_ds: 'date'
+          dct_provenance_s: 'source'
         title: 'Limit by:'
         clear_all: 'Clear all'
         clear: 'Clear Filter'
@@ -220,6 +226,7 @@ en:
         title: "No results found for your search"
         modify_search: "Try modifying your search"
         use_fewer_keywords: "Use fewer keywords to start, then refine your search using the links on the left."
+        zoom_out_map: "Zoom out the map to find other results"
         search_fields: "you searched by %{search_fields}"
         search_everything: "try searching everything"
       view_title: "View results as: "

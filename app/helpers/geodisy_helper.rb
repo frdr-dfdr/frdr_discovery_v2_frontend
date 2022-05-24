@@ -122,4 +122,31 @@ module GeodisyHelper
   def sidebar_classes
     'page-sidebar col-xl-3'
   end
+
+  def has_active_facet? fields, response
+      facets_from_request(fields, response).any? { |display_facet| facet_field_in_params?(display_facet.name) }
+  end
+
+  def get_search_details(controller)
+    search = controller.view_context.search_state.query_param()
+    filters = controller.view_context.search_state.filter_params()
+    details = []
+
+    details.append(search.to_s.strip) unless search.to_s.strip.empty?
+
+    filters.each do | key, values |
+      filter = "("
+      filter += I18n.t("blacklight.search.facets.details." + key) + ": "
+      filter += values.join(", ")
+      filter += ")"
+      details.append(filter)
+    end
+
+    details.join(" AND ")
+  end
+
+  def url_no_facets(view_context)
+    no_filters = view_context.search_state.params.except(:f)
+    view_context.search_action_path(view_context.search_state.reset(no_filters))
+  end
 end
