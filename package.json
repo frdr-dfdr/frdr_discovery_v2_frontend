@@ -9,7 +9,7 @@
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.7.0",
-    "webpack-dev-server": "^3.10.3"
+    "webpack-dev-server": "^3.9.0"
   },
   "resolutions": {
     "serialize-javascript": "^3.1.0"
