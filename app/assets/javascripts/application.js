@@ -22,7 +22,9 @@
 //= require bootstrap
 //= require blacklight/blacklight
 
-//= require_tree .
+
+//= require i18n
+//= require i18n/translations
 
 // FRDR Discovery
 //= require handlebars.runtime
@@ -60,3 +62,5 @@
 // Clustering
 //= require Leaflet/leaflet.prunecluster/PruneCluster.js
 //= require oboe/oboe-browser.js
+
+//= require_tree .
