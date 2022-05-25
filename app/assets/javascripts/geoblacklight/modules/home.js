@@ -15,7 +15,7 @@ Blacklight.onLoad(function() {
       },
       staticButton: '<a class="search_here btn btn-primary"></a>'
     }));
-    window.map = geoblacklight.map
+    //window.map = geoblacklight.map
     var pruneCluster = new PruneClusterForLeaflet();
 
     // Oboe - SAX steam JSON results from Solr /export
