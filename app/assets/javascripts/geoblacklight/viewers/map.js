@@ -138,7 +138,7 @@ GeoBlacklight.Viewer.Map = GeoBlacklight.Viewer.extend({
       layer.addData(geojson);
       this.overlay.addLayer(layer);
     },
-    
+
   /**
   * Selects basemap if specified in data options, if not return positron.
   */
