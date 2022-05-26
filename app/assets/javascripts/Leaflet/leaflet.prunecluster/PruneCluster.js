@@ -488,7 +488,7 @@ var PruneClusterForLeaflet = (L.Layer ? L.Layer : L.Class).extend({
     },
     BuildLeafletClusterIcon: function (cluster) {
         var c = 'prunecluster prunecluster-';
-        var iconSize = 38;
+        var iconSize = 35;
         var maxPopulation = this.Cluster.GetPopulation();
         if (cluster.population < Math.max(4, maxPopulation * 0.01)) {
             c += 'small';
@@ -499,7 +499,7 @@ var PruneClusterForLeaflet = (L.Layer ? L.Layer : L.Class).extend({
         }
         else {
             c += 'large';
-            iconSize = 44;
+            iconSize = 45;
         }
         return new L.DivIcon({
             html: "<div><span>" + cluster.population + "</span></div>",
