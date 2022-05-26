@@ -490,10 +490,10 @@ var PruneClusterForLeaflet = (L.Layer ? L.Layer : L.Class).extend({
         var c = 'prunecluster prunecluster-';
         var iconSize = 35;
         var maxPopulation = this.Cluster.GetPopulation();
-        if (cluster.population < Math.max(4, maxPopulation * 0.01)) {
+        if (cluster.population < Math.max(10, maxPopulation * 0.01)) {
             c += 'small';
         }
-        else if (cluster.population < Math.max(6, maxPopulation * 0.05)) {
+        else if (cluster.population < Math.max(100, maxPopulation * 0.05)) {
             c += 'medium';
             iconSize = 40;
         }
