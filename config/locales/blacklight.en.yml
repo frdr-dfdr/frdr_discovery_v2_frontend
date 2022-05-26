@@ -192,7 +192,7 @@ en:
           dct_provenance_s: 'source'
         title: 'Limit by:'
         clear_all: 'Clear all'
-        clear: 'Clear Filter'
+        clear: 'Clear'
         sort:
           count: 'Numerical Sort'
           index: 'A-Z Sort'

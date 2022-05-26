@@ -12,6 +12,34 @@
     font-weight: 600;
 }
 
+.facet-heading-label {
+    margin-top: 10px;
+    margin-left: 10px;
+    display: inline-block;
+}
+
+.facet-heading-collapse-btn {
+    width: 55px;
+    margin-left: 5px;
+}
+
+.btn.facet-heading-collapse-btn:hover {
+    color: $primary;
+    background-color: $secondary;
+}
+
+a.clear-facet-btn {
+    margin-top: 5px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    background-color: white;
+    color: black !important;
+}
+
+a.clear-facet-btn:hover {
+    color: white !important;
+}
+
 .facet-checkbox {
     margin-right: 5px;
 }
@@ -19,15 +47,6 @@
 .facet-content {
     max-height: 230px;
     overflow-y: auto;
-}
-
-.facet-field-heading:hover {
-    background:#212529;
-    color:#f7f7f7 !important;
-}
-
-.facet-field-heading:hover > button {
-    color:#f7f7f7 !important;
 }
 
 .facet-label {
@@ -50,10 +69,6 @@
 .card-header.p-0.facet-field-heading {
     /** Make the active filter colour match no filters chosen **/
     background-color: white !important;
-}
-
-.card-header.p-0.facet-field-heading:hover {
-    background-color: $secondary !important;
 }
 
 .catalog-section-divider {
