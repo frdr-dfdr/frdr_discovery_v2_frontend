@@ -1,10 +1,10 @@
 development:
-  adapter: Lunaris::Globus::Search
+  adapter: ::GlobusSearch::
   url: <%= ENV['GLOBUS_SEARCH_URL'] || "https://search.api.globus.org/v1/index/ecfd43ee-165f-47be-b82e-2a9e496f0264/search" %>
 test: &test
-  adapter: Lunaris::Globus::Search
+  adapter: ::GlobusSearch::
   url: <%= ENV['GLOBUS_SEARCH_URL'] || "https://search.api.globus.org/v1/index/ecfd43ee-165f-47be-b82e-2a9e496f0264/search" %>
 production:
-  adapter: Lunaris::Globus::Search
+  adapter: ::GlobusSearch::
   url: <%= ENV['GLOBUS_SEARCH_URL'] || "https://search.api.globus.org/v1/index/ecfd43ee-165f-47be-b82e-2a9e496f0264/search" %>
 
