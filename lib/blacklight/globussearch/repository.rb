@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-module Lunaris::Globus::Search
+module Blacklight::GlobusSearch
   class Repository < Blacklight::AbstractRepository
     ##
     # Find a single solr document result (by id) using the document configuration

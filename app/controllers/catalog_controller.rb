@@ -1,5 +1,6 @@
 # -*- encoding : utf-8 -*-
 require 'blacklight/catalog'
+require "blacklight/globussearch"
 
 class CatalogController < ApplicationController
 
@@ -7,6 +8,9 @@ class CatalogController < ApplicationController
   include GeodisyHelper
 
   configure_blacklight do |config|
+
+    # Set the backend to Globus Search instead of Solr
+    config.repository_class = Blacklight::GlobusSearch::Repository
 
     # Ensures that JSON representations of Solr Documents can be retrieved using
     # the path /catalog/:id/raw

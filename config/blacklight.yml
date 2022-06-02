@@ -1,10 +1,9 @@
 development:
-  adapter: ::GlobusSearch::
-  url: <%= ENV['GLOBUS_SEARCH_URL'] || "https://search.api.globus.org/v1/index/ecfd43ee-165f-47be-b82e-2a9e496f0264/search" %>
+  adapter: Blacklight::GlobusSearch::Repository
+  url: "https://search.api.globus.org/v1/index/ecfd43ee-165f-47be-b82e-2a9e496f0264/search"
 test: &test
-  adapter: ::GlobusSearch::
-  url: <%= ENV['GLOBUS_SEARCH_URL'] || "https://search.api.globus.org/v1/index/ecfd43ee-165f-47be-b82e-2a9e496f0264/search" %>
+  adapter: Blacklight::GlobusSearch::Repository
+  url: "https://search.api.globus.org/v1/index/ecfd43ee-165f-47be-b82e-2a9e496f0264/search"
 production:
-  adapter: ::GlobusSearch::
-  url: <%= ENV['GLOBUS_SEARCH_URL'] || "https://search.api.globus.org/v1/index/ecfd43ee-165f-47be-b82e-2a9e496f0264/search" %>
-
+  adapter: Blacklight::GlobusSearch::Repository
+  url: "https://search.api.globus.org/v1/index/ecfd43ee-165f-47be-b82e-2a9e496f0264/search"
