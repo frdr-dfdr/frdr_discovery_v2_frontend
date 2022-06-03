@@ -27,9 +27,9 @@ module Blacklight::GlobusSearch
     def search params = {}
       puts "search called"
       puts "blacklight_config" + blacklight_config.qt.to_s()
-      send_and_receive params
-      # send_and_receive blacklight_config.solr_path, params.reverse_merge(qt: blacklight_config.qt)
-      nil
+      request = Request.new("/search", params.reverse_merge(qt: blacklight_config.qt))
+      response = request.send_and_receive()
+      response
     end
 
     # @param [Hash] request_params
@@ -70,6 +70,13 @@ module Blacklight::GlobusSearch
     # @overload find(params)
     #   @param [Hash] parameters for RSolr::Client#send_and_receive
     # @return [Blacklight::Solr::Response] the solr response object
+
+
+    ##
+    # Execute a Globus Search Query
+    # @param [String] path to the Globus Search index
+    # @param [Hash] parameters to include in the search. These are the in the solr
+    #               format so we will need to translate them.
     def send_and_receive(path, solr_params = {})
       puts "send_and_receive called"
       response = HTTP.get("https://search.api.globus.org/v1/index/ecfd43ee-165f-47be-b82e-2a9e496f0264/search", :params => {:q => "*"})
