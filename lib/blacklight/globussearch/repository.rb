@@ -1,4 +1,7 @@
 # frozen_string_literal: true
+
+require "http"
+
 module Blacklight::GlobusSearch
   class Repository < Blacklight::AbstractRepository
     ##
@@ -6,6 +9,7 @@ module Blacklight::GlobusSearch
     # @param [String] id document's unique key value
     # @param [Hash] params additional solr query parameters
     def find id, params = {}
+      puts "find called"
       #doc_params = params.reverse_merge(blacklight_config.default_document_solr_params)
       #                   .reverse_merge(qt: blacklight_config.document_solr_request_handler)
       #                   .merge(blacklight_config.document_unique_id_param => id)
@@ -21,6 +25,9 @@ module Blacklight::GlobusSearch
     # Execute a search query against solr
     # @param [Hash] params solr query parameters
     def search params = {}
+      puts "search called"
+      puts "blacklight_config" + blacklight_config.qt.to_s()
+      send_and_receive params
       # send_and_receive blacklight_config.solr_path, params.reverse_merge(qt: blacklight_config.qt)
       nil
     end
@@ -28,6 +35,7 @@ module Blacklight::GlobusSearch
     # @param [Hash] request_params
     # @return [Blacklight::Suggest::Response]
     def suggestions(request_params)
+      puts "suggestions called"
       #suggest_results = connection.send_and_receive(suggest_handler_path, params: request_params)
       #Blacklight::Suggest::Response.new suggest_results, request_params, suggest_handler_path, suggester_name
       nil
@@ -37,6 +45,7 @@ module Blacklight::GlobusSearch
     # Gets a list of available fields
     # @return [Hash]
     def reflect_fields
+      puts "reflect_fields called"
       # send_and_receive('admin/luke', params: { fl: '*', 'json.nl' => 'map' })['fields']
       nil
     end
@@ -44,6 +53,7 @@ module Blacklight::GlobusSearch
     ##
     # @return [boolean] true if the repository is reachable
     def ping
+      puts "ping called"
       #response = connection.send_and_receive 'admin/ping', {}
       #Blacklight.logger&.info("Ping [#{connection.uri}] returned: '#{response['status']}'")
       #response['status'] == "OK"
@@ -61,6 +71,10 @@ module Blacklight::GlobusSearch
     #   @param [Hash] parameters for RSolr::Client#send_and_receive
     # @return [Blacklight::Solr::Response] the solr response object
     def send_and_receive(path, solr_params = {})
+      puts "send_and_receive called"
+      response = HTTP.get("https://search.api.globus.org/v1/index/ecfd43ee-165f-47be-b82e-2a9e496f0264/search", :params => {:q => "*"})
+      puts response.parse
+      puts response.code
       #benchmark("Solr fetch", level: :debug) do
       #  res = connection.send_and_receive(path, build_solr_request(solr_params))
       #  solr_response = blacklight_config.response_model.new(res, solr_params, document_model: blacklight_config.document_model, blacklight_config: blacklight_config)
@@ -82,6 +96,7 @@ module Blacklight::GlobusSearch
     # @return [Hash]
     # @!visibility private
     def build_solr_request(solr_params)
+      puts "build_solr_request called"
       #if solr_params[:json].present?
       #  {
       #    data: { params: solr_params.to_hash.except(:json) }.merge(solr_params[:json]).to_json,
@@ -103,14 +118,17 @@ module Blacklight::GlobusSearch
     ##
     # @return [String]
     def suggest_handler_path
+      puts "suggest_handler_path called"
       blacklight_config.autocomplete_path
     end
 
     def suggester_name
+      puts "suggester_name called"
       blacklight_config.autocomplete_suggester
     end
 
     def build_connection
+      puts "build_connection called"
       # RSolr.connect(connection_config.merge(adapter: connection_config[:http_adapter]))
       nil
     end
@@ -122,6 +140,7 @@ module Blacklight::GlobusSearch
     # @return [Array<Exception>] that can be used, with a splat, as argument
     #   to a ruby rescue
     def defined_rsolr_timeout_exceptions
+      puts "defined_rsolr_timeout_exceptions called"
       #if defined?(RSolr::Error::Timeout)
       #  [RSolr::Error::Timeout]
       #else
