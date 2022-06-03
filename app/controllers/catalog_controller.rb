@@ -1,6 +1,6 @@
 # -*- encoding : utf-8 -*-
 require 'blacklight/catalog'
-require "blacklight/globussearch"
+require "blacklight/globus_search"
 
 class CatalogController < ApplicationController
 
