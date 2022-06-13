@@ -29,7 +29,7 @@
 // FRDR Discovery
 //= require handlebars.runtime
 //= require geoblacklight/geoblacklight
-//= require geoblacklight/viewers/map.js
+//= require geoblacklight/viewers/map
 //= require geoblacklight/basemaps
 //= require geoblacklight/controls
 //= require geoblacklight/viewers
