@@ -46,12 +46,9 @@
 //= require geoblacklight/modules/layer_opacity
 //= require geoblacklight/modules/metadata
 //= require geoblacklight/modules/metadata_download_button
-//= require geoblacklight/modules/results
 //= require geoblacklight/modules/util
 
 //= require geoblacklight/downloaders
-//= require readmore
-//= require leaflet
 //= require leaflet-iiif
 //= require esri-leaflet
 
@@ -61,7 +58,8 @@
 //= require geoblacklight/modules/show_citation_controls.js
 
 // Clustering
-//= require Leaflet/leaflet.prunecluster/PruneCluster.js
 //= require oboe/oboe-browser.js
+// May need to next line, but maybe not
+// require Leaflet/leaflet.prunecluster/PruneCluster.js
 
 //= require_tree .

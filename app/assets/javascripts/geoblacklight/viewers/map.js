@@ -51,6 +51,25 @@ GeoBlacklight.Viewer.Map = GeoBlacklight.Viewer.extend({
   },
 
   /**
+     * Remove bounding box overlay from map.
+     */
+    removeBoundsOverlay: function() {
+      this.overlay.clearLayers();
+    },
+
+    /**
+    * Selects basemap if specified in data options, if not return positron.
+    */
+    selectBasemap: function() {
+      var _this = this;
+      if (_this.data.basemap) {
+        return GeoBlacklight.Basemaps[_this.data.basemap];
+      } else {
+        return GeoBlacklight.Basemaps.positron;
+      }
+    },
+
+  /**
    * Add a bounding box overlay from checkbox previews to map.
    * @param {L.LatLngBounds} bounds Leaflet LatLngBounds
    * @param {string} name
@@ -120,34 +139,6 @@ GeoBlacklight.Viewer.Map = GeoBlacklight.Viewer.extend({
         if (this.overlay._layers[i].id == name){
             this.overlay.removeLayer(i);
         }
-    }
-  },
-  /**
-   * Remove bounding box overlay from map.
-   */
-  removeBoundsOverlay: function() {
-    this.overlay.clearLayers();
-  },
-
-  /**
-     * Add a GeoJSON overlay to map.
-     * @param {string} geojson GeoJSON string
-     */
-    addGeoJsonOverlay: function(geojson) {
-      var layer = L.geoJSON();
-      layer.addData(geojson);
-      this.overlay.addLayer(layer);
-    },
-
-  /**
-  * Selects basemap if specified in data options, if not return positron.
-  */
-  selectBasemap: function() {
-    var _this = this;
-    if (_this.data.basemap) {
-      return GeoBlacklight.Basemaps[_this.data.basemap];
-    } else {
-      return GeoBlacklight.Basemaps.positron;
     }
   },
 
