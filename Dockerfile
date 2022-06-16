@@ -12,7 +12,8 @@ RUN apt-get update \
         yarn \
     && rm -rf /var/lib/apt/lists/*
 
-RUn apt-get install nano
+RUN apt-get update
+RUN apt-get install nano
 WORKDIR /usr/src
 
 # Add default env variable referencing our solr container
