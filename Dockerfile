@@ -32,6 +32,7 @@ RUN gem install bundler -v 2.2.0.rc.2
 RUN bundle install
 
 COPY . /usr/src
+RUN rm public/assets/application-*
 RUN bundle exec rake assets:precompile --trace
 
 RUN yarn install --check-files
