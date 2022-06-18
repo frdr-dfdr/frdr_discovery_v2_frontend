@@ -22,21 +22,126 @@ class Blacklight::GlobusSearch::Response < ActiveSupport::HashWithIndifferentAcc
   attr_reader :request_params
   attr_accessor :blacklight_config, :options
 
-  delegate :document_factory, to: :blacklight_config
-
   def initialize(data, request_params, options = {})
-    super(force_to_utf8(ActiveSupport::HashWithIndifferentAccess.new(data)))
+    Blacklight.logger&.debug "Response init with #{data.to_json}"
+    if data["@datatype"] == "GSearchResult"
+      parsed_data = parse_search_result(data)
+    elsif data["@datatype"] == "GMetaResult"
+      parsed_data = parse_meta_result(data)
+    else
+      Blacklight.logger&.error "Unable to parse Globus Search result because its type #{data["@datatype"]} is not recognized. Full response was: #{data}"
+      parsed_data = data
+    end
+
+    super(force_to_utf8(ActiveSupport::HashWithIndifferentAccess.new(parsed_data)))
     @request_params = ActiveSupport::HashWithIndifferentAccess.new(request_params)
     self.blacklight_config = options[:blacklight_config]
     self.options = options
+  end
+
+  def polygon_to_bbox(metadata)
+
+    if metadata.nil? || metadata["geoLocationPolygon"].nil?
+      return []
+    end
+
+    polygon = metadata["geoLocationPolygon"]
+    coordinates = polygon["coordinates"]
+
+    if coordinates.nil?
+      return []
+    end
+
+    coordinates = coordinates[0] unless coordinates.length() < 1
+
+    if coordinates.length() != 5
+      return []
+    end
+
+    west = coordinates[0]
+    east = coordinates[1]
+    north = coordinates[2]
+    south = coordinates[3]
+
+    bbox = "ENVELOPE(#{coordinates[0][0]}, #{coordinates[2][0]}, #{coordinates[0][1]}, #{coordinates[2][1]})"
+    bbox
+  end
+
+  def parse_meta_result(data)
+    # Structure is:
+    # entries => [] => content => metadata field key => value
+    docs = []
+    subject = data["subject"]
+    data["entries"].each { |entry|
+      content = entry["content"]
+      # Replace the internal id with the subject from the Globus Search index
+      content["layer_slug_s"] = subject
+      # Replace globus search polygon coordinates with solr geom
+      content["solr_geom"] = polygon_to_bbox(content)
+      docs << content
+    }
+    parsed_data = {
+      :response => {
+        :docs => docs,
+        :start => 0,
+        :numFound => 1
+      }
+    }
+    parsed_data
+  end
+
+  def get_facet_counts(data)
+    facet_counts = {}
+    data["facet_results"].each { | facet_result |
+      counts = []
+      facet_result["buckets"].each { | bucket |
+        counts << bucket["value"]
+        counts << bucket["count"]
+      }
+      facet_counts[facet_result["name"]] = counts
+    } unless data["facet_results"].nil?
+    facet_counts
+  end
+
+  def parse_search_result(data)
+    # Need to replace globus search coordinates with envelope
+    docs = []
+    # Structure is:
+    # gmeta => [] => content => metadata field key => value
+    data["gmeta"].each { |gmetaresult|
+      subject = gmetaresult["subject"]
+      gmetaresult["content"].each { |entry|
+        # Replace the internal id with the subject from the Globus Search index
+        entry["layer_slug_s"] = subject
+        entry["solr_geom"] = polygon_to_bbox(entry)
+        docs << entry
+      }
+    }
+    parsed_data = {
+        :response => {
+          :docs => docs,
+          :start => data["offset"],
+          :numFound => data["total"]
+        },
+
+        :facet_counts => {
+          :facet_fields => get_facet_counts(data)
+        }
+      }
+    Blacklight.logger&.debug "Globus Search result parsed to Solr style response: #{parsed_data.to_json.to_s}"
+    parsed_data
   end
 
   def header
     self['responseHeader'] || {}
   end
 
+  def document_factory
+    Blacklight::DocumentFactory
+  end
+
   def documents
-    @documents ||= (response['gmeta'] || []).collect { |doc| document_factory.build(doc, self, options) }
+    @documents ||= (response['docs'] || []).collect { |doc| document_factory.build(doc, self, options) }
   end
   alias_method :docs, :documents
 

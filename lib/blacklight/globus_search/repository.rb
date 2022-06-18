@@ -4,31 +4,28 @@ require "http"
 
 module Blacklight::GlobusSearch
   class Repository < Blacklight::AbstractRepository
+
     ##
     # Find a single solr document result (by id) using the document configuration
     # @param [String] id document's unique key value
     # @param [Hash] params additional solr query parameters
     def find id, params = {}
-      puts "find called"
-      #doc_params = params.reverse_merge(blacklight_config.default_document_solr_params)
-      #                   .reverse_merge(qt: blacklight_config.document_solr_request_handler)
-      #                   .merge(blacklight_config.document_unique_id_param => id)
-
+      request = Request.new("/subject?subject=" + id)
+      response = request.get()
       #solr_response = send_and_receive blacklight_config.document_solr_path || blacklight_config.solr_path, doc_params
-      #raise Blacklight::Exceptions::RecordNotFound if solr_response.documents.empty?
-
-      #solr_response
-      nil
+      raise Blacklight::Exceptions::RecordNotFound if response.documents.empty?
+      response
     end
 
     ##
     # Execute a search query against solr
     # @param [Hash] params solr query parameters
     def search params = {}
-      puts "search called"
-      puts "blacklight_config" + blacklight_config.qt.to_s()
+      puts "search called with params #{params.to_hash.to_s}"
+      puts "blacklight_config qt: #{blacklight_config.qt}"
+
       request = Request.new("/search", params.reverse_merge(qt: blacklight_config.qt))
-      response = request.send_and_receive()
+      response = request.post(params)
       response
     end
 
