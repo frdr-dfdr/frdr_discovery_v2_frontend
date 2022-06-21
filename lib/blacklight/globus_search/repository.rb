@@ -10,9 +10,8 @@ module Blacklight::GlobusSearch
     # @param [String] id document's unique key value
     # @param [Hash] params additional solr query parameters
     def find id, params = {}
-      request = Request.new("/subject?subject=" + id)
+      request = Request.new(connection_config[:url] + "/subject?subject=" + id)
       response = request.get()
-      #solr_response = send_and_receive blacklight_config.document_solr_path || blacklight_config.solr_path, doc_params
       raise Blacklight::Exceptions::RecordNotFound if response.documents.empty?
       response
     end
@@ -21,10 +20,7 @@ module Blacklight::GlobusSearch
     # Execute a search query against solr
     # @param [Hash] params solr query parameters
     def search params = {}
-      puts "search called with params #{params.to_hash.to_s}"
-      puts "blacklight_config qt: #{blacklight_config.qt}"
-
-      request = Request.new("/search", params.reverse_merge(qt: blacklight_config.qt))
+      request = Request.new(connection_config[:url] + "/search", params.reverse_merge(qt: blacklight_config.qt))
       response = request.post(params)
       response
     end

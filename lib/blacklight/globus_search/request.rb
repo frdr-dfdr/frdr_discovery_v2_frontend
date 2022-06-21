@@ -4,8 +4,6 @@ require 'json'
 module Blacklight::GlobusSearch
   class Request < ActiveSupport::HashWithIndifferentAccess
 
-    @@base = "https://search.api.globus.org/v1/index/ecfd43ee-165f-47be-b82e-2a9e496f0264"
-
     # Field name => amount to boost search by for field
     @@boosts = {
       "dc_title_multi" => 8,
@@ -33,8 +31,8 @@ module Blacklight::GlobusSearch
     end
 
     def get(params = {})
-        Blacklight.logger&.debug "Get called to globus search index: #{@@base}#{@path} and params #{params}"
-        http_response = HTTP.get(@@base + @path, params)
+        Blacklight.logger&.debug "Get called to globus search index: #{@path} and params #{params}"
+        http_response = HTTP.get(@path, params)
         Response.new(http_response.parse, self)
     end
 
@@ -194,8 +192,8 @@ module Blacklight::GlobusSearch
         sort: generate_sort(sort)
       }
 
-      Blacklight.logger&.debug "Post called Globus Search index #{@@base}#{@path} and payload #{payload.to_json}"
-      http_response = HTTP.headers("Content-Type" => "application/json").post(@@base + @path, :body => payload.to_json)
+      Blacklight.logger&.debug "Post called Globus Search index #{@path} and payload #{payload.to_json}"
+      http_response = HTTP.headers("Content-Type" => "application/json").post(@path, :body => payload.to_json)
       Response.new(http_response.parse, self)
     end
 

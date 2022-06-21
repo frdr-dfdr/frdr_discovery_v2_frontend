@@ -1,9 +1,9 @@
 development:
   adapter: Blacklight::GlobusSearch::Repository
-  url: "https://search.api.globus.org/v1/index/ecfd43ee-165f-47be-b82e-2a9e496f0264/search"
+  url: "https://search.api.globus.org/v1/index/29abfeb0-bd17-4e6b-b058-85ea7a975e0f"
 test: &test
   adapter: Blacklight::GlobusSearch::Repository
-  url: "https://search.api.globus.org/v1/index/ecfd43ee-165f-47be-b82e-2a9e496f0264/search"
+  url: "https://search.api.globus.org/v1/index/29abfeb0-bd17-4e6b-b058-85ea7a975e0f"
 production:
   adapter: Blacklight::GlobusSearch::Repository
-  url: "https://search.api.globus.org/v1/index/ecfd43ee-165f-47be-b82e-2a9e496f0264/search"
+  url: "https://search.api.globus.org/v1/index/29abfeb0-bd17-4e6b-b058-85ea7a975e0f"
