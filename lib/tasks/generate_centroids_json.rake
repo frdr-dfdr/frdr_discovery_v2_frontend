@@ -27,7 +27,7 @@ namespace :geoportal do
       end
     end
 
-    centroids_file = "#{Rails.root}/public/centroids.json"
+    centroids_file = "#{Rails.root}/public/centroids_full.json"
     File.open(centroids_file, "w"){|f| f.write(JSON.generate(docs))}
   end
 end
