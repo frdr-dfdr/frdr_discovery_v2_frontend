@@ -62,22 +62,40 @@ Blacklight.onLoad(function() {
        geoblacklight.map.addControl(L.control.geosearch(opts));
        var pruneCluster = new PruneClusterForLeaflet();
 
-           // Oboe - SAX steam JSON results from Solr /export
-           // oboe('http://localhost:8983/solr/geoportal/export?fl=uuid_sdv,dc_title_sdv,centroid_sdv&indent=on&q=*:*&wt=json&sort=dc_title_sdv%20asc&rows=10000')
-
-           oboe('/centroids_full.json')
-             .node('*', function( doc ){
-                 if(typeof doc.c != 'undefined'){
-                   var latlng = doc.c.split(",")
-
-                   var marker = new PruneCluster.Marker(latlng[0],latlng[1], {popup: "<a href='/catalog/" + doc.l + "'>" + doc.t + "</a>"});
-                   pruneCluster.RegisterMarker(marker);
+            // Send Oboe to admin/api for non-web-ui attributes like centroid
+            // Not usingURL() to maintain legacy IE support
+            url = document.createElement('a');
+            url.href = window.location.href;
+            url.pathname = '/admin/api.json'
+            // Oboe - Re-query Solr for JSON results
+            oboe(url.toString() + '&format=json&per_page=100&rows=100')
+              .node('data.*', function( doc ){
+                  if(typeof doc['solr_geom'] != 'undefined'){
+                      geom = doc['solr_geom']
+                      geom = geom[geom.index('(')+1..geom.index(')')-1]
+                      w,e,n,s    = geom.split(",")
+                      lat = ((n.to_f+s.to_f)/2).round(4) # Truncate long values
+                      lng = ((w.to_f+e.to_f)/2).round(4) # Truncate long values
+                      var marker = new PruneCluster.Marker(lat,lng, {popup: "<a href='/catalog/" + doc['layer_slug_s'] + "'>" +doc['dc_title_s'].truncate(50) + "</a>"});
+                      pruneCluster.RegisterMarker(marker);
               }
             }
           )
           .done(function(){
             geoblacklight.map.addLayer(pruneCluster)
         })
+
+            // set hover listeners on map
+            $('#content')
+              .on('mouseenter', '#documents [data-layer-id]', function() {
+                if($(this).data('bbox') !== "") {
+                  var geom = $(this).data('geom')
+                  geoblacklight.addGeoJsonOverlay(geom)
+                }
+              })
+              .on('mouseleave', '#documents [data-layer-id]', function() {
+                geoblacklight.removeBoundsOverlay();
+              });
   });
 
   function updatePage(url) {
