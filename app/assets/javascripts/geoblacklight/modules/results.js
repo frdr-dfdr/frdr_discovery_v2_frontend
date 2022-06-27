@@ -65,11 +65,13 @@ Blacklight.onLoad(function() {
             // Send Oboe to admin/api for non-web-ui attributes like centroid
             // Not usingURL() to maintain legacy IE support
             url = document.createElement('a');
-            url.href = window.location.href;
-            url.pathname = '/admin/api.json'
+            loc = window.location.href;
+            loc.replace('https','http');
+            loc.replace('/en',':8983/solr/geoblacklight/select')
+            loc.replace('/fr',':8983/solr/geoblacklight/select')
             // Oboe - Re-query Solr for JSON results
-            oboe(url.toString() + '&format=json&per_page=100&rows=100')
-              .node('data.*', function( doc ){
+            oboe(url.toString() + '&format=json&per_page=1000&rows=1000')
+              .node('response.*', function( doc ){
                   if(typeof doc['solr_geom'] != 'undefined'){
                       geom = doc['solr_geom']
                       geom = geom[geom.index('(')+1..geom.index(')')-1]
