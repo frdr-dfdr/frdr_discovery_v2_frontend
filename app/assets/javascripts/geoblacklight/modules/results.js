@@ -74,8 +74,8 @@ Blacklight.onLoad(function() {
                       geom = doc['solr_geom']
                       geom = geom[geom.index('(')+1..geom.index(')')-1]
                       w,e,n,s    = geom.split(",")
-                      lat = ((n.to_f+s.to_f)/2).round(4) # Truncate long values
-                      lng = ((w.to_f+e.to_f)/2).round(4) # Truncate long values
+                      lat = ((n.to_f+s.to_f)/2).round(4) // Truncate long values
+                      lng = ((w.to_f+e.to_f)/2).round(4) // Truncate long values
                       var marker = new PruneCluster.Marker(lat,lng, {popup: "<a href='/catalog/" + doc['layer_slug_s'] + "'>" +doc['dc_title_s'].truncate(50) + "</a>"});
                       pruneCluster.RegisterMarker(marker);
               }
