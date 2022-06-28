@@ -157,11 +157,11 @@ Blacklight.onLoad(function() {
             geoFacet["field_name"] = "geoLocationPolygons";
             geoFacet["type"] = "geo_bounding_box";
             var bottomRight = {};
-            bottomRight["lat"] = bbox[3];
+            bottomRight["lat"] = bbox[1];
             bottomRight["lon"] = bbox[2];
             geoFacet["bottom_right"] = bottomRight;
             var topLeft = {};
-            topLeft["lat"] = bbox[1];
+            topLeft["lat"] = bbox[3];
             topLeft["lon"] = bbox[0];
             geoFacet["top_left"] = topLeft;
             filters.push(geoFacet);
