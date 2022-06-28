@@ -213,7 +213,7 @@ Blacklight.onLoad(function() {
         }
     };
     var response = xhr.send(base);
-    var text =  response.string();
+    var stopHere = 1;
   }
 });
 
