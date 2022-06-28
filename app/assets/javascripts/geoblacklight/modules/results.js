@@ -61,6 +61,13 @@ Blacklight.onLoad(function() {
        // add geosearch control to map
        geoblacklight.map.addControl(L.control.geosearch(opts));
        var pruneCluster = new PruneClusterForLeaflet();
+       repo = []
+       $("input:hidden[name='f[dct_provenance_s][]']").map(function(x, elm) { return repo.add(elm.value); });
+       $("input:hidden[name='f[dct_provenance_s][]']").map(function(x, elm) { return repo.add(elm.value); });
+       year_begin = $("input:hidden[name='range[gbl_indexYear_im][begin]'").value;
+       year_end = $("input:hidden[name='range[gbl_indexYear_im][end]'").value;
+       
+
 
             // Send Oboe to admin/api for non-web-ui attributes like centroid
             // Not usingURL() to maintain legacy IE support
