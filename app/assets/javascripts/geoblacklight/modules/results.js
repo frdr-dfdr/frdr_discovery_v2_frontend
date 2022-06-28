@@ -152,15 +152,15 @@ Blacklight.onLoad(function() {
     filter["@version"] = "2017-09-01";
 
     //repos facet
-    if(repos != []){
+    if(repos.length > 0){
         filter["field_name"] = "dct_provenance_s";
         filter["type"] = "match_any";
         filter["values"] = repos;
-        var repoFilter = filter;
-        filters.push(repoFilter);
+
+        filters.push(filter);
     }
     //author facet
-    if(authors != []){
+    if(authors.length > 0){
         var authFilter = JSON.parse(JSON.stringify(filter));
         authFilter["field_name"] = "dc_creator_sm";
         authFilter["values"] = authors;
@@ -168,7 +168,7 @@ Blacklight.onLoad(function() {
         filters.push(authFilter);
     }
     //permissions facet
-    if(perms != []){
+    if(perms.length > 0){
         var permsFilter = JSON.parse(JSON.stringify(filter));
         permsFilter["field_name"] = "dc_rights_s";
         permsFilter["type"] = "match_any";
@@ -187,7 +187,7 @@ Blacklight.onLoad(function() {
     filters.push(dates);
 
     //bounding box facet
-    if(bbox != []){
+    if(bbox.length > 0){
         geoFacet = JSON.parse(JSON.stringify(filter));
         geoFacet["field_name"] = "geoLocationPolygons";
         geoFacet["type"] = "geo_bounding_box";
