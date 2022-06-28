@@ -64,21 +64,19 @@ Blacklight.onLoad(function() {
        repos = []
        perms = []
        authors = []
-       $("input:hidden[name='f[dct_provenance_s][]']").map(function(x, elm) { return repos.add(elm.value); });
-       $("input:hidden[name='f[dc_rights_s][]']").map(function(x, elm) { return perms.add(elm.value); });
-       $("input:hidden[name='f[dc_creator_sm][]']").map(function(x, elm) { return authors.add(elm.value); });
-       year_begin = $("input:hidden[name='range[gbl_indexYear_im][begin]'").value;
-       if(year_begin==null){
-            year_begin = "*";
-       }
-       year_end = $("input:hidden[name='range[gbl_indexYear_im][end]'").value;
-       if(year_end == null){
-            year_end == "*";
-       }
-       bbox = $("input:hidden[name='bbox']")[0].value.split(' ');
-       if(bbox == null)
-            bbox == [];
-       var q = $("#q[name='q']")[0].value
+       $("input:hidden[name='f[dct_provenance_s][]']").map(function(x, elm) { return repos.push(elm.value); });
+       $("input:hidden[name='f[dc_rights_s][]']").map(function(x, elm) { return perms.push(elm.value); });
+       $("input:hidden[name='f[dc_creator_sm][]']").map(function(x, elm) { return authors.push(elm.value); });
+       var year_begin = $("input:hidden[name='from']");
+       year_begin = year_begin.length>0? year_begin[0].value : "*";
+
+       var year_end = $("input:hidden[name='to']");
+       year_end = year_end.length>0? year_end[0].value : "*";
+
+       var bbox = $("input:hidden[name='bbox']");
+       bbox = bbox.length > 0? bbox[0].value.split(' '): [];
+       var q = $("#q[name='q']");
+       q = q.length>0? q[0].value:"";
        results = getGlobusRecords(q,repos,perms,authors,year_begin,year_end, bbox);
        
 
@@ -145,7 +143,7 @@ Blacklight.onLoad(function() {
     base["advanced"] = true;
     base["limit"] = 20;
     base["offset"] = 0;
-    if(q != null)
+    if(q != "")
         base["q"] = q;
     base["result_format_version"] = "2017-09-01";
     var filters = [];
@@ -159,50 +157,49 @@ Blacklight.onLoad(function() {
         filter["type"] = "match_any";
         filter["values"] = repos;
         var repoFilter = filter;
-        filters.add(repoFilter);
+        filters.push(repoFilter);
     }
     //author facet
     if(authors != []){
-        filter["field_name"] = "dc_creator_sm";
-        filter["values"] = authors;
-        filter["type"] = "match_any";
-        var authorFilter = filter;
-        filters.add(authorFilter);
+        var authFilter = JSON.parse(JSON.stringify(filter));
+        authFilter["field_name"] = "dc_creator_sm";
+        authFilter["values"] = authors;
+        authFilter["type"] = "match_any";
+        filters.push(authFilter);
     }
     //permissions facet
     if(perms != []){
-        filter["field_name"] = "dc_rights_s";
-            filter["type"] = "match_any";
-            filter["values"] = perms;
-            var permsFilter = filter;
-            filters.add(premsFilter);
+        var permsFilter = JSON.parse(JSON.stringify(filter));
+        permsFilter["field_name"] = "dc_rights_s";
+        permsFilter["type"] = "match_any";
+        permsFilter["values"] = perms;
+        filters.push(permsFilter);
     }
 
     //date range facet
-    filter["type"] = "range";
-    filter["field_name"] = "dct_issued_s";
+    var dates = JSON.parse(JSON.stringify(filter));
+    dates["type"] = "range";
+    dates["field_name"] = "dct_issued_s";
     var vals = {}
     vals["from"] = year_begin;
     vals["to"] = year_end;
-    filter["values"] = vals;
-    var dates = filter;
-    filters.add(dates);
+    dates["values"] = vals;
+    filters.push(dates);
 
     //bounding box facet
-    filter["type"] = "geo_bounding_box";
     if(bbox != []){
-        filter["field_name"] = "geoLocationPolygons";
-        filter["type"] = "geo_bounding_box";
+        geoFacet = JSON.parse(JSON.stringify(filter));
+        geoFacet["field_name"] = "geoLocationPolygons";
+        geoFacet["type"] = "geo_bounding_box";
         var bottomRight = {};
         bottomRight["lat"] = bbox[3];
         bottomRight["lon"] = bbox[1];
-        filter["bottom_right"] = bottomRight;
+        geoFacet["bottom_right"] = bottomRight;
         var topLeft = {};
         topLeft["lat"] = bbox[2];
         topLeft["lon"] = bbox[0];
-        filter["top_left"] = topLeft;
-        var geoFacet = filter;
-        filters.add(geoFacet);
+        geoFacet["top_left"] = topLeft;
+        filters.push(geoFacet);
     }
     base["filters"] = filters;
     var xhr = new XMLHttpRequest();
