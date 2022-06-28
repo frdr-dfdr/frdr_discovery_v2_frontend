@@ -138,7 +138,7 @@ Blacklight.onLoad(function() {
 
   function getGlobusRecords(q,repos,perms,authors,year_begin,year_end, bbox){
     var base = {};
-    base["@datatpe"] = "GSearchRequest";
+    base["@datatype"] = "GSearchRequest";
     base["@version"] = "2017-09-01";
     base["advanced"] = true;
     base["limit"] = 20;
@@ -151,6 +151,22 @@ Blacklight.onLoad(function() {
     filter["@datatype"] = "GFilter";
     filter["@version"] = "2017-09-01";
 
+    //bounding box facet
+        if(bbox.length > 0){
+            geoFacet = JSON.parse(JSON.stringify(filter));
+            geoFacet["field_name"] = "geoLocationPolygons";
+            geoFacet["type"] = "geo_bounding_box";
+            var bottomRight = {};
+            bottomRight["lat"] = bbox[3];
+            bottomRight["lon"] = bbox[1];
+            geoFacet["bottom_right"] = bottomRight;
+            var topLeft = {};
+            topLeft["lat"] = bbox[2];
+            topLeft["lon"] = bbox[0];
+            geoFacet["top_left"] = topLeft;
+            filters.push(geoFacet);
+        }
+        
     //repos facet
     if(repos.length > 0){
         filter["field_name"] = "dct_provenance_s";
@@ -186,21 +202,6 @@ Blacklight.onLoad(function() {
     dates["values"] = vals;
     filters.push(dates);
 
-    //bounding box facet
-    if(bbox.length > 0){
-        geoFacet = JSON.parse(JSON.stringify(filter));
-        geoFacet["field_name"] = "geoLocationPolygons";
-        geoFacet["type"] = "geo_bounding_box";
-        var bottomRight = {};
-        bottomRight["lat"] = bbox[3];
-        bottomRight["lon"] = bbox[1];
-        geoFacet["bottom_right"] = bottomRight;
-        var topLeft = {};
-        topLeft["lat"] = bbox[2];
-        topLeft["lon"] = bbox[0];
-        geoFacet["top_left"] = topLeft;
-        filters.push(geoFacet);
-    }
     base["filters"] = filters;
     var xhr = new XMLHttpRequest();
     var url = "https://search.api.globus.org/v1/index/29abfeb0-bd17-4e6b-b058-85ea7a975e0f/search";
