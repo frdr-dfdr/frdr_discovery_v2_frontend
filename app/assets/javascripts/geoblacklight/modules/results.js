@@ -154,7 +154,7 @@ Blacklight.onLoad(function() {
     //bounding box facet
         if(bbox.length > 0){
             geoFacet = JSON.parse(JSON.stringify(filter));
-            geoFacet["field_name"] = "geoLocationPolygons";
+            geoFacet["field_name"] = "geoLocationPolygon";
             geoFacet["type"] = "geo_bounding_box";
             var bottomRight = {};
             bottomRight["lat"] = bbox[1];
@@ -199,7 +199,9 @@ Blacklight.onLoad(function() {
     var vals = {}
     vals["from"] = year_begin;
     vals["to"] = year_end;
-    dates["values"] = vals;
+    var values = [];
+    values.push(vals);
+    dates["values"] = values;
     filters.push(dates);
 
     base["filters"] = filters;
