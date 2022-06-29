@@ -19,7 +19,6 @@ module Blacklight::GlobusSearch
 
     @@default_facet_limit = 10
 
-
     def initialize(path, constructor = {})
       @path = path
       if constructor.is_a?(Hash)
@@ -56,15 +55,22 @@ module Blacklight::GlobusSearch
         facet = {
           "@datatype": "GFacet",
           "@version": "2017-09-01",
-          "size": limit,
           "type": "terms",
           "field_name": field_name
         }
+        if field_name == Settings.FIELDS.DATE_PUBLISHED
+          facet["type"] = "date_histogram"
+          facet["date_interval"] = "year"
+          facet.delete("size")
+        else
+          facet["size"] = limit
+        end
         facets << facet
       } unless field_limits.nil?
       facets
     end
 
+    # Need to add the from and to date filters if set in parameters
     def generate_filters(field_filters = {})
       filters = []
       field_filters.each { | field_name, values |
@@ -126,6 +132,31 @@ module Blacklight::GlobusSearch
       filters
     end
 
+    def generate_date_filters(search_params = {})
+      filters = []
+
+      from = "*"
+      to = "*"
+
+      from = search_params["from"] unless search_params["from"].nil?
+      to = search_params["to"] unless search_params["to"].nil?
+
+      filter = {
+        "@datatype": "GFilter",
+        "@version": "2017-09-01",
+        "type": "range",
+        "field_name": Settings.FIELDS.DATE_PUBLISHED,
+        "values": [
+          {
+            "from": from,
+            "to": to
+          }
+        ]
+      }
+      filters << filter
+      filters
+    end
+
     def parse_filters(search_params = {})
       filters = {}
       search_params["fq"].each { | filter_text |
@@ -146,7 +177,7 @@ module Blacklight::GlobusSearch
       facets = {}
       search_params["facet.field"].each { | field |
         facets[field] = search_params["f.#{field}.facet.limit"] || @@default_facet_limit
-      }
+      } unless search_params["facet.field"].nil?
       facets
     end
 
@@ -173,7 +204,7 @@ module Blacklight::GlobusSearch
       limit = search_params["rows"] || 20
       parsed_filters = parse_filters(search_params)
       filters = generate_filters(parsed_filters)
-      filters = filters + generate_bbox_filters(search_params)
+      filters = filters + generate_bbox_filters(search_params) + generate_date_filters(search_params)
 
       facets = parse_facets(search_params)
       sort = parse_sort(search_params)
