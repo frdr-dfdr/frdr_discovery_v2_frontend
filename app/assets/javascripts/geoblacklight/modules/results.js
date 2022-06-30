@@ -79,9 +79,7 @@ Blacklight.onLoad(function() {
        q = q.length>0? q[0].value:"";
        results = getGlobusRecords(q,repos,perms,authors,year_begin,year_end, bbox);
 
-          .done(function(){
             geoblacklight.map.addLayer(pruneCluster)
-        })
 
             // set hover listeners on map
             $('#content')
