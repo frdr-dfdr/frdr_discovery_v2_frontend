@@ -77,7 +77,7 @@ Blacklight.onLoad(function() {
        bbox = bbox.length > 0? bbox[0].value.split(' '): [];
        var q = $("#q[name='q']");
        q = q.length>0? q[0].value:"";
-       results = getGlobusRecords(q,repos,perms,authors,year_begin,year_end, bbox);
+       results = getGlobusRecords(q,repos,perms,authors,year_begin,year_end, bbox, pruneCluster);
 
             geoblacklight.map.addLayer(pruneCluster)
 
@@ -111,7 +111,7 @@ Blacklight.onLoad(function() {
     });
   }
 
-  function getGlobusRecords(q,repos,perms,authors,year_begin,year_end, bbox){
+  function getGlobusRecords(q,repos,perms,authors,year_begin,year_end, bbox, pruneCluster){
     var base = {};
     base["@datatype"] = "GSearchRequest";
     base["@version"] = "2017-09-01";
@@ -189,7 +189,7 @@ Blacklight.onLoad(function() {
         type: 'POST',
         success: function(data, status, jQxhr){
             console.log('${data} and status is ${status}');
-            addRecordsToClusters(data);
+            addRecordsToClusters(data, pruneCluster);
         },
         error: function( jqXhr, textStatus, errorThrown ){
                 console.log( errorThrown );
@@ -209,7 +209,7 @@ Blacklight.onLoad(function() {
     var stopHere = 1;
   }
 
-  function addRecordsToClusters(json){
+  function addRecordsToClusters(json, pruneCluster){
     let meta = json['gmeta']
     meta.forEach(function(record){
         let slug = record["subject"];
