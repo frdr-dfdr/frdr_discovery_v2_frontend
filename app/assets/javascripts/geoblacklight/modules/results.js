@@ -77,9 +77,10 @@ Blacklight.onLoad(function() {
         bbox = bbox.length > 0? bbox[0].value.split(' '): [];
         var q = $("#q[name='q']");
         q = q.length>0? q[0].value:"";
-        pruneCluster = getGlobusRecords(q,repos,perms,authors,year_begin,year_end, bbox, pruneCluster);
-
-        geoblacklight.map.addLayer(pruneCluster)
+        getGlobusRecords(q,repos,perms,authors,year_begin,year_end, bbox, pruneCluster)
+        .done(function(){
+                geoblacklight.map.addLayer(pruneCluster)
+            });
 
         // set hover listeners on map
         $('#content')
@@ -189,25 +190,12 @@ Blacklight.onLoad(function() {
         type: 'POST',
         success: function(data, status, jQxhr){
             console.log('${data} and status is ${status}');
-            return addRecordsToClusters(data, pruneCluster);
+            addRecordsToClusters(data, pruneCluster);
         },
         error: function( jqXhr, textStatus, errorThrown ){
                 console.log( errorThrown );
-                return pruneCluster;
             }
     });
-    /*var xhr = new XMLHttpRequest();
-
-    xhr.open("POST", url, true);
-    xhr.setRequestHeader("Content-Type", "application/json");
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-            var json = JSON.parse(xhr.responseText);
-            console.log(json.email + ", " + json.password);
-        }
-    };
-    var response = xhr.send(base);*/
-    return pruneCluster;
   }
 
   function addRecordsToClusters(json, pruneCluster){
@@ -222,7 +210,6 @@ Blacklight.onLoad(function() {
         marker = new PruneCluster.Marker(lat,lng, {popup: "<a href='/catalog/" + slug + "'>" +title + "</a>"});
         pruneCluster.RegisterMarker(marker);
     });
-    return pruneCluster;
   }
 });
 
