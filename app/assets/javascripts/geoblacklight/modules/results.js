@@ -184,7 +184,7 @@ Blacklight.onLoad(function() {
 
     const url = "https://search.api.globus.org/v1/index/29abfeb0-bd17-4e6b-b058-85ea7a975e0f/search";
     $.ajax(url, {
-        data: JSON.stringify(base)
+        data: JSON.stringify(base),
         contentType: 'application/json',
         type: 'POST',
         success: function(data, status, jQxhr){
