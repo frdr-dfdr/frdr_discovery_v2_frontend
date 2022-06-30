@@ -189,13 +189,11 @@ Blacklight.onLoad(function() {
         type: 'POST',
         success: function(data, status, jQxhr){
             console.log('${data} and status is ${status}');
+            //addRecordsToClusters(json);
         },
         error: function( jqXhr, textStatus, errorThrown ){
                 console.log( errorThrown );
             }
-
-        let stop  = 1;
-        //addRecordsToClusters(json);
     });
     /*var xhr = new XMLHttpRequest();
 
