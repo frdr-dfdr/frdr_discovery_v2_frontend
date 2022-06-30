@@ -110,7 +110,7 @@ Blacklight.onLoad(function() {
     });
   }
 
-  function getGlobusRecords(q,repos,perms,authors,year_begin,year_end, bbox, pruneCluster){
+  async function getGlobusRecords(q,repos,perms,authors,year_begin,year_end, bbox, pruneCluster){
     var base = {};
     base["@datatype"] = "GSearchRequest";
     base["@version"] = "2017-09-01";
@@ -182,19 +182,7 @@ Blacklight.onLoad(function() {
 
 
     const url = "https://search.api.globus.org/v1/index/29abfeb0-bd17-4e6b-b058-85ea7a975e0f/search";
-    $.ajax(url, {
-        data: JSON.stringify(base),
-        contentType: 'application/json',
-        type: 'POST',
-        success: async function(data, status, jQxhr){
-            console.log('${data} and status is ${status}');
-            pruneCluster = await addRecordsToClusters(data, pruneCluster);
-        },
-        error: function( jqXhr, textStatus, errorThrown ){
-                console.log( errorThrown );
-            }
-    });
-    return pruneCluster;
+    return await updatePrune(url,base,pruneCluster);
   }
 
   function addRecordsToClusters(json, pruneCluster){
@@ -215,6 +203,22 @@ Blacklight.onLoad(function() {
   async function updateClusters(q,repos,perms,authors,year_begin,year_end, bbox, pruneCluster, geoblacklight){
     pruneCluster = await getGlobusRecords(q,repos,perms,authors,year_begin,year_end, bbox, pruneCluster);
     geoblacklight.map.addLayer(pruneCluster);
+  }
+
+  async function updatePrune(url, base, pruneCluster){
+  $.ajax(url, {
+          data: JSON.stringify(base),
+          contentType: 'application/json',
+          type: 'POST',
+          success: async function(data, status, jQxhr){
+              console.log('${data} and status is ${status}');
+              pruneCluster = await addRecordsToClusters(data, pruneCluster);
+          },
+          error: function( jqXhr, textStatus, errorThrown ){
+                  console.log( errorThrown );
+              }
+      });
+      return pruneCluster;
   }
 });
 
