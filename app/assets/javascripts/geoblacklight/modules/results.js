@@ -77,8 +77,8 @@ Blacklight.onLoad(function() {
         bbox = bbox.length > 0? bbox[0].value.split(' '): [];
         var q = $("#q[name='q']");
         q = q.length>0? q[0].value:"";
-        geoblacklight.map.addLayer(getGlobusRecords(q,repos,perms,authors,year_begin,year_end, bbox, pruneCluster));
-        updatePage(window.location.href);
+
+        updateClusters(q,repos,perms,authors,year_begin,year_end, bbox, pruneCluster);
 
         // set hover listeners on map
         $('#content')
@@ -210,6 +210,11 @@ Blacklight.onLoad(function() {
         pruneCluster.RegisterMarker(marker);
     });
     return pruneCluster;
+  }
+
+  async function updateClusters(q,repos,perms,authors,year_begin,year_end, bbox, pruneCluster){
+    await pruneCluster = getGlobusRecords(q,repos,perms,authors,year_begin,year_end, bbox, pruneCluster);
+    geoblacklight.map.addLayer(pruneCluster);
   }
 });
 
