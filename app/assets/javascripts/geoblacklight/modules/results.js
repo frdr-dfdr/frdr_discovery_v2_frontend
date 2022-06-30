@@ -216,8 +216,8 @@ Blacklight.onLoad(function() {
         let content = record["content"][0];
         let title = content["dc_title_s"].slice(0,46) + "...";
         let polygon = content["geoLocationPolygon"]
-        let lat = (polygon[0][1] + polygon[1][1])/2;
-        let lng = (polygon[0][0] + polygon[1][0])/2;
+        let lat = (polygon["coordinates"][0][0][1] + polygon["coordinates"][0][1][1])/2;
+        let lng = (polygon["coordinates"][0][[0][0] + polygon["coordinates"][0][1][0])/2;
         marker = new PruneCluster.Marker(lat,lng, {popup: "<a href='/catalog/" + slug + "'>" +title + "</a>"});
         pruneCluster.RegisterMarker(marker);
     });
