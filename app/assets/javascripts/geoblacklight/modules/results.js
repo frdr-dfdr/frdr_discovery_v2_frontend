@@ -213,7 +213,7 @@ Blacklight.onLoad(function() {
   }
 
   async function updateClusters(q,repos,perms,authors,year_begin,year_end, bbox, pruneCluster){
-    await pruneCluster = getGlobusRecords(q,repos,perms,authors,year_begin,year_end, bbox, pruneCluster);
+    pruneCluster = await getGlobusRecords(q,repos,perms,authors,year_begin,year_end, bbox, pruneCluster);
     geoblacklight.map.addLayer(pruneCluster);
   }
 });
