@@ -78,30 +78,7 @@ Blacklight.onLoad(function() {
        var q = $("#q[name='q']");
        q = q.length>0? q[0].value:"";
        results = getGlobusRecords(q,repos,perms,authors,year_begin,year_end, bbox);
-       
 
-
-            // Send Oboe to admin/api for non-web-ui attributes like centroid
-            // Not usingURL() to maintain legacy IE support
-            url = document.createElement('a');
-            loc = window.location.href;
-            loc = loc.replace('https','http');
-            loc = loc.replace('/en',':8983/solr/geoblacklight/select')
-            loc = loc.replace('/fr',':8983/solr/geoblacklight/select')
-            // Oboe - Re-query Solr for JSON results
-            oboe(loc + '&format=json&per_page=1000&rows=1000')
-              .node('response.*', function( doc ){
-                  if(typeof doc['solr_geom'] != 'undefined'){
-                      geom = doc['solr_geom']
-                      geom = geom[geom.index('(')+1..geom.index(')')-1]
-                      w,e,n,s    = geom.split(",")
-                      lat = ((n.to_f+s.to_f)/2).round(4) // Truncate long values
-                      lng = ((w.to_f+e.to_f)/2).round(4) // Truncate long values
-                      var marker = new PruneCluster.Marker(lat,lng, {popup: "<a href='/catalog/" + doc['layer_slug_s'] + "'>" +doc['dc_title_s'].truncate(50) + "</a>"});
-                      pruneCluster.RegisterMarker(marker);
-              }
-            }
-          )
           .done(function(){
             geoblacklight.map.addLayer(pruneCluster)
         })
@@ -212,6 +189,7 @@ Blacklight.onLoad(function() {
         console.log('${data} and status is ${status}');
         let json = JSON.parse(data);
         let stop  = 1;
+        //addRecordsToClusters(json);
     });
     /*var xhr = new XMLHttpRequest();
 
@@ -225,6 +203,16 @@ Blacklight.onLoad(function() {
     };
     var response = xhr.send(base);*/
     var stopHere = 1;
+  }
+
+  function addRecordsToClusters(json){
+    geom = json['solr_geom']
+    geom = geom[geom.index('(')+1..geom.index(')')-1]
+    w,e,n,s    = geom.split(",")
+    lat = ((n.to_f+s.to_f)/2).round(4) // Truncate long values
+    lng = ((w.to_f+e.to_f)/2).round(4) // Truncate long values
+    var marker = new PruneCluster.Marker(lat,lng, {popup: "<a href='/catalog/" + doc['layer_slug_s'] + "'>" +doc['dc_title_s'].truncate(50) + "</a>"});
+    pruneCluster.RegisterMarker(marker);
   }
 });
 
