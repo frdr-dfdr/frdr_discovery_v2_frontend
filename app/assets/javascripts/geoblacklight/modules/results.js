@@ -205,17 +205,16 @@ Blacklight.onLoad(function() {
     filters.push(dates);
 
     base["filters"] = filters;
-    var xhr = new XMLHttpRequest();
-    var url = "https://search.api.globus.org/v1/index/29abfeb0-bd17-4e6b-b058-85ea7a975e0f/search";
-    const request = new Request(url), {
-        method: 'POST',
-        body: JSON.stringify(base)
-    });
 
-    request.json().then(function(data){
+
+    const url = "https://search.api.globus.org/v1/index/29abfeb0-bd17-4e6b-b058-85ea7a975e0f/search";
+    $.post(url, base, function(data, status){
+        console.log('${data} and status is ${status}');
         let json = JSON.parse(data);
-        var stopHere = 1;
+        let stop  = 1;
     });
+    /*var xhr = new XMLHttpRequest();
+
     xhr.open("POST", url, true);
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.onreadystatechange = function () {
@@ -224,7 +223,7 @@ Blacklight.onLoad(function() {
             console.log(json.email + ", " + json.password);
         }
     };
-    var response = xhr.send(base);
+    var response = xhr.send(base);*/
     var stopHere = 1;
   }
 });
