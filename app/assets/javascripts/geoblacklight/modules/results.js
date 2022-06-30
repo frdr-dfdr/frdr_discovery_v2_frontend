@@ -184,7 +184,8 @@ Blacklight.onLoad(function() {
     const url = "https://search.api.globus.org/v1/index/29abfeb0-bd17-4e6b-b058-85ea7a975e0f/search";
     pruneCluster = await updatePrune(url,base,pruneCluster);
     geoblacklight.map.addLayer(pruneCluster);
-    pruneCluster.RedrawIcons();
+    geoblacklight.map.getBounds();
+    
   }
 
   function addRecordsToClusters(json, pruneCluster){
