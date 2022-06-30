@@ -186,9 +186,9 @@ Blacklight.onLoad(function() {
         data: JSON.stringify(base),
         contentType: 'application/json',
         type: 'POST',
-        success: function(data, status, jQxhr){
+        success: async function(data, status, jQxhr){
             console.log('${data} and status is ${status}');
-            pruneCluster = addRecordsToClusters(data, pruneCluster);
+            pruneCluster = await addRecordsToClusters(data, pruneCluster);
         },
         error: function( jqXhr, textStatus, errorThrown ){
                 console.log( errorThrown );
