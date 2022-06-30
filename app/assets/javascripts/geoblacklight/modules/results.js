@@ -58,40 +58,40 @@ Blacklight.onLoad(function() {
            geoblacklight.removeBoundsOverlay();
          });
 
-       // add geosearch control to map
-       geoblacklight.map.addControl(L.control.geosearch(opts));
-       var pruneCluster = new PruneClusterForLeaflet();
-       repos = []
-       perms = []
-       authors = []
-       $("input:hidden[name='f[dct_provenance_s][]']").map(function(x, elm) { return repos.push(elm.value); });
-       $("input:hidden[name='f[dc_rights_s][]']").map(function(x, elm) { return perms.push(elm.value); });
-       $("input:hidden[name='f[dc_creator_sm][]']").map(function(x, elm) { return authors.push(elm.value); });
-       var year_begin = $("input:hidden[name='from']");
-       year_begin = year_begin.length>0? year_begin[0].value : "*";
+        // add geosearch control to map
+        geoblacklight.map.addControl(L.control.geosearch(opts));
+        var pruneCluster = new PruneClusterForLeaflet();
+        repos = []
+        perms = []
+        authors = []
+        $("input:hidden[name='f[dct_provenance_s][]']").map(function(x, elm) { return repos.push(elm.value); });
+        $("input:hidden[name='f[dc_rights_s][]']").map(function(x, elm) { return perms.push(elm.value); });
+        $("input:hidden[name='f[dc_creator_sm][]']").map(function(x, elm) { return authors.push(elm.value); });
+        var year_begin = $("input:hidden[name='from']");
+        year_begin = year_begin.length>0? year_begin[0].value : "*";
 
-       var year_end = $("input:hidden[name='to']");
-       year_end = year_end.length>0? year_end[0].value : "*";
+        var year_end = $("input:hidden[name='to']");
+        year_end = year_end.length>0? year_end[0].value : "*";
 
-       var bbox = $("input:hidden[name='bbox']");
-       bbox = bbox.length > 0? bbox[0].value.split(' '): [];
-       var q = $("#q[name='q']");
-       q = q.length>0? q[0].value:"";
-       results = getGlobusRecords(q,repos,perms,authors,year_begin,year_end, bbox, pruneCluster);
+        var bbox = $("input:hidden[name='bbox']");
+        bbox = bbox.length > 0? bbox[0].value.split(' '): [];
+        var q = $("#q[name='q']");
+        q = q.length>0? q[0].value:"";
+        pruneCluster = getGlobusRecords(q,repos,perms,authors,year_begin,year_end, bbox, pruneCluster);
 
-            geoblacklight.map.addLayer(pruneCluster)
+        geoblacklight.map.addLayer(pruneCluster)
 
-            // set hover listeners on map
-            $('#content')
-              .on('mouseenter', '#documents [data-layer-id]', function() {
-                if($(this).data('bbox') !== "") {
-                  let bbox = $(this).data('bbox')
-                  geoblacklight.addBoundsOverlay(bbox)
-                }
-              })
-              .on('mouseleave', '#documents [data-layer-id]', function() {
-                geoblacklight.removeBoundsOverlay();
-              });
+        // set hover listeners on map
+        $('#content')
+          .on('mouseenter', '#documents [data-layer-id]', function() {
+            if($(this).data('bbox') !== "") {
+              let bbox = $(this).data('bbox')
+              geoblacklight.addBoundsOverlay(bbox)
+            }
+          })
+          .on('mouseleave', '#documents [data-layer-id]', function() {
+            geoblacklight.removeBoundsOverlay();
+          });
   });
 
   function updatePage(url) {
@@ -189,10 +189,11 @@ Blacklight.onLoad(function() {
         type: 'POST',
         success: function(data, status, jQxhr){
             console.log('${data} and status is ${status}');
-            addRecordsToClusters(data, pruneCluster);
+            return addRecordsToClusters(data, pruneCluster);
         },
         error: function( jqXhr, textStatus, errorThrown ){
                 console.log( errorThrown );
+                return pruneCluster;
             }
     });
     /*var xhr = new XMLHttpRequest();
@@ -206,7 +207,7 @@ Blacklight.onLoad(function() {
         }
     };
     var response = xhr.send(base);*/
-    var stopHere = 1;
+    return pruneCluster;
   }
 
   function addRecordsToClusters(json, pruneCluster){
@@ -221,6 +222,7 @@ Blacklight.onLoad(function() {
         marker = new PruneCluster.Marker(lat,lng, {popup: "<a href='/catalog/" + slug + "'>" +title + "</a>"});
         pruneCluster.RegisterMarker(marker);
     });
+    return pruneCluster;
   }
 });
 
