@@ -183,7 +183,7 @@ Blacklight.onLoad(function() {
 
 
     const url = "https://search.api.globus.org/v1/index/29abfeb0-bd17-4e6b-b058-85ea7a975e0f/search";
-    $.post(url, base, function(data, status){
+    $.post(url, JSON.stringify(base), function(data, status){
         console.log('${data} and status is ${status}');
         let json = JSON.parse(data);
         let stop  = 1;
