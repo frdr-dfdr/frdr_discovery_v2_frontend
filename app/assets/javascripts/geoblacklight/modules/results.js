@@ -186,7 +186,7 @@ Blacklight.onLoad(function() {
     geoblacklight.map.addLayer(pruneCluster);
     let center = geoblacklight.map.getCenter();
     let zoom = geoblacklight.map.getZoom();
-    geoblacklight.map.setView(center,zoom);
+    geoblacklight.map.setView(center,1);
 
   }
 
