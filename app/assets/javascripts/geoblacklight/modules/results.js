@@ -116,7 +116,7 @@ Blacklight.onLoad(function() {
     base["@datatype"] = "GSearchRequest";
     base["@version"] = "2017-09-01";
     base["advanced"] = true;
-    base["limit"] = 20;
+    base["limit"] = 1000;
     base["offset"] = 0;
     if(q != "")
         base["q"] = q;
