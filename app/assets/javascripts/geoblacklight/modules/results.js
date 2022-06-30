@@ -189,7 +189,7 @@ Blacklight.onLoad(function() {
         type: 'POST',
         success: function(data, status, jQxhr){
             console.log('${data} and status is ${status}');
-            //addRecordsToClusters(json);
+            addRecordsToClusters(data);
         },
         error: function( jqXhr, textStatus, errorThrown ){
                 console.log( errorThrown );
@@ -210,13 +210,17 @@ Blacklight.onLoad(function() {
   }
 
   function addRecordsToClusters(json){
-    geom = json['solr_geom']
-    geom = geom[geom.index('(')+1..geom.index(')')-1]
-    w,e,n,s    = geom.split(",")
-    lat = ((n.to_f+s.to_f)/2).round(4) // Truncate long values
-    lng = ((w.to_f+e.to_f)/2).round(4) // Truncate long values
-    var marker = new PruneCluster.Marker(lat,lng, {popup: "<a href='/catalog/" + doc['layer_slug_s'] + "'>" +doc['dc_title_s'].truncate(50) + "</a>"});
-    pruneCluster.RegisterMarker(marker);
+    let meta = json['gmeta']
+    meta.forEach(function(record){
+        let slug = record["subject"];
+        let content = record["content"][0];
+        let title = content["dc_title_s"].truncate(50);
+        let polygon = content["geoLocationPolygon"]
+        let lat = (polygon[0][1] + polygon[1][1])/2;
+        let lng = (polygon[0][0] + polygon[1][0])/2;
+        marker = new PruneCluster.Marker(lat,lng, {popup: "<a href='/catalog/" + slug + "'>" +title + "</a>"});
+        pruneCluster.RegisterMarker(marker);
+    });
   }
 });
 
