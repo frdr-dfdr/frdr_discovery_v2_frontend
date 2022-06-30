@@ -78,7 +78,7 @@ Blacklight.onLoad(function() {
         var q = $("#q[name='q']");
         q = q.length>0? q[0].value:"";
 
-        updateClusters(q,repos,perms,authors,year_begin,year_end, bbox, pruneCluster);
+        updateClusters(q,repos,perms,authors,year_begin,year_end, bbox, pruneCluster, geoblacklight);
 
         // set hover listeners on map
         $('#content')
@@ -212,7 +212,7 @@ Blacklight.onLoad(function() {
     return pruneCluster;
   }
 
-  async function updateClusters(q,repos,perms,authors,year_begin,year_end, bbox, pruneCluster){
+  async function updateClusters(q,repos,perms,authors,year_begin,year_end, bbox, pruneCluster, geoblacklight){
     pruneCluster = await getGlobusRecords(q,repos,perms,authors,year_begin,year_end, bbox, pruneCluster);
     geoblacklight.map.addLayer(pruneCluster);
   }
