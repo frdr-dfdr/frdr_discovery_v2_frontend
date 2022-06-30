@@ -110,8 +110,8 @@ Blacklight.onLoad(function() {
             $('#content')
               .on('mouseenter', '#documents [data-layer-id]', function() {
                 if($(this).data('bbox') !== "") {
-                  var geom = $(this).data('geom')
-                  geoblacklight.addGeoJsonOverlay(geom)
+                  let bbox = $(this).data('bbox')
+                  geoblacklight.addGeoJsonOverlay(bbox)
                 }
               })
               .on('mouseleave', '#documents [data-layer-id]', function() {
