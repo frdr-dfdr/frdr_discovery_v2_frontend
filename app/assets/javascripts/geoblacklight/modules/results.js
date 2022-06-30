@@ -183,9 +183,17 @@ Blacklight.onLoad(function() {
 
 
     const url = "https://search.api.globus.org/v1/index/29abfeb0-bd17-4e6b-b058-85ea7a975e0f/search";
-    $.post(url, JSON.stringify(base), function(data, status){
-        console.log('${data} and status is ${status}');
-        let json = JSON.parse(data);
+    $.ajax(url, {
+        data: JSON.stringify(base)
+        contentType: 'application/json',
+        type: 'POST',
+        success: function(data, status, jQxhr){
+            console.log('${data} and status is ${status}');
+        },
+        error: function( jqXhr, textStatus, errorThrown ){
+                console.log( errorThrown );
+            }
+
         let stop  = 1;
         //addRecordsToClusters(json);
     });
