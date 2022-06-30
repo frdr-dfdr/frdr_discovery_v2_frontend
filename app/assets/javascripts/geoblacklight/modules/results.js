@@ -203,19 +203,21 @@ Blacklight.onLoad(function() {
   }
 
   async function updatePrune(url, base, pruneCluster){
-  $.ajax(url, {
-          data: JSON.stringify(base),
-          contentType: 'application/json',
-          type: 'POST',
-          success: async function(data, status, jQxhr){
-              pruneCluster = await addRecordsToClusters(data, pruneCluster);
-          },
-          error: function( jqXhr, textStatus, errorThrown ){
-                  console.log( errorThrown );
-              }
-      });
-      return pruneCluster;
-  }
+        let promise = new Promise((resolve, reject) => {$.ajax(url, {
+              data: JSON.stringify(base),
+              contentType: 'application/json',
+              type: 'POST',
+              success: async function(data, status, jQxhr){
+                  pruneCluster = await addRecordsToClusters(data, pruneCluster);
+              },
+              error: function( jqXhr, textStatus, errorThrown ){
+                      console.log( errorThrown );
+                  }
+          });
+          }
+          let result = await promise;
+          return pruneCluster;
+        }
 });
 
 
