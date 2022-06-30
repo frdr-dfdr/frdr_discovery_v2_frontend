@@ -78,6 +78,7 @@ Blacklight.onLoad(function() {
         var q = $("#q[name='q']");
         q = q.length>0? q[0].value:"";
         geoblacklight.map.addLayer(getGlobusRecords(q,repos,perms,authors,year_begin,year_end, bbox, pruneCluster));
+        geoblacklight.map.viewreset();
 
         // set hover listeners on map
         $('#content')
