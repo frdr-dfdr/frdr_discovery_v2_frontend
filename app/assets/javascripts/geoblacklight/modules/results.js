@@ -203,6 +203,7 @@ Blacklight.onLoad(function() {
   async function updateClusters(q,repos,perms,authors,year_begin,year_end, bbox, pruneCluster, geoblacklight){
     pruneCluster = await getGlobusRecords(q,repos,perms,authors,year_begin,year_end, bbox, pruneCluster);
     geoblacklight.map.addLayer(pruneCluster);
+    geoblacklight.map.invalidatesize();
   }
 
   async function updatePrune(url, base, pruneCluster){
@@ -211,7 +212,6 @@ Blacklight.onLoad(function() {
           contentType: 'application/json',
           type: 'POST',
           success: async function(data, status, jQxhr){
-              console.log('${data} and status is ${status}');
               pruneCluster = await addRecordsToClusters(data, pruneCluster);
           },
           error: function( jqXhr, textStatus, errorThrown ){
