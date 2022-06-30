@@ -203,7 +203,6 @@ Blacklight.onLoad(function() {
   async function updateClusters(q,repos,perms,authors,year_begin,year_end, bbox, pruneCluster, geoblacklight){
     pruneCluster = await getGlobusRecords(q,repos,perms,authors,year_begin,year_end, bbox, pruneCluster);
     geoblacklight.map.addLayer(pruneCluster);
-    geoblacklight.map.invalidateSize();
   }
 
   async function updatePrune(url, base, pruneCluster){
