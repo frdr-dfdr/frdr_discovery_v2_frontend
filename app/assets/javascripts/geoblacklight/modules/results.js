@@ -111,7 +111,7 @@ Blacklight.onLoad(function() {
               .on('mouseenter', '#documents [data-layer-id]', function() {
                 if($(this).data('bbox') !== "") {
                   let bbox = $(this).data('bbox')
-                  geoblacklight.addGeoJsonOverlay(bbox)
+                  geoblacklight.addBoundsOverlay(bbox)
                 }
               })
               .on('mouseleave', '#documents [data-layer-id]', function() {
