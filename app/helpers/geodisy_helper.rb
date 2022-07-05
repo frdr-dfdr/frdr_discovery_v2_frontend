@@ -137,7 +137,8 @@ module GeodisyHelper
     filters.each do | key, values |
       filter = "("
       filter += I18n.t("blacklight.search.facets.details." + key) + ": "
-      filter += values.join(", ")
+      filter += values.join(", ") if values.is_a?(Array)
+      filter += values if values.is_a?(String)
       filter += ")"
       details.append(filter)
     end
@@ -148,5 +149,27 @@ module GeodisyHelper
   def url_no_facets(view_context)
     no_filters = view_context.search_state.params.except(:f)
     view_context.search_action_path(view_context.search_state.reset(no_filters))
+  end
+
+  def date_published_parse(params)
+    full = params.dig(:f, Settings.FIELDS.DATE_PUBLISHED)
+    if full.nil? || full.empty?
+      return ["", ""]
+    end
+    full = full[0] if full.is_a?(Array)
+    full = full.split("to")
+    full
+  end
+
+  def add_empty_date_published_filter(params)
+    if params.nil?
+      return {}
+    end
+    with_date = params.clone
+    if with_date[:f].nil?
+      with_date[:f] = {}
+    end
+    with_date[:f]["#{Settings.FIELDS.DATE_PUBLISHED}"] = ''
+    with_date
   end
 end

@@ -58,7 +58,9 @@ en:
       canarie: 'https://www.canarie.ca/'
       warning: 'Geodisy is currently experiencing an issue that is resulting in some missing records and reduced geospatial preview functionality. We expect to correct this issue shortly. Thank you for your patience.'
     facets:
+      apply: 'Apply'
       author: 'Author'
+      date_divider: 'to'
       publisher: 'Publisher'
       place: 'Place'
       collection: 'Collection'

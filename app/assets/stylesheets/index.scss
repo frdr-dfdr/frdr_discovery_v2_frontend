@@ -149,6 +149,18 @@ hr.metadata-divider {
     width: calc(100% - 100px);
 }
 
+.lunaris-date-divider {
+    max-width: 110px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    text-align: center;
+}
+
+.lunaris-date-from, .lunaris-date-to {
+    max-width: 110px;
+    min-width: 108px;
+}
+
 .more-info-area {
     font-size: 0.9em;
 }
@@ -264,6 +276,7 @@ hr.metadata-divider {
     .documents-map {
         width: 400px;
     }
+
 }
 
 /** xl size breakpoint **/
@@ -279,6 +292,16 @@ hr.metadata-divider {
 
     .documents-map {
         width: 400px;
+    }
+
+    .lunaris-date-controls {
+        align-content: center;
+        display: flex;
+        justify-content: center;
+    }
+
+    .lunaris-date-to {
+        float: right;
     }
 }
 
@@ -299,5 +322,15 @@ hr.metadata-divider {
 
     .container {
       max-width: 95% !important;
+    }
+
+    .lunaris-date-controls {
+        align-content: center;
+        display: flex;
+        justify-content: center;
+    }
+
+    .lunaris-date-to {
+        float: right;
     }
 }

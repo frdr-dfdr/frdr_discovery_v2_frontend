@@ -74,14 +74,16 @@ module Blacklight::GlobusSearch
     def generate_filters(field_filters = {})
       filters = []
       field_filters.each { | field_name, values |
-        filter = {
-          "@datatype": "GFilter",
-          "@version": "2017-09-01",
-          "type": "match_any",
-          "field_name": field_name,
-          "values": values
-        }
-        filters << filter
+        if field_name != Settings.FIELDS.DATE_PUBLISHED
+          filter = {
+            "@datatype": "GFilter",
+            "@version": "2017-09-01",
+            "type": "match_any",
+            "field_name": field_name,
+            "values": values
+          }
+          filters << filter
+        end
       } unless filters.nil?
       filters
     end
@@ -138,8 +140,12 @@ module Blacklight::GlobusSearch
       from = "*"
       to = "*"
 
-      from = search_params["from"] unless search_params["from"].nil?
-      to = search_params["to"] unless search_params["to"].nil?
+      fromTo = search_params.dig(Settings.FIELDS.DATE_PUBLISHED)
+      fromTo = fromTo[0] if fromTo.is_a?(Array)
+      fromTo = fromTo.split("to") unless fromTo.nil?
+
+      from = fromTo[0] unless fromTo.nil? || fromTo[0].nil? || fromTo[0].empty?
+      to = fromTo[1] unless fromTo.nil? || fromTo[1].nil? || fromTo[1].empty?
 
       filter = {
         "@datatype": "GFilter",
@@ -204,7 +210,7 @@ module Blacklight::GlobusSearch
       limit = search_params["rows"] || 20
       parsed_filters = parse_filters(search_params)
       filters = generate_filters(parsed_filters)
-      filters = filters + generate_bbox_filters(search_params) + generate_date_filters(search_params)
+      filters = filters + generate_bbox_filters(search_params) + generate_date_filters(parsed_filters)
 
       facets = parse_facets(search_params)
       sort = parse_sort(search_params)
