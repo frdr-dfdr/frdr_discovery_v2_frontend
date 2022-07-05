@@ -1,0 +1,54 @@
+@import "bootstrap";
+@import 'bootstrap-datepicker.min.css';
+
+.datepicker.datepicker-dropdown {
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-left: 4px;
+    padding-right: 4px;
+}
+
+.lunaris-date-divider {
+    max-width: 110px;
+    min-width: 15px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    text-align: center;
+}
+
+.lunaris-date-from, .lunaris-date-to {
+    max-width: 110px;
+    min-width: 108px;
+}
+
+td.active.day {
+    color: $secondary !important;
+    background-color: $primary !important;
+    background-image: none !important;
+}
+
+/** xl size breakpoint **/
+@media (min-width: 1201px) and (max-width: 1400px) {
+    .lunaris-date-controls {
+        align-content: center;
+        display: flex;
+        justify-content: center;
+    }
+
+    .lunaris-date-to {
+        float: right;
+    }
+}
+
+/** > xl size breakpoint **/
+@media (min-width: 1401px) {
+    .lunaris-date-controls {
+        align-content: center;
+        display: flex;
+        justify-content: center;
+    }
+
+    .lunaris-date-to {
+        float: right;
+    }
+}

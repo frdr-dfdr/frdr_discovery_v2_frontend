@@ -83,6 +83,8 @@ label.feature-label {
 @import 'map';
 /** Css rules for search results **/
 @import 'index';
+/** Css rules for selecting date widget **/
+@import 'lunaris_date_facet';
 
 @import 'blacklight';
 @import 'geoblacklight';
