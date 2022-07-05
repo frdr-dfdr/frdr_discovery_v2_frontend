@@ -182,10 +182,9 @@ Blacklight.onLoad(function() {
 
 
     const url = "https://search.api.globus.org/v1/index/29abfeb0-bd17-4e6b-b058-85ea7a975e0f/search";
-    updatePrune(url,base,pruneCluster).then((data) =>{
-        geoblacklight.map.addLayer(data);
-        geoblacklight.map.zoomOut();
-        geoblacklight.map.zoomIn();
+    const p = Promise.resolve(updatePrune(url,base,pruneCluster));
+    p.then(geoblacklight, function(prune) {
+        geoblacklight.map.addLayer(prune);
     });
   }
 
