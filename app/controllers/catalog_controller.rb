@@ -230,11 +230,11 @@ class CatalogController < ApplicationController
     # label in pulldown is followed by the name of the SOLR field to sort by and
     # whether the sort is ascending or descending (it must be asc or desc
     # except in the relevancy case).
-    config.add_sort_field 'score desc', :label => 'blacklight.search_fields.sort.relevancy'
-    config.add_sort_field "#{Settings.FIELDS.DATE_PUBLISHED} desc, #{Settings.FIELDS.TITLE} asc", :label => 'geoblacklight.sort.publication_date_newest'
-    config.add_sort_field "#{Settings.FIELDS.DATE_PUBLISHED} asc, #{Settings.FIELDS.TITLE} asc", :label => 'geoblacklight.sort.publication_date_oldest'
-    config.add_sort_field "#{Settings.FIELDS.TITLE} asc", :label =>  'geoblacklight.sort.title_a_z'
-    config.add_sort_field "#{Settings.FIELDS.TITLE} desc", :label => 'geoblacklight.sort.title_z_a'
+    config.add_sort_field 'score desc'
+    config.add_sort_field "#{Settings.FIELDS.DATE_PUBLISHED} desc, #{Settings.FIELDS.TITLE} asc"
+    config.add_sort_field "#{Settings.FIELDS.DATE_PUBLISHED} asc, #{Settings.FIELDS.TITLE} asc"
+    config.add_sort_field "#{Settings.FIELDS.TITLE} asc"
+    config.add_sort_field "#{Settings.FIELDS.TITLE} desc"
 
     # If there are more than this many search results, no spelling ("did you
     # mean") suggestion is offered.

@@ -136,6 +136,12 @@ en:
     back_to_bookmarks: 'Back to Bookmarks'
 
     search:
+      fields:
+        'score desc': 'Relevance'
+        'dct_issued_s desc, dc_title_s asc': 'Date Published (newest first)'
+        'dct_issued_s asc, dc_title_s asc': 'Date Published (oldest first)'
+        'dc_title_s asc': 'Title (a-z)'
+        'dc_title_s desc': 'Title (z-a)'
       page_title:
         title: '%{constraints} - %{application_name} Search Results'
         constraint: '%{label}: %{value}'
