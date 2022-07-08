@@ -169,7 +169,9 @@ module GeodisyHelper
     if with_date[:f].nil?
       with_date[:f] = {}
     end
-    with_date[:f]["#{Settings.FIELDS.DATE_PUBLISHED}"] = ''
+    if with_date[:f]["#{Settings.FIELDS.DATE_PUBLISHED}"].nil?
+      with_date[:f]["#{Settings.FIELDS.DATE_PUBLISHED}"] = ''
+    end
     with_date
   end
 end
