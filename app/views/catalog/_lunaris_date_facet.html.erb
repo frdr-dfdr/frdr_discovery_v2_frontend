@@ -1,10 +1,17 @@
 <% fromTo = date_published_parse(params) %>
 <% params_with_date = add_empty_date_published_filter(params) %>
 <%= form_tag @url, method: "get", id: 'filter-date', role: 'filter-date', 'aria-label' => 'Form to filter by date' do %>
-  <%= render_hash_as_hidden_fields(params.except(:f)) %>
-  <% params_with_date[:f].each do |key, value| %>
-    <%= hidden_field_tag "f[#{key}][]", "#{value}" %>
+  <%= render_hash_as_hidden_fields(params.except(:f, :utf8, :page)) %>
+  <% params_with_date[:f].each do |key, values| %>
+    <% if values.is_a?(Array) %>
+      <% values.each do | value | %>
+        <%= hidden_field_tag "f[#{key}][]", "#{value}" %>
+      <% end %>
+    <% else %>
+      <%= hidden_field_tag "f[#{key}][]", "#{values}" %>
+    <% end %>
   <% end %>
+
   <div class="row mb-3">
     <div class="offset-sm-0 offset-lg-0 col-sm-6 col-lg-12 col-xl-5 pr-xl-0">
       <input class="form-control lunaris-date-from" id="date_from" type="text" value="<%= fromTo[0] %>">
