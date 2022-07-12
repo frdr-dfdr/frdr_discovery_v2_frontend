@@ -23,6 +23,7 @@ class Blacklight::GlobusSearch::Response < ActiveSupport::HashWithIndifferentAcc
   attr_accessor :blacklight_config, :options
 
   def initialize(data, request_params, options = {})
+    @request_params = ActiveSupport::HashWithIndifferentAccess.new(request_params)
     Blacklight.logger&.debug "Response init with #{data.to_json}"
     if data["@datatype"] == "GSearchResult"
       parsed_data = parse_search_result(data)
@@ -34,7 +35,6 @@ class Blacklight::GlobusSearch::Response < ActiveSupport::HashWithIndifferentAcc
     end
 
     super(force_to_utf8(ActiveSupport::HashWithIndifferentAccess.new(parsed_data)))
-    @request_params = ActiveSupport::HashWithIndifferentAccess.new(request_params)
     self.blacklight_config = options[:blacklight_config]
     self.options = options
   end
@@ -100,6 +100,37 @@ class Blacklight::GlobusSearch::Response < ActiveSupport::HashWithIndifferentAcc
       }
       facet_counts[facet_result["name"]] = counts
     } unless data["facet_results"].nil?
+
+    request_params["parsed_filters"].each { | filter_key, filter_value |
+      # If there is no count array create it.
+      if !facet_counts.has_key?(filter_key)
+        counts = []
+      else
+        counts = facet_counts[filter_key]
+      end
+
+      # For each of the selected filters if they are not present in the counts,
+      # then add it with a zero count so that it shows up in the UI.
+      filter_value.each { | value |
+        if filter_value.is_a?(Array) && !counts.include?(value)
+            counts << value
+            counts << 0
+        end
+      }
+      facet_counts[filter_key] = counts
+    } if request_params.has_key?("parsed_filters")
+
+    # Make sure every facet has at least one blank entry so it displays
+    facet_counts.each { | filter_key, filter_values |
+      if filter_values.nil?
+        filter_values = []
+      end
+      if filter_values.length == 0
+        # We found an empty facet so add an empty value
+        filter_values << "none"
+        filter_values << 0
+      end
+    }
     facet_counts
   end
 

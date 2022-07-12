@@ -64,6 +64,7 @@ en:
       publisher: 'Publisher'
       place: 'Place'
       collection: 'Collection'
+      none: 'No results found to limit current search'
       access: 'Access'
       format: 'Format'
       data_type: 'Data type'

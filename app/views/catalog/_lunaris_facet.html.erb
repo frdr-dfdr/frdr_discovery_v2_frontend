@@ -3,7 +3,11 @@
 
   <% paginator.items.each do |item| -%>
     <li>
-      <%= render_facet_item(field_name, item) %>
+      <% if item.value == "none" && item.hits == 0 %>
+        <li><%= t('geoblacklight.facets.none') %></li>
+      <% else %>
+        <%= render_facet_item(field_name, item) %>
+      <% end %>
     </li>
   <% end %>
 </ul>

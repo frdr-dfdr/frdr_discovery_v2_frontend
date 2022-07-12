@@ -209,6 +209,7 @@ module Blacklight::GlobusSearch
       offset = search_params["start"] || 0
       limit = search_params["rows"] || 20
       parsed_filters = parse_filters(search_params)
+      self["parsed_filters"] = parsed_filters
       filters = generate_filters(parsed_filters)
       filters = filters + generate_bbox_filters(search_params) + generate_date_filters(parsed_filters)
 
@@ -231,7 +232,7 @@ module Blacklight::GlobusSearch
 
       Blacklight.logger&.debug "Post called Globus Search index #{@path} and payload #{payload.to_json}"
       http_response = HTTP.headers("Content-Type" => "application/json").post(@path, :body => payload.to_json)
-      Response.new(http_response.parse, self)
+      Response.new(http_response.parse, request_params=self)
     end
 
     def append_query(query)
