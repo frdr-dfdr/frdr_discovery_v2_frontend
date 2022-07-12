@@ -20,6 +20,9 @@ GeoBlacklight.Viewer.Map = GeoBlacklight.Viewer.extend({
     if (this.data.mapBbox) {
       this.options.bbox = L.bboxToBounds(this.data.mapBbox);
     }
+    if (!this.options.bbox){
+        this.options.bbox = [{lat:11.0,lng:-144.0},{lat:68.0,lng:-55.0}];
+    }
     this.map = L.map(this.element).fitBounds(this.options.bbox); 
 
     // Add initial bbox to map element for easier testing
