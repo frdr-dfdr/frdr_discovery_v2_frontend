@@ -182,11 +182,20 @@ Blacklight.onLoad(function() {
 
 
     const url = "https://search.api.globus.org/v1/index/29abfeb0-bd17-4e6b-b058-85ea7a975e0f/search";
-    const p = Promise.resolve(updatePrune(url,base,pruneCluster));
-    p.then(function(data) {
-        geoblacklight.map.addLayer(data);
-        geoblacklight.map.fire("move").fire("moveend");
-    });
+    $.ajax(url, {
+                  data: JSON.stringify(base),
+                  contentType: 'application/json',
+                  type: 'POST',
+                  success: async function(data, status, jQxhr){
+                      pruneCluster = addRecordsToClusters(data, pruneCluster);
+                      geoblacklight.map.addLayer(pruneCluster);
+                      geoblacklight.map._onResize();
+                  },
+                  error: function( jqXhr, textStatus, errorThrown ){
+                          console.log( errorThrown );
+                      }
+              });
+
   }
 
   function addRecordsToClusters(json, pruneCluster){
@@ -211,6 +220,9 @@ Blacklight.onLoad(function() {
               type: 'POST',
               success: async function(data, status, jQxhr){
                   pruneCluster = await addRecordsToClusters(data, pruneCluster);
+                  geoblacklight.map.addLayer(pruneCluster);
+                  geoblacklight.map.reSize();
+
               },
               error: function( jqXhr, textStatus, errorThrown ){
                       console.log( errorThrown );
