@@ -29,6 +29,9 @@ class Blacklight::GlobusSearch::Response < ActiveSupport::HashWithIndifferentAcc
       parsed_data = parse_search_result(data)
     elsif data["@datatype"] == "GMetaResult"
       parsed_data = parse_meta_result(data)
+    elsif data["@datatype"] == "GError"
+      Blacklight.logger&.error "There was an error getting '#{request_params}' '#{options}' because we got the response '#{data}'"
+      parsed_data = data
     else
       Blacklight.logger&.error "Unable to parse Globus Search result because its type #{data["@datatype"]} is not recognized. Full response was: #{data}"
       parsed_data = data
@@ -92,8 +95,17 @@ class Blacklight::GlobusSearch::Response < ActiveSupport::HashWithIndifferentAcc
 
   def get_facet_counts(data)
     facet_counts = {}
+
+    request_params["parsed_filters"].each { | filter_key, filter_value |
+      facet_counts[filter_key] = []
+      filter_value.each { | value |
+        facet_counts[filter_key] << value
+        facet_counts[filter_key] << nil
+      }
+    }
+
     data["facet_results"].each { | facet_result |
-      counts = []
+      counts = facet_counts[facet_result["name"]] || []
       facet_result["buckets"].each { | bucket |
         counts << bucket["value"]
         counts << bucket["count"]
@@ -131,6 +143,7 @@ class Blacklight::GlobusSearch::Response < ActiveSupport::HashWithIndifferentAcc
         filter_values << 0
       end
     }
+
     facet_counts
   end
 
