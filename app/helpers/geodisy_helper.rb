@@ -174,4 +174,13 @@ module GeodisyHelper
     end
     with_date
   end
+
+  def get_search_filter(q, field_name)
+    match_field = field_name + ':\\s*\\(([\\w\\s~`@#$%^&*-=+|\\[\\]{};\':",.<>\\/?]+)\\*\\)'
+    if q.nil? || q.empty? || !q.match?(match_field)
+      return ""
+    end
+
+    return q.match(match_field)[1] || ""
+  end
 end
