@@ -28,11 +28,8 @@ module Blacklight::GlobusSearch
     # @param [Hash] request_params
     # @return [Blacklight::Suggest::Response]
     def suggestions(request_params)
-      # Need to figure out if we need suggestions
-      puts "suggestions called"
-      #suggest_results = connection.send_and_receive(suggest_handler_path, params: request_params)
-      #Blacklight::Suggest::Response.new suggest_results, request_params, suggest_handler_path, suggester_name
-      nil
+      search_results = search(request_params)
+      Suggest.new(search_results, request_params)
     end
 
     ##
@@ -47,24 +44,8 @@ module Blacklight::GlobusSearch
     ##
     # @return [boolean] true if the repository is reachable
     def ping
-      puts "ping called"
-      #response = connection.send_and_receive 'admin/ping', {}
-      #Blacklight.logger&.info("Ping [#{connection.uri}] returned: '#{response['status']}'")
-      #response['status'] == "OK"
-    end
-
-    private
-
-    ##
-    # @return [String]
-    def suggest_handler_path
-      puts "suggest_handler_path called"
-      blacklight_config.autocomplete_path
-    end
-
-    def suggester_name
-      puts "suggester_name called"
-      blacklight_config.autocomplete_suggester
+      response = search({q: "*"})
+      response['status'].empty?
     end
 
   end
