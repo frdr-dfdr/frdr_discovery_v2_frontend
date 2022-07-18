@@ -1,16 +1,19 @@
 <% # main container for facets/limits menu -%>
-<% if has_facet_values? facet_field_names(groupname), @response %>
 <div id="facets<%= "-#{groupname}" unless groupname.nil? %>" class="facets sidenav facets-toggleable-lg">
 
   <div class="card facet-limit blacklight-search_details">
     <h3 class="card-header p-0 facet-field-heading" id="facet-search_details-header">
         <button type="button" class="btn w-100 d-block btn-block p-2 text-start text-left collapse-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#facet-search_details" data-bs-target="#facet-search_details" aria-expanded="false">
-          <%= I18n.t("blacklight.search.facets.details") %>
+          <%= I18n.t("blacklight.search.facets.details.title") %>
         </button>
     </h3>
     <div id="facet-search_details" aria-labelledby="facet-search_details-header" class="panel-collapse facet-content collapse" style="">
         <div class="card-body">
-          calculus AND (subject: Mathematics) AND (source: Open Data Canada)
+          <% unless get_search_details(controller).to_s.empty? %>
+            <%= get_search_details(controller) %>
+          <% else %>
+            <%= I18n.t("blacklight.search.facets.details.none") %>
+          <% end %>
         </div>
     </div>
   </div>
@@ -20,9 +23,11 @@
       <%= groupname.blank? ? t('blacklight.search.facets.title') : t("blacklight.search.facets-#{groupname}.title") %>
     </h2>
 
-    <button class="btn btn-secondary">
-      <%= I18n.t("blacklight.search.facets.clear_all") %>
-    </button>
+    <% if has_active_facet?(facet_field_names(nil), @response) %>
+      <%= link_to I18n.t("blacklight.search.facets.clear_all"), url_no_facets(controller.view_context), :class => "btn btn-secondary" %>
+    <% else %>
+      <%= button_tag I18n.t("blacklight.search.facets.clear_all"), :disabled => true, :class => "btn btn-secondary" %>
+    <% end %>
 
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#facet-panel<%= "-#{groupname}" unless groupname.nil? %>-collapse" aria-controls="facet-panel<%= "-#{groupname}" unless groupname.nil? %>-collapse" aria-expanded="false" aria-label="Toggle facets">
       <span class="navbar-toggler-icon"></span>
@@ -33,4 +38,3 @@
     <%= render_facet_partials facet_field_names(groupname), response: @response %>
   </div>
 </div>
-<% end %>

@@ -1,0 +1,21 @@
+<div class='row'>
+  <div class="centre-pane">
+    <%= render 'sort_and_per_page' %>
+    <h2><%= t 'blacklight.search.zero_results.title' %></h2>
+    <div id="documents" class="noresults">
+      <h3><%= t 'blacklight.search.zero_results.modify_search' %></h3>
+      <ul>
+        <li><%= t 'blacklight.search.zero_results.use_fewer_keywords' %></li>
+        <li><%= t 'blacklight.search.zero_results.zoom_out_map' %></li>
+
+    <%- if params[:q] and params[:search_field] and params[:search_field] != blacklight_config.default_search_field.try(:key) -%>
+        <li><%= t 'blacklight.search.zero_results.search_fields', :search_fields => search_field_label(params) %> -
+          <%= link_to t('blacklight.search.zero_results.search_everything', field: blacklight_config.default_search_field.label), url_for(search_state.params_for_search(search_field: blacklight_config.default_search_field.key)) %>
+        </li>
+    <%- end %>
+
+      </ul>
+    </div>
+  </div>
+  <%= content_tag :div, '', id: 'map', class: 'documents-map', aria: { label: t('geoblacklight.map.label') }, data: { map: 'index', 'catalog-path'=> search_catalog_path , 'map-bbox' => params[:bbox], basemap: geoblacklight_basemap, leaflet_options: leaflet_options } %>
+</div>

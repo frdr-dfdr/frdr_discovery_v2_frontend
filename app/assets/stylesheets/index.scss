@@ -7,13 +7,41 @@
     white-space: pre-line;
 }
 
-.facets-checkbox {
-    margin-right: 5px;
-}
-
 .facets-heading {
     font-size: 1.1rem;
     font-weight: 600;
+}
+
+.facet-heading-label {
+    margin-top: 10px;
+    margin-left: 10px;
+    display: inline-block;
+}
+
+.facet-heading-collapse-btn {
+    width: 55px;
+    margin-left: 5px;
+}
+
+.btn.facet-heading-collapse-btn:hover {
+    color: $primary;
+    background-color: $secondary;
+}
+
+a.clear-facet-btn {
+    margin-top: 5px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    background-color: white;
+    color: black !important;
+}
+
+a.clear-facet-btn:hover {
+    color: white !important;
+}
+
+.facet-checkbox {
+    margin-right: 5px;
 }
 
 .facet-content {
@@ -21,13 +49,13 @@
     overflow-y: auto;
 }
 
-.facet-field-heading:hover {
-    background:#212529;
-    color:#f7f7f7 !important;
-}
-
-.facet-field-heading:hover > button {
-    color:#f7f7f7 !important;
+.facet-label {
+    /** Make the facet label look like a link, it can be clicked **/
+    text-decoration-color: rgb(0, 0, 0);
+    text-decoration-line: underline;
+    text-decoration-style: solid;
+    text-decoration-thickness: auto;
+    cursor: pointer;
 }
 
 .card.facet-limit.facet-limit-active {
@@ -41,10 +69,6 @@
 .card-header.p-0.facet-field-heading {
     /** Make the active filter colour match no filters chosen **/
     background-color: white !important;
-}
-
-.card-header.p-0.facet-field-heading:hover {
-    background-color: $secondary !important;
 }
 
 .catalog-section-divider {
@@ -96,7 +120,7 @@ hr.metadata-divider {
 }
 
 /** Make sure the list of documents isn't shorter than the map **/
-.documents-list {
+.documents-list, .noresults {
     min-height: 400px;
 }
 
