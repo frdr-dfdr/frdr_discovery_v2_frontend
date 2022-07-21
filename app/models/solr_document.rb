@@ -7,12 +7,6 @@ class SolrDocument
 
   def initialize(source_doc = {}, response = nil)
     super(source_doc, response)
-    @bboxes = ['Stanley Park; Vancouver; British Columbia; Canada', '123.72, 49.195, -123.020, 49.315']
-    @lines = ['123,45, 49.195, -123.45, 49.195', '123.72, 49.195, -123.020, 49.315']
-    @points = ['123.72,49.50']
-    @polygons = ['123,45, 49.195, 92.321, 35.323, 87.232, 23.231, -123.45, 49.195', '123.72, 49.195, -123.020, 49.315, 122.12, 87.321']
-    @files = [{"geoserver_id" => 'file1.geojson',"file_name" => 'test1'},{"geoserver_id" => 'file2.geojson',"file_name" => 'test2'},{"geoserver_id" => 'file3.geojson',"file_name" => 'test3'}]
-    @files2 = ["file1.geojson","file2.geojson","file3.geojson"]
     @download_info = download_info
   end
 
@@ -266,8 +260,6 @@ class SolrDocument
   end
   # Check if there are geospatial files to preview
   def has_files?
-    #@files.length>0
-    #once we are putting in real values from the GBL JSON use the below rather than the above
     return has_previews?
   end
 
@@ -276,8 +268,6 @@ class SolrDocument
     answer = []
     b = [none, ""]
     answer.push(b)
-    #geo_files = @files
-    #once we are putting in real values from the GBL JSON use the below rather than the above
     geo_files = get_previews
     geo_files.each do |file|
         label = file["file_name"]
