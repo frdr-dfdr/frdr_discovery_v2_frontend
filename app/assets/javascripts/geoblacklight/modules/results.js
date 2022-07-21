@@ -186,9 +186,9 @@ Blacklight.onLoad(function() {
             data: JSON.stringify(base),
             contentType: 'application/json',
             type: 'POST',
-            success: function(data, status, jQxhr){
+            success: async function(data, status, jQxhr){
                 if Object.keys(data).length > 0 && data["gmeta"]{
-                    pruneCluster = addRecordsToClusters(data, pruneCluster);
+                    pruneCluster = await addRecordsToClusters(data, pruneCluster);
                     geoblacklight.map.addLayer(pruneCluster);
                     geoblacklight.map._onResize();
                 }
