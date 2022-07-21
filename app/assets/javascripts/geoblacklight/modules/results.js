@@ -187,9 +187,11 @@ Blacklight.onLoad(function() {
             contentType: 'application/json',
             type: 'POST',
             success: async function(data, status, jQxhr){
-                pruneCluster = addRecordsToClusters(data, pruneCluster);
-                geoblacklight.map.addLayer(pruneCluster);
-                geoblacklight.map._onResize();
+                if Object.keys(data).length > 0 && data["gmeta"]{
+                    pruneCluster = addRecordsToClusters(data, pruneCluster);
+                    geoblacklight.map.addLayer(pruneCluster);
+                    geoblacklight.map._onResize();
+                }
             },
             error: function(jqXhr, textStatus, errorThrown){
                 console.log(errorThrown);
