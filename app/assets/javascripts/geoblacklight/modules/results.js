@@ -213,21 +213,4 @@ Blacklight.onLoad(function() {
         });
         return pruneCluster;
     }
-
-    async function updatePrune(url, base, pruneCluster){
-        $.ajax(url, {
-              data: JSON.stringify(base),
-              contentType: 'application/json',
-              type: 'POST',
-              success: async function(data, status, jQxhr){
-                  pruneCluster = await addRecordsToClusters(data, pruneCluster);
-                  geoblacklight.map.addLayer(pruneCluster);
-                  geoblacklight.map.reSize();
-              },
-              error: function(jqXhr, textStatus, errorThrown){
-                      console.log(errorThrown);
-                  }
-          });
-        return pruneCluster;
-    }
 });
