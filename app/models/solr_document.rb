@@ -329,12 +329,12 @@ class SolrDocument
     logger = Logging.logger(STDERR)
     logger.level = :warn
     logger.error Settings.FIELDS.GEO_PREVIEWS
-    prevs = fetch(Settings.FIELDS.GEO_PREVIEWS,[])
+    previews = fetch(Settings.FIELDS.GEO_PREVIEWS,[])
     array = []
-    logger.error prevs.length()
-    prevs.each do |prev|
+    logger.error previews.length()
+    previews.each do |preview|
         group = Hash.new
-        prev_json = JSON.parse(prev)
+        prev_json = JSON.parse(preview)
         label = prev_json.fetch("file_name",String.new)
         val = prev_json.fetch("geoserver_id",String.new)
         url = prev_json.fetch("download_url",String.new)
