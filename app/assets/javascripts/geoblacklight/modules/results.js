@@ -126,20 +126,20 @@ Blacklight.onLoad(function() {
     filter["@version"] = "2017-09-01";
 
     //bounding box facet
-        if(bbox.length > 0){
-            geoFacet = JSON.parse(JSON.stringify(filter));
-            geoFacet["field_name"] = "geoLocationPolygon";
-            geoFacet["type"] = "geo_bounding_box";
-            var bottomRight = {};
-            bottomRight["lat"] = bbox[1];
-            bottomRight["lon"] = bbox[2];
-            geoFacet["bottom_right"] = bottomRight;
-            var topLeft = {};
-            topLeft["lat"] = bbox[3];
-            topLeft["lon"] = bbox[0];
-            geoFacet["top_left"] = topLeft;
-            filters.push(geoFacet);
-        }
+    if(bbox.length > 0){
+        geoFacet = JSON.parse(JSON.stringify(filter));
+        geoFacet["field_name"] = "geoLocationPolygon";
+        geoFacet["type"] = "geo_bounding_box";
+        var bottomRight = {};
+        bottomRight["lat"] = bbox[1];
+        bottomRight["lon"] = bbox[2];
+        geoFacet["bottom_right"] = bottomRight;
+        var topLeft = {};
+        topLeft["lat"] = bbox[3];
+        topLeft["lon"] = bbox[0];
+        geoFacet["top_left"] = topLeft;
+        filters.push(geoFacet);
+    }
 
     //repos facet
     if(repos.length > 0){
@@ -191,8 +191,8 @@ Blacklight.onLoad(function() {
                       geoblacklight.map.addLayer(pruneCluster);
                       geoblacklight.map._onResize();
                   },
-                  error: function( jqXhr, textStatus, errorThrown ){
-                          console.log( errorThrown );
+                  error: function(jqXhr, textStatus, errorThrown){
+                          console.log(errorThrown);
                       }
               });
 
@@ -224,8 +224,8 @@ Blacklight.onLoad(function() {
                   geoblacklight.map.reSize();
 
               },
-              error: function( jqXhr, textStatus, errorThrown ){
-                      console.log( errorThrown );
+              error: function(jqXhr, textStatus, errorThrown){
+                      console.log(errorThrown);
                   }
           });
 
