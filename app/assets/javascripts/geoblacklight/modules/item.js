@@ -204,17 +204,19 @@ Blacklight.onLoad(function() {
         }
 
         function get_download_url(info,geoserver_id){
-            if(geoserver_id in info)
+            if(geoserver_id in info){
                 return info[geoserver_id]["url"]
-            else
+            } else {
                 return ""
+            }
         }
 
         function get_download_filename(info,geoserver_id){
-            if(geoserver_id in info)
+            if(geoserver_id in info){
                 return info[geoserver_id]["filename"]
-            else
+            } else {
                 return ""
+            }
         }
     });
 
