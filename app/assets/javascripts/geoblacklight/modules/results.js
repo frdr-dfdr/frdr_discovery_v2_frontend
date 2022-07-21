@@ -110,7 +110,7 @@ Blacklight.onLoad(function() {
         });
     }
 
-    async function updateClusters(q,repos,perms,authors,year_begin,year_end, bbox, pruneCluster, geoblacklight){
+    function updateClusters(q,repos,perms,authors,year_begin,year_end, bbox, pruneCluster, geoblacklight){
         var base = {};
         base["@datatype"] = "GSearchRequest";
         base["@version"] = "2017-09-01";
@@ -186,7 +186,7 @@ Blacklight.onLoad(function() {
             data: JSON.stringify(base),
             contentType: 'application/json',
             type: 'POST',
-            success: async function(data, status, jQxhr){
+            success: function(data, status, jQxhr){
                 if Object.keys(data).length > 0 && data["gmeta"]{
                     pruneCluster = addRecordsToClusters(data, pruneCluster);
                     geoblacklight.map.addLayer(pruneCluster);
