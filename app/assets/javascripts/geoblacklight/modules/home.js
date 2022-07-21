@@ -15,11 +15,7 @@ Blacklight.onLoad(function() {
       },
       staticButton: '<a class="search_here btn btn-primary"></a>'
     }));
-    //window.map = geoblacklight.map
     var pruneCluster = new PruneClusterForLeaflet();
-
-    // Oboe - SAX steam JSON results from Solr /export
-    // oboe('http://localhost:8983/solr/geoportal/export?fl=uuid_sdv,dc_title_sdv,centroid_sdv&indent=on&q=*:*&wt=json&sort=dc_title_sdv%20asc&rows=10000')
 
     oboe('/centroids_full.json')
       .node('*', function( doc ){
