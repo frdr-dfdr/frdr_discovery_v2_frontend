@@ -7,6 +7,7 @@ class SolrDocument
 
   def initialize(source_doc = {}, response = nil)
     super(source_doc, response)
+    @test_file = [{"geoserver_id" => "file1.geojson", "file_name" => "test1","url" => "https://demo.borland.com/testsite/downloads/Hello.txt"},{"geoserver_id" => "file2.geojson","file_name" => "test2","url" => "https://demo.borland.com/testsite/downloads/Hello.txt"}]
     @download_info = download_info
   end
 
@@ -319,7 +320,8 @@ class SolrDocument
     logger = Logging.logger(STDERR)
     logger.level = :warn
     logger.error Settings.FIELDS.GEO_PREVIEWS
-    previews = fetch(Settings.FIELDS.GEO_PREVIEWS,[])
+    #previews = fetch(Settings.FIELDS.GEO_PREVIEWS,[])
+    previews = @test1
     array = []
     logger.error previews.length()
     previews.each do |preview|
