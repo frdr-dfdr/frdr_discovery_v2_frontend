@@ -159,9 +159,10 @@ hr.metadata-divider {
 }
 
 .centre-pane {
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
     background-color: white;
     padding: 10px;
-    border-radius: 15px;
 }
 
 .page-sidebar {
