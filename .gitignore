@@ -72,3 +72,5 @@ yarn-debug.log*
 .idea/
 
 .metadata/
+
+public/centroids_full.json

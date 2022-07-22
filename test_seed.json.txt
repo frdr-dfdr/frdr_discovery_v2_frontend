@@ -4,7 +4,7 @@
         "dc_rights_s":"Public",
         "layer_slug_s":"geodisy:cioos_3ead5773-87a5-440f-a31f-b40e800bea50",
         "dc_title_s":"« J’y mets mon grain de sable » Project - Dune restoration on the Magdalen Islands (2009-2011)",
-        "solr_geom":"ENVELOPE(-62.4610937, -60.8734899, 47.9806584, 46.9241249)",
+        "solr_geom":"ENVELOPE(-66.4610937, 15.9111969, 57.9806584, 35.9241249)",
         "dct_issued_s":"2020-03-11",
         "dc_publisher_s":"Canadian Integrated Ocean Observing System (CIOOS)",
         "layer_geom_type_sm":"Undetermined",
@@ -17,6 +17,17 @@
         "layer_id_s":"cioos_3ead5773-87a5-440f-a31f-b40e800bea50",
         "timestamp":"2021-10-07T21:24:08.921Z",
         "dc_format_sm":["GeoTIFF"],
+        "geo_preview_sm": ['{
+                        "file_name": "test_file_1.tif",
+                         "geoserver_id": "test_geoserver_id",
+                         "download_url": "www.test1.com"
+                    }',
+                    '{
+                        "file_name": "test_file_2.tif",
+                        "geoserver_id": "test_geoserver_id_2",
+                        "download_url": "www.test2.com"
+                    }'
+                    ],
         "bboxes_sm":['{
                         "west": "-65.0782819",
                         "east": "-64.9111969",
@@ -38,23 +49,23 @@
                         "north": "48.6194031",
                         "south": "41.5340161",
                         "bbox_type": "bounding box",
-			"country": "Canada",
-                        "province": "British Columbia",
-			"city": "Vancouver",
-			"other": "Stanley Park"
+			            "country": "Italy",
+                        "province": "Lombardy",
+			            "city": "Milan",
+			            "other": "Parco Sempione"
                 }'
                 ],
 	"lines_sm":['{
-			"lat1": "46.6194031", 
-			"long1": "-65.0782", 
-			"lat2": "36.619", 
-			"long2": "-53.5476"
+                "lat1": "46.6194031",
+                "long1": "-65.0782",
+                "lat2": "36.619",
+                "long2": "-53.5476"
 		     }',
 		     '{
-			"lat1": "48.6194031", 
-                        "long1": "-62.0782", 
-                        "lat2": "37.619", 
-                        "long2": "-54.5476"
+                "lat1": "48.6194031",
+                "long1": "-62.0782",
+                "lat2": "37.619",
+                "long2": "-54.5476"
 		     }
 		  '],
 	"points_sm":['{
@@ -72,40 +83,39 @@
 				}',
 				'{	
 					"lat":"48.6194031", 
-                                        "long":"-62.0782"
+                    "long":"-62.0782"
 				}',
 				'{       
-                                        "lat":"36.6194031", 
-                                        "long":"-53.0782" 
+                    "lat":"36.6194031",
+                    "long":"-53.0782"
                                 }',
 				'{       
-                                        "lat":"37.6194031", 
-                                        "long":"-54.0782" 
+                    "lat":"37.6194031",
+                    "long":"-54.0782"
                                 }'
 			],
 			['       {
-                                        "lat":"56.6194031", 
-                                        "long":"-65.0782"
+                    "lat":"56.6194031",
+                    "long":"-65.0782"
                                 }',
                                 '{       
-                                        "lat":"58.6194031", 
-                                        "long":"-62.0782"
+                    "lat":"58.6194031",
+                    "long":"-62.0782"
                                 }',
                                 '{       
-                                        "lat":"46.6194031", 
-                                        "long":"-53.0782" 
+                    "lat":"46.6194031",
+                    "long":"-53.0782"
                                 }', 
                                 '{       
-                                        "lat":"47.6194031", 
-                                        "long":"-54.0782" 
+                    "lat":"47.6194031",
+                    "long":"-54.0782"
                                 }',
 				'{
-                                        "lat":"56.6194031", 
-                                        "long":"-65.0782"
+                    "lat":"56.6194031",
+                    "long":"-65.0782"
                                 }'
                         ]
 		      ]
-
 },
 	
       {
