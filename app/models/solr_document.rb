@@ -69,90 +69,90 @@ class SolrDocument
     logger.level = :warn
     array_boxes = []
     boxes = fetch(Settings.FIELDS.BBOXES, [])
-    for box in boxes do
-        bbox_map = Hash.new
-        answer_bb = []
-        answer_bb_str = String.new
-        box_json = JSON.parse(box)
-        west = String.new(box_json.fetch("west", "181"))
-        east = String.new(box_json.fetch("east", "181"))
-        north = String.new(box_json.fetch("north", "181"))
-        south = String.new(box_json.fetch("south", "181"))
-        error_message = "Somehow got an invalid bounding box to GBL: W " + west + " E " + east + " N " + north + " S " + south
-        begin
-            west_f = west.to_f.round(6)
-            if west_f > 180 || west_f < -180
-                logger.error error_message
-                next
-            end
-            east_f = east.to_f.round(6)
-            if east_f > 180 || east_f < -180
-                logger.error error_message
-                next
-            end
-            north_f = north.to_f.round(6)
-            if north_f > 90 || north_f < -90
-                logger.error error_message
-                next
-            end
-            south_f = south.to_f.round(6)
-            if south_f > 90 || south_f < -90
-                logger.error error_message
-                next
-            end
-        rescue
-            error_message = "Somehow got an invalid entry in one of box coordinates: W " + west + " E " + east + " N " + north + " S " + south
-            logger.error error_message
-            next
+    boxes.each { |box|
+      bbox_map = Hash.new
+      answer_bb = []
+      answer_bb_str = String.new
+      box_json = JSON.parse(box)
+      west = String.new(box_json.fetch("west", "181"))
+      east = String.new(box_json.fetch("east", "181"))
+      north = String.new(box_json.fetch("north", "181"))
+      south = String.new(box_json.fetch("south", "181"))
+      error_message = "Somehow got an invalid bounding box to GBL: W " + west + " E " + east + " N " + north + " S " + south
+      begin
+        west_f = west.to_f.round(6)
+        if west_f > 180 || west_f < -180
+          logger.error error_message
+          next
         end
-
-        point_nw = []
-        point_se = []
-        point_nw = [north_f.to_s,west_f.to_s]
-        point_se = [south_f.to_s,east_f.to_s]
-        answer_bb.push(point_nw)
-        answer_bb.push(point_se)
-
-        other = String.new(box_json.fetch("other", String.new))
-        country = String.new(box_json.fetch("country", String.new))
-        province = String.new(box_json.fetch("province", String.new))
-        city = String.new(box_json.fetch("city",String.new))
-        file_name = String.new(box_json.fetch("file_name", String.new))
-        if !file_name.empty?
-            answer_bb_str = file_name
-        elsif other.empty? && country.empty? && province.empty? && city.empty?
-            answer_bb_str = "North: " + north.to_s + ", West: " + west.to_s + ", South: " + south.to_s + ', East: ' + east.to_s
-        else
-            answer_bb_str = (([other, city, province, country] - ["", nil]).join("; "))
+        east_f = east.to_f.round(6)
+        if east_f > 180 || east_f < -180
+          logger.error error_message
+          next
         end
-        bbox_map["data"] = answer_bb
-        bbox_map["checkboxes"] = answer_bb_str
-        array_boxes.push(bbox_map)
-    end
+        north_f = north.to_f.round(6)
+        if north_f > 90 || north_f < -90
+          logger.error error_message
+          next
+        end
+        south_f = south.to_f.round(6)
+        if south_f > 90 || south_f < -90
+          logger.error error_message
+          next
+        end
+      rescue
+        error_message = "Somehow got an invalid entry in one of box coordinates: W " + west + " E " + east + " N " + north + " S " + south
+        logger.error error_message
+        next
+      end
+
+      point_nw = []
+      point_se = []
+      point_nw = [north_f.to_s, west_f.to_s]
+      point_se = [south_f.to_s, east_f.to_s]
+      answer_bb.push(point_nw)
+      answer_bb.push(point_se)
+
+      other = String.new(box_json.fetch("other", String.new))
+      country = String.new(box_json.fetch("country", String.new))
+      province = String.new(box_json.fetch("province", String.new))
+      city = String.new(box_json.fetch("city", String.new))
+      file_name = String.new(box_json.fetch("file_name", String.new))
+      if !file_name.empty?
+        answer_bb_str = file_name
+      elsif other.empty? && country.empty? && province.empty? && city.empty?
+        answer_bb_str = "North: " + north.to_s + ", West: " + west.to_s + ", South: " + south.to_s + ', East: ' + east.to_s
+      else
+        answer_bb_str = (([other, city, province, country] - ["", nil]).join("; "))
+      end
+      bbox_map["data"] = answer_bb
+      bbox_map["checkboxes"] = answer_bb_str
+      array_boxes.push(bbox_map)
+    }
     return array_boxes
   end
     #TODO update to deal with polylines
   def get_lines
     array_lines = []
     lines = fetch(Settings.FIELDS.LINES, [])
-    for line in lines do
-        answer_str = String.new
-        line_json = JSON.parse(line)
-        answer_str = "(" + line_json["lat1"].to_s + ", " + line_json["long1"].to_s + ") - (" + line_json["lat2"].to_s + ", " + line_json["long2"].to_s + ")"
-        answer_ls = []
-        line_pt_1 = []
-        line_pt_2 = []
-        line_pt_1.push(line_json["lat1"])
-        line_pt_1.push(line_json["long1"])
-        answer_ls.push(line_pt_1)
-        line_pt_2.push(line_json["lat2"])
-        line_pt_2.push(line_json["long2"])
-        answer_ls.push(line_pt_2)
-        line_map = Hash.new
-        line_map["data"] = answer_ls
-        line_map["checkboxes"] = answer_str
-        array_lines.push(line_map)
-    end
+    lines.each { |line|
+      answer_str = String.new
+      line_json = JSON.parse(line)
+      answer_str = "(" + line_json["lat1"].to_s + ", " + line_json["long1"].to_s + ") - (" + line_json["lat2"].to_s + ", " + line_json["long2"].to_s + ")"
+      answer_ls = []
+      line_pt_1 = []
+      line_pt_2 = []
+      line_pt_1.push(line_json["lat1"])
+      line_pt_1.push(line_json["long1"])
+      answer_ls.push(line_pt_1)
+      line_pt_2.push(line_json["lat2"])
+      line_pt_2.push(line_json["long2"])
+      answer_ls.push(line_pt_2)
+      line_map = Hash.new
+      line_map["data"] = answer_ls
+      line_map["checkboxes"] = answer_str
+      array_lines.push(line_map)
+    }
     return []
     #Uncomment this and remove above return if we start showing polylines
     #return array_lines
@@ -163,56 +163,56 @@ class SolrDocument
     logger.level = :warn
     array_polygons = []
     polygons = fetch(Settings.FIELDS.POLYGONS, [])
-    for polygon in polygons do
-        answer_pgs = []
-        answer_pg_str = []
-        polygon_json = JSON.parse(polygon)
-        first = String.new
-        last = String.new
-        bad =  false
-        for point in polygon_json do
-            single_point = []
-            point_str = "(" + point["lat"].to_s + ", " + point["long"].to_s + ")"
-            lat = point.fetch("lat",181).to_f.round(6)
-            lon = point.fetch("long",181).to_f.round(6)
-            if lat > 90 || lat< -90 || lon > 180 || lon < -180
-                bad = true
-                error_message = "ERROR: Somehow got an invalid point in a polygon to GBL: Lat " + lat + " Long " + lon
-                logger.error error_message
-                break
-            end
-            single_point.push(point["lat"])
-            single_point.push(point["long"])
-            if first.empty?
-                first = single_point
-                first_str = point_str
-            end
-            answer_pgs.push(single_point)
-            last = single_point
-            answer_pg_str.push(point_str)
-            last_str = point_str
+    polygons.each { |polygon|
+      answer_pgs = []
+      answer_pg_str = []
+      polygon_json = JSON.parse(polygon)
+      first = String.new
+      last = String.new
+      bad = false
+      polygon_json.each { |point|
+        single_point = []
+        point_str = "(" + point["lat"].to_s + ", " + point["long"].to_s + ")"
+        lat = point.fetch("lat", 181).to_f.round(6)
+        lon = point.fetch("long", 181).to_f.round(6)
+        if lat > 90 || lat < -90 || lon > 180 || lon < -180
+          bad = true
+          error_message = "ERROR: Somehow got an invalid point in a polygon to GBL: Lat " + lat + " Long " + lon
+          logger.error error_message
+          break
         end
-        if bad
-            next
+        single_point.push(point["lat"])
+        single_point.push(point["long"])
+        if first.empty?
+          first = single_point
+          first_str = point_str
         end
-        if last == first
-            answer_pgs.pop()
-            answer_pg_str.pop()
+        answer_pgs.push(single_point)
+        last = single_point
+        answer_pg_str.push(point_str)
+        last_str = point_str
+      }
+      if bad
+        next
+      end
+      if last == first
+        answer_pgs.pop()
+        answer_pg_str.pop()
+      end
+      label = String.new
+      counter = 0
+      for a in answer_pg_str do
+        if counter != 0
+          label = label + ", "
         end
-        label = String.new
-        counter = 0
-        for a in answer_pg_str do
-            if counter != 0
-                label = label + ", "
-            end
-            counter = 1
-            label = label + a
-        end
-        poly_map = Hash.new
-        poly_map["data"] = answer_pgs
-        poly_map["checkboxes"] = label
-        array_polygons.push(poly_map)
-    end
+        counter = 1
+        label = label + a
+      end
+      poly_map = Hash.new
+      poly_map["data"] = answer_pgs
+      poly_map["checkboxes"] = label
+      array_polygons.push(poly_map)
+    }
     return []
     #Uncomment this and remove above return if we start showing polygons
     #return array_polygons
@@ -223,21 +223,21 @@ class SolrDocument
     logger.level = :warn
     array_points = []
     points = fetch(Settings.FIELDS.POINTS, [])
-    for point in points do
-        point_json = JSON.parse(point)
-        points_map = Hash.new
-        lat = point_json.fetch("lat",181).to_f.round(6)
-        lon = point_json.fetch("long",181).to_f.round(6)
-        if lat > 90 || lat < -90 || lon >180 || lon < -180
-            error_message = "Somehow got an invalid point to GBL: lat " + lat + " long " + long
-            logger.error error_message
-            next
-        end
-        point_string = lat.to_s + ", " + lon.to_s
-        points_map["data"] = "[" + point_string + "]"
-        points_map["checkboxes"] = "(" + point_string + ")"
-        array_points.push(points_map)
-    end
+    points.each { |point|
+      point_json = JSON.parse(point)
+      points_map = Hash.new
+      lat = point_json.fetch("lat", 181).to_f.round(6)
+      lon = point_json.fetch("long", 181).to_f.round(6)
+      if lat > 90 || lat < -90 || lon > 180 || lon < -180
+        error_message = "Somehow got an invalid point to GBL: lat " + lat + " long " + long
+        logger.error error_message
+        next
+      end
+      point_string = lat.to_s + ", " + lon.to_s
+      points_map["data"] = "[" + point_string + "]"
+      points_map["checkboxes"] = "(" + point_string + ")"
+      array_points.push(points_map)
+    }
     return array_points
   end
 
