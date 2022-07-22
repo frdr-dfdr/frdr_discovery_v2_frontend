@@ -1,7 +1,22 @@
 Blacklight.onLoad(function() {
+
+    function getFieldName(form) {
+        return form.children('.field-name').val();
+    }
+
     var forms = $('.facet_search_form');
+
+    $.each(forms, function(index) {
+        var form = $(forms[index]);
+        var fieldName = getFieldName(form);
+        var searchBox = $('#facet-search-' + fieldName);
+        if (searchBox.val()) {
+            $("#facet-" + fieldName).collapse('show');
+        }
+    });
+
     forms.submit(function(event) {
-        var field_name = $(event.target).children('.field-name').val();
+        var field_name = getFieldName($(event.target));
 
         // Match ': (Value With Spaces and Other Chars)'
         var matchSearchValue = ':\\s*\\(([\\w\\s~`@#$%^&*-=+|\\[\\]{};\':",.<>\\/?]+)\\*\\)';

@@ -15,7 +15,7 @@
       aria-label="<%= 'Collapse ' + @facet_field.label %>"
     ></button>
 
-    <% if @facet_field.active? %>
+    <% if @facet_field.active? || has_search_filter?(params[:q], @facet_field.key) %>
       <a href="<%= controller.view_context.search_action_path(url_clear_facet(@facet_field.search_state.params, @facet_field.key)) %>" class="btn btn-secondary clear-facet-btn pull-right">
         <%= t("blacklight.search.facets.clear") %>
       </a>

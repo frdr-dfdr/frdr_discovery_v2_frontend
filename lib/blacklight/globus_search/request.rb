@@ -205,7 +205,7 @@ module Blacklight::GlobusSearch
       search_params = params.to_hash
 
       advanced = true
-      query = search_params[:q] || "*"
+      query = search_params[:q]&.strip || "*"
       offset = search_params["start"] || 0
       limit = search_params["rows"] || 20
       parsed_filters = parse_filters(search_params)

@@ -25,12 +25,15 @@ module Blacklight
           titles = []
           repositories = []
           creators = []
+          if @request_params[:q].nil? || response.empty?
+            return []
+          end
           response.dig(:response, :docs).each { | doc |
-            titles << doc.dig(Settings.FIELDS.TITLE)
+            titles << doc.dig(Settings.FIELDS.TITLE) unless !(doc.dig(Settings.FIELDS.TITLE)).include?(@request_params[:q])
 
-            repositories << doc.dig(Settings.FIELDS.PROVENANCE)
+            repositories << doc.dig(Settings.FIELDS.PROVENANCE) unless !(doc.dig(Settings.FIELDS.PROVENANCE)).include?(@request_params[:q])
 
-            creators << doc.dig(Settings.FIELDS.CREATOR)
+            creators << doc.dig(Settings.FIELDS.CREATOR) unless !(doc.dig(Settings.FIELDS.CREATOR)).include?(@request_params[:q])
           }
           titles.uniq!
           titles.each { | title |
@@ -47,7 +50,6 @@ module Blacklight
             suggestions << { term: creator, weight: 6, payload: "" } unless creator.empty?
           }
           suggestions
-          # (response.dig(suggest_path, suggester_name, request_params[:q], 'suggestions') || []).uniq
         end
     end
   end

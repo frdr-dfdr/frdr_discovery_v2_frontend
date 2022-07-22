@@ -58,6 +58,11 @@ a.clear-facet-btn:hover {
     cursor: pointer;
 }
 
+.facet-search-input {
+    width: calc(100% - 71px);
+    margin-left: 14px;
+}
+
 .card.facet-limit.facet-limit-active {
     /** Make the active filter card's borders match no filters chosen **/
     border-left-color: rgba(0, 0, 0, 0.125) !important;

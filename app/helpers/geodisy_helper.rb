@@ -146,9 +146,47 @@ module GeodisyHelper
     details.join(" AND ")
   end
 
-  def url_no_facets(view_context)
+  # A helper function for clear all button that removes all of the filters
+  # and filter search terms in URL format preserving the search state otherwise.
+  def url_no_facets(view_context, field_names)
+    # Remove the filters
     no_filters = view_context.search_state.params.except(:f)
+    # Remove search terms for filters
+    query = no_filters[:q]
+    field_names.each { | field_name |
+      query = remove_search_filter(query, field_name)
+    }
+    no_filters[:q] = query
     view_context.search_action_path(view_context.search_state.reset(no_filters))
+  end
+
+  # Remove a search to limit results based on a filter
+  def remove_search_filter(q, field_name)
+    if q.nil? || q.empty?
+      q
+    end
+    # Handle the case where there is an AND in front of the search filter.
+    # We want to remove the AND with white space around it as well as the search filter
+    additional_search_regex = Regexp.new('[\s]+[Aa][Nn][Dd][\s]+' + get_search_filter_regex(field_name))
+
+    # Handle the case where the search filter is first or the only part of the query and doesn't start with an AND.
+    front_or_single_regex = Regexp.new(get_search_filter_regex(field_name))
+
+    if (q.match(additional_search_regex))
+      q = q.sub(additional_search_regex, "")
+    elsif (q.match(front_or_single_regex))
+      q = q.sub(front_or_single_regex, "")
+    end
+
+    # Remove any left over white space
+    q = q.strip
+
+    # Remove a possible leading AND now that we have removed the search filter
+    if (q.match(/\A[Aa][Nn][Dd][\s]+/))
+      q = q.sub(/\A[Aa][Nn][Dd][\s]+/, "")
+    end
+
+    return q
   end
 
   def date_published_parse(params)
@@ -175,12 +213,47 @@ module GeodisyHelper
     with_date
   end
 
+  def has_any_search_filter?(q, field_names)
+    if q.nil? || q.empty?
+      return false;
+    end
+
+    unless field_names.is_a?(Array)
+      return false;
+    else
+      field_names.each { | field_name |
+        if (has_search_filter?(q, field_name))
+          return true;
+        end
+      }
+      return false;
+    end
+  end
+
+  def has_search_filter?(q, field_name)
+    if q.nil? || q.empty?
+      return false;
+    end
+    return q.match(get_search_filter_regex(field_name)) ? true : false
+  end
+
   def get_search_filter(q, field_name)
-    match_field = field_name + ':\\s*\\(([\\w\\s~`@#$%^&*-=+|\\[\\]{};\':",.<>\\/?]+)\\*\\)'
+    match_field = get_search_filter_regex(field_name)
     if q.nil? || q.empty? || !q.match?(match_field)
       return ""
     end
 
     return q.match(match_field)[1] || ""
   end
+
+  def get_search_filter_regex(field_name)
+    # This tries to match something like:
+    # Arctic dct_provenance_s: (Polar*) AND dc_creator_sm: (David*)
+    # So that we could remove the dct_provenance_s or dc_creator_sm value in the query
+    # without losing the rest. I've tried to support every possible character available
+    # within the parentheses including things like white spaces (\s) regular characters
+    # (\w) or available special characters.
+    return field_name + ':\\s*\\(([\\w\\s~`@#$%^&*-=+|\\[\\]{};\':",.<>\\/?]+)\\*\\)'
+  end
+
 end

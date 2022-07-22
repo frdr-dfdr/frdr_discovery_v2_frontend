@@ -28,8 +28,11 @@ module Blacklight::GlobusSearch
     # @param [Hash] request_params
     # @return [Blacklight::Suggest::Response]
     def suggestions(request_params)
-      search_results = search(request_params)
-      Suggest.new(search_results, request_params)
+      # Uncomment to use suggestions where the title, repo or creators match
+      # the current query string search.
+      # search_results = search(request_params)
+      # Suggest.new(search_results, request_params)
+      Suggest.new([], request_params)
     end
 
     ##
