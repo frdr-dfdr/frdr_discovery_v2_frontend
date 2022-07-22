@@ -321,7 +321,7 @@ class SolrDocument
     logger.level = :warn
     logger.error Settings.FIELDS.GEO_PREVIEWS
     #previews = fetch(Settings.FIELDS.GEO_PREVIEWS,[])
-    previews = @test1
+    previews = @test_file
     array = []
     logger.error previews.length()
     previews.each do |preview|
