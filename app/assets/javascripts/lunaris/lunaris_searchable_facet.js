@@ -21,7 +21,7 @@ Blacklight.onLoad(function() {
         // Match ': (Value With Spaces and Other Chars)'
         var matchSearchValue = ':\\s*\\(([\\w\\s~`@#$%^&*-=+|\\[\\]{};\':",.<>\\/?]+)\\*\\)';
         var matchField = new RegExp(field_name + matchSearchValue);
-        var matchAndThenField = new RegExp(' AND ' + field_name + matchSearchValue);
+        var matchAndThenField = new RegExp('\\s+[Aa][Nn][Dd]\\s+' + field_name + matchSearchValue);
         var q = $(event.target).children('[name="q"]');
         var facet_search_value = $("#facet-search-" + field_name).val().trim();
         var facet_search_query = field_name + ': (' + facet_search_value + '*)';
