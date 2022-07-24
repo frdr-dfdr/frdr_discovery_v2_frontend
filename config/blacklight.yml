@@ -1,10 +1,9 @@
 development:
-  adapter: solr
-  url: <%= ENV['SOLR_URL'] || "http://127.0.0.1:8983/solr/geoblacklight-core" %>
+  adapter: Blacklight::GlobusSearch::Repository
+  url: "https://search.api.globus.org/v1/index/29abfeb0-bd17-4e6b-b058-85ea7a975e0f"
 test: &test
-  adapter: solr
-  url: <%= ENV['SOLR_URL'] || "http://127.0.0.1:8983/solr/geoblacklight-core" %>
+  adapter: Blacklight::GlobusSearch::Repository
+  url: "https://search.api.globus.org/v1/index/29abfeb0-bd17-4e6b-b058-85ea7a975e0f"
 production:
-  adapter: solr
-  url: <%= ENV['SOLR_URL'] || "http://127.0.0.1:8983/solr/geoblacklight-core" %>
-
+  adapter: Blacklight::GlobusSearch::Repository
+  url: "https://search.api.globus.org/v1/index/29abfeb0-bd17-4e6b-b058-85ea7a975e0f"

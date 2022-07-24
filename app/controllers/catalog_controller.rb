@@ -1,5 +1,6 @@
 # -*- encoding : utf-8 -*-
 require 'blacklight/catalog'
+require "blacklight/globus_search"
 
 class CatalogController < ApplicationController
 
@@ -7,6 +8,9 @@ class CatalogController < ApplicationController
   include GeodisyHelper
 
   configure_blacklight do |config|
+
+    # Set the backend to Globus Search instead of Solr
+    config.repository_class = Blacklight::GlobusSearch::Repository
 
     # Ensures that JSON representations of Solr Documents can be retrieved using
     # the path /catalog/:id/raw
@@ -86,9 +90,9 @@ class CatalogController < ApplicationController
     #    :years_25 => { :label => 'within 25 Years', :fq => "pub_date:[#{Time.now.year - 25 } TO *]" }
     # }
 
-    config.add_facet_field Settings.FIELDS.PROVENANCE, label: 'Institution', limit: 8, partial: "lunaris_facet", collapse: false
+    config.add_facet_field Settings.FIELDS.PROVENANCE, label: 'Institution', limit: 8, partial: "lunaris_searchable_facet", collapse: false
     config.add_facet_field Settings.FIELDS.DATE_PUBLISHED, :label => 'Publication Date', limit: 10, partial: "lunaris_date_facet"
-    config.add_facet_field Settings.FIELDS.CREATOR, :label => 'Author', limit: 8, partial: "lunaris_facet"
+    config.add_facet_field Settings.FIELDS.CREATOR, :label => 'Author', limit: 8, partial: "lunaris_searchable_facet"
     config.add_facet_field Settings.FIELDS.RIGHTS, label: 'Access', limit: 8, partial: "lunaris_facet"
 
     # config.add_facet_field Settings.FIELDS.SUBJECT, :label => 'Subject', :limit => 8, partial: "lunaris_facet"
@@ -226,11 +230,11 @@ class CatalogController < ApplicationController
     # label in pulldown is followed by the name of the SOLR field to sort by and
     # whether the sort is ascending or descending (it must be asc or desc
     # except in the relevancy case).
-    config.add_sort_field 'score desc, dc_title_sort asc', :label => 'blacklight.search_fields.sort.relevancy'
-    config.add_sort_field "#{Settings.FIELDS.DATE_PUBLISHED} desc, dc_title_sort asc", :label => 'geoblacklight.sort.publication_date_newest'
-    config.add_sort_field "#{Settings.FIELDS.DATE_PUBLISHED} asc, dc_title_sort asc", :label => 'geoblacklight.sort.publication_date_oldest'
-    config.add_sort_field 'dc_title_sort asc', :label =>  'geoblacklight.sort.title_a_z'
-    config.add_sort_field 'dc_title_sort desc', :label => 'geoblacklight.sort.title_z_a'
+    config.add_sort_field 'score desc'
+    config.add_sort_field "#{Settings.FIELDS.DATE_PUBLISHED} desc, #{Settings.FIELDS.TITLE} asc"
+    config.add_sort_field "#{Settings.FIELDS.DATE_PUBLISHED} asc, #{Settings.FIELDS.TITLE} asc"
+    config.add_sort_field "#{Settings.FIELDS.TITLE} asc"
+    config.add_sort_field "#{Settings.FIELDS.TITLE} desc"
 
     # If there are more than this many search results, no spelling ("did you
     # mean") suggestion is offered.
@@ -270,7 +274,7 @@ class CatalogController < ApplicationController
     solr_response = search_service.fetch params[:id]
     document = solr_response&.first()&.documents&.first()
     bibtex = get_document_bibtex document
-    filename = document.fetch(:dc_title_s, "new_reference")
+    filename = document.fetch(Settings.FIELDS.TITLE, "new_reference")
     filename = filename.parameterize(separator: '_') + ".bib"
     send_data bibtex.to_s, :type => 'text/plain; charset=UTF-8', :filename => filename, :disposition => :attachment
   end

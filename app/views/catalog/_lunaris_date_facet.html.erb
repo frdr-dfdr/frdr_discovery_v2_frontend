@@ -1,14 +1,31 @@
-<div class="row mb-3">
-  <div class="col-5">
-    <input class="form-control" type="text">
+<% fromTo = date_published_parse(params) %>
+<% params_with_date = add_empty_date_published_filter(params) %>
+<%= form_tag @url, method: "get", id: 'filter-date', role: 'filter-date', 'aria-label' => 'Form to filter by date' do %>
+  <%= render_hash_as_hidden_fields(params.except(:f, :utf8, :page)) %>
+  <% params_with_date[:f].each do |key, values| %>
+    <% if values.is_a?(Array) %>
+      <% values.each do | value | %>
+        <%= hidden_field_tag "f[#{key}][]", "#{value}" %>
+      <% end %>
+    <% else %>
+      <%= hidden_field_tag "f[#{key}][]", "#{values}" %>
+    <% end %>
+  <% end %>
+
+  <div class="row mb-3">
+    <div class="offset-sm-0 offset-lg-0 col-sm-6 col-lg-12 col-xl-5 pr-xl-0">
+      <input class="form-control lunaris-date-from" id="date_from" type="text" value="<%= fromTo[0] %>">
+    </div>
+    <div class="col-sm-12 col-xl-2">
+      <div class="lunaris-date-divider"><%= t('geoblacklight.facets.date_divider') %></div>
+    </div>
+    <div class="offset-sm-0 offset-md-0 offset-lg-0 col-sm-6 col-lg-12 col-xl-5 pl-xl-0">
+      <input class="form-control lunaris-date-to" id="date_to" type="text" value="<%= fromTo[1]%>">
+    </div>
   </div>
-  <div class="col-2">
-    to
+  <div class="row">
+    <div class="offset-xl-4 col-sm-2 col-xl-4 lunaris-date-controls">
+      <button type="submit" class="btn btn-primary"><%= t('geoblacklight.facets.apply') %></button>
+    </div>
   </div>
-  <div class="col-5">
-    <input class="form-control" type="text">
-  </div>
-</div>
-<div class="row">
-  <button class="offset-4 col-4 btn btn-primary">Apply</button>
-</div>
+<% end %>

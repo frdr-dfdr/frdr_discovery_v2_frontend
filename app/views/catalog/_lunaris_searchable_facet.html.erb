@@ -1,0 +1,36 @@
+<% search_filter = get_search_filter(params[:q] || "", field_name) %>
+<%= form_tag @url, method: "get", class: 'facet_search_form', id: 'facet_search_form_' + field_name, role: 'search-filter' + field_name, 'aria-label' => 'Form to search filter ' + field_name do %>
+  <%= render_hash_as_hidden_fields(params.except(:f, :utf8, :page)) %>
+
+  <% params[:f].each do |key, values| %>
+    <% if values.is_a?(Array) %>
+      <% values.each do | value | %>
+        <%= hidden_field_tag "f[#{key}][]", "#{value}" %>
+      <% end %>
+    <% else %>
+      <%= hidden_field_tag "f[#{key}][]", "#{values}" %>
+    <% end %>
+  <% end unless params[:f].nil? %>
+
+  <input type="hidden" class="field-name" value="<%= field_name %>">
+  <div class="row mb-3">
+    <input class="facet-search-input" id="facet-search-<%= field_name %>" type="text" value="<%= search_filter %>">
+    <button class="btn btn-secondary float-right">
+      <%= blacklight_icon :search, aria_hidden: true %>
+    </button>
+  </div>
+<% end %>
+
+<ul class="facet-values list-unstyled">
+  <% paginator = facet_paginator(facet_field, display_facet) %>
+
+  <% paginator.items.each do |item| -%>
+    <li>
+      <% if item.value == "none" && item.hits == 0 %>
+        <li><%= t('geoblacklight.facets.none') %></li>
+      <% else %>
+        <%= render_facet_item(field_name, item) %>
+      <% end %>
+    </li>
+  <% end %>
+</ul>

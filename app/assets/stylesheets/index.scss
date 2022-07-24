@@ -58,6 +58,11 @@ a.clear-facet-btn:hover {
     cursor: pointer;
 }
 
+.facet-search-input {
+    width: calc(100% - 71px);
+    margin-left: 14px;
+}
+
 .card.facet-limit.facet-limit-active {
     /** Make the active filter card's borders match no filters chosen **/
     border-left-color: rgba(0, 0, 0, 0.125) !important;
@@ -154,9 +159,10 @@ hr.metadata-divider {
 }
 
 .centre-pane {
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
     background-color: white;
     padding: 10px;
-    border-radius: 15px;
 }
 
 .page-sidebar {
@@ -264,6 +270,7 @@ hr.metadata-divider {
     .documents-map {
         width: 400px;
     }
+
 }
 
 /** xl size breakpoint **/
@@ -300,4 +307,5 @@ hr.metadata-divider {
     .container {
       max-width: 95% !important;
     }
+
 }
